@@ -1,0 +1,41 @@
+<script type='text/javascript'>
+
+    $(document).ready(function () {
+        if ($('#card-selection').val() == 'メッセージカード') {
+            $('#cart-gift-message').css({ 'display': 'block' });
+            $('#cart-gift-message-lable').css({ 'display': 'block' });
+            if ($('#cart-gift-message').val().trim() == "") {
+                $('#cart-gift-message').val("大切な方へのメッセージをご入力下さい。");
+            }
+        }
+        $('#card-selection').change(function () {
+            if ($(this).val() == 'メッセージカード') {
+                $('#cart-gift-message').css({ 'display': 'block' });
+                $('#cart-gift-message-lable').css({ 'display': 'block' });
+                if ($('#cart-gift-message').val().trim() == "") {
+                    $('#cart-gift-message').val("大切な方へのメッセージをご入力下さい。");
+                }
+            } else {
+                $('#cart-gift-message').css({ 'display': 'none' });
+                $('#cart-gift-message-lable').css({ 'display': 'none' });
+                $('#cart-gift-message').val("");
+            }
+        });
+    });
+</script>
+
+<p class="cart-attribute__field">
+    <label>メッセージカード/のし (詳細は<a href="/pages/梱包-ギフト対応" style="border-bottom: 1px solid #fb8a68;">こちら</a>)</label>
+    <select id="card-selection" name="attributes[メッセージカード/のし]">
+        <option value="無し" {% if cart.attributes["メッセージカード/のし"] == "無し" %} selected{% endif %}>無し</option>
+        <option value="メッセージカード" {% if cart.attributes["メッセージカード/のし"] == "メッセージカード" %} selected{% endif %}>メッセージカード</option>
+        <option value="のし" {% if cart.attributes["メッセージカード/のし"] == "のし" %} selected{% endif %}>のし</option>
+    </select>
+</p>
+
+<p class="cart-attribute__field">
+    <label id="cart-gift-message-lable" style="display: none" for="cart-gift-message">ギフトカードメッセージ</label>
+    <textarea id="cart-gift-message" name="attributes[ギフトカードメッセージ]" style="display: none" rows="4">
+    {{ cart.attributes["ギフトカードメッセージ"] | newline_to_br }}
+  </textarea>
+</p>

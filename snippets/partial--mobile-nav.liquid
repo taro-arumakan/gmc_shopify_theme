@@ -1,0 +1,23 @@
+<div class="mobile-nav--header">
+  {% if settings.search--show-in-header %}
+    <div class="mobile-nav--search" data-item="accent-text">
+      <a href="{{ routes.search_url }}">{{ 'general.search.search' | t }}</a>
+    </div>
+  {% endif %}
+
+  {% if shop.customer_accounts_enabled %}
+    <div class="mobile-nav--login" data-item="accent-text">
+      {% assign account_t = 'layout.header.account_view_link' | t %}
+      {% if customer %}
+        <a href="{{ routes.account_url }}">{{ account_t }}</a>
+      {% else %}
+        {% assign login_link = account_t | customer_login_link %}
+        {{ login_link }}
+      {% endif %}
+    </div>
+  {% endif %}
+</div>
+
+<div class="mobile-nav--menu" data-item="accent-text"></div>
+
+<div class="mobile-nav--localization"></div>

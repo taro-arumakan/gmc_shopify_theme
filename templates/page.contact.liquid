@@ -1,0 +1,123 @@
+{%- liquid
+  assign success_feedback_t = 'contact_page.success_feedback' | t
+  assign error_feedback_t = 'contact_page.error_feedback' | t
+  assign name_t = 'contact_page.name' | t
+  assign email_t = 'contact_page.email' | t
+  assign phone_t = 'contact_page.phone' | t
+  assign message_t = 'contact_page.message' | t
+  assign button_t = 'contact_page.button' | t
+  assign shopify_disclaimer_t = 'shopify.online_store.spam_detection.disclaimer_html' | t
+
+  assign columns = 1
+  if page.content != empty
+    assign columns = 2
+  endif
+-%}
+
+<div class="contact-page--root" data-container="section" data-columns="{{ columns }}">
+  <div class="contact-page--header" data-container="panel">
+    <div data-container="block">
+      <h1 data-item="section-heading" data-item="section-heading">
+        {{ page.title }}
+      </h1>
+    </div>
+  </div>
+
+  <div class="contact-page--body" data-container="panel" data-columns="{{ columns }}">
+    {% if page.content != empty %}
+      <div class="contact-page--left-column" data-container="block">
+        <div class="contact-page--content" data-item="rte-content">
+          {{ page.content }}
+        </div>
+      </div>
+    {% endif %}
+
+    <div class="contact-page--right-column" data-container="block">
+      <div class="contact-page--form" data-item>
+        {% form 'contact', id: 'contact_page_form' %}
+
+          {% if form.posted_successfully? %}
+            <div class="success" data-item="accent-text">
+              <p>{{ success_feedback_t }}</p>
+            </div>
+          {% endif %}
+
+          {% if form.errors %}
+            <div class="error" data-item="accent-text">
+              <p>{{ error_feedback_t }}:</p>
+              <ul>
+                {% for field in form.errors %}
+                  <li>
+                    {{ field | capitalize | replace: 'Body', 'Message' }} {{ form.errors.messages[field] }}
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+
+          {% unless form.posted_successfully? %}
+
+            <label for="contactFormName">{{ name_t }}</label>
+            <input
+              class="{% if form.errors contains 'name' %}error{% endif %}"
+              type="text"
+              id="contactFormName"
+              name="contact[name]"
+              value="{{ contact.fields.name }}"
+            />
+
+            <label for="contactFormEmail">{{ email_t }}</label>
+            <input
+              class="{% if form.errors contains 'email' %}error{% endif %}"
+              type="email"
+              id="contactFormEmail"
+              name="contact[email]"
+              value="{{ contact.fields.email }}"
+              required
+            />
+
+            <label for="contactFormTelephone">{{ phone_t }}</label>
+            <input
+              class="{% if form.errors contains 'phone' %}error{% endif %}"
+              type="tel"
+              id="contactFormTelephone"
+              name="contact[phone]"
+              value="{{ contact.fields.phone }}"
+            />
+
+            <label for="contactFormMessage">{{ message_t }}</label>
+            <textarea
+              class="{% if form.errors contains 'body' %}error{% endif %}"
+              rows="10"
+              cols="60"
+              id="contactFormMessage"
+              name="contact[body]"
+              required
+            >{{ contact.fields.body }}</textarea>
+
+            <div class="contact--page--submit-container" data-container="block">
+              <div class="contact-page--submit-button" data-item="button">
+                <button type="submit">
+                  {{ button_t }}
+                </button>
+              </div>
+            </div>
+
+          {% endunless %}
+
+          {% if form.posted_successfully? or form.errors %}
+            <script>
+              window.location.hash = '#page-content';
+            </script>
+          {% endif %}
+
+          <div data-item="hidden-text">
+            {% comment %} remove the below line to display reCAPTCHA badge {% endcomment %}
+            {{ shopify_disclaimer_t }}
+          </div>
+        {% endform %}
+      </div>
+    </div>
+
+  </div>
+</div>

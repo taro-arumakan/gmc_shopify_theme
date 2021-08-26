@@ -1,0 +1,45 @@
+{%- liquid
+  assign placeholder_t = 'layout.footer.newsletter_placeholder' | t
+  assign button_t = 'layout.footer.newsletter_button' | t
+  assign shopify_disclaimer_t = 'shopify.online_store.spam_detection.disclaimer_html' | t
+-%}
+
+{% if settings.popup--enabled %}
+  <div class="popup--root">
+    {% if settings.popup--newsletter--heading != blank %}
+      <div class="popup--heading" data-item="block-heading">
+        {{ settings.popup--newsletter--heading }}
+      </div>
+    {% endif %}
+
+    {% form 'customer' %}
+      <input type="hidden" name="contact[tags]" value="newsletter" />
+      <input type="hidden" name="contact[first_name]" value="Newsletter" />
+      <input type="hidden" name="contact[last_name]" value="Subscriber" />
+      <label for="contact[email]" data-item='hidden-text'>
+        {{ placeholder_t }}
+      </label>
+      <input
+        class="small"
+        type="email"
+        placeholder="{{ placeholder_t }}"
+        name="contact[email]"
+        id="contact[email]"
+      />
+      <div data-item='button'>
+        <button type="submit" value="{{ button_t }}">
+          {{ button_t }}
+        </button>
+      </div>
+
+      {% if form.posted_successfully? or form.errors %}
+        <script>window.location.hash = '#feedback-bar--newsletter';</script>
+      {% endif %}
+
+      <div data-item="hidden-text">
+        {% comment %} remove the below line to display reCAPTCHA badge {% endcomment %}
+        {{ shopify_disclaimer_t }}
+      </div>
+    {% endform %}
+  </div>
+{% endif %}

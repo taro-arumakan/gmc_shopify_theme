@@ -1,0 +1,14 @@
+<!-- {{ '//cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css' | stylesheet_tag }} -->
+
+<input class="flatpickr" name="attributes[お届け希望日]" type="text" placeholder="指定なし" readonly="readonly" />
+
+<script>
+    flatpickr.localize(flatpickr.l10ns.ja);
+    flatpickr.l10ns.ja.firstDayOfWeek = 0;
+    const config = {
+        minDate: new Date().fp_incr(2),
+        maxDate: new Date().fp_incr(30), // 今から30日後
+        locale: "ja",
+    }
+    flatpickr('.flatpickr', config);
+</script>

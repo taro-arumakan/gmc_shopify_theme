@@ -1,0 +1,11 @@
+<p class="cart-attribute__field">
+  <select id="" name="attributes[配送時間指定]">
+    <option value="指定なし" {% if cart.attributes["配送時間指定"] == "指定なし" %} selected {% endif %}>指定なし</option>
+    <option value="午前中" {% if cart.attributes["配送時間指定"] == "午前中" %} selected {% endif %}>午前中</option>
+    <option value="12:00-14:00" {% if cart.attributes["配送時間指定"] == "12:00-14:00" %} selected {% endif %}>12:00-14:00</option>
+    <option value="14:00-16:00" {% if cart.attributes["配送時間指定"] == "14:00-16:00" %} selected {% endif %}>14:00-16:00</option>
+    <option value="16:00-18:00" {% if cart.attributes["配送時間指定"] == "16:00-18:00" %} selected {% endif %}>16:00-18:00</option>
+    <option value="18:00-20:00" {% if cart.attributes["配送時間指定"] == "18:00-20:00" %} selected {% endif %}>18:00-20:00</option>
+    <option value="19:00-21:00" {% if cart.attributes["配送時間指定"] == "19:00-21:00" %} selected {% endif %}>19:00-21:00</option>
+  </select>
+</p>
