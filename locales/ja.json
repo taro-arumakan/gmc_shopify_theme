@@ -192,10 +192,10 @@
     "plus": "Plus",
     "order_notes": "備考欄",
     "gift_card_message": "贈り物用の無料ギフトカードに記載するメッセージをご記入下さい。",
-    "shipping_taxes_not_included": "配送料はチェックアウト時に計算されます。",
-    "shipping_taxes_included": "配送料はチェックアウト時に計算されます。",
+    "shipping_taxes_not_included": "配送料はお会計時に計算されます。",
+    "shipping_taxes_included": "配送料はお会計時に計算されます。",
     "continue": "買い物を続ける",
-    "checkout": "チェックアウト",
+    "checkout": "お会計",
     "empty_html": "<span data-item='rte-content'>商品が入っていません。<br> <a href='{{ collections_url }}'>お買い物を続ける<\/a><\/span>"
   },
   "blog": {
