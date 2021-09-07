@@ -264,6 +264,7 @@
       </div>
     {% endif %}
 
+    {% comment %}
     {% assign powered_check = powered_by_link | split: '>' %}
     {% if powered_check[1] != ' </a' %}
       <div class="footer--sub--block" data-type="powered-by">
@@ -272,6 +273,7 @@
         </div>
       </div>
     {% endif %}
+    {% endcomment %}
 
     {% unless shop.enabled_payment_types == empty %}
       {% if section.settings.show-payment-icons %}
