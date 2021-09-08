@@ -11,7 +11,7 @@
   assign gift_card_message_t = 'cart.gift_card_message' | t
   assign continue_t = 'cart.continue' | t
   assign checkout_t = 'cart.checkout' | t
-  assign empty_html_t = 'cart.empty_html' | t: collections_url: routes.all_products_collection_url
+  assign empty_html_t = 'cart.empty_html' | t: collections_url: '/collections/all-products'
 
   if cart.taxes_included
     assign shipping_taxes_t = 'cart.shipping_taxes_included' | t
