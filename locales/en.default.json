@@ -300,6 +300,7 @@
       "new_account": "Sign up",
       "reset_password": "Reset Password",
       "reset_instructions": "We will send you an email to reset your password.",
+      "reset_email_sent": "An email with a password reset link has been sent. Please check your inbox.",
       "submit": "Submit",
       "sign_in": "Login",
       "cancel": "Cancel",

@@ -1,5 +1,6 @@
 {%- liquid
   assign reset_instructions_t = 'customer.login.reset_instructions' | t
+  assign reset_email_sent_t = 'customer.login.reset_email_sent' | t
   assign title_t = 'customer.login.page_title' | t
   assign email_t = 'customer.login.email' | t
   assign password_t = 'customer.login.password' | t
@@ -17,7 +18,7 @@
 
   <div id="customer-login" class="customer--login">
     <p id="account-reset" class="account--reset" data-item="paragraph">
-      {{ reset_instructions_t }}
+      {{ reset_email_sent_t }}
     </p>
     <h1 data-item="section-heading">
       {{ title_t }}
@@ -116,9 +117,14 @@
         </span>
       </div>
 
-      {% if form.posted_successfully? or form.errors %}
+      {% comment %} {% if form.posted_successfully? or form.errors %}
         <script>window.location.hash = '#recover-successful';</script>
-      {% endif %}
+      {% endif %} {% endcomment %}
+
+      {% unless form.errors %}
+        <script>window.location.hash = '#recover-successful';</script>
+      {% endunless %}
+
     {% endform %}
   </div>
 

@@ -304,7 +304,8 @@
       "sign_in": "ログイン",
       "cancel": "キャンセル",
       "guest_title": "ゲストとして続行",
-      "guest_continue": "ゲストとして続行"
+      "guest_continue": "ゲストとして続行",
+      "reset_email_sent": "メールが送信されました。受信箱をご確認ください。"
     },
     "order": {
       "page_title": "注文 - {{ name }}",
