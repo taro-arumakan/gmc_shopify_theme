@@ -14,6 +14,7 @@
     </textarea>
     <label id="cart-noshi-type-lable" style="display: none" for="cart-noshi-type">のし表書 (上段)</label>
     <select id="cart-noshi-type" name="attributes[のし表書]" style="display: none">
+        <option hidden disabled value="" {% if cart.attributes["のし表書"] == "" %} selected{% endif %}></option>
         <option value="御祝" {% if cart.attributes["のし表書"] == "御祝" %} selected{% endif %}>御祝</option>
         <option value="内祝" {% if cart.attributes["のし表書"] == "内祝" %} selected{% endif %}>内祝</option>
         <option value="寿" {% if cart.attributes["のし表書"] == "寿" %} selected{% endif %}>寿</option>
@@ -21,6 +22,7 @@
     </select>
     <label id="cart-noshi-from-type-lable" style="display: none" for="cart-noshi-type">名入れ (下段)</label>
     <select id="cart-noshi-from-type" name="attributes[のし名入れ]" style="display: none">
+        <option hidden disabled value="" {% if cart.attributes["のし名入れ有無"] == "" %} selected{% endif %}></option>
         <option value="なし" {% if cart.attributes["のし名入れ有無"] == "なし" %} selected{% endif %}>なし</option>
         <option value="あり" {% if cart.attributes["のし名入れ有無"] == "あり" %} selected{% endif %}>あり</option>
     </select>

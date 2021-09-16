@@ -1,10 +1,5 @@
 function show_message_card_section() {
-    $('#cart-noshi-type-lable').css({ 'display': 'none' });
-    $('#cart-noshi-type').css({ 'display': 'none' });
-    $('#cart-noshi-from-type-lable').css({ 'display': 'none' });
-    $('#cart-noshi-from-type').css({ 'display': 'none' });
-    $('#cart-noshi-from-text-lable').css({ 'display': 'none' });
-    $('#cart-noshi-from-text').css({ 'display': 'none' });
+    hide_message_noshi_sections()
     $('#cart-gift-message').css({ 'display': 'block' });
     $('#cart-gift-message-lable').css({ 'display': 'block' });
     if ($('#cart-gift-message').val().trim() == "") {
@@ -12,13 +7,17 @@ function show_message_card_section() {
     }
 }
 function show_noshi_section() {
-    $('#cart-gift-message').css({ 'display': 'none' });
-    $('#cart-gift-message-lable').css({ 'display': 'none' });
-    $('#cart-gift-message').val("");
+    hide_message_noshi_sections()
     $('#cart-noshi-type').css({'display': 'block'});
     $('#cart-noshi-type-lable').css({'display': 'block'});
     $('#cart-noshi-from-type').css({'display': 'block'});
     $('#cart-noshi-from-type-lable').css({'display': 'block'});
+    if ($('#cart-noshi-type option:selected').val().trim() == "") {
+        $('#cart-noshi-type').val("御祝");
+    }
+    if ($('#cart-noshi-from-type option:selected').val().trim() == "") {
+        $('#cart-noshi-from-type').val("なし");
+    }
     show_noshi_from_section();
 }
 function show_noshi_from_section() {
@@ -31,6 +30,7 @@ function show_noshi_from_section() {
     } else {
         $('#cart-noshi-from-text-lable').css({'display': 'none'});
         $('#cart-noshi-from-text').css({'display': 'none'});        
+        $('#cart-noshi-from-text').val("");
     }
 }
 
@@ -40,10 +40,13 @@ function hide_message_noshi_sections() {
     $('#cart-gift-message').val("");
     $('#cart-noshi-type-lable').css({ 'display': 'none' });
     $('#cart-noshi-type').css({ 'display': 'none' });
+    $('#cart-noshi-type').val("");
     $('#cart-noshi-from-type-lable').css({ 'display': 'none' });
     $('#cart-noshi-from-type').css({ 'display': 'none' });
+    $('#cart-noshi-from-type').val("");
     $('#cart-noshi-from-text-lable').css({ 'display': 'none' });
     $('#cart-noshi-from-text').css({ 'display': 'none' });    
+    $('#cart-noshi-from-text').val("");
 }
 
 $(document).ready(function () {
