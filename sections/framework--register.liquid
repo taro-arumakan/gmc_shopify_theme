@@ -19,21 +19,6 @@
 
 			{{ form.errors | default_errors }}
 
-			<div id="first_name">
-				<label for="first_name" class="label" data-item="accent-text">
-					{{ first_name_t }}
-				</label>
-				<input
-					class="text"
-					type="text"
-					value=""
-					name="customer[first_name]"
-					id="first_name"
-					size="30"
-					required
-				/>
-			</div>
-
 			<div id="last_name">
 				<label for="last_name" class="label" data-item="accent-text">
 					{{ last_name_t }}
@@ -44,6 +29,21 @@
 					value=""
 					name="customer[last_name]"
 					id="last_name"
+					size="30"
+					required
+				/>
+			</div>
+
+			<div id="first_name">
+				<label for="first_name" class="label" data-item="accent-text">
+					{{ first_name_t }}
+				</label>
+				<input
+					class="text"
+					type="text"
+					value=""
+					name="customer[first_name]"
+					id="first_name"
 					size="30"
 					required
 				/>
