@@ -117,13 +117,11 @@
         </span>
       </div>
 
-      {% comment %} {% if form.posted_successfully? or form.errors %}
-        <script>window.location.hash = '#recover-successful';</script>
-      {% endif %} {% endcomment %}
-
-      {% unless form.errors %}
-        <script>window.location.hash = '#recover-successful';</script>
-      {% endunless %}
+      {% if form.posted_successfully? %}
+        {% unless form.errors %}
+          <script>window.location.hash = '#recover-successful';</script>
+        {% endunless %}
+      {% endif %}
 
     {% endform %}
   </div>
