@@ -340,7 +340,7 @@
       "last_name": "姓",
       "email": "Email",
       "password": "パスワード",
-      "submit": "サインアップ",
+      "submit": "新規登録",
       "login": "ログイン"
     },
     "reset_password": {
