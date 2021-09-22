@@ -10,9 +10,9 @@
   assign section_height = section.settings.section-height
   assign darken_video = section.settings.darken-video
   assign alt_text = section.settings.alt-text
-  assign heading = section.settings.heading  | escape
-  assign sub_heading = section.settings.sub-heading  | escape
-  assign button_text = section.settings.button-text  | escape | truncate: 30
+  assign heading = section.settings.heading | escape
+  assign sub_heading = section.settings.sub-heading | escape
+  assign button_text = section.settings.button-text | escape | truncate: 30
   assign button_url = section.settings.button-url | url_escape
 -%}
 
@@ -50,39 +50,37 @@
       {% endif %}
 
       <div class="feature-video--header">
-        <div class="feature-video--text-container">
-          {% if heading != blank %}
-            <div class="feature-video--heading">
-              <h2 data-item="featured-heading">{{ heading }}</h2>
-            </div>
-          {% endif %}
+        {% if heading != blank %}
+          <div class="feature-video--heading">
+            <h2 data-item="featured-heading">{{ heading }}</h2>
+          </div>
+        {% endif %}
 
-          {% if sub_heading != blank %}
-            <div class="feature-video--sub-heading" data-item="block-heading">
-              {{ sub_heading }}
-            </div>
-          {% endif %}
+        {% if sub_heading != blank %}
+          <div class="feature-video--sub-heading" data-item="block-heading">
+            {{ sub_heading }}
+          </div>
+        {% endif %}
 
-          {% if thumbnail %}
-            <div class="feature-video--play">
-              {% render 'framework--icons', icon: 'play-solid' %}
-            </div>
-          {% endif %}
+        {% if thumbnail %}
+          <div class="feature-video--play">
+            {% render 'framework--icons', icon: 'play-solid' %}
+          </div>
+        {% endif %}
 
-          {% if button_text != blank %}
-            <a
-              class="feature-video--button"
-              {% if alt_text %}
-                data-item="inverted-secondary-button"
-              {% else %}
-                data-item="button"
-              {% endif %}
-              href="{{ button_url }}"
-            >
-              <div>{{ button_text }}</div>
-            </a>
-          {% endif %}
-        </div>
+        {% if button_text != blank %}
+          <a
+            class="feature-video--button"
+            {% if alt_text %}
+              data-item="inverted-secondary-button"
+            {% else %}
+              data-item="button"
+            {% endif %}
+            href="{{ button_url }}"
+          >
+            <div>{{ button_text }}</div>
+          </a>
+        {% endif %}
       </div>
 
       <div id="player-{{ section.id }}"></div>

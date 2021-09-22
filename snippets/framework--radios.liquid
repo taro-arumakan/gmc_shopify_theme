@@ -42,7 +42,7 @@
       {{ option.name | escape }}
     </label>
 
-    {% if is_swatches and display_swatches_only == false %}
+    {% unless display_swatches_only %}
       <span class="radios--option-current" data-item="light-accent-text">
         {% for value in option.values %}
           {% if value == option.selected_value %}
@@ -50,7 +50,7 @@
           {% endif %}
         {% endfor %}
       </span>
-    {% endif %}
+    {% endunless %}
   </div>
 
   <div

@@ -41,6 +41,14 @@
     assign pickup_enabled = false
   endunless
 
+  assign first_variant_has_pickup = false
+  for store_availability in current_variant.store_availabilities
+    if store_availability.pick_up_enabled and current_variant.available
+      assign first_variant_has_pickup = true
+      break
+    endif
+  endfor
+
   unless unique_handle
     assign unique_id = product.id
   else
@@ -174,9 +182,10 @@
               {% endif %}
               {% if variant == current_variant %}
                 selected
+                data-pickup="{{ first_variant_has_pickup }}"
               {% endif %}
             >
-              {{ variant.title }}
+              {{- variant.title -}}
             </option>
           {% endfor %}
         </select>
@@ -329,9 +338,12 @@
     {% endif %}
 
     {% if pickup_enabled %}
-      <div class="product-form--pickup"></div>
-      <div class="product-form--pickup--spinner" style="display:none;">
-        {% render 'framework--loading-spinner' %}
+      <div class="product-form--pickup">
+        {%- if first_variant_has_pickup -%}
+          <div class="product-form--pickup--spinner">
+            {% render 'framework--loading-spinner' %}
+          </div>
+        {%- endif -%}
       </div>
     {% endif %}
 

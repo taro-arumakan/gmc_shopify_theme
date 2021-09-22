@@ -1599,7 +1599,7 @@ svg use svg {
     transition-delay: .1s
 }
 
-@media only screen and (min-width:1440px) {
+@media only screen and (min-width:768px) {
     .header--root {
         padding: 32px 48px 0
     }
@@ -1637,7 +1637,7 @@ svg use svg {
     padding: 8px
 }
 
-@media only screen and (max-width:1439px) {
+@media only screen and (max-width:767px) {
     .header--top-row {
         display: none
     }
@@ -1752,7 +1752,7 @@ svg use svg {
     background: 0 0
 }
 
-@media only screen and (max-width:1439px) {
+@media only screen and (max-width:767px) {
     .header--bottom-row {
         display: none
     }
@@ -1784,7 +1784,7 @@ svg use svg {
     padding: 20px 16px
 }
 
-@media only screen and (min-width:1440px) {
+@media only screen and (min-width:768px) {
     .header--mobile {
         display: none
     }
@@ -1844,7 +1844,7 @@ a.header--cart-link {
     margin-right: -16px
 }
 
-@media only screen and (min-width:1440px) {
+@media only screen and (min-width:768px) {
     a.header--cart-link {
         margin-top: -8px
     }
@@ -1921,6 +1921,11 @@ a.header--cart-link {
     width: max-content
 }
 
+.disclosure--current-option[data-unavailable=true] {
+    color: var(--color--body--light);
+    text-decoration: line-through
+}
+
 .disclosure--form {
     background-color: var(--color-page-bg);
     border: 1px solid var(--color-border);
@@ -1938,12 +1943,18 @@ a.header--cart-link {
 }
 
 .disclosure--option-link {
-    color: var(--color-text) !important;
+    color: var(--color-text);
     display: inline-block;
     padding: 9px 15px;
     white-space: nowrap;
     width: 100%;
     cursor: pointer
+}
+
+.disclosure--option-link[data-empty=true],
+.disclosure--option-link[data-unavailable=true] {
+    color: var(--color--body--light);
+    text-decoration: line-through
 }
 
 .disclosure--option-link:focus,
@@ -2494,20 +2505,4 @@ ul.x-menu--level-3--container {
 
 .slideshow--root {
     padding: 0
-}
-
-.featured-content--link a,
-.featured-content--link a:link,
-.featured-content--link a:visited {
-    color: var(--color--accent);
-    font-weight: bolder;
-    font-size: medium;
-}
-
-#featured-collection-show-more a,
-#featured-collection-show-more a:link,
-#featured-collection-show-more a:visited {
-    color: var(--color--accent);
-    font-weight: bolder;
-    font-size: medium;
 }
