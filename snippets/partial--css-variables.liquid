@@ -5,6 +5,7 @@
     --color--accent: {{ settings.color--accent }};
     --color-text: {{ settings.color-text }};
     --color-page-bg: {{ settings.color-page-bg }};
+    --color-page-bg--opaque: {{ settings.color-page-bg | color_modify: 'alpha', 0.75 }};
     --color-badge-bdr: {{ settings.color-text | color_modify: 'alpha', 0.05 }};
     --color-border: {{ settings.color-border }};
     --color-button: {{ settings.color-button }};
