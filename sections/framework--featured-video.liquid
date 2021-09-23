@@ -10,9 +10,9 @@
   assign section_height = section.settings.section-height
   assign darken_video = section.settings.darken-video
   assign alt_text = section.settings.alt-text
-  assign heading = section.settings.heading  | escape
-  assign sub_heading = section.settings.sub-heading  | escape
-  assign button_text = section.settings.button-text  | escape | truncate: 30
+  assign heading = section.settings.heading | escape
+  assign sub_heading = section.settings.sub-heading | escape
+  assign button_text = section.settings.button-text | escape | truncate: 30
   assign button_url = section.settings.button-url | url_escape
 -%}
 
