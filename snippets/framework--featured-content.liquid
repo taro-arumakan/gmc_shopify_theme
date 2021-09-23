@@ -83,6 +83,9 @@
   >
     <div class="featured-content--image">
       {% if image %}
+        {%- if image_link_url != blank -%}
+          <a class="slide__link" href="{{ image_link_url}}"></a>
+        {%- endif -%}
         {%
           render "framework--image",
           image: image,
@@ -93,6 +96,7 @@
           darken: darken_image,
           darken_mobile: darken_image_mobile
         %}
+
       {% else %}
         {%
           render "framework--placeholder",
@@ -120,7 +124,9 @@
               {{ title | escape }}
             </h3>
             <h3 class="featured-content--title" data-view="mobile" data-item="{{ mobile_heading_type }}">
-              {{ title | escape }}
+              <a href="{{ link_url }}">
+                {{ title | escape }}
+              </a>
             </h3>
           {% endif %}
 
