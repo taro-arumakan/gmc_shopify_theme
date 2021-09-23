@@ -62,9 +62,8 @@
           },
           "footer--menu": {
             "type": "menu",
-            "disabled": true,
             "settings": {
-              "menu-title": "Info",
+              "menu-title": "",
               "menu": "footer"
             }
           },
@@ -225,23 +224,23 @@
         "settings": {
           "text-color": "auto",
           "background-color": "accent",
-          "container-width": 5,
+          "container-width": 3,
           "spacing-above": true,
           "spacing-below": true,
-          "image-height": 2,
-          "darken-image": false,
+          "image-height": 3,
+          "darken-image": true,
           "parallax-enabled": false,
           "text-position": "center",
           "text-width": "medium",
-          "overlap": false,
+          "overlap": true,
           "box-around-text": true,
           "mobile-overlay": true,
           "image": "shopify:\/\/shop_images\/210730_83602_eb735561-e129-4aea-8358-377e2df889ce.jpg",
-          "overline": "SALE",
-          "title": "キャンペーン",
-          "description": "<p><\/p><p>今日もお買い得商品が目白押し<br\/>🚚 税込10,000円以上のお買上げで送料無料 🚚<\/p>",
-          "link-url": "shopify:\/\/collections\/all",
-          "link-text": "SHOP NOW"
+          "overline": "",
+          "title": "RENEWAL OPEN!!",
+          "description": "<p><\/p><p>GMC\/Tonteki-Genkiは<br\/>この度新しいサイトをオープン致しました。<\/p><p>会員様には特別クーポンコード記載のメールを<br\/>送信させていただいております。<\/p><p>引き続き変わらぬご愛顧をお願いいたします。<\/p><p> Cheers!<\/p><p>お問い合わせはこちらまで:<\/p>",
+          "link-url": "mailto:info-ec@mazina.co.jp",
+          "link-text": "info-ec@mazina.co.jp"
         }
       },
       "1622168176e17753a1": {
@@ -260,7 +259,7 @@
           "background-color": "light",
           "theme": "standard",
           "heading": "GMC STORE",
-          "address": "<p>〒299-4301<br\/>千葉県⻑⽣郡⼀宮町⼀宮 366-1<br\/>050-1236-0263<br\/>store@email.com<\/p>",
+          "address": "<p>〒299-4301<br\/>千葉県⻑⽣郡⼀宮町⼀宮 366-1<br\/>050-1236-0263<br\/>info-ec@mazina.co.jp<\/p>",
           "hours": "<p>OPEN\/CLOSE <strong> <\/strong>11:00-17:00 <br\/>Closed: Wed (水)<\/p>"
         }
       },
@@ -365,6 +364,7 @@
       },
       "1622252965e8eecda5": {
         "type": "framework--image-with-text",
+        "disabled": true,
         "settings": {
           "text-color": "auto",
           "background-color": "dark",
@@ -549,6 +549,7 @@
       },
       "1625800094d8ca22c6": {
         "type": "framework--featured-product",
+        "disabled": true,
         "settings": {
           "background-color": "none",
           "smart_payment_button": true,
@@ -636,9 +637,26 @@
           "link-url": "",
           "link-text": ""
         }
+      },
+      "framework--password": {
+        "type": "framework--password",
+        "settings": {
+          "logo": "shopify:\/\/shop_images\/GMC_maru_chef_white.png",
+          "logo-height-range": 210,
+          "show-mailing-list": true,
+          "mailing-list--title": "メーリングリストに登録:"
+        }
+      },
+      "163180119052731816": {
+        "type": "framework--custom-content",
+        "settings": {
+          "custom_html": ""
+        }
       }
     },
     "content_for_index": [
+      "162216815655a1ed49",
+      "163180119052731816",
       "16222525405669b824",
       "16221681335594a8dd",
       "1622168216035eefb8",
@@ -646,7 +664,6 @@
       "16256573039dda93fd",
       "1625801985215d5007",
       "1625808628607758d1",
-      "162216815655a1ed49",
       "1622252965e8eecda5",
       "1625800094d8ca22c6",
       "162582184147945781",
