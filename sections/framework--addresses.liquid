@@ -34,7 +34,7 @@
               </p>
 
               <div class="address--view" data-item="paragraph">
-                <p>{{ address.first_name }} {{ address.last_name }}</p>
+                <p>{{ address.last_name }} {{ address.first_name }}</p>
                 <p>{{ address.company }}</p>
                 <p>{{ address.street }}</p>
                 <p>
@@ -50,23 +50,6 @@
                 <table class="address--customer-table">
                   <tr>
                     <td>
-                      <label data-item="accent-text" for="address_first_name_{{ address.id }}">
-                        {{ 'customer.addresses.first_name' | t }}
-                      </label>
-                    </td>
-                    <td>
-                      <input
-                        class="address_form"
-                        type="text"
-                        id="address_first_name_{{ address.id }}"
-                        name="address[first_name]"
-                        value="{{ form.first_name }}"
-                        size="40"
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
                       <label data-item="accent-text" for="address_last_name_{{ address.id }}">
                         {{ 'customer.addresses.last_name' | t }}
                       </label>
@@ -78,6 +61,23 @@
                         id="address_last_name_{{ address.id }}"
                         name="address[last_name]"
                         value="{{ form.last_name }}"
+                        size="40"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <label data-item="accent-text" for="address_first_name_{{ address.id }}">
+                        {{ 'customer.addresses.first_name' | t }}
+                      </label>
+                    </td>
+                    <td>
+                      <input
+                        class="address_form"
+                        type="text"
+                        id="address_first_name_{{ address.id }}"
+                        name="address[first_name]"
+                        value="{{ form.first_name }}"
                         size="40"
                       />
                     </td>
@@ -261,23 +261,6 @@
           <table class="address--customer-table">
             <tr>
               <td>
-                <label data-item="accent-text" for="address_first_name_new">
-                  {{ 'customer.addresses.first_name' | t }}
-                </label>
-              </td>
-              <td>
-                <input
-                  class="address_form"
-                  type="text"
-                  id="address_first_name_new"
-                  name="address[first_name]"
-                  value="{{ form.first_name }}"
-                  size="40"
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>
                 <label data-item="accent-text" for="address_last_name_new">
                   {{ 'customer.addresses.last_name' | t }}
                 </label>
@@ -289,6 +272,23 @@
                   id="address_last_name_new"
                   name="address[last_name]"
                   value="{{ form.last_name }}"
+                  size="40"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label data-item="accent-text" for="address_first_name_new">
+                  {{ 'customer.addresses.first_name' | t }}
+                </label>
+              </td>
+              <td>
+                <input
+                  class="address_form"
+                  type="text"
+                  id="address_first_name_new"
+                  name="address[first_name]"
+                  value="{{ form.first_name }}"
                   size="40"
                 />
               </td>
