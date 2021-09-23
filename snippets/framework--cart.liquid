@@ -8,9 +8,10 @@
   assign minus_t = 'cart.minus' | t
   assign plus_t = 'cart.plus' | t
   assign order_notes_t = 'cart.order_notes' | t
+  assign gift_card_message_t = 'cart.gift_card_message' | t
   assign continue_t = 'cart.continue' | t
   assign checkout_t = 'cart.checkout' | t
-  assign empty_html_t = 'cart.empty_html' | t: collections_url: routes.all_products_collection_url
+  assign empty_html_t = 'cart.empty_html' | t: collections_url: '/collections/all-products'
 
   if cart.taxes_included
     assign shipping_taxes_t = 'cart.shipping_taxes_included' | t
@@ -268,14 +269,14 @@
                   {% endif %}
 
                   <div class="cart--item--price">
-                    {% if item.original_price > item.final_price %}
+                    {% if item.original_line_price > item.final_line_price %}
                       <div class="cart--item--orig-price" data-item="light-accent-text">
-                        <s class="money">{{ item.original_price | money }}</s>
+                        <s class="money">{{ item.original_line_price | money }}</s>
                       </div>
                     {% endif %}
 
                     <div class="cart--item--total money" data-item="accent-text">
-                      {{ item.final_price | money }}
+                      {{ item.final_line_price | money }}
                     </div>
 
                     <div class="cart--item--unit-price-container" data-item="small-text">
@@ -365,6 +366,7 @@
             >{{ cart.note }}</textarea>
           </div>
         {% endif %}
+        {% render 'message-card-or-noshi' %}
         <div class="cart--totals">
           {%- if cart.cart_level_discount_applications != blank -%}
             <div class="cart--sub-total">
