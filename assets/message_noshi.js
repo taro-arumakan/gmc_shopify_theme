@@ -1,56 +1,62 @@
 function show_message_card_section() {
-    $('#cart-gift-message').css({ 'display': 'block' });
-    $('#cart-gift-message-lable').css({ 'display': 'block' });
-    if ($('#cart-gift-message').val().trim() == "") {
-        $('#cart-gift-message').val("大切な方へのメッセージをご入力下さい。");
+    document.querySelector('#cart-gift-message-lable').style.display = 'block';
+    var gift_message_text = document.querySelector('#cart-gift-message')
+    gift_message_text.style.display = 'block';
+    gift_message_text.value = gift_message_text.value.replaceAll('<br />', '\n').trim();
+    if (gift_message_text.value.trim() == '') {
+        gift_message_text.value = '大切な方へのメッセージをご入力下さい。';
     }
     hide_noshi_section();
 }
 
 function show_noshi_section() {
-    $('#cart-noshi-type').css({'display': 'block'});
-    $('#cart-noshi-type-lable').css({'display': 'block'});
-    $('#cart-noshi-from-type').css({'display': 'block'});
-    $('#cart-noshi-from-type-lable').css({'display': 'block'});
-    if ($('#cart-noshi-type option:selected').val().trim() == "") {
-        $('#cart-noshi-type').val("御祝");
-    }
-    if ($('#cart-noshi-from-type option:selected').val().trim() == "") {
-        $('#cart-noshi-from-type').val("なし");
-    }
-    show_noshi_from_section();
-    hide_message_section();
+  var noshi_type = document.querySelector('#cart-noshi-type');
+  noshi_type.style.display = 'block';
+  document.querySelector('#cart-noshi-type-lable').style.display = 'block';
+  var noshi_from_type = document.querySelector('#cart-noshi-from-type');
+  noshi_from_type.style.display = 'block';
+  document.querySelector('#cart-noshi-from-type-lable').style.display = 'block';
+  if (noshi_type.value.trim() == '') {
+      noshi_type.value = '御祝';
+  }
+  if (noshi_from_type.value.trim() == '') {
+      noshi_from_type.value = 'なし';
+  }
+  show_noshi_from_section();
+  hide_message_section();
 }
 
 function show_noshi_from_section() {
-    if ($('#cart-noshi-from-type').val() == "あり") {
-        $('#cart-noshi-from-text-lable').css({'display': 'block'});
-        $('#cart-noshi-from-text').css({'display': 'block'});
-        if ($('#cart-noshi-from-text').val().trim() == "") {
-            $('#cart-noshi-from-text').val("贈り主様のお名前をご記入下さい。");
-        }
-    } else {
-        $('#cart-noshi-from-text-lable').css({'display': 'none'});
-        $('#cart-noshi-from-text').css({'display': 'none'});        
+  if (document.querySelector('#cart-noshi-from-type').value == 'あり') {
+    document.querySelector('#cart-noshi-from-text-lable').style.display = 'block';
+    var noshi_from_text = document.querySelector('#cart-noshi-from-text');
+    noshi_from_text.style.display = 'block';
+    noshi_from_text.value = noshi_from_text.value.replaceAll('<br />', '\n').trim();
+    if (noshi_from_text.value.trim() == '') {
+      noshi_from_text.value = '贈り主様のお名前をご記入下さい。';
     }
+  } else {
+    document.querySelector('#cart-noshi-from-text-lable').style.display = 'none';
+    document.querySelector('#cart-noshi-from-text').style.display = 'none';
+  }
 }
 
 function hide_message_section() {
-    $('#cart-gift-message').css({ 'display': 'none' });
-    $('#cart-gift-message-lable').css({ 'display': 'none' });
+  document.querySelector('#cart-gift-message-lable').style.display = 'none';
+  document.querySelector('#cart-gift-message').style.display = 'none';
 }
 
 function hide_noshi_section() {
-    $('#cart-noshi-type-lable').css({ 'display': 'none' });
-    $('#cart-noshi-type').css({ 'display': 'none' });
-    $('#cart-noshi-from-type-lable').css({ 'display': 'none' });
-    $('#cart-noshi-from-type').css({ 'display': 'none' });
-    $('#cart-noshi-from-text-lable').css({ 'display': 'none' });
-    $('#cart-noshi-from-text').css({ 'display': 'none' });    
+  document.querySelector('#cart-noshi-type-lable').style.display = 'none';
+  document.querySelector('#cart-noshi-type').style.display = 'none';
+  document.querySelector('#cart-noshi-from-type-lable').style.display = 'none';
+  document.querySelector('#cart-noshi-from-type').style.display = 'none';
+  document.querySelector('#cart-noshi-from-text-lable').style.display = 'none';
+  document.querySelector('#cart-noshi-from-text').style.display = 'none';
 }
 
 function clear_message_noshi_values() {
-  switch ($('#card-selection').val()) {
+  switch (document.querySelector('#card-selection').value) {
     case "なし":
       clear_message_values();
       clear_noshi_values();
@@ -64,22 +70,38 @@ function clear_message_noshi_values() {
 }
 
 function clear_message_values() {
-  $('#cart-gift-message').val("");
-}
-function clear_noshi_values() {
-  $('#cart-noshi-type').val("");
-  $('#cart-noshi-from-type').val("");
-  $('#cart-noshi-from-text').val("");
+  document.querySelector('#cart-gift-message').value = '';
 }
 
-$(document).ready(function () {
-    if ($('#card-selection').val() == 'メッセージカード') {
+function clear_noshi_values() {
+  document.querySelector('#cart-noshi-type').value = '';
+  document.querySelector('#cart-noshi-from-type').value = '';
+  document.querySelector('#cart-noshi-from-text').value = '';
+}
+
+var ready = (callback) => {
+  if (document.readyState != "loading") callback();
+  else document.addEventListener("DOMContentLoaded", callback);
+}
+
+ready(() => {
+  var cs = document.querySelector('#card-selection');
+  if (cs){
+    switch (cs.value) {
+      case 'メッセージカード':
         show_message_card_section();
-    } else if ($('#card-selection').val() == 'のし') {
+        break;
+      case 'のし':
         show_noshi_section();
+        break
+      default:
+        hide_message_section();
+        hide_noshi_section();
     }
-    $('body').on('change', '#card-selection', function() {
-      switch ($(this).val()) {
+  }
+  document.querySelector('body').addEventListener('change', event => {
+    if (event.target.matches('#card-selection')){
+      switch (event.target.value) {
         case 'メッセージカード':
           show_message_card_section();
           break;
@@ -90,11 +112,13 @@ $(document).ready(function () {
           hide_message_section();
           hide_noshi_section();
       }
-    });
-    $('body').on('change', '#cart-noshi-from-type', function() {
+    } else if (event.target.matches('#cart-noshi-from-type')) {
         show_noshi_from_section();
-    });
-    $('body').on('submit', '.cart--form', function(event) {    // shopify renders form class="cart--form"
+    }
+  });
+  document.querySelector('body').addEventListener('submit', event => {
+    if (event.target.matches('form.cart--form')){   // <form class="cart--form"> rendered by shopify
       clear_message_noshi_values();
-    });
+    }
+  });
 });
