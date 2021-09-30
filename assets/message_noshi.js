@@ -1,3 +1,13 @@
+function select_text_if_default(textarea) {
+  const default_texts = [
+    '大切な方へのメッセージをご入力下さい。',   // message card
+    '贈り主様のお名前をご記入下さい。'         // noshi from
+  ];
+  if (default_texts.indexOf(textarea.value) >= 0) {
+    textarea.select();
+  }
+}
+
 function show_message_card_section() {
     document.querySelector('#cart-gift-message-lable').style.display = 'block';
     var gift_message_text = document.querySelector('#cart-gift-message')

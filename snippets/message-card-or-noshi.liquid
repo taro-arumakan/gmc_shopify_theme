@@ -9,7 +9,7 @@
 
 <p class="cart-attribute__field">
     <label id="cart-gift-message-lable" style="display: none" for="cart-gift-message">ギフトカードメッセージ</label>
-    <textarea id="cart-gift-message" name="attributes[ギフトカードメッセージ]" style="display: none" rows="4">
+    <textarea id="cart-gift-message" name="attributes[ギフトカードメッセージ]" style="display: none" rows="4" onclick="select_text_if_default(this);">
       {{ cart.attributes["ギフトカードメッセージ"] | newline_to_br }}
     </textarea>
     <label id="cart-noshi-type-lable" style="display: none" for="cart-noshi-type">のし表書 (上段)</label>
@@ -27,7 +27,7 @@
         <option value="あり" {% if cart.attributes["のし名入れ有無"] == "あり" %} selected{% endif %}>あり</option>
     </select>
     <label id="cart-noshi-from-text-lable" style="display: none" for="cart-noshi-from-text">名入れ</label>
-    <textarea id="cart-noshi-from-text" name="attributes[のし名入れ]" style="display: none; writing-mode: vertical-rl" rows="4">
+    <textarea id="cart-noshi-from-text" name="attributes[のし名入れ]" style="display: none" rows="4" onclick="select_text_if_default(this);">
       {{ cart.attributes["のし名入れ"] | newline_to_br }}
     </textarea>
 </p>
