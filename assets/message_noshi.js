@@ -32,8 +32,18 @@ function show_noshi_section() {
   if (noshi_from_type.value.trim() == '') {
       noshi_from_type.value = 'なし';
   }
+  show_noshi_type_other_section();
   show_noshi_from_section();
   hide_message_section();
+}
+
+function show_noshi_type_other_section() {
+  if (document.querySelector('#cart-noshi-type').value == 'その他') {
+    var noshi_type_other = document.querySelector('#cart-noshi-type-other');
+    noshi_type_other.style.display = 'block';
+  } else {
+    document.querySelector('#cart-noshi-type-other').style.display = 'none';
+  }
 }
 
 function show_noshi_from_section() {
@@ -85,6 +95,7 @@ function clear_message_values() {
 
 function clear_noshi_values() {
   document.querySelector('#cart-noshi-type').value = '';
+  document.querySelector('#cart-noshi-type-other').value = '';
   document.querySelector('#cart-noshi-from-type').value = '';
   document.querySelector('#cart-noshi-from-text').value = '';
 }
@@ -122,6 +133,8 @@ ready(() => {
           hide_message_section();
           hide_noshi_section();
       }
+    } else if (event.target.matches('#cart-noshi-type')) {
+        show_noshi_type_other_section();
     } else if (event.target.matches('#cart-noshi-from-type')) {
         show_noshi_from_section();
     }

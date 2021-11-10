@@ -24,7 +24,12 @@
         <option value="御年賀" {% if cart.attributes["のし表書"] == "御年賀" %} selected{% endif %}>御年賀</option>
         <option value="ご挨拶" {% if cart.attributes["のし表書"] == "ご挨拶" %} selected{% endif %}>ご挨拶</option>
         <option value="御礼" {% if cart.attributes["のし表書"] == "御礼" %} selected{% endif %}>御礼</option>
+        <option value="その他" {% if cart.attributes["のし表書"] == "その他" %} selected{% endif %}>その他</option>
     </select>
+    <input type='text' id="cart-noshi-type-other"
+           name="attributes[のし表書き (その他)]"
+           value='{{ cart.attributes["のし表書き (その他)"] }}'
+           placeholder='ご希望の表書きをご入力ください。' style="display: none">
     <label id="cart-noshi-from-type-lable" style="display: none" for="cart-noshi-type">名入れ (下段)</label>
     <select id="cart-noshi-from-type" name="attributes[のし名入れ]" style="display: none">
         <option hidden disabled value="" {% if cart.attributes["のし名入れ有無"] == "" %} selected{% endif %}></option>
