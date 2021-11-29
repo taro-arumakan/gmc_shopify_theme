@@ -125,7 +125,7 @@
       "16221681335594a8dd": {
         "type": "framework--featured-collection",
         "settings": {
-          "collection": "popular-this-week",
+          "collection": "best-seller",
           "background-color": "none",
           "featured-collection--image--show": false,
           "featured-collection--description--show": false,
