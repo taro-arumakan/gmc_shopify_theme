@@ -27,8 +27,8 @@
         <option value="その他" {% if cart.attributes["のし表書"] == "その他" %} selected{% endif %}>その他</option>
     </select>
     <input type='text' id="cart-noshi-type-other"
-           name="attributes[のし表書き (その他)]"
-           value='{{ cart.attributes["のし表書き (その他)"] }}'
+           name="attributes[のし表書 (その他)]"
+           value='{{ cart.attributes["のし表書 (その他)"] }}'
            placeholder='ご希望の表書きをご入力ください。' style="display: none">
     <label id="cart-noshi-from-type-lable" style="display: none" for="cart-noshi-type">名入れ (下段)</label>
     <select id="cart-noshi-from-type" name="attributes[のし名入れ]" style="display: none">

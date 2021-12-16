@@ -100,6 +100,45 @@ function clear_noshi_values() {
   document.querySelector('#cart-noshi-from-text').value = '';
 }
 
+function get_message_or_noshi_cart_attributes() {
+  var res = {'メッセージカード/のし': document.querySelector('#card-selection').value};
+  switch (res['メッセージカード/のし']) {
+    case 'メッセージカード':
+      res['ギフトカードメッセージ'] = document.querySelector('#cart-gift-message').value;
+      break;
+    case 'のし':
+      res['のし表書'] = document.querySelector('#cart-noshi-type').value
+      if (res['のし表書'] == 'その他') {
+        res['のし表書 (その他)'] = document.querySelector('#cart-noshi-type-other').value;
+      }
+      res['のし名入れ有無'] = document.querySelector('#cart-noshi-from-type').value;
+      if (res['のし名入れ有無'] = 'あり') {
+        res['のし名入れ'] = document.querySelector('#cart-noshi-from-text').value
+      }
+      break;
+  }
+  return res;
+}
+
+async function _update_message_or_noshi_cart_attributes() {
+  var attribute_values = get_message_or_noshi_cart_attributes();
+  var request = new XMLHttpRequest();
+  request.onerror = function() {
+    return console.log(request.statusText + ": cart note update request failed!");
+  };
+  console.log(`updating cart attributes: ${JSON.stringify(attribute_values)}`);
+  request.open("POST", theme.urls.cart + "/update.js");
+  request.setRequestHeader('Content-Type', 'application/json');
+  return request.send(JSON.stringify({
+    attributes: attribute_values
+  }));
+}
+
+async function update_message_or_noshi_cart_attributes() {
+  return await _update_message_or_noshi_cart_attributes();
+}
+
+
 var ready = (callback) => {
   if (document.readyState != "loading") callback();
   else document.addEventListener("DOMContentLoaded", callback);
@@ -142,6 +181,14 @@ ready(() => {
   document.querySelector('body').addEventListener('submit', event => {
     if (event.target.matches('form.cart--form')){   // <form class="cart--form"> rendered by shopify
       clear_message_noshi_values();
+    }
+  });
+  document.querySelector('body').addEventListener('click', event => {
+    if (['ShopifyPay-button', 'GooglePay-button', 'ApplePay-button'].some(
+      (testid) => event.target.closest(`[data-testid='${testid}']`))) {
+      clear_message_noshi_values();
+      var res = update_message_or_noshi_cart_attributes();
+      console.log(`in event listener: ${res}`);
     }
   });
 });
