@@ -120,7 +120,7 @@ function get_message_or_noshi_cart_attributes() {
   return res;
 }
 
-async function _update_message_or_noshi_cart_attributes() {
+async function update_message_or_noshi_cart_attributes() {
   var attribute_values = get_message_or_noshi_cart_attributes();
   var request = new XMLHttpRequest();
   request.onerror = function() {
@@ -133,11 +133,6 @@ async function _update_message_or_noshi_cart_attributes() {
     attributes: attribute_values
   }));
 }
-
-async function update_message_or_noshi_cart_attributes() {
-  return await _update_message_or_noshi_cart_attributes();
-}
-
 
 var ready = (callback) => {
   if (document.readyState != "loading") callback();
@@ -183,12 +178,11 @@ ready(() => {
       clear_message_noshi_values();
     }
   });
-  document.querySelector('body').addEventListener('click', event => {
+  document.querySelector('body').addEventListener('click', async event => {
     if (['ShopifyPay-button', 'GooglePay-button', 'ApplePay-button'].some(
       (testid) => event.target.closest(`[data-testid='${testid}']`))) {
       clear_message_noshi_values();
-      var res = update_message_or_noshi_cart_attributes();
-      console.log(`in event listener: ${res}`);
+      await update_message_or_noshi_cart_attributes();
     }
   });
 });
