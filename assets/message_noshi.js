@@ -112,7 +112,7 @@ function get_message_or_noshi_cart_attributes() {
         res['のし表書 (その他)'] = document.querySelector('#cart-noshi-type-other').value;
       }
       res['のし名入れ有無'] = document.querySelector('#cart-noshi-from-type').value;
-      if (res['のし名入れ有無'] = 'あり') {
+      if (res['のし名入れ有無'] == 'あり') {
         res['のし名入れ'] = document.querySelector('#cart-noshi-from-text').value
       }
       break;
