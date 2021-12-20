@@ -190,5 +190,5 @@ ready(() => {
       var res = update_message_or_noshi_cart_attributes();
       console.log(`in event listener: ${res}`);
     }
-  });
+  }, {capture: true});
 });
