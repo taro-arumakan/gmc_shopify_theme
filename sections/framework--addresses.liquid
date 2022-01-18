@@ -317,6 +317,72 @@
             </tr>
             <tr>
               <td>
+                <label data-item="accent-text" for="address_country_new">
+                  {{ 'customer.addresses.country' | t }}
+                </label>
+              </td>
+              <td>
+                <select
+                  id="address_country_new"
+                  name="address[country]"
+                  data-default="{{ form.country }}"
+                >
+                  {{ country_option_tags }}
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label data-item="accent-text" for="address_zip_new">
+                  {{ 'customer.addresses.zip' | t }}
+                </label>
+              </td>
+              <td>
+                <input
+                  class="address_form"
+                  type="text"
+                  id="address_zip_new"
+                  name="address[zip]"
+                  value="{{ form.zip }}"
+                  size="40"
+                />
+              </td>
+            </tr>
+            <tr id="address_province_container_new" style="display:none;">
+              <td>
+                <label data-item="accent-text" for="address_province_new">
+                  {{ 'customer.addresses.province' | t }}
+                </label>
+              </td>
+              <td>
+                <select
+                  class="address_form"
+                  id="address_province_new"
+                  name="address[province]"
+                  data-default="{{ form.province }}"
+                >
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label data-item="accent-text" for="address_city_new">
+                  {{ 'customer.addresses.city' | t }}
+                </label>
+              </td>
+              <td>
+                <input
+                  class="address_form"
+                  type="text"
+                  id="address_city_new"
+                  name="address[city]"
+                  value="{{ form.city }}"
+                  size="40"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>
                 <label data-item="accent-text" for="address_address1_new">
                   {{ 'customer.addresses.address1' | t }}
                 </label>
@@ -349,73 +415,7 @@
                 />
               </td>
             </tr>
-            <tr>
-              <td>
-                <label data-item="accent-text" for="address_city_new">
-                  {{ 'customer.addresses.city' | t }}
-                </label>
-              </td>
-              <td>
-                <input
-                  class="address_form"
-                  type="text"
-                  id="address_city_new"
-                  name="address[city]"
-                  value="{{ form.city }}"
-                  size="40"
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label data-item="accent-text" for="address_country_new">
-                  {{ 'customer.addresses.country' | t }}
-                </label>
-              </td>
-              <td>
-                <select
-                  id="address_country_new"
-                  name="address[country]"
-                  data-default="{{ form.country }}"
-                >
-                  {{ country_option_tags }}
-                </select>
-              </td>
-            </tr>
-            <tr id="address_province_container_new" style="display:none;">
-              <td>
-                <label data-item="accent-text" for="address_province_new">
-                  {{ 'customer.addresses.province' | t }}
-                </label>
-              </td>
-              <td>
-                <select
-                  class="address_form"
-                  id="address_province_new"
-                  name="address[province]"
-                  data-default="{{ form.province }}"
-                >
-                </select>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label data-item="accent-text" for="address_zip_new">
-                  {{ 'customer.addresses.zip' | t }}
-                </label>
-              </td>
-              <td>
-                <input
-                  class="address_form"
-                  type="text"
-                  id="address_zip_new"
-                  name="address[zip]"
-                  value="{{ form.zip }}"
-                  size="40"
-                />
-              </td>
-            </tr>
-            <tr>
+           <tr>
               <td>
                 <label data-item="accent-text" for="address_phone_new">
                   {{ 'customer.addresses.phone' | t }}
