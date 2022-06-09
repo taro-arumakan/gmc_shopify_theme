@@ -1,6 +1,6 @@
 {
   "current": {
-    "color--accent": "#fb8a68",
+    "color--accent": "#212121",
     "color-text": "#212121",
     "color--alternative": "#ffffff",
     "color-page-bg": "#ffffff",
@@ -235,10 +235,10 @@
           "overlap": true,
           "box-around-text": true,
           "mobile-overlay": true,
-          "image": "shopify:\/\/shop_images\/210730_83602_eb735561-e129-4aea-8358-377e2df889ce.jpg",
+          "image": "shopify:\/\/shop_images\/210730_83227_93df8aba-158c-4e09-bbee-27ef2df052b9.jpg",
           "overline": "",
-          "title": "RENEWAL OPEN!!",
-          "description": "<p><\/p><p>GMC\/Tonteki-Genkiは<br\/>この度新しいサイトをオープン致しました。<\/p><p>会員様には特別クーポンコード記載のメールを<br\/>送信させていただいております。<\/p><p>引き続き変わらぬご愛顧をお願いいたします。<\/p><p> Cheers!<\/p><p>お問い合わせはこちらまで:<\/p>",
+          "title": "GMC",
+          "description": "<p><\/p><p>GMCグリルレストラン<\/p><p>ご予約はお電話で🍖🔥<\/p><p>TEL 0475-36-6865<\/p><p>cheers☆<\/p><p><\/p><p><\/p><p>肉屋GMC<\/p><p>オンラインストアの<\/p><p>お問い合わせはこちらから<\/p>",
           "link-url": "mailto:info-ec@mazina.co.jp",
           "link-text": "info-ec@mazina.co.jp"
         }
@@ -254,13 +254,13 @@
       "1622168186514b2a01": {
         "type": "framework--map",
         "settings": {
-          "api-key": "AIzaSyBg1HIUU8stjtOKeo4i5M3FUNf_qT0ED4c",
-          "map-address": "genkimeatcheers",
+          "api-key": "",
+          "map-address": "千葉県長生郡一宮町一宮10072-2",
           "background-color": "light",
           "theme": "standard",
-          "heading": "GMC STORE",
-          "address": "<p>〒299-4301<br\/>千葉県⻑⽣郡⼀宮町⼀宮 366-1<br\/>050-1236-0263<br\/>info-ec@mazina.co.jp<\/p>",
-          "hours": "<p>OPEN\/CLOSE <strong> <\/strong>11:00-17:00 <br\/>Closed: Wed (水)<\/p>"
+          "heading": "",
+          "address": "<p>〒299-4301<br\/>千葉県長生郡一宮町一宮10072-2<br\/>0475-36-6865<\/p>",
+          "hours": ""
         }
       },
       "1622168216035eefb8": {
@@ -383,7 +383,7 @@
           "overline": "PICKUP",
           "title": "テンダーロイン フィレ肉",
           "description": "<p><\/p><p><\/p><p>タスマニア産グラスフェッドビーフ<\/p><p>人が住む場所で世界一大気が綺麗な大自然の中、<br\/>完全放牧で育った良質な赤身を健康的に。<br\/><br\/><\/p>",
-          "link-url": "shopify:\/\/products\/タスマニア産グラスフェドビーフ-リブアイロールステーキ-1パウンド-450g",
+          "link-url": "shopify:\/\/products\/tasmanian-ribeye-roll-steak-1lb",
           "link-text": "VIEW MORE"
         }
       },
@@ -535,7 +535,7 @@
           "background-color": "light",
           "smart_payment_button": true,
           "overline": "recommendation",
-          "featured_product": "黒トンバーグパテ-1kg-500g-2",
+          "featured_product": "black-pork-hamburg-patty",
           "show_vendor": false,
           "variant-style": "dropdowns",
           "swatches-enabled": false,
@@ -592,6 +592,7 @@
       },
       "1625808628607758d1": {
         "type": "framework--featured-collection",
+        "disabled": true,
         "settings": {
           "collection": "bbq-goods",
           "background-color": "none",
@@ -611,11 +612,12 @@
       "162582184147945781": {
         "type": "framework--custom-content",
         "settings": {
-          "custom_html": "<a name=\"shop\"><\/a>"
+          "custom_html": "<a name=\"gmc_grill\"><\/a>"
         }
       },
       "16298617236e37a6a9": {
         "type": "framework--image-with-text",
+        "disabled": true,
         "settings": {
           "text-color": "auto",
           "background-color": "none",
@@ -652,6 +654,78 @@
         "settings": {
           "custom_html": ""
         }
+      },
+      "16443986860774c0dd": {
+        "type": "framework--custom-content",
+        "settings": {
+          "custom_html": "<div class=\"row\" style=\"display: flex; flex-direction: row; flex-wrap: wrap; width: 100%; justify-content: center;\">\n    <div class=\"column\" style=\"display: flex;flex-direction: column;max-width: 120vmin; min-width: 25vmax;\">\n\n        <div class=\"map--info\">\n            <h3 class=\"map--heading\">精肉EC<\/h3>\n            <h2 class=\"map--heading\">株式会社マジダ<\/h2>\n            <div class=\"map--address\">\n                <p>〒299-4301<br>\n                千葉県長生郡一宮町一宮10072-2<br>\n                GMCグリル2F<\/p>\n            <\/div>\n        <\/div>\n    <\/div>\n<\/div>"
+        }
+      },
+      "1654061790516cfee5": {
+        "type": "framework--image-with-text",
+        "settings": {
+          "text-color": "auto",
+          "background-color": "none",
+          "container-width": 6,
+          "spacing-above": false,
+          "spacing-below": false,
+          "image-height": 2,
+          "darken-image": false,
+          "parallax-enabled": false,
+          "text-position": "left",
+          "text-width": "medium",
+          "overlap": false,
+          "box-around-text": false,
+          "mobile-overlay": false,
+          "image": "shopify:\/\/shop_images\/cheers.jpg",
+          "overline": "プレミアム精肉店",
+          "title": "肉屋GMC",
+          "description": "",
+          "link-url": "",
+          "link-text": ""
+        }
+      },
+      "16540619534e3cdf2b": {
+        "type": "framework--image-with-text",
+        "settings": {
+          "text-color": "auto",
+          "background-color": "none",
+          "container-width": 6,
+          "spacing-above": false,
+          "spacing-below": false,
+          "image-height": 3,
+          "darken-image": false,
+          "parallax-enabled": false,
+          "text-position": "right",
+          "text-width": "medium",
+          "overlap": false,
+          "box-around-text": false,
+          "mobile-overlay": false,
+          "image": "shopify:\/\/shop_images\/postcard_YY_omote_3_f7c87838-d1cc-40a6-8446-e50d263eb26f.jpg",
+          "overline": "炭火グリルレストラン",
+          "title": "GMC Grill",
+          "description": "<p><\/p><p><\/p><p><strong>Lunch: 11:00 - 15:00<br\/><\/strong><a href=\"\/pages\/gmc-grill-lunch-menu\" target=\"_blank\" title=\"GMC Grill Lunch Menu\">メニューはこちら<\/a><\/p><p><\/p><p><\/p><p><strong>Dinner: 18:00 - 22:00<br\/><\/strong><a href=\"\/pages\/gmc-grill-dinner-menu\" target=\"_blank\" title=\"GMC Grill Dinner Menu\">メニューはこちら<\/a><\/p><p><\/p><p><\/p><p>定休日: 水, 木<\/p>",
+          "link-url": "",
+          "link-text": ""
+        }
+      },
+      "1654518668743788bb": {
+        "type": "framework--map",
+        "settings": {
+          "api-key": "",
+          "map-address": "genkimeatcheers",
+          "background-color": "none",
+          "theme": "standard",
+          "heading": "",
+          "address": "<p>〒299-4301<\/p><p>千葉県長生郡一宮町一宮366-1<\/p><p>050-1236-0263<\/p>",
+          "hours": ""
+        }
+      },
+      "16545186715ff81eb0": {
+        "type": "framework--custom-content",
+        "settings": {
+          "custom_html": "<a name=\"butcher_gmc\"><\/a>"
+        }
       }
     },
     "content_for_index": [
@@ -667,9 +741,14 @@
       "1622252965e8eecda5",
       "1625800094d8ca22c6",
       "162582184147945781",
-      "16298617236e37a6a9",
+      "16540619534e3cdf2b",
       "1622168186514b2a01",
-      "1622168176e17753a1"
+      "16545186715ff81eb0",
+      "1654061790516cfee5",
+      "1654518668743788bb",
+      "16298617236e37a6a9",
+      "1622168176e17753a1",
+      "16443986860774c0dd"
     ]
   },
   "presets": {
