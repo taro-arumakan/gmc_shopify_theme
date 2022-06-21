@@ -37,7 +37,7 @@
       "header": {
         "type": "header",
         "settings": {
-          "transparent-menu": true,
+          "transparent-menu": false,
           "header-account-show": true,
           "cart--icon": "bag",
           "header-menu-center": false,
@@ -118,7 +118,7 @@
           "home-page-only": true,
           "background-color": "dark",
           "alternative-color": true,
-          "text": "税込1万円以上お買い上げで 送料無料 📦",
+          "text": "現在発送まで2週間程度頂いております🙏🏾",
           "link": ""
         }
       },
@@ -725,6 +725,17 @@
         "type": "framework--custom-content",
         "settings": {
           "custom_html": "<a name=\"butcher_gmc\"><\/a>"
+        }
+      },
+      "announcement2": {
+        "type": "announcement2",
+        "settings": {
+          "enabled": true,
+          "home-page-only": true,
+          "background-color": "dark",
+          "alternative-color": true,
+          "text": "税込1万円以上お買い上げで 送料無料 📦",
+          "link": ""
         }
       }
     },
