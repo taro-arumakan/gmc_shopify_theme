@@ -118,14 +118,14 @@
           "home-page-only": true,
           "background-color": "dark",
           "alternative-color": true,
-          "text": "現在発送まで2週間程度頂いております🙏🏾",
+          "text": "",
           "link": ""
         }
       },
       "16221681335594a8dd": {
         "type": "framework--featured-collection",
         "settings": {
-          "collection": "best-seller",
+          "collection": "gift-贈答",
           "background-color": "none",
           "featured-collection--image--show": false,
           "featured-collection--description--show": false,
@@ -157,7 +157,7 @@
               "tall": true,
               "retain-ratio": false,
               "title": "Black Pork Hamburg",
-              "link-url": "shopify:\/\/collections\/浅草トンテキ元気",
+              "link-url": "shopify:\/\/collections\/gift-贈答",
               "link-text": ""
             }
           },
@@ -169,7 +169,7 @@
               "tall": true,
               "retain-ratio": false,
               "title": "Premium Dog Food",
-              "link-url": "shopify:\/\/collections\/愛犬用プレミアム食肉店-gmc-wacca",
+              "link-url": "shopify:\/\/collections\/gift-贈答",
               "link-text": ""
             }
           },
@@ -181,7 +181,7 @@
               "tall": false,
               "retain-ratio": false,
               "title": "Premium BBQ Meats",
-              "link-url": "shopify:\/\/collections\/gmc",
+              "link-url": "shopify:\/\/collections\/gift-贈答",
               "link-text": ""
             }
           },
@@ -238,7 +238,7 @@
           "image": "shopify:\/\/shop_images\/210730_83227_93df8aba-158c-4e09-bbee-27ef2df052b9.jpg",
           "overline": "",
           "title": "GMC",
-          "description": "<p>新規アカウントご購入キャンペーン！！！<\/p><p>6\/15-7\/15の間、<\/p><p>新規アカウントを作成されたお客様を対象に、<\/p><p>5.000円以上お買い上げのお客様へ<\/p><p>1.000円OFFのキャンペーンを行なっております。<\/p><p>是非この特別な機会にGMCのお肉をお楽しみください。<\/p><p>※新規アカウントを作成後に登録メールアドレスにクーポンコードが届きます。そちらのクーポンコードを入力後、決済をお願いいたします。<\/p><p><\/p><p>GMCギフトSET<\/p><p>お中元等にも喜ばれています。<\/p><p><\/p><p>お問い合わせはこちらから<\/p>",
+          "description": "<p>web shopご来店有難うございます。<\/p><p><\/p><p>ただ今 GIFT 購入いただきますと、<\/p><p>無料にてオリジナル風呂敷に包んで発送致します。<\/p><p><\/p><p>どうぞこの機会にcheers☆<\/p><p><\/p><p><\/p><p>GMC MEAT TRIP 2023<\/p><p>2\/8-14 三越　日本橋本店<\/p><p>5\/19-21 浅草　三社祭<\/p><p>5\/27-28 green room 横浜赤レンガ<\/p><p>6\/21-27 伊勢丹　新宿本店<\/p><p>7\/26-8\/1 三越　日本橋本店<\/p><p>9\/15-17浅草六区ブロードウェイ<\/p><p>11\/5東浪見 ONE WORLD SURF SHOP<\/p><p>11\/26一宮町　渚farmers market<\/p><p>　<\/p>",
           "link-url": "mailto:info-ec@mazina.co.jp",
           "link-text": "info-ec@mazina.co.jp"
         }
@@ -254,7 +254,7 @@
       "1622168186514b2a01": {
         "type": "framework--map",
         "settings": {
-          "api-key": "",
+          "api-key": "AIzaSyBPX8catje2M3X3a4mV5Y9R9jUoZ0xDQrQ",
           "map-address": "千葉県長生郡一宮町一宮10072-2",
           "background-color": "light",
           "theme": "standard",
@@ -286,13 +286,13 @@
             "type": "image",
             "settings": {
               "image": "shopify:\/\/shop_images\/210730_82812.jpg",
-              "image-link-url": "shopify:\/\/collections\/all-products",
+              "image-link-url": "shopify:\/\/collections\/gift-贈答",
               "text-position": "bottom-left",
               "text-width": "large",
               "overline": "Our top picks from around the world",
               "title": "ALL ITEMS",
               "description": "<p>世界各国の生産者との繋がりからセレクトした上質なお肉。<br\/>シンプルな味付けと素材に合わせた火入れでお肉の奥深い世界をお伝えします。<\/p>",
-              "link-url": "shopify:\/\/collections\/all-products",
+              "link-url": "shopify:\/\/collections\/gift-贈答",
               "link-text": "shop now"
             }
           },
@@ -300,13 +300,13 @@
             "type": "image",
             "settings": {
               "image": "shopify:\/\/shop_images\/210730_83227.jpg",
-              "image-link-url": "shopify:\/\/collections\/浅草トンテキ元気",
+              "image-link-url": "shopify:\/\/collections\/gift-贈答",
               "text-position": "bottom-left",
               "text-width": "large",
               "overline": "鹿児島県産 六白黒豚 \/ 黒豚ハンバーグ",
               "title": "Black Pork Hamburg",
               "description": "<p>鹿児島県の六白黒豚生産者、南州農場から日本が誇る最高峰銘柄豚。<br\/>甘味のある脂身と旨味の濃い赤身が特徴のかごしま黒豚を100%使用。<\/p>",
-              "link-url": "shopify:\/\/collections\/浅草トンテキ元気",
+              "link-url": "shopify:\/\/products\/職人がひとつひとつ焼き上げたgmc薩摩黒豚ハンバーグ-6個入のコピー",
               "link-text": "SHOP NOW"
             }
           },
@@ -314,13 +314,13 @@
             "type": "image",
             "settings": {
               "image": "shopify:\/\/shop_images\/210730_83535.jpg",
-              "image-link-url": "shopify:\/\/collections\/gmc",
+              "image-link-url": "shopify:\/\/collections\/gift-贈答",
               "text-position": "bottom-left",
               "text-width": "large",
               "overline": "All Meats \/ BBQ精肉",
               "title": "Premium BBQ Meats",
               "description": "<p>最高なお肉があればBBQはこの世で最も楽しいアクティビティの一つとなる。<br\/>笑い声、良き友、好奇心。伝統から少し離れてみる心意気が最高のスパイス。<\/p>",
-              "link-url": "shopify:\/\/collections\/gmc",
+              "link-url": "shopify:\/\/products\/gmc-特製bbqセット-8人前",
               "link-text": "SHOP NOW"
             }
           },
@@ -328,13 +328,13 @@
             "type": "image",
             "settings": {
               "image": "shopify:\/\/shop_images\/1_3722.jpg",
-              "image-link-url": "shopify:\/\/collections\/愛犬用プレミアム食肉店-gmc-wacca",
+              "image-link-url": "shopify:\/\/collections\/gift-贈答",
               "text-position": "bottom-left",
               "text-width": "large",
               "overline": "gmc Wacca \/ 愛犬用プレミアム食肉",
               "title": "Premium Dog Food",
               "description": "<p>北海道オホーツクで天然の牧草や木の実を食べて育ったエゾシカのみを使用。<br\/>契約猟師がハントしているため狩猟日、猟場も明確です。<\/p>",
-              "link-url": "shopify:\/\/collections\/愛犬用プレミアム食肉店-gmc-wacca",
+              "link-url": "shopify:\/\/products\/gourmet-dog-food-combo",
               "link-text": "SHOP NOW"
             }
           }
@@ -535,7 +535,7 @@
           "background-color": "light",
           "smart_payment_button": true,
           "overline": "recommendation",
-          "featured_product": "black-pork-hamburg-patty",
+          "featured_product": "gmc-satsuma-kurobuta-goddess-set",
           "show_vendor": false,
           "variant-style": "dropdowns",
           "swatches-enabled": false,
@@ -568,6 +568,7 @@
       },
       "1625801985215d5007": {
         "type": "framework--image-with-text",
+        "disabled": true,
         "settings": {
           "text-color": "auto",
           "background-color": "none",
@@ -655,14 +656,9 @@
           "custom_html": ""
         }
       },
-      "16443986860774c0dd": {
-        "type": "framework--custom-content",
-        "settings": {
-          "custom_html": "<div class=\"row\" style=\"display: flex; flex-direction: row; flex-wrap: wrap; width: 100%; justify-content: center;\">\n    <div class=\"column\" style=\"display: flex;flex-direction: column;max-width: 120vmin; min-width: 25vmax;\">\n\n        <div class=\"map--info\">\n            <h3 class=\"map--heading\">精肉EC<\/h3>\n            <h2 class=\"map--heading\">株式会社マジダ<\/h2>\n            <div class=\"map--address\">\n                <p>〒299-4301<br>\n                千葉県長生郡一宮町一宮10072-2<br>\n                GMCグリル2F<\/p>\n            <\/div>\n        <\/div>\n    <\/div>\n<\/div>"
-        }
-      },
       "1654061790516cfee5": {
         "type": "framework--image-with-text",
+        "disabled": true,
         "settings": {
           "text-color": "auto",
           "background-color": "none",
@@ -704,25 +700,27 @@
           "image": "shopify:\/\/shop_images\/postcard_YY_omote_3_f7c87838-d1cc-40a6-8446-e50d263eb26f.jpg",
           "overline": "炭火グリルレストラン",
           "title": "GMC Grill",
-          "description": "<p><\/p><p><\/p><p><strong>Lunch: 11:00 - 15:00<br\/><\/strong><a href=\"\/pages\/gmc-grill-lunch-menu\" target=\"_blank\" title=\"GMC Grill Lunch Menu\">メニューはこちら<\/a><\/p><p><\/p><p><\/p><p><strong>Dinner: 18:00 - 22:00<br\/><\/strong><a href=\"\/pages\/gmc-grill-dinner-menu\" target=\"_blank\" title=\"GMC Grill Dinner Menu\">メニューはこちら<\/a><\/p><p><\/p><p><\/p><p>定休日: 水, 木<\/p>",
+          "description": "<p><\/p><p><strong> ground menu :<br\/><\/strong><a href=\"\/pages\/gmc-grill-dinner-menu\" target=\"_blank\" title=\"GMC Grill Dinner Menu\">メニューはこちら<\/a><\/p><p><\/p><p>11:30-15:00(14:30.LO)<\/p><p>18:00-22:00(21:00.LO)<\/p><p>定休日: 水曜木曜<\/p><p><\/p>",
           "link-url": "",
           "link-text": ""
         }
       },
       "1654518668743788bb": {
         "type": "framework--map",
+        "disabled": true,
         "settings": {
-          "api-key": "",
+          "api-key": "AIzaSyBPX8catje2M3X3a4mV5Y9R9jUoZ0xDQrQ",
           "map-address": "genkimeatcheers",
           "background-color": "none",
           "theme": "standard",
           "heading": "",
-          "address": "<p>〒299-4301<\/p><p>千葉県長生郡一宮町一宮366-1<\/p><p>050-1236-0263<\/p>",
+          "address": "<p>〒299-4301<\/p><p>千葉県長生郡一宮町一宮366-1<\/p><p>050-1236-0263<\/p><p>定休日：水木<\/p>",
           "hours": ""
         }
       },
       "16545186715ff81eb0": {
         "type": "framework--custom-content",
+        "disabled": true,
         "settings": {
           "custom_html": "<a name=\"butcher_gmc\"><\/a>"
         }
@@ -737,6 +735,12 @@
           "text": "税込1万円以上お買い上げで 送料無料 📦",
           "link": ""
         }
+      },
+      "e3a47c05-94fd-494b-bb84-86feb2ff170f": {
+        "type": "framework--custom-content",
+        "settings": {
+          "custom_html": "<a name=\"butcher_gmc\"><\/a>"
+        }
       }
     },
     "content_for_index": [
@@ -747,6 +751,7 @@
       "1622168216035eefb8",
       "16221681418d5acabe",
       "16256573039dda93fd",
+      "e3a47c05-94fd-494b-bb84-86feb2ff170f",
       "1625801985215d5007",
       "1625808628607758d1",
       "1622252965e8eecda5",
@@ -758,9 +763,22 @@
       "1654061790516cfee5",
       "1654518668743788bb",
       "16298617236e37a6a9",
-      "1622168176e17753a1",
-      "16443986860774c0dd"
-    ]
+      "1622168176e17753a1"
+    ],
+    "blocks": {
+      "15683396631634586217": {
+        "type": "shopify:\/\/apps\/inbox\/blocks\/chat\/841fc607-4181-4ad1-842d-e24d7f8bad6b",
+        "disabled": true,
+        "settings": {
+          "button_color": "#202a36",
+          "button_icon": "chat_bubble",
+          "button_text": "chat_with_us",
+          "button_horizontal_position": "bottom_right",
+          "button_vertical_position": "lowest",
+          "greeting_message": "👋こんにちは、ご質問等ございましたら、メッセージを送信してください。私たちが喜んでサポートいたします。"
+        }
+      }
+    }
   },
   "presets": {
     "Beauty": {

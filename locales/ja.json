@@ -70,10 +70,10 @@
   },
   "layout": {
     "header": {
-      "account_view_link": "アカウントを表示",
+      "account_view_link": "お客様情報を表示",
       "cart": "カート",
       "search": "商品検索",
-      "account": "アカウント",
+      "account": "お客様情報",
       "back": "戻る"
     },
     "footer": {
@@ -252,7 +252,7 @@
   },
   "customer": {
     "account": {
-      "page_title": "アカウント",
+      "page_title": "お客様情報",
       "orders": "注文",
       "order": "注文",
       "date": "日付",
@@ -264,11 +264,11 @@
       "logout": "ログアウト"
     },
     "activate_account": {
-      "page_title": "アカウント作成",
+      "page_title": "お客様情報",
       "subtext": "パスワードを設定して下さい。",
       "password": "パスワード",
       "password_confirm": "パスワード確認",
-      "submit": "アカウント作成",
+      "submit": "登録",
       "cancel": "キャンセル"
     },
     "addresses": {
@@ -335,7 +335,7 @@
       "tracking_number": "配送番号"
     },
     "register": {
-      "page_title": "アカウント作成",
+      "page_title": "お客様情報登録",
       "first_name": "名",
       "last_name": "姓",
       "email": "Email",
