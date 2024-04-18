@@ -45,6 +45,7 @@
     "checkout": "Checkout",
     "continue": "Continue Shopping",
     "empty_html": "<span data-item='rte-content'>Your cart is currently empty.<br\/> <a href='{{ collections_url }}'>Click here to continue shopping<\/a>.<\/span>",
+    "gift_card_message": "Add your message to print on a free gift card to a recipient",
     "minus": "Minus",
     "order_notes": "Leave a note with your order",
     "plus": "Plus",
