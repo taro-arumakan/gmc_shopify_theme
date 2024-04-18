@@ -1,449 +1,149 @@
 {
   "sections": {
+    "164016757166a86406": {
+      "type": "image-with-text",
+      "custom_css": [
+        ".stacked-text--root {align-self: stretch;}",
+        ".featured-content--image {position: absolute;}",
+        ".featured-content--root[data-text-position=\"overlay\"] .stacked-text--root {position: relative;}"
+      ],
+      "settings": {
+        "top-border": false,
+        "spacing-above": true,
+        "spacing-below": true,
+        "background-color": "dark",
+        "container-width": "4",
+        "light-text": false,
+        "overlap": true,
+        "heading-type": "section-heading",
+        "text-position": "overlay",
+        "text-horizontal-alignment": "center",
+        "text-vertical-alignment": "center",
+        "text-width": "medium",
+        "text-style": "eclipse-shadow",
+        "text-background-color": "light",
+        "image-display-type": "original",
+        "aspect-ratio": 200,
+        "overlay-style": "darken-bottom",
+        "parallax-enabled": false,
+        "image": "shopify:\/\/shop_images\/210730_83227_93df8aba-158c-4e09-bbee-27ef2df052b9.jpg",
+        "overline": "",
+        "title": "GMC",
+        "description": "<p>web shopご来店有難うございます。<\/p><p><\/p><p>ただ今 GIFT 購入いただきますと、<\/p><p>無料にてオリジナル風呂敷に包んで発送致します。<\/p><p><\/p><p>どうぞこの機会にcheers☆<\/p><p><\/p><p><\/p><p>GMC MEAT TRIP 2023<\/p><p>2\/8-14 三越　日本橋本店<\/p><p>5\/19-21 浅草　三社祭<\/p><p>5\/27-28 green room 横浜赤レンガ<\/p><p>6\/21-27 伊勢丹　新宿本店<\/p><p>7\/26-8\/1 三越　日本橋本店<\/p><p>9\/15-17浅草六区ブロードウェイ<\/p><p>11\/5東浪見 ONE WORLD SURF SHOP<\/p><p>11\/26一宮町　渚farmers market<\/p>",
+        "link-url": "mailto:info-ec@mazina.co.jp",
+        "link-text": "info-ec@mazina.co.jp",
+        "mobile-overlay": true,
+        "mobile-hide-description": false,
+        "mobile-image-display-type": "aspect-ratio",
+        "mobile-aspect-ratio": 200,
+        "mobile-text-alignment": "center"
+      }
+    },
     "slideshow": {
       "type": "slideshow",
       "blocks": {
         "slide-0": {
           "type": "image",
           "settings": {
-            "text-width": "small",
-            "overline": "",
-            "title": "Slide heading",
-            "description": "<p>Combine imagery with text to create stand-out campaign sections, eye-catching promotions, information blocks and more.<\/p>",
-            "link-url": "\/",
-            "link-text": "View more"
+            "text-width": "large",
+            "text-horizontal-alignment": "right",
+            "text-vertical-alignment": "bottom",
+            "image": "shopify:\/\/shop_images\/210730_82812.jpg",
+            "overline": "Our top picks from around the world",
+            "title": "ALL ITEMS",
+            "description": "<p>世界各国の生産者との繋がりからセレクトした上質なお肉。<br\/>シンプルな味付けと素材に合わせた火入れでお肉の奥深い世界をお伝えします。<\/p>",
+            "link-url": "shopify:\/\/collections\/gift-贈答",
+            "link-text": "shop now",
+            "mobile-text-alignment": "center",
+            "mobile-hide-description": false
           }
         },
         "slide-1": {
           "type": "image",
           "settings": {
-            "text-width": "small",
-            "overline": "",
-            "title": "Slide heading",
-            "description": "<p>Combine imagery with text to create stand-out campaign sections, eye-catching promotions, information blocks and more.<\/p>",
-            "link-url": "\/",
-            "link-text": "View more"
+            "text-width": "large",
+            "text-horizontal-alignment": "left",
+            "text-vertical-alignment": "bottom",
+            "image": "shopify:\/\/shop_images\/210730_83227.jpg",
+            "overline": "鹿児島県産 六白黒豚 \/ 黒豚ハンバーグ",
+            "title": "Black Pork Hamburg",
+            "description": "<p>鹿児島県の六白黒豚生産者、南州農場から日本が誇る最高峰銘柄豚。<br\/>甘味のある脂身と旨味の濃い赤身が特徴のかごしま黒豚を100%使用。<\/p>",
+            "link-url": "shopify:\/\/products\/職人がひとつひとつ焼き上げたgmc薩摩黒豚ハンバーグ-6個入のコピー",
+            "link-text": "SHOP NOW",
+            "mobile-text-alignment": "center",
+            "mobile-hide-description": false
           }
         },
         "slide-2": {
           "type": "image",
           "settings": {
-            "text-width": "small",
-            "overline": "",
-            "title": "Slide heading",
-            "description": "<p>Combine imagery with text to create stand-out campaign sections, eye-catching promotions, information blocks and more.<\/p>",
-            "link-url": "\/",
-            "link-text": "View more"
+            "text-width": "large",
+            "text-horizontal-alignment": "center",
+            "text-vertical-alignment": "center",
+            "image": "shopify:\/\/shop_images\/210730_83535.jpg",
+            "overline": "All Meats \/ BBQ精肉",
+            "title": "Premium BBQ Meats",
+            "description": "<p>最高なお肉があればBBQはこの世で最も楽しいアクティビティの一つとなる。<br\/>笑い声、良き友、好奇心。伝統から少し離れてみる心意気が最高のスパイス。<\/p>",
+            "link-url": "shopify:\/\/products\/gmc-特製bbqセット-8人前",
+            "link-text": "SHOP NOW",
+            "mobile-text-alignment": "center",
+            "mobile-hide-description": false
+          }
+        },
+        "image_BiWKtV": {
+          "type": "image",
+          "settings": {
+            "text-width": "large",
+            "text-horizontal-alignment": "left",
+            "text-vertical-alignment": "center",
+            "image": "shopify:\/\/shop_images\/1_3722.jpg",
+            "overline": "gmc Wacca \/ 愛犬用プレミアム食肉",
+            "title": "Premium Dog Food",
+            "description": "<p>北海道オホーツクで天然の牧草や木の実を食べて育ったエゾシカのみを使用。<br\/>契約猟師がハントしているため狩猟日、猟場も明確です。<\/p>",
+            "link-url": "shopify:\/\/products\/gourmet-dog-food-combo",
+            "link-text": "shop now",
+            "mobile-text-alignment": "center",
+            "mobile-hide-description": false
           }
         }
       },
       "block_order": [
         "slide-0",
         "slide-1",
-        "slide-2"
+        "slide-2",
+        "image_BiWKtV"
+      ],
+      "custom_css": [
+        ".featured-content--root[data-text-position=\"overlay\"] .stacked-text--root {position: relative; order: 2;}"
       ],
       "settings": {
+        "top-border": false,
         "spacing-above": false,
         "spacing-below": false,
         "spacing-around-blocks": false,
+        "arrows-enabled": true,
         "blocks_per_slide": 1,
         "background-color": "none",
-        "light-text": "true",
+        "light-text": false,
         "text-style": "none",
+        "text-background-color": "transparent",
+        "heading-type": "section-heading",
+        "image-display-type": "medium",
         "aspect-ratio": 56,
         "overlay-style": "darken-bottom",
-        "auto-rotate": false,
-        "rotate-frequency": 4,
-        "transition_type": "slide",
+        "auto-rotate": true,
+        "rotate-frequency": 7,
+        "transition_type": "fade",
+        "mobile-image-display-type": "original",
         "mobile-aspect-ratio": 134,
         "blocks_per_slide_mobile": "1",
-        "mobile-overlay": true
+        "mobile-overlay": false
       }
     },
-    "2edd3bf1-d431-4051-8eb3-b1abb6d841d4": {
-      "type": "countdown",
-      "settings": {
-        "spacing-above": true,
-        "spacing-below": true,
-        "background-color": "light",
-        "light-text": false,
-        "overlay-style": "none",
-        "parallax-enabled": false,
-        "timer-bg-color": "dark",
-        "light-number": true,
-        "number-size": 40,
-        "container-width": "3",
-        "overline": "",
-        "heading": "Limited offer",
-        "description": "<p>Share something about a limited offer or temporary promotion.<\/p>",
-        "link-url": "",
-        "link-text": "Optional link",
-        "expiry-date": "01-01-2026",
-        "expiry-hours": 0,
-        "expiry-minutes": 0,
-        "hide-when-expired": true,
-        "mobile-number-size": 20
-      }
-    },
-    "a2243e73-eaf5-4985-8402-eb9b4ed43f1e": {
-      "type": "featured-products",
-      "settings": {
-        "spacing-above": true,
-        "spacing-below": true,
-        "background-color": "none",
-        "light-text": false,
-        "display-type": "grid",
-        "products-per-row--desktop": "3",
-        "products-per-row--mobile": "2",
-        "product-list": [
-
-        ],
-        "heading": "Featured products",
-        "link-url": "",
-        "link-text": ""
-      }
-    },
-    "8a29fc19-19a8-41b0-b2e8-10505f1f156f": {
-      "type": "scrolling-content",
-      "blocks": {
-        "template--14898551390289__8a29fc19-19a8-41b0-b2e8-10505f1f156f-image-1": {
-          "type": "image",
-          "settings": {
-            "image-height": 100,
-            "link": "",
-            "hide-on-desktop": false,
-            "mobile-image-height": 70,
-            "hide-on-mobile": false
-          }
-        },
-        "template--14898551390289__8a29fc19-19a8-41b0-b2e8-10505f1f156f-text-1": {
-          "type": "text",
-          "settings": {
-            "text": "Your scrolling text here",
-            "link": "",
-            "hide-on-mobile": false,
-            "hide-on-desktop": false
-          }
-        },
-        "template--14898551390289__8a29fc19-19a8-41b0-b2e8-10505f1f156f-image-2": {
-          "type": "image",
-          "settings": {
-            "image-height": 100,
-            "link": "",
-            "hide-on-desktop": false,
-            "mobile-image-height": 70,
-            "hide-on-mobile": false
-          }
-        },
-        "template--14898551390289__8a29fc19-19a8-41b0-b2e8-10505f1f156f-text-2": {
-          "type": "text",
-          "settings": {
-            "text": "Your scrolling text here",
-            "link": "",
-            "hide-on-mobile": false,
-            "hide-on-desktop": false
-          }
-        }
-      },
-      "block_order": [
-        "template--14898551390289__8a29fc19-19a8-41b0-b2e8-10505f1f156f-image-1",
-        "template--14898551390289__8a29fc19-19a8-41b0-b2e8-10505f1f156f-text-1",
-        "template--14898551390289__8a29fc19-19a8-41b0-b2e8-10505f1f156f-image-2",
-        "template--14898551390289__8a29fc19-19a8-41b0-b2e8-10505f1f156f-text-2"
-      ],
-      "settings": {
-        "top-border": true,
-        "spacing-above": true,
-        "spacing-below": true,
-        "background-color": "none",
-        "parallax-enabled": false,
-        "overlay-style": "none",
-        "light-text": false,
-        "text-size": "section-heading",
-        "animation-direction": "left",
-        "animation-speed": 6,
-        "pause-on-hover": false
-      }
-    },
-    "25d1774b-0b34-42d1-91d9-acea2fe2d4e9": {
-      "type": "scrolling-content",
-      "blocks": {
-        "template--14898551390289__25d1774b-0b34-42d1-91d9-acea2fe2d4e9-image-1": {
-          "type": "image",
-          "settings": {
-            "image-height": 100,
-            "link": "",
-            "hide-on-desktop": false,
-            "mobile-image-height": 70,
-            "hide-on-mobile": false
-          }
-        },
-        "template--14898551390289__25d1774b-0b34-42d1-91d9-acea2fe2d4e9-text-1": {
-          "type": "text",
-          "settings": {
-            "text": "Your scrolling text here",
-            "link": "",
-            "hide-on-mobile": false,
-            "hide-on-desktop": false
-          }
-        },
-        "template--14898551390289__25d1774b-0b34-42d1-91d9-acea2fe2d4e9-image-2": {
-          "type": "image",
-          "settings": {
-            "image-height": 100,
-            "link": "",
-            "hide-on-desktop": false,
-            "mobile-image-height": 70,
-            "hide-on-mobile": false
-          }
-        },
-        "template--14898551390289__25d1774b-0b34-42d1-91d9-acea2fe2d4e9-text-2": {
-          "type": "text",
-          "settings": {
-            "text": "Your scrolling text here",
-            "link": "",
-            "hide-on-mobile": false,
-            "hide-on-desktop": false
-          }
-        }
-      },
-      "block_order": [
-        "template--14898551390289__25d1774b-0b34-42d1-91d9-acea2fe2d4e9-image-1",
-        "template--14898551390289__25d1774b-0b34-42d1-91d9-acea2fe2d4e9-text-1",
-        "template--14898551390289__25d1774b-0b34-42d1-91d9-acea2fe2d4e9-image-2",
-        "template--14898551390289__25d1774b-0b34-42d1-91d9-acea2fe2d4e9-text-2"
-      ],
-      "settings": {
-        "top-border": true,
-        "spacing-above": true,
-        "spacing-below": true,
-        "background-color": "none",
-        "parallax-enabled": false,
-        "overlay-style": "none",
-        "light-text": false,
-        "text-size": "section-heading",
-        "animation-direction": "right",
-        "animation-speed": 6,
-        "pause-on-hover": false
-      }
-    },
-    "164016757166a86406": {
-      "type": "image-with-text",
-      "settings": {
-        "spacing-above": false,
-        "spacing-below": false,
-        "background-color": "light",
-        "container-width": "6",
-        "light-text": "false",
-        "overlap": false,
-        "text-position": "left",
-        "text-width": "small",
-        "text-style": "none",
-        "aspect-ratio": 80,
-        "overlay-style": "darken-bottom",
-        "parallax-enabled": false,
-        "overline": "",
-        "title": "Image with text",
-        "description": "<p>Combine imagery with text to create stand-out campaign sections, eye-catching promotions, information blocks and more.<\/p>",
-        "link-url": "",
-        "link-text": "",
-        "mobile-overlay": true,
-        "mobile-aspect-ratio": 134
-      }
-    },
-    "c990c808-20ee-417a-8211-74ae6de26bb0": {
-      "type": "shop-the-look",
-      "blocks": {
-        "template--14898551390289__c990c808-20ee-417a-8211-74ae6de26bb0-hotspot-1": {
-          "type": "hotspot",
-          "settings": {
-            "product": "",
-            "horizontal": 35,
-            "vertical": 33,
-            "mobile-horizontal": 35,
-            "mobile-vertical": 35
-          }
-        },
-        "template--14898551390289__c990c808-20ee-417a-8211-74ae6de26bb0-hotspot-2": {
-          "type": "hotspot",
-          "settings": {
-            "product": "",
-            "horizontal": 44,
-            "vertical": 62,
-            "mobile-horizontal": 45,
-            "mobile-vertical": 66
-          }
-        },
-        "template--14898551390289__c990c808-20ee-417a-8211-74ae6de26bb0-hotspot-3": {
-          "type": "hotspot",
-          "settings": {
-            "product": "",
-            "horizontal": 65,
-            "vertical": 50,
-            "mobile-horizontal": 65,
-            "mobile-vertical": 47
-          }
-        }
-      },
-      "block_order": [
-        "template--14898551390289__c990c808-20ee-417a-8211-74ae6de26bb0-hotspot-1",
-        "template--14898551390289__c990c808-20ee-417a-8211-74ae6de26bb0-hotspot-2",
-        "template--14898551390289__c990c808-20ee-417a-8211-74ae6de26bb0-hotspot-3"
-      ],
-      "settings": {
-        "spacing-above": true,
-        "spacing-below": true,
-        "background-color": "none",
-        "light-text": false,
-        "container-width": "4",
-        "hotspot-color": "white",
-        "heading": "Shop the look"
-      }
-    },
-    "16401814158380a11c": {
-      "type": "image-with-text",
-      "settings": {
-        "spacing-above": false,
-        "spacing-below": false,
-        "background-color": "none",
-        "container-width": "6",
-        "light-text": "true",
-        "overlap": false,
-        "text-position": "overlay",
-        "text-width": "medium",
-        "text-style": "none",
-        "aspect-ratio": 56,
-        "overlay-style": "darken-bottom",
-        "parallax-enabled": false,
-        "overline": "",
-        "title": "Image with text",
-        "description": "<p>Combine imagery with text to create stand-out campaign sections, eye-catching promotions, information blocks and more.<\/p>",
-        "link-url": "",
-        "link-text": "",
-        "mobile-overlay": true,
-        "mobile-aspect-ratio": 134
-      }
-    },
-    "00e17d30-119a-48eb-893b-5bf838084367": {
-      "type": "image-comparison",
-      "blocks": {
-        "template--14898551390289__00e17d30-119a-48eb-893b-5bf838084367-before-1": {
-          "type": "before",
-          "settings": {
-          }
-        },
-        "template--14898551390289__00e17d30-119a-48eb-893b-5bf838084367-after-1": {
-          "type": "after",
-          "settings": {
-          }
-        }
-      },
-      "block_order": [
-        "template--14898551390289__00e17d30-119a-48eb-893b-5bf838084367-before-1",
-        "template--14898551390289__00e17d30-119a-48eb-893b-5bf838084367-after-1"
-      ],
-      "settings": {
-        "spacing-above": true,
-        "spacing-below": true,
-        "aspect-ratio": 56,
-        "background-color": "none",
-        "light-text": false,
-        "container-width": "4",
-        "overline": "",
-        "heading": "Image comparison",
-        "link-url": "",
-        "link-text": "Optional link",
-        "cursor-direction": "horizontal",
-        "cursor-position": 75,
-        "mobile-aspect-ratio": 134
-      }
-    },
-    "featured-text": {
-      "type": "featured-text",
-      "settings": {
-        "spacing-above": true,
-        "spacing-below": true,
-        "background-color": "light",
-        "light-text": false,
-        "container-width": "4",
-        "overline": "",
-        "heading": "Introduce your brand",
-        "description": "<p>We're passionate about empowering small businesses and want to see you get the most out of your theme. If you have any questions please don't hesitate to get in touch.<\/p>",
-        "link-url": "\/",
-        "link-text": "Link text"
-      }
-    },
-    "grid-with-overlay": {
-      "type": "grid-with-overlay",
-      "blocks": {
-        "overlay-block-0": {
-          "type": "image",
-          "settings": {
-            "x-blocks": "2",
-            "y-blocks": "1",
-            "title": "Grid image",
-            "link-url": "",
-            "link-text": "View more"
-          }
-        },
-        "overlay-block-1": {
-          "type": "image",
-          "settings": {
-            "x-blocks": "1",
-            "y-blocks": "1",
-            "title": "Grid image",
-            "link-url": "",
-            "link-text": "View more"
-          }
-        },
-        "overlay-block-3": {
-          "type": "image",
-          "settings": {
-            "x-blocks": "1",
-            "y-blocks": "1",
-            "title": "Grid image",
-            "link-url": "",
-            "link-text": "View more"
-          }
-        },
-        "overlay-block-2": {
-          "type": "image",
-          "settings": {
-            "x-blocks": "2",
-            "y-blocks": "1",
-            "title": "Grid image",
-            "link-url": "",
-            "link-text": "View more"
-          }
-        }
-      },
-      "block_order": [
-        "overlay-block-0",
-        "overlay-block-1",
-        "overlay-block-3",
-        "overlay-block-2"
-      ],
-      "settings": {
-        "spacing-above": true,
-        "spacing-below": false,
-        "background-color": "none",
-        "container-width": "4",
-        "spacing": true,
-        "width": 3,
-        "light-text": false,
-        "text-style": "light-with-darken",
-        "overline": "",
-        "heading": "",
-        "description": "",
-        "link-url": "",
-        "link-text": "",
-        "mobile-width": "2",
-        "mobile-overlay": true
-      }
-    },
-    "featured-collection-slider": {
+    "featured-collection-grid": {
       "type": "featured-collection",
       "settings": {
+        "top-border": false,
         "spacing-above": true,
         "spacing-below": true,
         "featured-collection--image--show": false,
@@ -452,67 +152,146 @@
         "light-text": false,
         "display-type": "grid",
         "products-per-row--desktop": "4",
-        "products-per-row--mobile": "1",
-        "collection": "",
-        "max-products": 8,
-        "heading": "Collection name"
+        "products-per-row--mobile": "2",
+        "collection": "gift-贈答",
+        "max-products": 6,
+        "heading": "{{ section.settings.collection.title }}"
       }
     },
-    "ef31fa12-e7a0-4c66-8567-1cca76a8a029": {
-      "type": "text-columns",
+    "featured_video_adjaUU": {
+      "type": "featured-video",
+      "settings": {
+        "top-border": false,
+        "spacing-above": true,
+        "spacing-below": true,
+        "background-color": "none",
+        "container-width": "6",
+        "light-text": true,
+        "text-width": "medium",
+        "text-horizontal-alignment": "center",
+        "text-vertical-alignment": "center",
+        "text-style": "none",
+        "text-background-color": "transparent",
+        "heading-type": "featured-heading",
+        "autoplay": true,
+        "video-display-type": "aspect-ratio",
+        "aspect-ratio": 56,
+        "play-button-style": "solid",
+        "overlay-style": "darken-bottom",
+        "video-url": "https:\/\/www.youtube.com\/watch?v=jjyoFw8tYRY",
+        "image": "shopify:\/\/shop_images\/2_6737_38fb903d-3e71-4fcd-8025-1486890b0b2f.jpg",
+        "overline": "Genki Meat Cheers YouTube Channel",
+        "heading": "",
+        "description": "<p>お肉の最適な焼き方をお伝えします！<\/p>",
+        "button-text": "チャンネルへGO",
+        "button-url": "https:\/\/www.youtube.com\/channel\/UCaFEU-umMmWuISQYSy_UR3g\/videos",
+        "mobile-image-display-type": "original",
+        "mobile-aspect-ratio": 134,
+        "mobile-text-alignment": "center",
+        "mobile-hide-description": false
+      }
+    },
+    "grid-with-overlay": {
+      "type": "grid-with-overlay",
       "blocks": {
-        "template--14865991630929__ef31fa12-e7a0-4c66-8567-1cca76a8a029-168670132626cd7253-0": {
+        "overlay-block-0": {
           "type": "image",
           "settings": {
-            "show-image": true,
-            "title": "Add a title or tagline",
-            "description": "<p>Explain a set of product features, add illustrations, infographics, logo lists, or link to pages.<\/p>",
-            "link-url": "",
-            "link-text": "View more"
+            "image": "shopify:\/\/shop_images\/1_4110.jpg",
+            "x-blocks": "1",
+            "y-blocks": "1",
+            "image-display-type": "fill",
+            "aspect-ratio": 56,
+            "title": "About Meat",
+            "link-url": "shopify:\/\/pages\/about-meat",
+            "link-text": ""
           }
         },
-        "template--14865991630929__ef31fa12-e7a0-4c66-8567-1cca76a8a029-168670132626cd7253-1": {
+        "image_7YmkDA": {
           "type": "image",
           "settings": {
-            "show-image": true,
-            "title": "Add a title or tagline",
-            "description": "<p>Explain a set of product features, add illustrations, infographics, logo lists, or link to pages.<\/p>",
-            "link-url": "",
-            "link-text": "View more"
+            "image": "shopify:\/\/shop_images\/210730_83380.jpg",
+            "x-blocks": "1",
+            "y-blocks": "1",
+            "image-display-type": "fill",
+            "aspect-ratio": 56,
+            "title": "Black Pork Hamburg",
+            "link-url": "shopify:\/\/products\/職人がひとつひとつ焼き上げたgmc薩摩黒豚ハンバーグ-6個入のコピー",
+            "link-text": ""
           }
         },
-        "template--14865991630929__ef31fa12-e7a0-4c66-8567-1cca76a8a029-168670132626cd7253-2": {
+        "overlay-block-1": {
           "type": "image",
           "settings": {
-            "show-image": true,
-            "title": "Add a title or tagline",
-            "description": "<p>Explain a set of product features, add illustrations, infographics, logo lists, or link to pages.<\/p>",
-            "link-url": "",
-            "link-text": "View more"
+            "image": "shopify:\/\/shop_images\/210730_82428.jpg",
+            "x-blocks": "1",
+            "y-blocks": "1",
+            "image-display-type": "fill",
+            "aspect-ratio": 56,
+            "title": "Premium Dog Food",
+            "link-url": "shopify:\/\/products\/gourmet-dog-food-combo",
+            "link-text": ""
+          }
+        },
+        "overlay-block-2": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/2_6909.jpg",
+            "x-blocks": "1",
+            "y-blocks": "1",
+            "image-display-type": "fill",
+            "aspect-ratio": 56,
+            "title": "Premium BBQ Meats",
+            "link-url": "shopify:\/\/products\/gmc-特製bbqセット-8人前",
+            "link-text": ""
+          }
+        },
+        "overlay-block-3": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/1_3848_105f4d46-8b6f-4e3c-85c1-800b28827fa6.jpg",
+            "x-blocks": "2",
+            "y-blocks": "1",
+            "image-display-type": "fill",
+            "aspect-ratio": 58,
+            "title": "SHOP",
+            "link-url": "https:\/\/gmc.mazina.co.jp#gmc_grill",
+            "link-text": ""
           }
         }
       },
       "block_order": [
-        "template--14865991630929__ef31fa12-e7a0-4c66-8567-1cca76a8a029-168670132626cd7253-0",
-        "template--14865991630929__ef31fa12-e7a0-4c66-8567-1cca76a8a029-168670132626cd7253-1",
-        "template--14865991630929__ef31fa12-e7a0-4c66-8567-1cca76a8a029-168670132626cd7253-2"
+        "overlay-block-0",
+        "image_7YmkDA",
+        "overlay-block-1",
+        "overlay-block-2",
+        "overlay-block-3"
+      ],
+      "custom_css": [
+        ".featured-grid--body--container[data-mobile-columns=\"2\"] .featured-grid--item:nth-child(odd):last-child {width: 100%; }"
       ],
       "settings": {
+        "top-border": false,
         "spacing-above": true,
         "spacing-below": true,
-        "block-spacing": true,
-        "background-color": "light",
-        "light-text": false,
+        "background-color": "none",
+        "heading-light-text": false,
         "container-width": "4",
-        "width": 3,
-        "aspect-ratio": "square",
-        "image-width": 0,
-        "text-alignment": "center",
-        "heading": "Text columns with images",
+        "spacing": true,
+        "width": 4,
+        "light-text": true,
+        "text-style": "eclipse-shadow",
+        "heading-type": "block-heading",
+        "overlay-style": "darken-bottom",
+        "overline": "",
+        "heading": "GMC Collection",
         "description": "",
         "link-url": "",
         "link-text": "",
-        "mobile-width": "1"
+        "mobile-width": "2",
+        "mobile-overlay": true,
+        "mobile-image-display-type": "original",
+        "mobile-aspect-ratio": 134
       }
     },
     "1640181507ee260ca6": {
@@ -521,6 +300,7 @@
         "164018150735c4d43c-0": {
           "type": "overline",
           "settings": {
+            "overline": "Recommendation"
           }
         },
         "164018150735c4d43c-1": {
@@ -530,6 +310,7 @@
         },
         "164018150735c4d43c-2": {
           "type": "vendor",
+          "disabled": true,
           "settings": {
           }
         },
@@ -564,333 +345,92 @@
         "164018150735c4d43c-5"
       ],
       "settings": {
+        "top-border": false,
         "spacing-above": true,
         "spacing-below": true,
         "background-color": "none",
         "container-width": "4",
         "text-column-width": 30,
-        "thumbnail-width": 80,
+        "thumbnail-width": 40,
         "media-gap": 8,
         "text-alignment": "left",
-        "featured_product": "",
+        "featured_product": "gmc-satsuma-kurobuta-goddess-set",
         "loop-enabled": false
       }
     },
-    "1640167859b5c16893": {
-      "type": "grid-with-overlay",
-      "blocks": {
-        "1640167859a1c96a93-0": {
-          "type": "image",
-          "settings": {
-            "x-blocks": "1",
-            "y-blocks": "1",
-            "title": "Grid image",
-            "link-url": "",
-            "link-text": "View more"
-          }
-        },
-        "1640167859a1c96a93-1": {
-          "type": "image",
-          "settings": {
-            "x-blocks": "1",
-            "y-blocks": "1",
-            "title": "Grid image",
-            "link-url": "",
-            "link-text": "View more"
-          }
-        },
-        "1640167859a1c96a93-2": {
-          "type": "image",
-          "settings": {
-            "x-blocks": "1",
-            "y-blocks": "1",
-            "title": "Grid image",
-            "link-url": "",
-            "link-text": "View more"
-          }
-        },
-        "1640167859a1c96a93-3": {
-          "type": "image",
-          "settings": {
-            "x-blocks": "1",
-            "y-blocks": "1",
-            "title": "Grid image",
-            "link-url": "",
-            "link-text": "View more"
-          }
-        },
-        "d6ae2379-05cb-42f9-9bee-e83df8324047": {
-          "type": "image",
-          "settings": {
-            "x-blocks": "1",
-            "y-blocks": "1",
-            "title": "Grid image",
-            "link-url": "",
-            "link-text": "View more"
-          }
-        },
-        "ef42088c-fd17-4d4b-9aa0-ac42f62d5bbe": {
-          "type": "image",
-          "settings": {
-            "x-blocks": "1",
-            "y-blocks": "1",
-            "title": "Grid image",
-            "link-url": "",
-            "link-text": "View more"
-          }
-        },
-        "1a5a4e1a-9143-48ce-8e82-0f0953d2c770": {
-          "type": "image",
-          "settings": {
-            "x-blocks": "1",
-            "y-blocks": "1",
-            "title": "Grid image",
-            "link-url": "",
-            "link-text": "View more"
-          }
-        },
-        "c2ab6290-9cde-4230-85ac-e32b1a8256bb": {
-          "type": "image",
-          "settings": {
-            "x-blocks": "1",
-            "y-blocks": "1",
-            "title": "Grid image",
-            "link-url": "",
-            "link-text": "View more"
-          }
-        }
-      },
-      "block_order": [
-        "1640167859a1c96a93-0",
-        "1640167859a1c96a93-1",
-        "1640167859a1c96a93-2",
-        "1640167859a1c96a93-3",
-        "d6ae2379-05cb-42f9-9bee-e83df8324047",
-        "ef42088c-fd17-4d4b-9aa0-ac42f62d5bbe",
-        "1a5a4e1a-9143-48ce-8e82-0f0953d2c770",
-        "c2ab6290-9cde-4230-85ac-e32b1a8256bb"
-      ],
+    "custom_content_bTzfAg": {
+      "type": "custom-content",
       "settings": {
+        "top-border": false,
         "spacing-above": true,
-        "spacing-below": true,
-        "background-color": "light",
-        "container-width": "4",
-        "spacing": true,
-        "width": 4,
-        "light-text": false,
-        "text-style": "hover",
-        "overline": "",
-        "heading": "Grid with overlay",
-        "description": "",
-        "link-url": "",
-        "link-text": "",
-        "mobile-width": "2",
-        "mobile-overlay": true
-      }
-    },
-    "2c7b2c75-a053-465f-9304-0c8a440bc6b4": {
-      "type": "testimonials",
-      "blocks": {
-        "template--14865991630929__2c7b2c75-a053-465f-9304-0c8a440bc6b4-1686696817f31cd7d8-0": {
-          "type": "testimonial",
-          "settings": {
-            "icon": "quote",
-            "author-role": "",
-            "author-name": "",
-            "description": "<p>Here you can include a short description about the author or their testimonial.<\/p>"
-          }
-        },
-        "template--14865991630929__2c7b2c75-a053-465f-9304-0c8a440bc6b4-1686696817f31cd7d8-1": {
-          "type": "testimonial",
-          "settings": {
-            "icon": "quote",
-            "author-role": "",
-            "author-name": "",
-            "description": "<p>Here you can include a short description about the author or their testimonial.<\/p>"
-          }
-        },
-        "template--14865991630929__2c7b2c75-a053-465f-9304-0c8a440bc6b4-1686696817f31cd7d8-2": {
-          "type": "testimonial",
-          "settings": {
-            "icon": "quote",
-            "author-role": "",
-            "author-name": "",
-            "description": "<p>Here you can include a short description about the author or their testimonial.<\/p>"
-          }
-        },
-        "template--14865991630929__2c7b2c75-a053-465f-9304-0c8a440bc6b4-1686696817f31cd7d8-3": {
-          "type": "testimonial",
-          "settings": {
-            "icon": "quote",
-            "author-role": "",
-            "author-name": "",
-            "description": "<p>Here you can include a short description about the author or their testimonial.<\/p>"
-          }
-        }
-      },
-      "block_order": [
-        "template--14865991630929__2c7b2c75-a053-465f-9304-0c8a440bc6b4-1686696817f31cd7d8-0",
-        "template--14865991630929__2c7b2c75-a053-465f-9304-0c8a440bc6b4-1686696817f31cd7d8-1",
-        "template--14865991630929__2c7b2c75-a053-465f-9304-0c8a440bc6b4-1686696817f31cd7d8-2",
-        "template--14865991630929__2c7b2c75-a053-465f-9304-0c8a440bc6b4-1686696817f31cd7d8-3"
-      ],
-      "settings": {
-        "spacing-above": true,
-        "spacing-below": true,
+        "spacing-below": false,
         "background-color": "none",
         "light-text": false,
         "container-width": "4",
-        "image-shape": "circle",
-        "overline": "",
-        "heading": "Testimonials",
-        "mobile-width": "2"
+        "custom_html": "<a name=\"butcher_gmc\"><\/a>"
       }
     },
-    "08b1b747-95f6-4cb0-a1cc-eab87e962b2c": {
-      "type": "featured-video",
+    "16401814158380a11c": {
+      "type": "image-with-text",
       "settings": {
+        "top-border": false,
         "spacing-above": false,
         "spacing-below": false,
         "background-color": "none",
         "container-width": "6",
-        "light-text": true,
+        "light-text": false,
+        "overlap": false,
+        "heading-type": "section-heading",
+        "text-position": "center",
+        "text-horizontal-alignment": "center",
+        "text-vertical-alignment": "center",
+        "text-width": "medium",
+        "text-style": "none",
+        "text-background-color": "transparent",
+        "image-display-type": "medium",
         "aspect-ratio": 56,
-        "play-button-style": "solid",
         "overlay-style": "darken-bottom",
-        "video-url": "",
-        "heading": "Video",
-        "description": "<p>Add a description here<\/p>",
-        "button-text": "button",
-        "button-url": "",
-        "mobile-aspect-ratio": 134
-      }
-    },
-    "888c0700-2b7d-4516-8312-8388f1daefac": {
-      "type": "newsletter",
-      "settings": {
-        "spacing-above": true,
-        "spacing-below": true,
-        "background-color": "none",
-        "light-text": false,
-        "heading": "Subscribe to our newsletter",
-        "description": "<p>A short sentence describing what someone will receive by subscribing<\/p>"
-      }
-    },
-    "f464cea0-bd7e-46ca-8e5a-57cfc76269da": {
-      "type": "collapsible-rows",
-      "blocks": {
-        "template--14865991630929__f464cea0-bd7e-46ca-8e5a-57cfc76269da-16866969207649ce86-0": {
-          "type": "collapsible-row",
-          "settings": {
-            "heading": "Collapsible row",
-            "description": "<p>Use rows to highlight unique features, <br\/>sizing information, <br\/>or other sales information.<\/p>",
-            "page-content": "",
-            "default-open": false
-          }
-        },
-        "template--14865991630929__f464cea0-bd7e-46ca-8e5a-57cfc76269da-16866969207649ce86-1": {
-          "type": "collapsible-row",
-          "settings": {
-            "heading": "Collapsible row",
-            "description": "<p>Use rows to highlight unique features, <br\/>sizing information, <br\/>or other sales information.<\/p>",
-            "page-content": "",
-            "default-open": false
-          }
-        },
-        "template--14865991630929__f464cea0-bd7e-46ca-8e5a-57cfc76269da-16866969207649ce86-2": {
-          "type": "collapsible-row",
-          "settings": {
-            "heading": "Collapsible row",
-            "description": "<p>Use rows to highlight unique features, <br\/>sizing information, <br\/>or other sales information.<\/p>",
-            "page-content": "",
-            "default-open": false
-          }
-        }
-      },
-      "block_order": [
-        "template--14865991630929__f464cea0-bd7e-46ca-8e5a-57cfc76269da-16866969207649ce86-0",
-        "template--14865991630929__f464cea0-bd7e-46ca-8e5a-57cfc76269da-16866969207649ce86-1",
-        "template--14865991630929__f464cea0-bd7e-46ca-8e5a-57cfc76269da-16866969207649ce86-2"
-      ],
-      "settings": {
-        "spacing-above": true,
-        "spacing-below": true,
-        "background-color": "light",
-        "light-text": false,
-        "container-width": "1",
-        "heading": "FAQS"
+        "parallax-enabled": false,
+        "image": "shopify:\/\/shop_images\/postcard_YY_omote_3.jpg",
+        "overline": "炭火グリルレストラン",
+        "title": "GMC Grill",
+        "description": "<p><\/p><p><strong> ground menu :<br\/><\/strong><a href=\"\/pages\/gmc-grill-dinner-menu\" target=\"_blank\" title=\"GMC Grill Dinner Menu\">メニューはこちら<\/a><\/p><p><\/p><p>11:30-15:00(14:30.LO)<\/p><p>18:00-22:00(21:00.LO)<\/p><p>定休日: 水曜木曜<\/p><p><\/p>",
+        "link-url": "https:\/\/gmc.mazina.co.jp\/pages\/gmc-grill-dinner-menu",
+        "link-text": "",
+        "mobile-overlay": false,
+        "mobile-hide-description": false,
+        "mobile-image-display-type": "original",
+        "mobile-aspect-ratio": 134,
+        "mobile-text-alignment": "center"
       }
     },
     "map": {
       "type": "map",
       "settings": {
-        "spacing-above": true,
+        "top-border": false,
+        "spacing-above": false,
         "spacing-below": true,
         "background-color": "none",
         "light-text": false,
         "container-width": "4",
         "theme": "grayscale",
-        "heading": "Our store",
-        "address": "<p>391 Sunrise Blvd,<br\/>Los Angeles<br\/>CA 94108, USA<\/p>",
-        "hours": "<p>Monday - Friday<br\/>10am - 6pm<br\/><br\/>Saturday - Sunday<br\/>12pm - 5pm<\/p>",
-        "api-key": "",
-        "map-address": "391 Sutter St, San Francisco"
-      }
-    },
-    "featured-blog": {
-      "type": "featured-blog",
-      "settings": {
-        "spacing-above": true,
-        "spacing-below": true,
-        "background-color": "light",
-        "light-text": false,
-        "container-width": "4",
-        "tag-select": "pinned",
-        "show-date": true,
-        "show-excerpt": true,
-        "blog": "news",
-        "blog-heading": "Blog posts",
-        "view-more-text": "View more"
-      }
-    },
-    "79cdc2f8-dc2d-4924-bfd4-2f03cdbe0381": {
-      "type": "featured-text",
-      "settings": {
-        "spacing-above": true,
-        "spacing-below": true,
-        "background-color": "dark",
-        "light-text": true,
-        "container-width": "1",
-        "overline": "Issues or concerns",
-        "heading": "Any questions about the theme?",
-        "description": "<p>We're passionate about empowering small businesses and want to see you get the most out of your theme. If you have any questions please don't hesitate to get in touch.<\/p>",
-        "link-url": "https:\/\/support.troopthemes.com?utm_source=new_install&utm_medium=new_install",
-        "link-text": "Contact us"
+        "heading": "",
+        "address": "<p>〒299-4301<br\/>千葉県長生郡一宮町一宮10072-2<br\/>0475-36-6865<\/p>",
+        "hours": "",
+        "api-key": "AIzaSyAioJ2j410LopRaonQS04ybG0xwMNyLhbQ",
+        "map-address": "千葉県長生郡一宮町一宮10072-2"
       }
     }
   },
   "order": [
-    "slideshow",
-    "2edd3bf1-d431-4051-8eb3-b1abb6d841d4",
-    "a2243e73-eaf5-4985-8402-eb9b4ed43f1e",
-    "8a29fc19-19a8-41b0-b2e8-10505f1f156f",
-    "25d1774b-0b34-42d1-91d9-acea2fe2d4e9",
     "164016757166a86406",
-    "c990c808-20ee-417a-8211-74ae6de26bb0",
-    "16401814158380a11c",
-    "00e17d30-119a-48eb-893b-5bf838084367",
-    "featured-text",
+    "slideshow",
+    "featured-collection-grid",
+    "featured_video_adjaUU",
     "grid-with-overlay",
-    "featured-collection-slider",
-    "ef31fa12-e7a0-4c66-8567-1cca76a8a029",
     "1640181507ee260ca6",
-    "1640167859b5c16893",
-    "2c7b2c75-a053-465f-9304-0c8a440bc6b4",
-    "08b1b747-95f6-4cb0-a1cc-eab87e962b2c",
-    "888c0700-2b7d-4516-8312-8388f1daefac",
-    "f464cea0-bd7e-46ca-8e5a-57cfc76269da",
-    "map",
-    "featured-blog",
-    "79cdc2f8-dc2d-4924-bfd4-2f03cdbe0381"
+    "custom_content_bTzfAg",
+    "16401814158380a11c",
+    "map"
   ]
 }
