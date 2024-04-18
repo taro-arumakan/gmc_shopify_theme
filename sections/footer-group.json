@@ -7,6 +7,7 @@
       "blocks": {
         "4bbc4d2e-97a8-4d59-87f2-9195c41265ab": {
           "type": "subscribe",
+          "disabled": true,
           "settings": {
             "newsletter--heading": "Newsletter",
             "newsletter--info": "<p>新商品やセール、最新のレシピに調理動画も。<br\/>GMCからのお得な情報をお届けします。<\/p>",
