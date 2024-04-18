@@ -268,7 +268,7 @@
         "overlay-block-3"
       ],
       "custom_css": [
-        ".featured-grid--body--container[data-mobile-columns=\"2\"] .featured-grid--item:nth-child(odd):last-child {width: 100%; }"
+        ".featured-grid--item:nth-child(odd):last-child {width: 100%;}"
       ],
       "settings": {
         "top-border": false,
@@ -377,21 +377,21 @@
         "spacing-above": false,
         "spacing-below": false,
         "background-color": "none",
-        "container-width": "6",
+        "container-width": "3",
         "light-text": false,
         "overlap": false,
         "heading-type": "section-heading",
         "text-position": "center",
         "text-horizontal-alignment": "center",
         "text-vertical-alignment": "center",
-        "text-width": "medium",
+        "text-width": "large",
         "text-style": "none",
         "text-background-color": "transparent",
         "image-display-type": "medium",
         "aspect-ratio": 56,
         "overlay-style": "darken-bottom",
         "parallax-enabled": false,
-        "image": "shopify:\/\/shop_images\/postcard_YY_omote_3.jpg",
+        "image": "shopify:\/\/shop_images\/postcard_YY_omote_3_f7c87838-d1cc-40a6-8446-e50d263eb26f.jpg",
         "overline": "炭火グリルレストラン",
         "title": "GMC Grill",
         "description": "<p><\/p><p><strong> ground menu :<br\/><\/strong><a href=\"\/pages\/gmc-grill-dinner-menu\" target=\"_blank\" title=\"GMC Grill Dinner Menu\">メニューはこちら<\/a><\/p><p><\/p><p>11:30-15:00(14:30.LO)<\/p><p>18:00-22:00(21:00.LO)<\/p><p>定休日: 水曜木曜<\/p><p><\/p>",
