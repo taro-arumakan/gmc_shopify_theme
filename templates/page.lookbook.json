@@ -6,13 +6,9 @@
         "spacing-above": false,
         "spacing-below": true,
         "background-color": "none",
-        "container-width": "5",
-        "light-text": "false",
         "overlap": false,
-        "text-position": "overlay",
+        "text-position": "center",
         "text-width": "medium",
-        "text-style": "none",
-        "overlay-style": "darken-bottom",
         "parallax-enabled": false,
         "overline": "Overline text",
         "title": "Lookbook",
@@ -28,7 +24,6 @@
         "show-title": false,
         "background-color": "none",
         "light-text": false,
-        "container-width": "3",
         "spacing-above": false,
         "spacing-below": true
       }
@@ -39,8 +34,6 @@
         "163243822008cc1cdd-1": {
           "type": "image",
           "settings": {
-            "x-blocks": "1",
-            "y-blocks": "2",
             "title": "Grid image",
             "link-url": "",
             "link-text": "View more"
@@ -49,8 +42,6 @@
         "163243822008cc1cdd-2": {
           "type": "image",
           "settings": {
-            "x-blocks": "1",
-            "y-blocks": "1",
             "title": "Grid image",
             "link-url": "",
             "link-text": "View more"
@@ -59,8 +50,6 @@
         "163243822008cc1cdd-3": {
           "type": "image",
           "settings": {
-            "x-blocks": "1",
-            "y-blocks": "1",
             "title": "Grid image",
             "link-url": "",
             "link-text": "View more"
@@ -69,8 +58,6 @@
         "dd134221-c067-4343-8329-87a55375741b": {
           "type": "image",
           "settings": {
-            "x-blocks": "2",
-            "y-blocks": "1",
             "title": "Grid image",
             "link-url": "",
             "link-text": "View more"
@@ -79,8 +66,6 @@
         "829a7e53-6bc6-4f66-ad58-b4dafb4b2788": {
           "type": "image",
           "settings": {
-            "x-blocks": "2",
-            "y-blocks": "1",
             "title": "Grid image",
             "link-url": "",
             "link-text": "View more"
@@ -89,8 +74,6 @@
         "1cffdf4d-d46c-4371-87ae-e5691c9d06ff": {
           "type": "image",
           "settings": {
-            "x-blocks": "1",
-            "y-blocks": "1",
             "title": "Grid image",
             "link-url": "",
             "link-text": "View more"
@@ -99,8 +82,6 @@
         "913775ee-4352-4900-92fb-411a7ae0a303": {
           "type": "image",
           "settings": {
-            "x-blocks": "1",
-            "y-blocks": "1",
             "title": "Grid image",
             "link-url": "",
             "link-text": "View more"
@@ -109,8 +90,6 @@
         "163243822008cc1cdd-0": {
           "type": "image",
           "settings": {
-            "x-blocks": "2",
-            "y-blocks": "2",
             "title": "Grid image",
             "link-url": "",
             "link-text": "View more"
@@ -119,8 +98,6 @@
         "8cdbfb93-fdcf-4331-b22b-2763f0ab82f9": {
           "type": "image",
           "settings": {
-            "x-blocks": "1",
-            "y-blocks": "1",
             "title": "Grid image",
             "link-url": "",
             "link-text": "View more"
@@ -142,13 +119,10 @@
         "spacing-above": false,
         "spacing-below": true,
         "background-color": "none",
-        "container-width": "3",
         "spacing": true,
         "width": 3,
-        "text-style": "light-with-darken",
-        "overline": "",
+        "text-style": "light-with-overlay",
         "heading": "",
-        "description": "",
         "link-url": "",
         "link-text": "",
         "mobile-width": "2",
@@ -161,8 +135,6 @@
         "16324391249e26ecb5-0": {
           "type": "image",
           "settings": {
-            "x-blocks": "1",
-            "y-blocks": "1",
             "title": "Grid image",
             "link-url": "",
             "link-text": "View more"
@@ -171,8 +143,6 @@
         "16324391249e26ecb5-1": {
           "type": "image",
           "settings": {
-            "x-blocks": "1",
-            "y-blocks": "1",
             "title": "Grid image",
             "link-url": "",
             "link-text": "View more"
@@ -187,13 +157,10 @@
         "spacing-above": false,
         "spacing-below": true,
         "background-color": "none",
-        "container-width": "4",
         "spacing": true,
         "width": 2,
-        "text-style": "light-with-darken",
-        "overline": "",
+        "text-style": "light-with-overlay",
         "heading": "",
-        "description": "",
         "link-url": "",
         "link-text": "",
         "mobile-width": "2",
@@ -206,13 +173,9 @@
         "spacing-above": false,
         "spacing-below": true,
         "background-color": "none",
-        "container-width": "5",
-        "light-text": "false",
         "overlap": false,
-        "text-position": "overlay",
+        "text-position": "center",
         "text-width": "medium",
-        "text-style": "none",
-        "overlay-style": "darken-bottom",
         "parallax-enabled": false,
         "overline": "Overline text",
         "title": "Image with Text",
