@@ -18,18 +18,13 @@
         <p class="address--email" data-item="paragraph">{{ customer.email }}</p>
         <div class="address--view" data-item="paragraph">
           {%- if customer.default_address != nil -%}
+            <p>{{ customer.default_address.country }}</p>
+            <p>{{ customer.default_address.zip }}</p>
+            <p>{{ customer.default_address.province }} {{ customer.default_address.city }}</p>
             <p>{{ customer.default_address.address1 }}</p>
-
             {% if customer.default_address.address2 != "" %}
               <p>{{ customer.default_address.address2 }}</p>
             {% endif %}
-
-            <p>{{ customer.default_address.city }},
-            {% if customer.default_address.province_code %}
-              {{ customer.default_address.province_code }},
-            {% endif %}
-            {{ customer.default_address.country }}</p>
-            <p>{{ customer.default_address.zip }}</p>
             <p>{{ customer.default_address.phone }}</p>
           {%- endif -%}
 
