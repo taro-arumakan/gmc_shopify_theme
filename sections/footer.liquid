@@ -176,13 +176,6 @@
       </div>
     {%- endif -%}
 
-    {%- assign powered_check = powered_by_link | split: '>' -%}
-    {%- if powered_check[1] != ' </a' -%}
-      <div class="footer--sub--block" data-type="powered-by" data-item="paragraph">
-        {{- powered_by_link -}}
-      </div>
-    {%- endif -%}
-
     {%- liquid
       if shop.enabled_payment_types != empty and section.settings.show-payment-icons
         echo '<div class="footer--sub--block" data-type="payment-icons">'
