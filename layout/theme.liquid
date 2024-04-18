@@ -1,186 +1,124 @@
 <!doctype html>
-<html class="no-js" lang="{{ shop.locale }}">
+<html class="no-js" lang="{{ request.locale.iso_code }}" dir="ltr">
   <head>
-    <!-- Blockshop Theme - Version 7.0.3 by Troop Themes - https://troopthemes.com/ -->
+    <!-- Blockshop Theme - Version 9.4.3 by Troop Themes - https://troopthemes.com/ -->
 
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    {% if page_description %}
+    {%- if page_description -%}
       <meta name="description" content="{{ page_description | escape }}">
-    {% endif %}
+    {%- endif -%}
 
-    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.shopify.com" crossorigin>
-    <link rel="preconnect" href="https://monorail-edge.shopifysvc.com">
-
-    <link rel="preload" href="{{ 'theme--critical.css' | asset_url }}" as="style">
-    <link rel="preload" href="{{ 'theme--async.css' | asset_url }}" as="style">
-    <link rel="preload" href="{{ 'lazysizes.min.js' | asset_url }}" as="script">
-    <link rel="preload" href="{{ 'theme.min.js' | asset_url }}" as="script">
+    {%- liquid
+      echo 'theme--critical.css' | asset_url | preload_tag: as: 'style'
+      echo 'theme--async.css' | asset_url | preload_tag: as: 'style'
+    -%}
 
     {%- if canonical_url != blank -%}
       <link rel="canonical" href="{{ canonical_url }}">
     {%- endif -%}
 
-    {% if settings.favicon != blank %}
-      <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x' }}" type="image/png">
-      <link rel="apple-touch-icon" href="{{ settings.favicon | img_url: '180x' }}">
-    {% endif %}
+    {%- if settings.favicon != blank -%}
+      <link rel="shortcut icon" href="{{ settings.favicon | image_url: width: 32 }}" type="image/png">
+      <link rel="apple-touch-icon" href="{{ settings.favicon | image_url: width: 180 }}">
+    {%- endif -%}
 
-    {% render 'framework--social-meta-tags' %}
+    <title>
+      {%- liquid
+        echo page_title
+        unless request.page_type == 'index'
+          echo ' | ' | append: shop.name
+        endunless
+      -%}
+    </title>
 
-    {% if request.page_type == 'index' %}
-      <title>{{ page_title }}</title>
-    {% elsif request.page_type == 'password' %}
-      <title>{{ shop.name }}</title>
-    {% else %}
-      <title>{{ page_title }} | {{ shop.name }}</title>
-    {% endif %}
+    {%- liquid
+      render 'meta-tags'
+      render 'css-typography'
+      render 'css-variables'
+      render 'custom-styles'
+      render 'js-variables'
+      render 'js-utils'
+      render 'js-modules'
+    -%}
 
-    {% render 'framework--css-variables' %}
-    {% render 'partial--css-variables' %}
-    {% render 'partial--js-variables' %}
+    {%- if request.page_type contains 'customers' -%}
+      <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
+      <script src="{{ 'customer_area.js' | shopify_asset_url }}" defer="defer"></script>
+    {%- endif -%}
 
-    <script>
-      function onLoadStylesheet() {
-        const link = document.querySelector(`link[href="${theme.assets.stylesheet}"]`);
-        link.loaded = true;
-        link.dispatchEvent(new Event('load'));
-      }
-    </script>
+    <link href="{{ "theme--critical.css" | asset_url }}" rel="stylesheet" media="all">
+    <link
+      href="{{ "theme--async.css" | asset_url }}"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    >
+
     <noscript>
       <style>
-        body .layout--main-content > *,
-        body .header--root,
-        body .footer--root,
-        body .popup-modal-close,
-        body .modal--root,
-        body .modal--window {
+        .layout--template > *, .layout--footer-group > * {
           opacity: 1;
         }
       </style>
-
-      <link href="{{ 'theme--async.css' | asset_url }}" rel="stylesheet">
+      <link href="{{ "theme--async.css" | asset_url }}" rel="stylesheet">
     </noscript>
-
-    <link href="{{ 'theme--critical.css' | asset_url }}" rel="stylesheet" media="all"/>
-    <link
-      href="{{ 'theme--async.css' | asset_url }}"
-      rel="stylesheet"
-      media="print"
-      onload="this.media='all';onLoadStylesheet()"
-    >
-
-    <script src="{{ 'lazysizes.min.js' | asset_url }}" async="async"></script>
-    <script src="{{ 'theme.min.js' | asset_url }}" defer="defer"></script>
-
-    {% if request.page_type contains 'customers' %}
-      <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
-      <script src="{{ 'customer_area.js' | shopify_asset_url }}" defer="defer"></script>
-    {% endif %}
-
-    <script src="{{ 'message_noshi.js' | asset_url }}" defer="defer"></script>
 
     {{ content_for_header }}
   </head>
 
   <body
-    class="page--{{ page_title | handle }} template--{{ template | split: '.' | first | remove: '/' | remove: '_' }}"
+    class="template--{{ template | split: '.' | first | remove: '_' | replace: '/', '--' }} page--{{ page_title | handle }}"
     data-theme-id="606"
     data-theme-name="Blockshop"
-    data-theme-version="7.0.3"
-    data-tabbing="false"
+    data-theme-version="9.4.3"
+    data-theme-preset="{{ settings.preset }}"
+    data-transition-container="viewport"
+    data-logged-in="{% if customer %}true{% else %}false{% endif %}"
+    {% if settings.border--enabled %}
+      data-show-border
+    {% endif %}
   >
-    {% unless request.page_type == 'password' %}
-      <a data-item="a11y-button" href='#main-content'>
-        {{ 'general.skip_link' | t }}
-      </a>
+    <!--[if IE]>
+      <div style="text-align:center;padding:72px 16px;">
+        {{ 'general.browser_unsupported' | t }}
+      </div>
+      <style>
+        .layout--viewport { display: none; }
+      </style>
+    <![endif]-->
 
-      <div
-        class="off-canvas--viewport"
-        data-js-class="OffCanvas"
-        data-off-canvas--state="closed"
-      >
-        <div class="off-canvas--overlay" data-js-class="Transition"></div>
-        <div
-          aria-label="{{ 'general.close' | t }}"
-          data-js-class="Transition"
-          data-off-canvas--close
-        >
-          {% render 'framework--icons', icon: 'cross' %}
+    <a data-item="a11y-button" href='#main-content' id="a11y_skip">
+      {{- 'general.a11y.skip_main' | t -}}
+    </a>
+
+    <div class="layout--viewport" data-drawer-status="closed">
+      <div class="layout--main-content">
+        <header class="layout--header-group">
+          {%- sections 'header-group' -%}
+        </header>
+
+        <div class="layout--overlay-group">
+          {%- sections 'overlay-group' -%}
         </div>
 
+        <main class="layout--template" id="main-content">
+          {{ content_for_layout }}
+        </main>
 
-        <div class="off-canvas--main-content">
-          {% section 'announcement' %}
-          {% section 'header' %}
-          {% section 'announcement2' %}
-    {% endunless %}
-
-    <main class="layout--main-content" id="main-content">
-      {{ content_for_layout }}
-    </main>
-
-    {% unless request.page_type == 'password' %}
-          {% section 'framework--footer' %}
-
-          <div class="popup-modal-close" aria-label="{{ 'general.close' | t }}" tabindex="0">
-            {% render 'framework--icons', icon: 'cross' %}
-          </div>
-          <div class="popup-modal-mask"></div>
-        </div>
-
-        <div
-          class="off-canvas--right-sidebar"
-          data-active="cart"
-          data-js-class="Transition"
-        >
-          <div class="off-canvas--focus-trigger" tabindex="0"></div>
-
-          {% if request.page_type == 'product' %}
-            <div class="off-canvas--container" data-view="pickup"></div>
-          {% endif %}
-
-          {% if request.page_type == 'collection' %}
-            <div class="off-canvas--container" data-view="collection-filter"></div>
-          {% endif %}
-
-          {% if settings.product--quick-add-enabled %}
-            <div class="off-canvas--container" data-view="product-form"></div>
-          {% endif %}
-
-          {% if settings.cart--type == 'drawer' or settings.product--quick-add-enabled %}
-            <div class="off-canvas--container" data-view="cart">
-              {% render 'framework--cart', view: 'mobile', is_drawer: true %}
-            </div>
-          {% endif %}
-
-          <div class="off-canvas--focus-trigger" tabindex="0"></div>
-        </div>
-
-        <div
-          class="off-canvas--left-sidebar"
-          data-active="menu"
-          data-js-class="Transition"
-        >
-          <div class="off-canvas--focus-trigger" tabindex="0"></div>
-
-          <div class="off-canvas--container" data-view="menu">
-            {% render 'partial--mobile-nav' %}
-          </div>
-
-          <div class="off-canvas--focus-trigger" tabindex="0"></div>
-        </div>
-
-        {% render 'framework--feedback-bar' %}
-        {% render 'partial--popup' %}
-
+        <footer class="layout--footer-group">
+          {%- sections 'footer-group' -%}
+        </footer>
       </div>
 
-      {% render 'framework--search', view: 'modal' %}
-      {% render 'framework--modal' %}
-    {% endunless %}
+      {%- liquid
+        render 'drawer'
+        render 'layout--navigation'
+        render 'feedback-bar'
+      -%}
+    </div>
 
+    {%- render 'icons', icon: 'defs' -%}
   </body>
 </html>

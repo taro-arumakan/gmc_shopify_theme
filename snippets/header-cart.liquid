@@ -1,0 +1,41 @@
+{%- liquid
+  assign cart_t = 'layout.header.cart' | t
+
+  capture cart_icon
+    if cart_icon == "bag"
+      render 'icons', icon: 'bag'
+    elsif cart_icon == "cart"
+      render 'icons', icon: 'cart'
+    elsif cart_icon == "text"
+      echo 'cart.title' | t
+    endif
+  endcapture
+-%}
+
+<a
+  class="header--cart-toggle"
+  aria-label="{{ cart_t }}"
+  data-cart-count="{{ cart.item_count }}"
+  data-item="nav-text"
+  {% if settings.cart--type == 'drawer' %}
+    data-drawer-open="right"
+    data-drawer-view="cart-drawer"
+    aria-haspopup="menu"
+    href="#"
+  {% else %}
+    href="{{ routes.cart_url }}"
+  {% endif %}
+>
+  {{ cart_icon }}
+</a>
+
+<noscript>
+  <a
+    class="header--cart-toggle"
+    aria-label="{{ cart_t }}"
+    href="{{ routes.cart_url }}"
+    data-cart-count="{{ cart.item_count }}"
+  >
+    {{ cart_icon }}
+  </a>
+</noscript>

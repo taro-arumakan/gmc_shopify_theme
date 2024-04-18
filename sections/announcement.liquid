@@ -1,58 +1,63 @@
-{% capture general_settings %}
-  {{ settings.color--alternative }}
-  {{ settings.color--accent }}
-{% endcapture %}
+{%- liquid
+  assign bg_color = section.settings.background-color
+  assign icon = section.settings.icon
+  assign light_text = section.settings.light-text
+  assign link = section.settings.link
+  assign text = section.settings.text
 
-{% assign show_on_page = true %}
-{% if section.settings.home-page-only and template != 'index' or template == 'password' %}
-  {% assign show_on_page = false %}
-{% endif %}
+  assign enabled = true
+  if section.settings.home-page-only and template != 'index'
+    assign enabled = false
+  endif
 
-<div
-  class="announcement--root"
-  style="{% render 'framework--background-colors', bg_color: section.settings.background-color %}"
-  data-section-id="{{ section.id }}"
-  data-section-type="announcement"
-  data-js-class="IndexAnnouncement"
-  data-alternative-color="{{ section.settings.alternative-color }}"
->
-  {% if section.settings.enabled and show_on_page %}
+  capture link_settings
+    echo settings.color--alternative
+    echo settings.color--accent-1
+    echo settings.color--accent-2
+  endcapture
+-%}
 
-    {% if section.settings.link != blank %}
-      <a class="announcement--link" href="{{ section.settings.link }}">
-    {% endif %}
+{%- if enabled -%}
+  <div
+    class="announcement--root"
+    data-section-id="{{ section.id }}"
+    data-section-type="announcement"
+    data-background-color="{{ bg_color }}"
+    data-light-text="{{ light_text }}"
+    data-spacing="none"
+  >
+    {%- if link != blank -%}
+      <a class="announcement--link" href="{{ link }}">
+    {%- endif -%}
 
     <div class="announcement--wrapper">
-      {% if section.settings.icon %}
+      {%- if icon -%}
         <div class="announcement--icon">
-          {{ section.settings.icon | img_url: '50x50' | img_tag: section.settings.icon.alt }}
+          {{-
+            icon |
+              image_url: width: 50, height: 50 |
+              image_tag: alt: icon.alt
+          -}}
         </div>
-      {% endif %}
+      {%- endif -%}
 
-      {% if section.settings.text != blank %}
+      {%- if text != blank -%}
         <div class="announcement--text" data-item="accent-text">
-          {{ section.settings.text | escape }}
+          {{- text | escape -}}
         </div>
-      {% endif %}
+      {%- endif -%}
     </div>
 
-    {% if section.settings.link != blank %}
+    {%- if link != blank -%}
       </a>
-    {% endif %}
-
-  {% endif %}
-</div>
+    {%- endif -%}
+  </div>
+{%- endif -%}
 
 {% schema %}
 {
   "name": "Announcement bar",
   "settings": [
-    {
-      "type": "checkbox",
-      "id": "enabled",
-      "label": "Show announcement",
-      "default": true
-    },
     {
       "type": "checkbox",
       "id": "home-page-only",
@@ -64,18 +69,34 @@
       "label": "Background color",
       "type": "select",
       "options": [
-        { "label": "None", "value": "none" },
-        { "label": "Light grey", "value": "light" },
-        { "label": "Dark", "value": "dark" },
-        { "label": "Accent", "value": "accent" }
+        {
+          "label": "Transparent",
+          "value": "none"
+        },
+        {
+          "label": "Light",
+          "value": "light"
+        },
+        {
+          "label": "Dark",
+          "value": "dark"
+        },
+        {
+          "label": "Accent 1",
+          "value": "accent-1"
+        },
+        {
+          "label": "Accent 2",
+          "value": "accent-2"
+        }
       ],
-      "default": "dark"
+      "default": "accent-1"
     },
     {
-      "id": "alternative-color",
+      "id": "light-text",
       "label": "Use light text color",
       "type": "checkbox",
-      "default": true
+      "default": false
     },
     {
       "type": "image_picker",
@@ -87,7 +108,7 @@
       "type": "text",
       "id": "text",
       "label": "Text",
-      "default": "Annoucement for sales, promos, shipping info & more — Click and Collect available"
+      "default": "Announcement for sales, promos, shipping info & more — Click and Collect available"
     },
     {
       "type": "url",

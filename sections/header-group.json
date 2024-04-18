@@ -1,0 +1,32 @@
+{
+  "type": "header",
+  "name": "Header Group",
+  "sections": {
+    "announcement": {
+      "type": "announcement",
+      "settings": {
+        "home-page-only": false,
+        "background-color": "accent-1",
+        "light-text": false
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "transparent-menu": false,
+        "background-color": "accent-2",
+        "light-text": false,
+        "cart--icon": "bag",
+        "header-menu-center": true,
+        "header-logo-center": true,
+        "logo": "{{ shop.brand.logo }}",
+        "logo-height": 35,
+        "mobile-logo-height": 30
+      }
+    }
+  },
+  "order": [
+    "announcement",
+    "header"
+  ]
+}

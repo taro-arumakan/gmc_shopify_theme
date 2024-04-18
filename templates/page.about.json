@@ -1,0 +1,114 @@
+{
+  "sections": {
+    "16324732604d3e7054": {
+      "type": "image-with-text",
+      "settings": {
+        "spacing-above": false,
+        "spacing-below": true,
+        "background-color": "none",
+        "container-width": "6",
+        "light-text": "false",
+        "overlap": false,
+        "text-position": "overlay",
+        "text-width": "medium",
+        "text-style": "none",
+        "overlay-style": "darken-bottom",
+        "parallax-enabled": false,
+        "overline": "About",
+        "title": "Our story",
+        "description": "<p>Combine imagery with text to create stand-out campaign sections, eye-catching promotions, information blocks and more.<\/p>",
+        "link-url": "",
+        "link-text": "",
+        "mobile-overlay": true
+      }
+    },
+    "main": {
+      "type": "page",
+      "settings": {
+        "show-title": false,
+        "background-color": "none",
+        "light-text": false,
+        "container-width": "1",
+        "spacing-above": false,
+        "spacing-below": true
+      }
+    },
+    "16324732989269ca2c": {
+      "type": "featured-text",
+      "settings": {
+        "spacing-above": false,
+        "spacing-below": true,
+        "background-color": "none",
+        "light-text": false,
+        "container-width": "4",
+        "overline": "Overline text",
+        "heading": "Introduce your brand"
+      }
+    },
+    "163247330191cc65e8": {
+      "type": "image-with-text",
+      "settings": {
+        "spacing-above": false,
+        "spacing-below": true,
+        "background-color": "none",
+        "container-width": "2",
+        "light-text": "false",
+        "overlap": false,
+        "text-position": "left",
+        "text-width": "small",
+        "text-style": "none",
+        "overlay-style": "darken-bottom",
+        "parallax-enabled": false,
+        "overline": "Overline text",
+        "title": "Image with Text",
+        "description": "<p>Combine imagery with text to create stand-out campaign sections, eye-catching promotions, information blocks and more.<\/p>",
+        "link-url": "",
+        "link-text": "",
+        "mobile-overlay": true
+      }
+    },
+    "1632473305029b8e81": {
+      "type": "image-with-text",
+      "settings": {
+        "spacing-above": false,
+        "spacing-below": true,
+        "background-color": "none",
+        "container-width": "2",
+        "light-text": "false",
+        "overlap": false,
+        "text-position": "right",
+        "text-width": "small",
+        "text-style": "none",
+        "overlay-style": "darken-bottom",
+        "parallax-enabled": false,
+        "overline": "Overline text",
+        "title": "Image with Text",
+        "description": "<p>Combine imagery with text to create stand-out campaign sections, eye-catching promotions, information blocks and more.<\/p>",
+        "link-url": "",
+        "link-text": "",
+        "mobile-overlay": true
+      }
+    },
+    "1632473398c42b6136": {
+      "type": "featured-video",
+      "settings": {
+        "background-color": "none",
+        "light-text": true,
+        "overlay-style": "darken-bottom",
+        "video-url": "",
+        "heading": "Video",
+        "description": "<p>Add a description here<\/p>",
+        "button-text": "button",
+        "button-url": ""
+      }
+    }
+  },
+  "order": [
+    "16324732604d3e7054",
+    "main",
+    "16324732989269ca2c",
+    "163247330191cc65e8",
+    "1632473305029b8e81",
+    "1632473398c42b6136"
+  ]
+}

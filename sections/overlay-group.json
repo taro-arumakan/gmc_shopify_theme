@@ -1,0 +1,50 @@
+{
+  "type": "aside",
+  "name": "Overlay Group",
+  "sections": {
+    "popup": {
+      "type": "popup",
+      "blocks": {
+        "newsletter": {
+          "type": "newsletter",
+          "settings": {
+            "social-title": ""
+          }
+        },
+        "small-promotion": {
+          "type": "small-promotion",
+          "settings": {
+          }
+        },
+        "large-promotion": {
+          "type": "large-promotion",
+          "settings": {
+          }
+        },
+        "consent-tracking": {
+          "type": "consent-tracking",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "newsletter",
+        "small-promotion",
+        "large-promotion",
+        "consent-tracking"
+      ],
+      "settings": {
+      }
+    },
+    "age-verification": {
+      "type": "age-verification",
+      "disabled": true,
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "popup",
+    "age-verification"
+  ]
+}

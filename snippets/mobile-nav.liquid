@@ -1,0 +1,44 @@
+{%- liquid
+  assign account_t = 'layout.header.account_view_link' | t
+  assign search_t = 'general.search.search' | t
+-%}
+
+<div
+  class="mobile-nav--header"
+  {% unless settings.transitions--other %}
+    data-transition-item="y-menu"
+  {% endunless %}
+>
+  {%- if settings.search--show-in-header -%}
+    <div
+      class="mobile-nav--search"
+      data-item="accent-text"
+      data-drawer-open="top"
+      data-drawer-view="search"
+      tabindex="0"
+    >
+      {{- search_t -}}
+    </div>
+  {%- endif -%}
+
+  {%- if shop.customer_accounts_enabled -%}
+    <div class="mobile-nav--login" data-item="accent-text">
+      {%- if customer -%}
+        <a href="{{ routes.account_url }}">
+          {{- account_t -}}
+        </a>
+      {%- else -%}
+        {{- account_t | customer_login_link -}}
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</div>
+
+<div class="mobile-nav--menu" data-item="accent-text"></div>
+<div
+  class="mobile-nav--localization"
+  {% unless settings.transitions--other %}
+    data-transition-item="y-menu"
+    data-transition-type="slide-in"
+  {% endunless %}
+></div>
