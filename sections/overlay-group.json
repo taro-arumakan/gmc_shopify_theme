@@ -8,22 +8,83 @@
         "newsletter": {
           "type": "newsletter",
           "settings": {
-            "social-title": ""
+            "background-color": "dark",
+            "translucent": true,
+            "light-text": true,
+            "position": "right",
+            "text-alignment": "center",
+            "heading": "Sign up and save",
+            "description": "<p>Describe the benefits of the newsletter – dazzling discounts, sneak peeks, limited-edition treats, exclusive deals, fashion tips.<\/p>",
+            "social-title": "",
+            "social-enabled": true,
+            "delay": 5,
+            "show-at-bottom": true,
+            "days-range": 7,
+            "referrer-enabled": false,
+            "referrer-url": "",
+            "page-enabled": false,
+            "page-url": ""
           }
         },
         "small-promotion": {
           "type": "small-promotion",
           "settings": {
+            "background-color": "dark",
+            "translucent": true,
+            "light-text": true,
+            "heading-type": "paragraph",
+            "position": "left",
+            "heading": "10% off your first order",
+            "delay": 3,
+            "show-at-bottom": true,
+            "days-range": 7,
+            "referrer-enabled": false,
+            "referrer-url": "",
+            "page-enabled": false,
+            "page-url": "",
+            "scroll-text": true,
+            "animation-speed": 7.5
           }
         },
         "large-promotion": {
           "type": "large-promotion",
           "settings": {
+            "background-color": "dark",
+            "translucent": true,
+            "light-text": true,
+            "position": "left",
+            "text-alignment": "center",
+            "heading": "Up to 40% off",
+            "description": "<p><\/p>",
+            "link-url": "\/",
+            "link-text": "Shop the sale",
+            "delay": 3,
+            "show-at-bottom": true,
+            "days-range": 7,
+            "referrer-enabled": false,
+            "referrer-url": "",
+            "page-enabled": false,
+            "page-url": "",
+            "countdown-enabled": true,
+            "timer-bg-color": "dark",
+            "light-number": true,
+            "expiry-date": "01-01-2026",
+            "expiry-hours": 0,
+            "expiry-minutes": 0,
+            "hide-when-expired": true,
+            "show-button-when": "always"
           }
         },
         "consent-tracking": {
           "type": "consent-tracking",
           "settings": {
+            "background-color": "dark",
+            "translucent": true,
+            "light-text": true,
+            "position": "left",
+            "text-alignment": "center",
+            "heading": "Cookie consent",
+            "description": "<p>We use cookies and similar technologies to provide the best experience on our website. Refer to our Privacy Policy for more information.<\/p>"
           }
         }
       },
@@ -33,13 +94,25 @@
         "large-promotion",
         "consent-tracking"
       ],
+      "disabled": true,
       "settings": {
+        "limit": true
       }
     },
     "age-verification": {
       "type": "age-verification",
       "disabled": true,
       "settings": {
+        "background-color": "dark",
+        "translucent": true,
+        "light-text": true,
+        "heading": "Confirm your age",
+        "description": "<p>Are you 18 years old or older?<\/p>",
+        "decline-text": "No I'm not",
+        "approve-text": "Yes I am",
+        "declined-heading": "Come back when you're older",
+        "declined-description": "<p>Sorry, the content of this store can't be seen by a younger audience. Come back when you're older.<\/p>",
+        "return-text": "Oops, I entered incorrectly"
       }
     }
   },
