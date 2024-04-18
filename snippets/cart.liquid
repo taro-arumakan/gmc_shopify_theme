@@ -350,6 +350,9 @@
         </div>
       {%- endif -%}
 
+      {% render 'message-card-or-noshi' %}
+
+      
       <div class="cart--totals">
         {%- if cart.cart_level_discount_applications != blank -%}
           <div class="cart--sub-total">
