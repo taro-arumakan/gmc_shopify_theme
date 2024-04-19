@@ -39,7 +39,7 @@
         "liquid_Cehc4f": {
           "type": "liquid",
           "settings": {
-            "custom-liquid": "<p class=\"line-item-property__field\">\n  <label for=\"reservation_date\">予約日<\/label>\n  <input required class=\"required\" id=\"reservation_date\" type=\"text\" name=\"properties[予約日]\">\n<\/p>"
+            "custom-liquid": "<p class=\"line-item-property__field\">\n  <label for=\"\">予約日<\/label>\n  <input required class=\"required\" id=\"reservation_date\" type=\"date\" name=\"properties[予約日]\">\n<\/p>\n\n<script>\nvar tzoffset = (new Date()).getTimezoneOffset() * 60000;\nvar tplus2ts = new Date().setDate(new Date().getDate() + 2);\n\nvar min_date = new Date(tplus2ts - tzoffset);\n\ndocument.getElementById('reservation_date').min = min_date.toISOString().split('T')[0];\n<\/script>"
           }
         },
         "quantity_selector_AAJhe9": {
