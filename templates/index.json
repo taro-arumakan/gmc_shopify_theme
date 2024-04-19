@@ -269,7 +269,7 @@
       ],
       "custom_css": [
         ".featured-grid--item:nth-child(odd):last-child {width: 100%;}",
-        "@media only screen and (min-width: 768px){.featured-grid--item:nth-child(odd):last-child {grid-column: 2 \/ span 2; }}"
+        "@media only screen and (min-width: 768px) {.featured-grid--item:nth-child(odd):last-child {grid-column: 2 \/ span 2; }}"
       ],
       "settings": {
         "top-border": false,
@@ -364,11 +364,11 @@
       "settings": {
         "top-border": false,
         "spacing-above": true,
-        "spacing-below": false,
+        "spacing-below": true,
         "background-color": "none",
         "light-text": false,
         "container-width": "4",
-        "custom_html": "<a name=\"butcher_gmc\"><\/a>"
+        "custom_html": "<a name=\"gmc_grill\"><\/a>"
       }
     },
     "16401814158380a11c": {
