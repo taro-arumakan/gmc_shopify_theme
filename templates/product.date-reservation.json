@@ -1,0 +1,106 @@
+{
+  "sections": {
+    "main": {
+      "type": "product",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+          }
+        },
+        "vendor": {
+          "type": "vendor",
+          "disabled": true,
+          "settings": {
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "collapsible-row-enabled": false,
+            "heading": "Description"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+          }
+        },
+        "options": {
+          "type": "options",
+          "settings": {
+            "variant-style": "dropdowns",
+            "swatches-enabled": true,
+            "size-chart-enabled": false,
+            "size-chart-option": "size",
+            "size-chart-content": ""
+          }
+        },
+        "liquid_Cehc4f": {
+          "type": "liquid",
+          "settings": {
+            "custom-liquid": "<p class=\"line-item-property__field\">\n  <label for=\"reservation_date\">予約日<\/label>\n  <input required class=\"required\" id=\"reservation_date\" type=\"text\" name=\"properties[予約日]\">\n<\/p>"
+          }
+        },
+        "quantity_selector_AAJhe9": {
+          "type": "quantity-selector",
+          "settings": {
+          }
+        },
+        "buy-buttons": {
+          "type": "buy-buttons",
+          "settings": {
+            "smart-payment-enabled": true
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "vendor",
+        "description",
+        "price",
+        "options",
+        "liquid_Cehc4f",
+        "quantity_selector_AAJhe9",
+        "buy-buttons"
+      ],
+      "settings": {
+        "container-width": "4",
+        "spacing-above": true,
+        "spacing-below": true,
+        "media-layout": "thumbnails",
+        "text-column-width": 30,
+        "media-gap": 8,
+        "column-spacing": "close",
+        "text-alignment": "left",
+        "thumbnail-width": 80,
+        "heading-enabled": false,
+        "heading-sizes-enabled": false,
+        "heading-size": 40,
+        "breadcrumbs-enabled": true,
+        "modal-enabled": true,
+        "variant-scroll-enabled": true,
+        "image-zoom-enabled": true,
+        "loop-enabled": false,
+        "mobile-media-layout": "thumbnails"
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "disabled": true,
+      "settings": {
+        "top-border": false,
+        "spacing-above": true,
+        "spacing-below": true,
+        "background-color": "none",
+        "light-text": false,
+        "container-width": "4",
+        "title": "You may also like"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "related-products"
+  ]
+}
