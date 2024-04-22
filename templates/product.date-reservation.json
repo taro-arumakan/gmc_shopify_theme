@@ -97,10 +97,29 @@
         "container-width": "4",
         "title": "You may also like"
       }
+    },
+    "featured_collection_zYB9wT": {
+      "type": "featured-collection",
+      "settings": {
+        "top-border": false,
+        "spacing-above": false,
+        "spacing-below": true,
+        "featured-collection--image--show": false,
+        "featured-collection--description--show": false,
+        "background-color": "none",
+        "light-text": false,
+        "display-type": "slideshow",
+        "products-per-row--desktop": "3",
+        "products-per-row--mobile": "2",
+        "collection": "{{ product.metafields.custom.product_featured_collection.value }}",
+        "max-products": 12,
+        "heading": "{{ section.settings.collection.title }}その他のオプション"
+      }
     }
   },
   "order": [
     "main",
-    "related-products"
+    "related-products",
+    "featured_collection_zYB9wT"
   ]
 }
