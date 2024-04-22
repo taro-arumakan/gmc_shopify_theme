@@ -97,6 +97,9 @@ class Drawer extends HTMLElement {
       this.state.instance.on("transitionend", () => this.toggle("opened"), {
         once: !0,
       });
+    fetch('/?sections=cart-drawer')
+      .then(data => data.json())
+      .then(res => document.querySelector('cart-root').innerHTML = res['cart-drawer']);
   }
   opened() {
     var t = document.getElementById(
