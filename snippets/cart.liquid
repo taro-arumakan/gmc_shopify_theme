@@ -26,7 +26,6 @@
   if view == 'mobile'
     assign sizes = '250px'
   endif
-  assign show_message_or_noshi = true
 -%}
 
 {%- for item in cart.items -%}
@@ -286,11 +285,6 @@
 
     </div>
   {%- endcapture -%}
-  {%- liquid
-    if item.product.tags contains 'BBQ予約'
-      assign show_message_or_noshi = false
-    endif
-  -%}
 {%- endfor -%}
 
 <cart-root
@@ -356,11 +350,8 @@
         </div>
       {%- endif -%}
 
-      {%- liquid
-        if show_message_or_noshi
-          render 'message-card-or-noshi'
-        endif
-      -%}
+      {% render 'message-card-or-noshi' %}
+
       
       <div class="cart--totals">
         {%- if cart.cart_level_discount_applications != blank -%}
