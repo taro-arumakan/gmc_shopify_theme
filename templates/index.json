@@ -382,7 +382,7 @@
         "light-text": false,
         "overlap": false,
         "heading-type": "section-heading",
-        "text-position": "center",
+        "text-position": "bottom",
         "text-horizontal-alignment": "center",
         "text-vertical-alignment": "center",
         "text-width": "large",
