@@ -1,0 +1,251 @@
+{
+  "sections": {
+    "collection-header": {
+      "type": "collection--header",
+      "disabled": true,
+      "settings": {
+        "show-title": true,
+        "heading-type": "section-heading",
+        "heading-alignment": "center",
+        "show-description": true,
+        "description-alignment": "with-title",
+        "light-text": true,
+        "show-image": true,
+        "use-image-fallback": true,
+        "image-display-type": "medium",
+        "aspect-ratio": 56,
+        "mobile-image-display-type": "original",
+        "mobile-aspect-ratio": 134,
+        "text-style": "none",
+        "overlay-style": "darken-bottom",
+        "parallax-enabled": false
+      }
+    },
+    "navigation": {
+      "type": "collection--navigation",
+      "disabled": true,
+      "settings": {
+        "show-browse-button": true,
+        "show-sort-button": true,
+        "show-refine-button": true,
+        "show-layout-buttons": true,
+        "show-collections-list": true,
+        "custom-list-collections": "",
+        "show-sort-list": true,
+        "show-refine-list": true,
+        "swatches-enabled": false,
+        "show-search-link": true
+      }
+    },
+    "main": {
+      "type": "collection--body",
+      "blocks": {
+        "grid-promo-1": {
+          "type": "promotion",
+          "disabled": true,
+          "settings": {
+            "row-number": 2,
+            "column-number": 2,
+            "promo-width": 2,
+            "heading-type": "featured-heading",
+            "text-horizontal-alignment": "center",
+            "text-vertical-alignment": "center",
+            "text-width": "medium",
+            "text-style": "none",
+            "text-background-color": "light",
+            "overlay-style": "darken-bottom",
+            "image-display-type": "x-small",
+            "aspect-ratio": 56,
+            "parallax-enabled": false,
+            "light-text": true,
+            "image": "{{ collection.image }}",
+            "overline": "Overline text{{ collection.title }}",
+            "title": "Grid promotion{{ collection.title }}",
+            "description": "<p>Create eye-catching promos within collection grids to increase discoverability and accelerate conversions.<\/p>",
+            "link-url": "",
+            "link-text": "Optional link",
+            "mobile-hide-description": false,
+            "mobile-image-display-type": "original",
+            "mobile-aspect-ratio": 134,
+            "mobile-text-alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "grid-promo-1"
+      ],
+      "disabled": true,
+      "settings": {
+        "products-per-row--desktop": 4,
+        "products-per-row--mobile": "2",
+        "number-of-rows": 6
+      }
+    },
+    "image_with_text_b7dzDd": {
+      "type": "image-with-text",
+      "settings": {
+        "top-border": false,
+        "spacing-above": false,
+        "spacing-below": false,
+        "background-color": "none",
+        "container-width": "6",
+        "light-text": true,
+        "overlap": true,
+        "heading-type": "section-heading",
+        "text-position": "overlay",
+        "text-horizontal-alignment": "center",
+        "text-vertical-alignment": "center",
+        "text-width": "medium",
+        "text-style": "none",
+        "text-background-color": "transparent",
+        "image-display-type": "medium",
+        "aspect-ratio": 56,
+        "overlay-style": "darken-top",
+        "parallax-enabled": false,
+        "image": "shopify:\/\/shop_images\/376886321_17993713538474730_7888887659607403635_n.jpg",
+        "overline": "",
+        "title": "GMC MEAT TRIP 2023",
+        "description": "",
+        "link-url": "",
+        "link-text": "",
+        "mobile-overlay": true,
+        "mobile-hide-description": false,
+        "mobile-image-display-type": "original",
+        "mobile-aspect-ratio": 134,
+        "mobile-text-alignment": "center"
+      }
+    },
+    "text_columns_mgMkwB": {
+      "type": "text-columns",
+      "blocks": {
+        "image_bgXMRr": {
+          "type": "image",
+          "settings": {
+            "show-image": true,
+            "image": "shopify:\/\/shop_images\/328981813_1637256143400819_29683902598437084_n.jpg",
+            "title": "Feb 8-14",
+            "description": "",
+            "link-url": "https:\/\/www.instagram.com\/p\/CoRKDaoPrFu",
+            "link-text": "三越 日本橋本店"
+          }
+        },
+        "image_PmFLdx": {
+          "type": "image",
+          "settings": {
+            "show-image": true,
+            "image": "shopify:\/\/shop_images\/IMG_1053_2.jpg",
+            "title": "May 19-21",
+            "description": "<p>浅草 三社祭<\/p>",
+            "link-url": "",
+            "link-text": ""
+          }
+        },
+        "image_V7yRCh": {
+          "type": "image",
+          "settings": {
+            "show-image": true,
+            "image": "shopify:\/\/shop_images\/348767180_612092207551641_9218439877701192094_n.jpg",
+            "title": "May 27-28",
+            "description": "",
+            "link-url": "https:\/\/www.instagram.com\/p\/CtS6nlmMsha\/",
+            "link-text": "Green Room 横浜赤レンガ"
+          }
+        },
+        "image_KkRJVH": {
+          "type": "image",
+          "settings": {
+            "show-image": true,
+            "image": "shopify:\/\/shop_images\/Screenshot_2024-05-21_at_11.50.37.png",
+            "title": "Jun 21-27",
+            "description": "",
+            "link-url": "https:\/\/www.instagram.com\/p\/CtepQXBvLoS\/",
+            "link-text": "伊勢丹 新宿本店"
+          }
+        },
+        "image_NEk9wd": {
+          "type": "image",
+          "settings": {
+            "show-image": true,
+            "image": "shopify:\/\/shop_images\/328981813_1637256143400819_29683902598437084_n.jpg",
+            "title": "Jul 26- Aug  1",
+            "description": "<p>三越 日本橋本店<\/p>",
+            "link-url": "",
+            "link-text": ""
+          }
+        },
+        "image_qagQmM": {
+          "type": "image",
+          "settings": {
+            "show-image": true,
+            "image": "shopify:\/\/shop_images\/376886321_17993713538474730_7888887659607403635_n.jpg",
+            "title": "Sep 15-17",
+            "description": "",
+            "link-url": "https:\/\/www.instagram.com\/p\/CxA9GldvF8X",
+            "link-text": "浅草六区ブロードウェイ"
+          }
+        },
+        "image_qBLf97": {
+          "type": "image",
+          "settings": {
+            "show-image": true,
+            "image": "shopify:\/\/shop_images\/397288251_18000589403474730_7894782992791577083_n.jpg",
+            "title": "Nov 5",
+            "description": "",
+            "link-url": "https:\/\/www.instagram.com\/p\/CzGJL_qv-LG",
+            "link-text": "東浪見 ONE WORLD SURF SHOP"
+          }
+        },
+        "image_XGL8ef": {
+          "type": "image",
+          "settings": {
+            "show-image": true,
+            "image": "shopify:\/\/shop_images\/404215961_18003431264474730_6918438771450109187_n.jpg",
+            "title": "Nov 26",
+            "description": "",
+            "link-url": "https:\/\/www.instagram.com\/p\/Cz5wwnjvKHc",
+            "link-text": "一宮町渚 farmers market"
+          }
+        }
+      },
+      "block_order": [
+        "image_bgXMRr",
+        "image_PmFLdx",
+        "image_V7yRCh",
+        "image_KkRJVH",
+        "image_NEk9wd",
+        "image_qagQmM",
+        "image_qBLf97",
+        "image_XGL8ef"
+      ],
+      "custom_css": [
+        "@media only screen and (min-width: 768px) {.featured-grid--root[data-text-position=\"bottom\"] .featured-grid--body--container {justify-items: center; } .featured-grid--item--image img {object-fit: cover; width: 40vw; height: 40vw; max-width: 550px; max-height: 550px; }}"
+      ],
+      "settings": {
+        "top-border": false,
+        "spacing-above": true,
+        "spacing-below": true,
+        "block-spacing": true,
+        "background-color": "none",
+        "light-text": false,
+        "container-width": "4",
+        "width": 2,
+        "aspect-ratio": "square",
+        "image-width": 0,
+        "text-alignment": "center",
+        "overline": "",
+        "heading": "",
+        "description": "",
+        "link-url": "",
+        "link-text": "",
+        "mobile-width": "1"
+      }
+    }
+  },
+  "order": [
+    "collection-header",
+    "navigation",
+    "main",
+    "image_with_text_b7dzDd",
+    "text_columns_mgMkwB"
+  ]
+}
