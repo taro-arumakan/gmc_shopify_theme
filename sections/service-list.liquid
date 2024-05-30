@@ -1,13 +1,13 @@
 {%- liquid
-  assign bg_color = section.settings.background-color
-  assign container_width = section.settings.container-width
+  assign bg_color = section.settings['background-color']
+  assign container_width = section.settings['container-width']
   assign heading = section.settings.heading
-  assign heading_alignment = section.settings.heading-alignment
-  assign light_text = section.settings.light-text
-  assign show_description = section.settings.show-description
-  assign spacing_above = section.settings.spacing-above
-  assign spacing_below = section.settings.spacing-below
-  assign top_border = section.settings.top-border
+  assign heading_alignment = section.settings['heading-alignment']
+  assign light_text = section.settings['light-text']
+  assign show_description = section.settings['show-description']
+  assign spacing_above = section.settings['spacing-above']
+  assign spacing_below = section.settings['spacing-below']
+  assign top_border = section.settings['top-border']
 
   render 'section-assets', name: 'service-list'
 -%}
@@ -24,12 +24,19 @@
   data-spacing-below="{{ spacing_below }}"
   data-top-border="{{ top_border }}"
 >
-  <div class="service-list--wrapper">
+  <div
+    class="service-list--wrapper"
+    data-transition-container="{{ section.id }}"
+    data-transition-type="slide-in"
+    data-transition-cascade="vertical"
+    data-transition-cascade-interval="120"
+  >
     {%- unless heading == blank -%}
       <h2
         class="service-list--title"
         data-item="section-heading"
         data-heading-alignment="{{ heading_alignment }}"
+        data-transition-item="{{ section.id }}"
       >
         {{- heading | escape -}}
       </h2>
@@ -40,19 +47,30 @@
         <div class="service-list--single-column">
           <ul class="service-list--blocks">
             {%- for block in section.blocks -%}
-              {%- if block.type == "header" -%}
+              {%- if block.type == 'header' -%}
                 {%- unless forloop.first -%}
-                  </ul><ul class="service-list--blocks">
+                  </ul>
+                  <ul class="service-list--blocks">
                 {%- endunless -%}
 
-                <li class="service-list--block-header" {{ block.shopify_attributes }}>
+                <li
+                  class="service-list--block-header"
+                  {{ block.shopify_attributes }}
+                  data-transition-item="{{ section.id }}"
+                  data-transition-type="slide-in"
+                >
                   <h3 class="service-list--block-header--text" data-item="block-heading">
                     {{- block.settings.title | escape -}}
                   </h3>
                 </li>
 
               {%- else -%}
-                <li class="service-list--block" {{ block.shopify_attributes }}>
+                <li
+                  class="service-list--block"
+                  {{ block.shopify_attributes }}
+                  data-transition-item="{{ section.id }}"
+                  data-transition-type="slide-in"
+                >
                   <div class="service-list--info">
                     {%- if block.settings.title.size > 0 -%}
                       <div class="service-list--block-title">
