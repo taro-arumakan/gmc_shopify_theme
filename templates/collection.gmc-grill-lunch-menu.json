@@ -1,0 +1,377 @@
+{
+  "sections": {
+    "collection-header": {
+      "type": "collection--header",
+      "settings": {
+        "show-title": true,
+        "heading-type": "section-heading",
+        "heading-alignment": "center",
+        "show-description": true,
+        "description-alignment": "with-title",
+        "light-text": true,
+        "show-image": true,
+        "use-image-fallback": true,
+        "image-display-type": "medium",
+        "aspect-ratio": 56,
+        "mobile-image-display-type": "original",
+        "mobile-aspect-ratio": 134,
+        "text-style": "none",
+        "overlay-style": "darken-bottom",
+        "parallax-enabled": false
+      }
+    },
+    "navigation": {
+      "type": "collection--navigation",
+      "disabled": true,
+      "settings": {
+        "show-browse-button": true,
+        "show-sort-button": true,
+        "show-refine-button": true,
+        "show-layout-buttons": true,
+        "show-collections-list": true,
+        "custom-list-collections": "",
+        "show-sort-list": true,
+        "show-refine-list": true,
+        "swatches-enabled": false,
+        "show-search-link": true
+      }
+    },
+    "main": {
+      "type": "collection--body",
+      "blocks": {
+        "grid-promo-1": {
+          "type": "promotion",
+          "disabled": true,
+          "settings": {
+            "row-number": 2,
+            "column-number": 2,
+            "promo-width": 2,
+            "heading-type": "featured-heading",
+            "text-horizontal-alignment": "center",
+            "text-vertical-alignment": "center",
+            "text-width": "medium",
+            "text-style": "none",
+            "text-background-color": "light",
+            "overlay-style": "darken-bottom",
+            "image-display-type": "x-small",
+            "aspect-ratio": 56,
+            "parallax-enabled": false,
+            "light-text": true,
+            "image": "{{ collection.image }}",
+            "overline": "Overline text{{ collection.title }}",
+            "title": "Grid promotion{{ collection.title }}",
+            "description": "<p>Create eye-catching promos within collection grids to increase discoverability and accelerate conversions.<\/p>",
+            "link-url": "",
+            "link-text": "Optional link",
+            "mobile-hide-description": false,
+            "mobile-image-display-type": "original",
+            "mobile-aspect-ratio": 134,
+            "mobile-text-alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "grid-promo-1"
+      ],
+      "disabled": true,
+      "settings": {
+        "products-per-row--desktop": 4,
+        "products-per-row--mobile": "2",
+        "number-of-rows": 6
+      }
+    },
+    "service_list_kEep4q": {
+      "type": "service-list",
+      "blocks": {
+        "header_KqRxiT": {
+          "type": "header",
+          "settings": {
+            "title": "薩摩黒豚ステーキ"
+          }
+        },
+        "item_H93g3E": {
+          "type": "item",
+          "settings": {
+            "title": "200g",
+            "price": "¥1,200",
+            "description": ""
+          }
+        },
+        "item_9AQxBF": {
+          "type": "item",
+          "settings": {
+            "title": "400g",
+            "price": "¥2,400",
+            "description": ""
+          }
+        },
+        "item_wfgkN9": {
+          "type": "item",
+          "settings": {
+            "title": "600g",
+            "price": "¥3,600",
+            "description": "<p>日本が誇る最高銘柄豚《かごしま黒豚》使用。<br\/>濃厚な旨味と脂身の甘みが特徴、低温調理でミディアムレア食感。<\/p>"
+          }
+        },
+        "header_3eygAi": {
+          "type": "header",
+          "settings": {
+            "title": "薩摩黒豚ステーキ ガーリックバター"
+          }
+        },
+        "item_Y9CtXH": {
+          "type": "item",
+          "settings": {
+            "title": "200g",
+            "price": "¥1,300",
+            "description": ""
+          }
+        },
+        "item_QfNymG": {
+          "type": "item",
+          "settings": {
+            "title": "400g",
+            "price": "¥2,400",
+            "description": ""
+          }
+        },
+        "item_GF7FnV": {
+          "type": "item",
+          "settings": {
+            "title": "600g",
+            "price": "¥3,600",
+            "description": "<p>薩摩黒豚ステーキにガーリックバターと焦がし醤油。<br\/>ガツっと濃い目の味がお好きな方に。<\/p>"
+          }
+        },
+        "header_qgW9qB": {
+          "type": "header",
+          "settings": {
+            "title": "薩摩黒豚ハンバーグ"
+          }
+        },
+        "item_wczLVY": {
+          "type": "item",
+          "settings": {
+            "title": "200g",
+            "price": "¥880",
+            "description": ""
+          }
+        },
+        "item_MhF9JE": {
+          "type": "item",
+          "settings": {
+            "title": "400g",
+            "price": "¥1,320",
+            "description": ""
+          }
+        },
+        "item_hEjTCG": {
+          "type": "item",
+          "settings": {
+            "title": "500g",
+            "price": "¥2,200",
+            "description": "<p>浅草トンテキ元気より受け継がられた名物ハンバーグ。<br\/>《ウチダソース》をかけてご賞味ください。<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "header_KqRxiT",
+        "item_H93g3E",
+        "item_9AQxBF",
+        "item_wfgkN9",
+        "header_3eygAi",
+        "item_Y9CtXH",
+        "item_QfNymG",
+        "item_GF7FnV",
+        "header_qgW9qB",
+        "item_wczLVY",
+        "item_MhF9JE",
+        "item_hEjTCG"
+      ],
+      "settings": {
+        "top-border": false,
+        "spacing-above": true,
+        "spacing-below": true,
+        "background-color": "none",
+        "light-text": false,
+        "container-width": "4",
+        "show-description": true,
+        "heading": "Platters",
+        "heading-alignment": "center"
+      }
+    },
+    "service_list_A7XKeM": {
+      "type": "service-list",
+      "blocks": {
+        "item_NKqiii": {
+          "type": "item",
+          "settings": {
+            "title": "Vツインプレート",
+            "price": "¥1,980",
+            "description": "<p>薩摩黒豚ステーキ 200g<br\/>ハンバーグ 200g<br\/>ソーセージ<br\/>目玉焼き<\/p>"
+          }
+        },
+        "item_aQ7R7N": {
+          "type": "item",
+          "settings": {
+            "title": "ゴッデスプレート",
+            "price": "¥3,200",
+            "description": "<p>薩摩黒豚ステーキ 200g<br\/>ハンバーグ 300g<br\/>フランク<br\/>自家製ベーコン<br\/>目玉焼<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "item_NKqiii",
+        "item_aQ7R7N"
+      ],
+      "settings": {
+        "top-border": false,
+        "spacing-above": false,
+        "spacing-below": false,
+        "background-color": "none",
+        "light-text": false,
+        "container-width": "4",
+        "show-description": true,
+        "heading": "",
+        "heading-alignment": "center"
+      }
+    },
+    "service_list_8QMe4D": {
+      "type": "service-list",
+      "blocks": {
+        "header_hdGqP4": {
+          "type": "header",
+          "settings": {
+            "title": "ランチオプション"
+          }
+        },
+        "item_hAGTEA": {
+          "type": "item",
+          "settings": {
+            "title": "ランチSET",
+            "price": "¥350 ",
+            "description": "<p>ライス, スープ, サラダ<\/p>"
+          }
+        },
+        "item_ecD4XC": {
+          "type": "item",
+          "settings": {
+            "title": "ライス単品",
+            "price": "¥200",
+            "description": ""
+          }
+        },
+        "item_RQkwnL": {
+          "type": "item",
+          "settings": {
+            "title": "ライス大盛",
+            "price": "¥50",
+            "description": ""
+          }
+        },
+        "header_FkGXAG": {
+          "type": "header",
+          "settings": {
+            "title": "*プラス¥300でガーリックライスに変更出来ます。"
+          }
+        },
+        "header_HkfCKT": {
+          "type": "header",
+          "settings": {
+            "title": "トッピング"
+          }
+        },
+        "item_EXqnXN": {
+          "type": "item",
+          "settings": {
+            "title": "大根おろしポン酢",
+            "price": "¥100",
+            "description": ""
+          }
+        },
+        "item_pwQWJL": {
+          "type": "item",
+          "settings": {
+            "title": "葉ニンニク醤油",
+            "price": "¥100",
+            "description": ""
+          }
+        },
+        "item_8wADKg": {
+          "type": "item",
+          "settings": {
+            "title": "目玉焼き",
+            "price": "¥150",
+            "description": ""
+          }
+        },
+        "item_kgxQbp": {
+          "type": "item",
+          "settings": {
+            "title": "チェダーチーズ",
+            "price": "¥200",
+            "description": ""
+          }
+        },
+        "item_x6in9Y": {
+          "type": "item",
+          "settings": {
+            "title": "南州農場フランク",
+            "price": "¥480",
+            "description": ""
+          }
+        },
+        "item_UtnbpV": {
+          "type": "item",
+          "settings": {
+            "title": "自家製ベーコン",
+            "price": "¥380",
+            "description": ""
+          }
+        },
+        "item_D4bbHM": {
+          "type": "item",
+          "settings": {
+            "title": "グリルトマト",
+            "price": "¥200",
+            "description": ""
+          }
+        }
+      },
+      "block_order": [
+        "header_hdGqP4",
+        "item_hAGTEA",
+        "item_ecD4XC",
+        "item_RQkwnL",
+        "header_FkGXAG",
+        "header_HkfCKT",
+        "item_EXqnXN",
+        "item_pwQWJL",
+        "item_8wADKg",
+        "item_kgxQbp",
+        "item_x6in9Y",
+        "item_UtnbpV",
+        "item_D4bbHM"
+      ],
+      "settings": {
+        "top-border": false,
+        "spacing-above": true,
+        "spacing-below": true,
+        "background-color": "none",
+        "light-text": false,
+        "container-width": "4",
+        "show-description": true,
+        "heading": "",
+        "heading-alignment": "center"
+      }
+    }
+  },
+  "order": [
+    "collection-header",
+    "navigation",
+    "main",
+    "service_list_kEep4q",
+    "service_list_A7XKeM",
+    "service_list_8QMe4D"
+  ]
+}
