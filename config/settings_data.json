@@ -16,7 +16,7 @@
     "product--label-light-text": true,
     "product--show-new-label": true,
     "search--show-in-header": true,
-    "favicon": "",
+    "favicon": "shopify:\/\/shop_images\/GMC_maru_chef.png",
     "hide-tags": "featured, pinned",
     "cart--type": "drawer",
     "cart--show-note": true,
