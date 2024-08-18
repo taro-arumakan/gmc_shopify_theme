@@ -260,7 +260,7 @@
       "type": "featured-text",
       "settings": {
         "top-border": false,
-        "spacing-above": false,
+        "spacing-above": true,
         "spacing-below": false,
         "background-color": "none",
         "light-text": false,
@@ -490,7 +490,7 @@
           "type": "item",
           "settings": {
             "title": "香取マッシュルームと夷隅ベビーリーフサラダ",
-            "price": "¥990",
+            "price": "¥1190",
             "description": ""
           }
         },
@@ -626,23 +626,6 @@
         "heading-alignment": "center"
       }
     },
-    "featured_text_nFpPnp": {
-      "type": "featured-text",
-      "settings": {
-        "top-border": false,
-        "spacing-above": true,
-        "spacing-below": true,
-        "background-color": "none",
-        "light-text": false,
-        "heading-type": "section-heading",
-        "container-width": "4",
-        "overline": "",
-        "heading": "GMC 特選BBQ Course",
-        "description": "<p><br\/>GMCシズリングベーコン<br\/>シーザーサラダ<br\/>新タマネギのポタージュ<br\/>薩摩黒豚フランクとマトンのアイヌ香草ソーセージとフライドポテト<br\/>アイスランド産　ラムチョップローズマリースモーク<br\/>自家製ピクルス盛合せ<br\/>薩摩黒豚プルドポークLOW & SLOW 8h<br\/>コールスローとパン<br\/>タスマニア産 グラスフェド放牧牛リブアイロールステーキ<br\/>季節のフルーツ<br\/>The rising sun coffee<\/p><h4>¥5,500 (４名様より)<\/h4>",
-        "link-url": "",
-        "link-text": ""
-      }
-    },
     "featured_text_GxeXTX": {
       "type": "featured-text",
       "settings": {
@@ -655,7 +638,7 @@
         "container-width": "4",
         "overline": "",
         "heading": "GMC 黒豚 Dinner Course",
-        "description": "<p><br\/>夷隅産ベビーリーフと香取産マッシュルームのサラダ<br\/>薩摩黒豚バラ寿司<br\/>薩摩黒豚ベーコンフランク盛合せ ポテト添え<br\/>薩摩黒豚ステーキ たまり醤油と山葵<br\/>薩摩黒豚ハンバーグ<br\/>ガーリックライス<br\/>The rising sun coffee<br\/>バニラアイス<\/p><h4>¥3,200 (２名様より)<\/h4>",
+        "description": "<p><br\/>夷隅産ベビーリーフと香取産マッシュルームのサラダ<br\/>薩摩黒豚バラ寿司<br\/>薩摩黒豚ベーコンフランク盛合せ ポテト添え<br\/>薩摩黒豚ステーキ たまり醤油と山葵<br\/>薩摩黒豚ハンバーグ<br\/>ガーリックライス<br\/>The rising sun coffee<br\/>バニラアイス<\/p><h4>¥3,800 (２名様より)<\/h4>",
         "link-url": "",
         "link-text": ""
       }
@@ -673,7 +656,7 @@
           "type": "item",
           "settings": {
             "title": "クラフト生ビール ペールエール",
-            "price": "M ¥550　　L ¥820",
+            "price": "M ¥600　　L ¥880",
             "description": ""
           }
         },
@@ -681,7 +664,7 @@
           "type": "item",
           "settings": {
             "title": "バドワイザー",
-            "price": "¥600",
+            "price": "¥660",
             "description": ""
           }
         },
@@ -689,7 +672,7 @@
           "type": "item",
           "settings": {
             "title": "ハイネケン",
-            "price": "¥600",
+            "price": "¥660",
             "description": ""
           }
         },
@@ -697,7 +680,7 @@
           "type": "item",
           "settings": {
             "title": "コロナ",
-            "price": "¥680",
+            "price": "¥780",
             "description": ""
           }
         },
@@ -719,7 +702,7 @@
           "type": "item",
           "settings": {
             "title": "グラス",
-            "price": "¥720",
+            "price": "¥780",
             "description": ""
           }
         },
@@ -727,7 +710,7 @@
           "type": "item",
           "settings": {
             "title": "ボトル",
-            "price": "¥3,500",
+            "price": "¥3,900",
             "description": "<p>白: ドメーヌ・ド・グールガゾー (仏)<br\/>赤: ウエストエンド ザ・ブラックシラーズ (豪)<\/p>"
           }
         },
@@ -741,7 +724,7 @@
           "type": "item",
           "settings": {
             "title": "ジャックハイボール",
-            "price": "¥500",
+            "price": "M\/ ¥600 L\/ ¥880",
             "description": ""
           }
         },
@@ -749,7 +732,7 @@
           "type": "item",
           "settings": {
             "title": "金宮レモンサワー \/ 烏龍ハイ",
-            "price": "¥550",
+            "price": "M\/ ¥550 L\/ ¥780",
             "description": ""
           }
         },
@@ -757,7 +740,7 @@
           "type": "item",
           "settings": {
             "title": "金宮梅干サワー",
-            "price": "¥600",
+            "price": "M\/ ¥680 L\/ ¥880",
             "description": ""
           }
         },
@@ -765,7 +748,7 @@
           "type": "item",
           "settings": {
             "title": "麦焼酎 二階堂 (水割\/炭酸割)",
-            "price": "¥600",
+            "price": "M\/ ¥680 L\/ ¥880",
             "description": ""
           }
         },
@@ -773,7 +756,7 @@
           "type": "item",
           "settings": {
             "title": "芋焼酎 三岳 (水割\/炭酸割)",
-            "price": "¥600",
+            "price": "M\/ ¥720 L\/ ¥920",
             "description": ""
           }
         },
@@ -787,7 +770,7 @@
           "type": "item",
           "settings": {
             "title": " The Rising Sun Coffee (Hot \/ Ice \/ Espresso)",
-            "price": "¥480",
+            "price": "¥550",
             "description": ""
           }
         },
@@ -795,7 +778,7 @@
           "type": "item",
           "settings": {
             "title": "コーラ・辛口ジンジャエール",
-            "price": "¥400",
+            "price": "¥500",
             "description": ""
           }
         },
@@ -803,7 +786,7 @@
           "type": "item",
           "settings": {
             "title": "オレンジジュース100%",
-            "price": "¥450",
+            "price": "¥500",
             "description": ""
           }
         },
@@ -811,7 +794,7 @@
           "type": "item",
           "settings": {
             "title": "グレープジュース100%",
-            "price": "¥450",
+            "price": "¥500",
             "description": ""
           }
         },
@@ -819,7 +802,7 @@
           "type": "item",
           "settings": {
             "title": "美生柑ジュース100%",
-            "price": "¥550",
+            "price": "¥620",
             "description": ""
           }
         }
@@ -908,7 +891,7 @@
           "type": "item",
           "settings": {
             "title": "リッチランド スパークリング (豪)",
-            "price": "¥4,800",
+            "price": "¥5,500",
             "description": "<p>トロピカルフルールのような華やかな香り、シャルドネのフレッシュさ、ピノノワールの旨味が調和<\/p>"
           }
         },
@@ -916,7 +899,7 @@
           "type": "item",
           "settings": {
             "title": "ヴーヴクリコ イエローラベルブリュット",
-            "price": "¥12,000",
+            "price": "¥13,000",
             "description": "<p>チェリーやブリオッシュ、ハチミツなどのアロマ、爽やかでフルーティー<\/p>"
           }
         },
@@ -924,7 +907,7 @@
           "type": "item",
           "settings": {
             "title": "ドンペリニヨン ロゼ 2006",
-            "price": "¥70,000",
+            "price": "¥77,700",
             "description": "<p>シャンパーニュ地方最高の葡萄園で、選ばれたヴィンテージ年にしか造られない。長期熟成をすることで得られる繊細で複雑な香りと芳醇な味わい<\/p>"
           }
         }
@@ -968,7 +951,6 @@
     "service_list_87Qjpp",
     "service_list_HqYnny",
     "service_list_8QMe4D",
-    "featured_text_nFpPnp",
     "featured_text_GxeXTX",
     "service_list_LGG6Ci",
     "service_list_TYn96y"
