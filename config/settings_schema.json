@@ -4,8 +4,8 @@
     "theme_name": "Blockshop",
     "theme_author": "Troop Themes",
     "theme_version": "9.4.3",
-    "theme_documentation_url": "https:\/\/support.troopthemes.com\/guide\/getting-started\/",
-    "theme_support_url": "http:\/\/support.troopthemes.com\/"
+    "theme_documentation_url": "https://support.troopthemes.com/guide/getting-started/",
+    "theme_support_url": "http://support.troopthemes.com/"
   },
   {
     "name": "Colors",
@@ -74,7 +74,7 @@
         "id": "color--swatches",
         "label": "Color swatch configuration",
         "default": "yellow green: #9acd32\nRed: rgb(139,0,0)\norange: orange.PNG\nStealth Grey: stealth-grey.jpg",
-        "info": "Each rule must be its own line. [Learn more](https:\/\/support.troopthemes.com\/guide\/color-swatch-guide) about naming conventions."
+        "info": "Each rule must be its own line. [Learn more](https://support.troopthemes.com/guide/color-swatch-guide) about naming conventions."
       }
     ]
   },
@@ -443,14 +443,14 @@
         "id": "product--show-rating",
         "label": "Show product rating",
         "default": false,
-        "info": "To display a rating, add a product rating app. [Learn more](https:\/\/help.shopify.com\/en\/manual\/products\/product-reviews)"
+        "info": "To display a rating, add a product rating app. [Learn more](https://help.shopify.com/en/manual/products/product-reviews)"
       },
       {
         "type": "checkbox",
         "id": "product--swatches-enabled",
         "label": "Enable color swatches",
         "default": false,
-        "info": "Display color swatches when available. [Learn more](https:\/\/support.troopthemes.com\/guide\/color-swatch-guide)"
+        "info": "Display color swatches when available. [Learn more](https://support.troopthemes.com/guide/color-swatch-guide)"
       },
       {
         "type": "checkbox",
@@ -577,7 +577,7 @@
         "type": "textarea",
         "placeholder": "Limited edition, Sustainable, Organic",
         "default": "Limited edition, Sustainable, Organic",
-        "info": "[Learn more](https:\/\/support.troopthemes.com\/guide\/configuring-product-labels\/)"
+        "info": "[Learn more](https://support.troopthemes.com/guide/configuring-product-labels/)"
       }
     ]
   },
@@ -713,55 +713,55 @@
         "type": "text",
         "id": "social--instagram--url",
         "label": "Instagram",
-        "info": "https:\/\/instagram.com\/shopify"
+        "info": "https://instagram.com/shopify"
       },
       {
         "type": "text",
         "id": "social--facebook--url",
         "label": "Facebook",
-        "info": "https:\/\/facebook.com\/shopify"
+        "info": "https://facebook.com/shopify"
       },
       {
         "type": "text",
         "id": "social--linkedin--url",
         "label": "LinkedIn",
-        "info": "https:\/\/linkedin.com\/company\/shopify"
+        "info": "https://linkedin.com/company/shopify"
       },
       {
         "type": "text",
         "id": "social--threads--url",
         "label": "Threads",
-        "info": "https:\/\/threads.net\/@shopify"
+        "info": "https://threads.net/@shopify"
       },
       {
         "type": "text",
         "id": "social--youtube--url",
         "label": "Youtube",
-        "info": "https:\/\/youtube.com\/user\/shopify"
+        "info": "https://youtube.com/user/shopify"
       },
       {
         "type": "text",
         "id": "social--vimeo--url",
         "label": "Vimeo",
-        "info": "https:\/\/vimeo.com\/shopify"
+        "info": "https://vimeo.com/shopify"
       },
       {
         "type": "text",
         "id": "social--pinterest--url",
         "label": "Pinterest",
-        "info": "https:\/\/pinterest.com\/shopify"
+        "info": "https://pinterest.com/shopify"
       },
       {
         "type": "text",
         "id": "social--x--url",
         "label": "𝕏 (formerly Twitter)",
-        "info": "https:\/\/x.com\/shopify"
+        "info": "https://x.com/shopify"
       },
       {
         "type": "text",
         "id": "social--tiktok--url",
         "label": "TikTok",
-        "info": "https:\/\/tiktok.com\/@shopify"
+        "info": "https://tiktok.com/@shopify"
       }
     ]
   },

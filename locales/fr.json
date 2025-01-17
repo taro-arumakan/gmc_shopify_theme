@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "blog": {
     "all": "Tout",
@@ -44,7 +53,7 @@
     "all_items_added": "Tous les articles ont été ajoutés à votre panier.",
     "checkout": "Paiement",
     "continue": "Continuer vos achats",
-    "empty_html": "<span data-item='rte-content'>Votre panier est actuellement vide.<br\/> <a href='{{ collections_url }}'>Cliquez ici pour continuer vos achats<\/a>.<\/span>",
+    "empty_html": "<span data-item='rte-content'>Votre panier est actuellement vide.<br/> <a href='{{ collections_url }}'>Cliquez ici pour continuer vos achats</a>.</span>",
     "minus": "Moins",
     "order_notes": "Laissez une note avec votre commande",
     "plus": "Plus",
@@ -296,9 +305,9 @@
       "other_pickup_locations": "Voir les lieux de retrait",
       "map": "carte",
       "available": "Retrait disponible",
-      "available_at_html": "Retrait disponible à <strong>{{ location_name }}<\/strong>",
+      "available_at_html": "Retrait disponible à <strong>{{ location_name }}</strong>",
       "unavailable": "Retrait actuellement indisponible",
-      "unavailable_at_html": "Retrait actuellement indisponible à <strong>{{ location_name }}<\/strong>",
+      "unavailable_at_html": "Retrait actuellement indisponible à <strong>{{ location_name }}</strong>",
       "return": "Retour au produit",
       "view_store_info": "Voir les informations de la boutique"
     },

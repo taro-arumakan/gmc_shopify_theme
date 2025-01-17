@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -5,19 +14,16 @@
       "blocks": {
         "heading": {
           "type": "heading",
-          "settings": {
-          }
+          "settings": {}
         },
         "vendor": {
           "type": "vendor",
           "disabled": true,
-          "settings": {
-          }
+          "settings": {}
         },
         "price": {
           "type": "price",
-          "settings": {
-          }
+          "settings": {}
         },
         "options": {
           "type": "options",
@@ -37,8 +43,7 @@
         },
         "pickup": {
           "type": "pickup",
-          "settings": {
-          }
+          "settings": {}
         },
         "description": {
           "type": "description",

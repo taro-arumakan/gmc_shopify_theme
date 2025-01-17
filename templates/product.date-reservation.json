@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -5,14 +14,12 @@
       "blocks": {
         "heading": {
           "type": "heading",
-          "settings": {
-          }
+          "settings": {}
         },
         "vendor": {
           "type": "vendor",
           "disabled": true,
-          "settings": {
-          }
+          "settings": {}
         },
         "description": {
           "type": "description",
@@ -23,8 +30,7 @@
         },
         "price": {
           "type": "price",
-          "settings": {
-          }
+          "settings": {}
         },
         "options": {
           "type": "options",
@@ -39,13 +45,12 @@
         "liquid_Cehc4f": {
           "type": "liquid",
           "settings": {
-            "custom-liquid": "<p class=\"line-item-property__field\">\n  <label for=\"\">予約日<\/label>\n  <input required class=\"required\" id=\"reservation_date\" type=\"date\" name=\"properties[予約日]\">\n<\/p>\n\n<script>\nvar tzoffset = (new Date()).getTimezoneOffset() * 60000;\nvar tplus2ts = new Date().setDate(new Date().getDate() + 2);\n\nvar min_date = new Date(tplus2ts - tzoffset);\n\ndocument.getElementById('reservation_date').min = min_date.toISOString().split('T')[0];\n<\/script>"
+            "custom-liquid": "<p class=\"line-item-property__field\">\n  <label for=\"\">予約日</label>\n  <input required class=\"required\" id=\"reservation_date\" type=\"date\" name=\"properties[予約日]\">\n</p>\n\n<script>\nvar tzoffset = (new Date()).getTimezoneOffset() * 60000;\nvar tplus2ts = new Date().setDate(new Date().getDate() + 2);\n\nvar min_date = new Date(tplus2ts - tzoffset);\n\ndocument.getElementById('reservation_date').min = min_date.toISOString().split('T')[0];\n</script>"
           }
         },
         "quantity_selector_AAJhe9": {
           "type": "quantity-selector",
-          "settings": {
-          }
+          "settings": {}
         },
         "buy-buttons": {
           "type": "buy-buttons",

@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "blog": {
     "all": "Todo",
@@ -44,7 +53,7 @@
     "all_items_added": "Todos los artículos se han agregado a su carrito.",
     "checkout": "Finalizar compra",
     "continue": "Seguir comprando",
-    "empty_html": "<span data-item='rte-content'>Su carrito está vacío.<br\/> <a href='{{ collections_url }}'>Haga clic aquí para seguir comprando<\/a>.<\/span>",
+    "empty_html": "<span data-item='rte-content'>Su carrito está vacío.<br/> <a href='{{ collections_url }}'>Haga clic aquí para seguir comprando</a>.</span>",
     "minus": "Menos",
     "order_notes": "Deje una nota con su pedido",
     "plus": "Más",
@@ -296,9 +305,9 @@
       "other_pickup_locations": "Ver ubicaciones de recogida",
       "map": "mapa",
       "available": "Recogida disponible",
-      "available_at_html": "Recogida disponible en <strong>{{ location_name }}<\/strong>",
+      "available_at_html": "Recogida disponible en <strong>{{ location_name }}</strong>",
       "unavailable": "Recogida actualmente no disponible",
-      "unavailable_at_html": "Recogida actualmente no disponible en <strong>{{ location_name }}<\/strong>",
+      "unavailable_at_html": "Recogida actualmente no disponible en <strong>{{ location_name }}</strong>",
       "return": "Volver al producto",
       "view_store_info": "Ver información de la tienda"
     },

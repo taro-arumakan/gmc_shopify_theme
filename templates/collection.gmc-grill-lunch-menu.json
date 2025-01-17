@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "collection-header": {
@@ -60,7 +69,7 @@
             "image": "{{ collection.image }}",
             "overline": "Overline text{{ collection.title }}",
             "title": "Grid promotion{{ collection.title }}",
-            "description": "<p>Create eye-catching promos within collection grids to increase discoverability and accelerate conversions.<\/p>",
+            "description": "<p>Create eye-catching promos within collection grids to increase discoverability and accelerate conversions.</p>",
             "link-url": "",
             "link-text": "Optional link",
             "mobile-hide-description": false,
@@ -110,7 +119,7 @@
           "settings": {
             "title": "600g",
             "price": "¥3,600",
-            "description": "<p>日本が誇る最高銘柄豚《かごしま黒豚》使用。<br\/>濃厚な旨味と脂身の甘みが特徴、低温調理でミディアムレア食感。<\/p>"
+            "description": "<p>日本が誇る最高銘柄豚《かごしま黒豚》使用。<br/>濃厚な旨味と脂身の甘みが特徴、低温調理でミディアムレア食感。</p>"
           }
         },
         "header_3eygAi": {
@@ -140,7 +149,7 @@
           "settings": {
             "title": "600g",
             "price": "¥3,600",
-            "description": "<p>薩摩黒豚ステーキにガーリックバターと焦がし醤油。<br\/>ガツっと濃い目の味がお好きな方に。<\/p>"
+            "description": "<p>薩摩黒豚ステーキにガーリックバターと焦がし醤油。<br/>ガツっと濃い目の味がお好きな方に。</p>"
           }
         },
         "header_qgW9qB": {
@@ -170,7 +179,7 @@
           "settings": {
             "title": "500g",
             "price": "¥2,200",
-            "description": "<p>浅草トンテキ元気より受け継がられた名物ハンバーグ。<br\/>《ウチダソース》をかけてご賞味ください。<\/p>"
+            "description": "<p>浅草トンテキ元気より受け継がられた名物ハンバーグ。<br/>《ウチダソース》をかけてご賞味ください。</p>"
           }
         }
       },
@@ -208,7 +217,7 @@
           "settings": {
             "title": "Vツインプレート",
             "price": "¥1,980",
-            "description": "<p>薩摩黒豚ステーキ 200g<br\/>ハンバーグ 200g<br\/>ソーセージ<br\/>目玉焼き<\/p>"
+            "description": "<p>薩摩黒豚ステーキ 200g<br/>ハンバーグ 200g<br/>ソーセージ<br/>目玉焼き</p>"
           }
         },
         "item_aQ7R7N": {
@@ -216,7 +225,7 @@
           "settings": {
             "title": "ゴッデスプレート",
             "price": "¥3,200",
-            "description": "<p>薩摩黒豚ステーキ 200g<br\/>ハンバーグ 300g<br\/>フランク<br\/>自家製ベーコン<br\/>目玉焼<\/p>"
+            "description": "<p>薩摩黒豚ステーキ 200g<br/>ハンバーグ 300g<br/>フランク<br/>自家製ベーコン<br/>目玉焼</p>"
           }
         }
       },
@@ -250,7 +259,7 @@
           "settings": {
             "title": "ランチSET",
             "price": "¥350 ",
-            "description": "<p>ライス, スープ, サラダ<\/p>"
+            "description": "<p>ライス, スープ, サラダ</p>"
           }
         },
         "item_ecD4XC": {

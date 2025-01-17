@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "collection-header": {
@@ -59,7 +68,7 @@
           "settings": {
             "title": "　",
             "price": "¥2,880",
-            "description": "<p>ロースステーキ200g \/ ハンバーグ200g \/ ソーセージ \/ 焼野菜 \/ スープ \/ サラダ \/ 目玉焼き \/ ライス<\/p>"
+            "description": "<p>ロースステーキ200g / ハンバーグ200g / ソーセージ / 焼野菜 / スープ / サラダ / 目玉焼き / ライス</p>"
           }
         },
         "header_nQ7y4U": {
@@ -81,7 +90,7 @@
           "settings": {
             "title": "ベーコン目玉焼",
             "price": "¥1,980",
-            "description": "<p>ハンバーグ200g \/ 焼野菜 \/ スープ \/ サラダ \/ ライス<\/p>"
+            "description": "<p>ハンバーグ200g / 焼野菜 / スープ / サラダ / ライス</p>"
           }
         },
         "header_brKNXE": {
@@ -109,7 +118,7 @@
         "header_6mdKgL": {
           "type": "header",
           "settings": {
-            "title": "Topping \/ トッピング"
+            "title": "Topping / トッピング"
           }
         },
         "item_Dt4T3q": {
@@ -171,7 +180,7 @@
           "settings": {
             "title": "　",
             "price": "¥2,260",
-            "description": "<p>ロースステーキ200g \/ 焼野菜 \/ スープ \/ サラダ \/ 目玉焼き \/ ガーリックライス<\/p>"
+            "description": "<p>ロースステーキ200g / 焼野菜 / スープ / サラダ / 目玉焼き / ガーリックライス</p>"
           }
         },
         "header_fVtnMB": {
@@ -185,7 +194,7 @@
           "settings": {
             "title": "　",
             "price": "¥3,880",
-            "description": "<p>リブアイロールステーキ200g \/ 焼野菜 \/ スープ \/ サラダ \/ ガーリックライス<\/p>"
+            "description": "<p>リブアイロールステーキ200g / 焼野菜 / スープ / サラダ / ガーリックライス</p>"
           }
         }
       },
@@ -251,7 +260,7 @@
         "container-width": "4",
         "overline": "",
         "heading": "タスマニア産 グラスフェド放牧牛",
-        "description": "<p>人が住む場所で世界一大気が綺麗なエリア《タスマニア》の大自然の中、放牧で牧草だけを食べて育った、安心＆安全なオーガニックビーフ。柔らかくジューシーな赤身肉からは牧草の香りがするほどです。<\/p>",
+        "description": "<p>人が住む場所で世界一大気が綺麗なエリア《タスマニア》の大自然の中、放牧で牧草だけを食べて育った、安心＆安全なオーガニックビーフ。柔らかくジューシーな赤身肉からは牧草の香りがするほどです。</p>",
         "link-url": "",
         "link-text": ""
       }
@@ -268,7 +277,7 @@
         "container-width": "4",
         "overline": "",
         "heading": "リブアイロールステーキ",
-        "description": "<p>香り高い赤身と脂身、最高級部位《リブアイロール》をオーダーを受けてから、じっくり備長炭で焼き上げます。<\/p>",
+        "description": "<p>香り高い赤身と脂身、最高級部位《リブアイロール》をオーダーを受けてから、じっくり備長炭で焼き上げます。</p>",
         "link-url": "",
         "link-text": ""
       }
@@ -280,8 +289,8 @@
           "type": "item",
           "settings": {
             "title": "Ribeye Steak",
-            "price": "¥1,800 \/ 100g",
-            "description": "<p>200gからオーダー承ります<\/p>"
+            "price": "¥1,800 / 100g",
+            "description": "<p>200gからオーダー承ります</p>"
           }
         }
       },
@@ -343,7 +352,7 @@
         "container-width": "4",
         "overline": "",
         "heading": "鹿児島県産 GMC薩摩黒豚",
-        "description": "<p>日本の最高峰銘柄豚、鹿児島県産の「かごしま黒豚」<\/p><p>鹿児島県鹿屋市にある契約農家《南州農場》の広大な土地で鹿児島特産のさつま芋をたっぷり食べ、生産者の愛情たっぷりに伸び伸び育ちました。<\/p><p>肩ロースステーキは炭火でじっくりロゼに、ハンバーグは肉汁たっぷり、GMCの原点《薩摩黒豚》、赤身の旨味と脂身の甘味をご堪能ください。<\/p>",
+        "description": "<p>日本の最高峰銘柄豚、鹿児島県産の「かごしま黒豚」</p><p>鹿児島県鹿屋市にある契約農家《南州農場》の広大な土地で鹿児島特産のさつま芋をたっぷり食べ、生産者の愛情たっぷりに伸び伸び育ちました。</p><p>肩ロースステーキは炭火でじっくりロゼに、ハンバーグは肉汁たっぷり、GMCの原点《薩摩黒豚》、赤身の旨味と脂身の甘味をご堪能ください。</p>",
         "link-url": "",
         "link-text": ""
       }
@@ -361,8 +370,8 @@
           "type": "item",
           "settings": {
             "title": "Black Port Shoulder Roast Steak",
-            "price": "¥880 \/ 100g",
-            "description": "<p>200gからオーダー承ります<\/p>"
+            "price": "¥880 / 100g",
+            "description": "<p>200gからオーダー承ります</p>"
           }
         },
         "header_jFFjJW": {
@@ -375,8 +384,8 @@
           "type": "item",
           "settings": {
             "title": "Black Pork Hamburg Steak",
-            "price": "¥670 \/ 100g",
-            "description": "<p>200gからオーダー承ります<\/p>"
+            "price": "¥670 / 100g",
+            "description": "<p>200gからオーダー承ります</p>"
           }
         }
       },
@@ -404,7 +413,7 @@
         "header_VdzCTj": {
           "type": "header",
           "settings": {
-            "title": "Topping \/ トッピング"
+            "title": "Topping / トッピング"
           }
         },
         "item_9Wh3LY": {
@@ -499,7 +508,7 @@
           "settings": {
             "title": "GMCソーセージ3種盛合せ",
             "price": "¥2,480",
-            "description": "<p>薩摩黒豚ソーセージ & フランク \/ 知床産マトンソーセージ<\/p>"
+            "description": "<p>薩摩黒豚ソーセージ & フランク / 知床産マトンソーセージ</p>"
           }
         },
         "item_e8ycyY": {
@@ -638,7 +647,7 @@
         "container-width": "4",
         "overline": "",
         "heading": "GMC 黒豚 Dinner Course",
-        "description": "<p><br\/>夷隅産ベビーリーフと香取産マッシュルームのサラダ<br\/>薩摩黒豚バラ寿司<br\/>薩摩黒豚ベーコンフランク盛合せ ポテト添え<br\/>薩摩黒豚ステーキ たまり醤油と山葵<br\/>薩摩黒豚ハンバーグ<br\/>ガーリックライス<br\/>The rising sun coffee<br\/>バニラアイス<\/p><h4>¥3,800 (２名様より)<\/h4>",
+        "description": "<p><br/>夷隅産ベビーリーフと香取産マッシュルームのサラダ<br/>薩摩黒豚バラ寿司<br/>薩摩黒豚ベーコンフランク盛合せ ポテト添え<br/>薩摩黒豚ステーキ たまり醤油と山葵<br/>薩摩黒豚ハンバーグ<br/>ガーリックライス<br/>The rising sun coffee<br/>バニラアイス</p><h4>¥3,800 (２名様より)</h4>",
         "link-url": "",
         "link-text": ""
       }
@@ -655,8 +664,8 @@
         "item_bYJ9Qm": {
           "type": "item",
           "settings": {
-            "title": "クラフト生ビール ペールエール",
-            "price": "M ¥600　　L ¥880",
+            "title": "ドラフトビール（生）",
+            "price": "M ¥600 L ¥840  XL ¥1160",
             "description": ""
           }
         },
@@ -711,7 +720,7 @@
           "settings": {
             "title": "ボトル",
             "price": "¥3,900",
-            "description": "<p>白: ドメーヌ・ド・グールガゾー (仏)<br\/>赤: ウエストエンド ザ・ブラックシラーズ (豪)<\/p>"
+            "description": "<p>白: ドメーヌ・ド・グールガゾー (仏)<br/>赤: ウエストエンド ザ・ブラックシラーズ (豪)</p>"
           }
         },
         "header_wepfkT": {
@@ -724,15 +733,15 @@
           "type": "item",
           "settings": {
             "title": "ジャックハイボール",
-            "price": "M\/ ¥600 L\/ ¥880",
+            "price": "M/ ¥600 L/ ¥880",
             "description": ""
           }
         },
         "item_JRbeKf": {
           "type": "item",
           "settings": {
-            "title": "金宮レモンサワー \/ 烏龍ハイ",
-            "price": "M\/ ¥550 L\/ ¥780",
+            "title": "金宮レモンサワー / 烏龍ハイ",
+            "price": "M/ ¥550 L/ ¥780",
             "description": ""
           }
         },
@@ -740,23 +749,23 @@
           "type": "item",
           "settings": {
             "title": "金宮梅干サワー",
-            "price": "M\/ ¥680 L\/ ¥880",
+            "price": "M/ ¥680 L/ ¥880",
             "description": ""
           }
         },
         "item_8bFWee": {
           "type": "item",
           "settings": {
-            "title": "麦焼酎 二階堂 (水割\/炭酸割)",
-            "price": "M\/ ¥680 L\/ ¥880",
+            "title": "麦焼酎 二階堂 (水割/炭酸割)",
+            "price": "M/ ¥680 L/ ¥880",
             "description": ""
           }
         },
         "item_jwfxjj": {
           "type": "item",
           "settings": {
-            "title": "芋焼酎 三岳 (水割\/炭酸割)",
-            "price": "M\/ ¥720 L\/ ¥920",
+            "title": "芋焼酎 三岳 (水割/炭酸割)",
+            "price": "M/ ¥720 L/ ¥920",
             "description": ""
           }
         },
@@ -769,7 +778,7 @@
         "item_V7URBy": {
           "type": "item",
           "settings": {
-            "title": " The Rising Sun Coffee (Hot \/ Ice \/ Espresso)",
+            "title": " The Rising Sun Coffee (Hot / Ice / Espresso)",
             "price": "¥550",
             "description": ""
           }
@@ -856,7 +865,7 @@
           "settings": {
             "title": "シャトー・レゾリュー青ラベル2019赤 (仏)",
             "price": "¥7,700",
-            "description": "<p>フレンチオーク樽９ヶ月熟成 果実の味わいに渋みも、本格派ワイン<\/p>"
+            "description": "<p>フレンチオーク樽９ヶ月熟成 果実の味わいに渋みも、本格派ワイン</p>"
           }
         },
         "item_kbCGMx": {
@@ -864,7 +873,7 @@
           "settings": {
             "title": "フィリップ・ジラールブルゴーニュ2018赤 (仏)",
             "price": "¥8,500",
-            "description": "<p>ピノノワール100%若くて柔らかい口当たり<\/p>"
+            "description": "<p>ピノノワール100%若くて柔らかい口当たり</p>"
           }
         },
         "header_zanNhP": {
@@ -878,7 +887,7 @@
           "settings": {
             "title": "フランシス・ブランシェプイィ・ヒュメタル熟成2019白 (仏)",
             "price": "¥8,000",
-            "description": "<p>柑橘系果実の香り、豊かな果実味にフレッシュな酸味、樽の風味、芳醇な味わい<\/p>"
+            "description": "<p>柑橘系果実の香り、豊かな果実味にフレッシュな酸味、樽の風味、芳醇な味わい</p>"
           }
         },
         "header_VwtNe9": {
@@ -892,7 +901,7 @@
           "settings": {
             "title": "リッチランド スパークリング (豪)",
             "price": "¥5,500",
-            "description": "<p>トロピカルフルールのような華やかな香り、シャルドネのフレッシュさ、ピノノワールの旨味が調和<\/p>"
+            "description": "<p>トロピカルフルールのような華やかな香り、シャルドネのフレッシュさ、ピノノワールの旨味が調和</p>"
           }
         },
         "item_dLawDt": {
@@ -900,7 +909,7 @@
           "settings": {
             "title": "ヴーヴクリコ イエローラベルブリュット",
             "price": "¥13,000",
-            "description": "<p>チェリーやブリオッシュ、ハチミツなどのアロマ、爽やかでフルーティー<\/p>"
+            "description": "<p>チェリーやブリオッシュ、ハチミツなどのアロマ、爽やかでフルーティー</p>"
           }
         },
         "item_kx8GzX": {
@@ -908,7 +917,7 @@
           "settings": {
             "title": "ドンペリニヨン ロゼ 2006",
             "price": "¥77,700",
-            "description": "<p>シャンパーニュ地方最高の葡萄園で、選ばれたヴィンテージ年にしか造られない。長期熟成をすることで得られる繊細で複雑な香りと芳醇な味わい<\/p>"
+            "description": "<p>シャンパーニュ地方最高の葡萄園で、選ばれたヴィンテージ年にしか造られない。長期熟成をすることで得られる繊細で複雑な香りと芳醇な味わい</p>"
           }
         }
       },

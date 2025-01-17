@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "general": {
     "breadcrumbs": {
@@ -180,7 +189,7 @@
     "shipping_taxes_included": "配送料はお会計時に計算されます。",
     "continue": "買い物を続ける",
     "checkout": "お会計",
-    "empty_html": "<span data-item='rte-content'>商品が入っていません。<br> <a href='{{ collections_url }}'>お買い物を続ける<\/a><\/span>",
+    "empty_html": "<span data-item='rte-content'>商品が入っていません。<br> <a href='{{ collections_url }}'>お買い物を続ける</a></span>",
     "all_items_added": "全ての商品がカートに追加されました",
     "title": "カート"
   },
@@ -323,8 +332,7 @@
       "submit": "実行"
     }
   },
-  "gift_cards": {
-  },
+  "gift_cards": {},
   "sections": {
     "contact": {
       "button": "送信",

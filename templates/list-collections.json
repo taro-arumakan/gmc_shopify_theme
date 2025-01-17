@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -29,26 +38,26 @@
         "image_ULxYBz": {
           "type": "image",
           "settings": {
-            "image": "shopify:\/\/shop_images\/1_3848_105f4d46-8b6f-4e3c-85c1-800b28827fa6.jpg",
+            "image": "shopify://shop_images/1_3848_105f4d46-8b6f-4e3c-85c1-800b28827fa6.jpg",
             "x-blocks": "1",
             "y-blocks": "1",
             "image-display-type": "fill",
             "aspect-ratio": 56,
             "title": "About Meat",
-            "link-url": "shopify:\/\/pages\/about-meat",
+            "link-url": "shopify://pages/about-meat",
             "link-text": "お肉への想い"
           }
         },
         "image_x8DKYi": {
           "type": "image",
           "settings": {
-            "image": "shopify:\/\/shop_images\/376886321_17993713538474730_7888887659607403635_n.jpg",
+            "image": "shopify://shop_images/376886321_17993713538474730_7888887659607403635_n.jpg",
             "x-blocks": "1",
             "y-blocks": "1",
             "image-display-type": "fill",
             "aspect-ratio": 56,
             "title": "GMC Meat Trip 2023",
-            "link-url": "shopify:\/\/collections\/gmc-meat-trip-2023",
+            "link-url": "shopify://collections/gmc-meat-trip-2023",
             "link-text": "旅日記2023"
           }
         }

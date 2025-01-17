@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "collection-header": {
@@ -74,7 +83,7 @@
         "container-width": "4",
         "overline": "",
         "heading": "タスマニア産 グラスフェド放牧牛",
-        "description": "<p>人が住む場所で世界一大気が綺麗なエリアとして知られるタスマニアの大自然の中、広大な大地の放牧で牧草だけを食べて育った、安心＆安全なオーガニックビーフ。柔らかくジューシーな赤身肉からは牧草の香りがするほどです。<br\/>香り高く赤身の美味しい《リブアイロール》の炭火ステーキをご堪能下さい。<\/p>",
+        "description": "<p>人が住む場所で世界一大気が綺麗なエリアとして知られるタスマニアの大自然の中、広大な大地の放牧で牧草だけを食べて育った、安心＆安全なオーガニックビーフ。柔らかくジューシーな赤身肉からは牧草の香りがするほどです。<br/>香り高く赤身の美味しい《リブアイロール》の炭火ステーキをご堪能下さい。</p>",
         "link-url": "",
         "link-text": ""
       }
@@ -93,7 +102,7 @@
           "settings": {
             "title": "450g",
             "price": "¥6,750",
-            "description": "<p>Ribeye steak, for three<\/p>"
+            "description": "<p>Ribeye steak, for three</p>"
           }
         },
         "item_9AQxBF": {
@@ -101,7 +110,7 @@
           "settings": {
             "title": "300g",
             "price": "¥4,500",
-            "description": "<p>Ribeye steak, for two<\/p>"
+            "description": "<p>Ribeye steak, for two</p>"
           }
         }
       },
@@ -134,7 +143,7 @@
         "container-width": "4",
         "overline": "",
         "heading": "クイーンズランド産 ブラックアンガス牛",
-        "description": "<p>1939年創業、ハート一族が４代にわたり経営してきたジョン・ディー社が生産するハイブランド《ジョンディーゴールド》は160日間を穀物肥育したブラックアンガス牛を45日ウエットエイジング後30日間のドライエイジングを施しました。<br\/>サーロインとフィレが一度に楽しめTボーンステーキ、斧の形で迫力満点トマホークステーキを特別な日にどうぞ。<\/p>",
+        "description": "<p>1939年創業、ハート一族が４代にわたり経営してきたジョン・ディー社が生産するハイブランド《ジョンディーゴールド》は160日間を穀物肥育したブラックアンガス牛を45日ウエットエイジング後30日間のドライエイジングを施しました。<br/>サーロインとフィレが一度に楽しめTボーンステーキ、斧の形で迫力満点トマホークステーキを特別な日にどうぞ。</p>",
         "link-url": "",
         "link-text": ""
       }
@@ -146,16 +155,16 @@
           "type": "item",
           "settings": {
             "title": "Tボーンステーキ",
-            "price": "¥1.250\/ 100g",
-            "description": "<p>T-bone steak 約1kg要予約<\/p>"
+            "price": "¥1.250/ 100g",
+            "description": "<p>T-bone steak 約1kg要予約</p>"
           }
         },
         "item_aQ7R7N": {
           "type": "item",
           "settings": {
             "title": "トマホークステーキ",
-            "price": "¥1.200\/ 100g ",
-            "description": "<p>Tomahawk steak 約1kg要予約<\/p>"
+            "price": "¥1.200/ 100g ",
+            "description": "<p>Tomahawk steak 約1kg要予約</p>"
           }
         }
       },
@@ -204,7 +213,7 @@
         "container-width": "4",
         "overline": "",
         "heading": "鹿児島県産 南州農場 かごしま黒豚",
-        "description": "<p>日本の最高峰銘柄豚、鹿児島県産の「かごしま黒豚」鹿児島県鹿屋市にある南州農場で生産者の努力と情熱と、たくさんのさつま芋を食べて育ちました。赤身の旨味と脂身の甘味をご賞味ください。<\/p>",
+        "description": "<p>日本の最高峰銘柄豚、鹿児島県産の「かごしま黒豚」鹿児島県鹿屋市にある南州農場で生産者の努力と情熱と、たくさんのさつま芋を食べて育ちました。赤身の旨味と脂身の甘味をご賞味ください。</p>",
         "link-url": "",
         "link-text": ""
       }
@@ -223,7 +232,7 @@
           "settings": {
             "title": "450g",
             "price": " ¥2,850",
-            "description": "<p>Black pork steak, for three<\/p>"
+            "description": "<p>Black pork steak, for three</p>"
           }
         },
         "item_C43CRg": {
@@ -231,7 +240,7 @@
           "settings": {
             "title": "300g",
             "price": " ¥1,900",
-            "description": "<p>Black pork steak, for two<\/p>"
+            "description": "<p>Black pork steak, for two</p>"
           }
         },
         "header_jFFjJW": {
@@ -245,7 +254,7 @@
           "settings": {
             "title": "500g",
             "price": "¥2,680",
-            "description": "<p>Black pork hamburg steak, for three<\/p>"
+            "description": "<p>Black pork hamburg steak, for three</p>"
           }
         },
         "item_FnDBkP": {
@@ -253,7 +262,7 @@
           "settings": {
             "title": "350g",
             "price": "¥1,980",
-            "description": "<p>Black pork hamburg steak, for two<\/p>"
+            "description": "<p>Black pork hamburg steak, for two</p>"
           }
         },
         "header_ixa6G6": {
@@ -267,7 +276,7 @@
           "settings": {
             "title": "300g",
             "price": "¥3,200",
-            "description": "<p>Black pulled pork, コールスロー・パン付<\/p>"
+            "description": "<p>Black pulled pork, コールスロー・パン付</p>"
           }
         },
         "header_WLiELn": {
@@ -281,7 +290,7 @@
           "settings": {
             "title": "5 piece",
             "price": "¥2,680",
-            "description": "<p>Black pork sausage<\/p>"
+            "description": "<p>Black pork sausage</p>"
           }
         }
       },
@@ -338,7 +347,7 @@
         "container-width": "4",
         "overline": "",
         "heading": "アイスランド産グラスフェドラム",
-        "description": "<p>放牧により海風で育つ野草やハーブを食べたい時に食べている自然な環境で育てられた、4-5ヶ月の仔羊（ラム）です。北の地アイスランドで原種のまま育ったラムは日本のラム総肉輸入量の1%と希少です。臭みなく柔らかい、GMCおすすめのラム肉です。<\/p>",
+        "description": "<p>放牧により海風で育つ野草やハーブを食べたい時に食べている自然な環境で育てられた、4-5ヶ月の仔羊（ラム）です。北の地アイスランドで原種のまま育ったラムは日本のラム総肉輸入量の1%と希少です。臭みなく柔らかい、GMCおすすめのラム肉です。</p>",
         "link-url": "",
         "link-text": ""
       }
@@ -357,7 +366,7 @@
           "settings": {
             "title": "2 piece",
             "price": "¥1,900",
-            "description": "<p>Iceland lamb double chops<\/p>"
+            "description": "<p>Iceland lamb double chops</p>"
           }
         },
         "header_RbtPUj": {
@@ -371,7 +380,7 @@
           "settings": {
             "title": "2 piece",
             "price": "¥1,500",
-            "description": "<p>Iceland lamb skewer-grilled<\/p>"
+            "description": "<p>Iceland lamb skewer-grilled</p>"
           }
         }
       },
@@ -572,7 +581,7 @@
         "container-width": "4",
         "overline": "",
         "heading": "GMC 特選BBQ Course",
-        "description": "<p><br\/>GMCシズリングベーコン<br\/>シーザーサラダ<br\/>新タマネギのポタージュ<br\/>薩摩黒豚フランクとマトンのアイヌ香草ソーセージとフライドポテト<br\/>アイスランド産　ラムチョップローズマリースモーク<br\/>自家製ピクルス盛合せ<br\/>薩摩黒豚プルドポークLOW & SLOW 8h<br\/>コールスローとパン<br\/>タスマニア産 グラスフェド放牧牛リブアイロールステーキ<br\/>季節のフルーツ<br\/>The rising sun coffee<\/p><h4>¥5,500 (４名様より)<\/h4>",
+        "description": "<p><br/>GMCシズリングベーコン<br/>シーザーサラダ<br/>新タマネギのポタージュ<br/>薩摩黒豚フランクとマトンのアイヌ香草ソーセージとフライドポテト<br/>アイスランド産　ラムチョップローズマリースモーク<br/>自家製ピクルス盛合せ<br/>薩摩黒豚プルドポークLOW & SLOW 8h<br/>コールスローとパン<br/>タスマニア産 グラスフェド放牧牛リブアイロールステーキ<br/>季節のフルーツ<br/>The rising sun coffee</p><h4>¥5,500 (４名様より)</h4>",
         "link-url": "",
         "link-text": ""
       }
@@ -589,7 +598,7 @@
         "container-width": "4",
         "overline": "",
         "heading": "GMC 黒豚 Dinner Course",
-        "description": "<p><br\/>夷隅産ベビーリーフと香取産マッシュルームのサラダ<br\/>薩摩黒豚バラ寿司<br\/>薩摩黒豚ベーコンフランク盛合せ ポテト添え<br\/>薩摩黒豚ステーキ たまり醤油と山葵<br\/>薩摩黒豚ハンバーグ<br\/>ガーリックライス<br\/>The rising sun coffee<br\/>バニラアイス<\/p><h4>¥3,200 (２名様より)<\/h4>",
+        "description": "<p><br/>夷隅産ベビーリーフと香取産マッシュルームのサラダ<br/>薩摩黒豚バラ寿司<br/>薩摩黒豚ベーコンフランク盛合せ ポテト添え<br/>薩摩黒豚ステーキ たまり醤油と山葵<br/>薩摩黒豚ハンバーグ<br/>ガーリックライス<br/>The rising sun coffee<br/>バニラアイス</p><h4>¥3,200 (２名様より)</h4>",
         "link-url": "",
         "link-text": ""
       }
@@ -662,7 +671,7 @@
           "settings": {
             "title": "ボトル",
             "price": "¥3,500",
-            "description": "<p>白: ドメーヌ・ド・グールガゾー (仏)<br\/>赤: ウエストエンド ザ・ブラックシラーズ (豪)<\/p>"
+            "description": "<p>白: ドメーヌ・ド・グールガゾー (仏)<br/>赤: ウエストエンド ザ・ブラックシラーズ (豪)</p>"
           }
         },
         "header_wepfkT": {
@@ -682,7 +691,7 @@
         "item_JRbeKf": {
           "type": "item",
           "settings": {
-            "title": "金宮レモンサワー \/ 烏龍ハイ",
+            "title": "金宮レモンサワー / 烏龍ハイ",
             "price": "¥550",
             "description": ""
           }
@@ -698,7 +707,7 @@
         "item_8bFWee": {
           "type": "item",
           "settings": {
-            "title": "麦焼酎 二階堂 (水割\/炭酸割)",
+            "title": "麦焼酎 二階堂 (水割/炭酸割)",
             "price": "¥600",
             "description": ""
           }
@@ -706,7 +715,7 @@
         "item_jwfxjj": {
           "type": "item",
           "settings": {
-            "title": "芋焼酎 三岳 (水割\/炭酸割)",
+            "title": "芋焼酎 三岳 (水割/炭酸割)",
             "price": "¥600",
             "description": ""
           }
@@ -720,7 +729,7 @@
         "item_V7URBy": {
           "type": "item",
           "settings": {
-            "title": " The Rising Sun Coffee (Hot \/ Ice \/ Espresso)",
+            "title": " The Rising Sun Coffee (Hot / Ice / Espresso)",
             "price": "¥480",
             "description": ""
           }
@@ -807,7 +816,7 @@
           "settings": {
             "title": "シャトー・レゾリュー青ラベル2019赤 (仏)",
             "price": "¥7,700",
-            "description": "<p>フレンチオーク樽９ヶ月熟成 果実の味わいに渋みも、本格派ワイン<\/p>"
+            "description": "<p>フレンチオーク樽９ヶ月熟成 果実の味わいに渋みも、本格派ワイン</p>"
           }
         },
         "item_kbCGMx": {
@@ -815,7 +824,7 @@
           "settings": {
             "title": "フィリップ・ジラールブルゴーニュ2018赤 (仏)",
             "price": "¥8,500",
-            "description": "<p>ピノノワール100%若くて柔らかい口当たり<\/p>"
+            "description": "<p>ピノノワール100%若くて柔らかい口当たり</p>"
           }
         },
         "header_zanNhP": {
@@ -829,7 +838,7 @@
           "settings": {
             "title": "フランシス・ブランシェプイィ・ヒュメタル熟成2019白 (仏)",
             "price": "¥8,000",
-            "description": "<p>柑橘系果実の香り、豊かな果実味にフレッシュな酸味、樽の風味、芳醇な味わい<\/p>"
+            "description": "<p>柑橘系果実の香り、豊かな果実味にフレッシュな酸味、樽の風味、芳醇な味わい</p>"
           }
         },
         "header_VwtNe9": {
@@ -843,7 +852,7 @@
           "settings": {
             "title": "リッチランド スパークリング (豪)",
             "price": "¥4,800",
-            "description": "<p>トロピカルフルールのような華やかな香り、シャルドネのフレッシュさ、ピノノワールの旨味が調和<\/p>"
+            "description": "<p>トロピカルフルールのような華やかな香り、シャルドネのフレッシュさ、ピノノワールの旨味が調和</p>"
           }
         },
         "item_dLawDt": {
@@ -851,7 +860,7 @@
           "settings": {
             "title": "ヴーヴクリコ イエローラベルブリュット",
             "price": "¥12,000",
-            "description": "<p>チェリーやブリオッシュ、ハチミツなどのアロマ、爽やかでフルーティー<\/p>"
+            "description": "<p>チェリーやブリオッシュ、ハチミツなどのアロマ、爽やかでフルーティー</p>"
           }
         },
         "item_kx8GzX": {
@@ -859,7 +868,7 @@
           "settings": {
             "title": "ドンペリニヨン ロゼ 2006",
             "price": "¥70,000",
-            "description": "<p>シャンパーニュ地方最高の葡萄園で、選ばれたヴィンテージ年にしか造られない。長期熟成をすることで得られる繊細で複雑な香りと芳醇な味わい<\/p>"
+            "description": "<p>シャンパーニュ地方最高の葡萄園で、選ばれたヴィンテージ年にしか造られない。長期熟成をすることで得られる繊細で複雑な香りと芳醇な味わい</p>"
           }
         }
       },

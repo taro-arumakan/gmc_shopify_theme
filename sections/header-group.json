@@ -1,11 +1,31 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "header",
   "name": "Header Group",
   "sections": {
+    "announcement": {
+      "type": "announcement",
+      "disabled": true,
+      "settings": {
+        "home-page-only": true,
+        "background-color": "dark",
+        "light-text": true,
+        "text": "税込1万円以上お買い上げで 送料無料 📦",
+        "link": ""
+      }
+    },
     "header": {
       "type": "header",
       "settings": {
-        "transparent-menu": false,
+        "transparent-menu": true,
         "background-color": "light",
         "light-text": false,
         "header-account-show": true,
@@ -15,24 +35,14 @@
         "show-region-selector": false,
         "show-locale-selector": false,
         "header-logo-center": false,
-        "logo": "shopify:\/\/shop_images\/GMC_kaku.png",
+        "logo": "shopify://shop_images/GMC_kaku.png",
         "logo-height": 55,
         "mobile-logo-height": 40
-      }
-    },
-    "announcement": {
-      "type": "announcement",
-      "settings": {
-        "home-page-only": true,
-        "background-color": "dark",
-        "light-text": true,
-        "text": "税込1万円以上お買い上げで 送料無料 📦",
-        "link": ""
       }
     }
   },
   "order": [
-    "header",
-    "announcement"
+    "announcement",
+    "header"
   ]
 }

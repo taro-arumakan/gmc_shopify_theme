@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "footer",
   "name": "Footer Group",
@@ -10,7 +19,7 @@
           "disabled": true,
           "settings": {
             "newsletter--heading": "Newsletter",
-            "newsletter--info": "<p>新商品やセール、最新のレシピに調理動画も。<br\/>GMCからのお得な情報をお届けします。<\/p>",
+            "newsletter--info": "<p>新商品やセール、最新のレシピに調理動画も。<br/>GMCからのお得な情報をお届けします。</p>",
             "subscribe--show-newsletter": true
           }
         },
@@ -26,7 +35,7 @@
           "type": "about",
           "settings": {
             "about-title": "",
-            "text": "<p>© GenkiMeatCheers<\/p>",
+            "text": "<p>© GenkiMeatCheers</p>",
             "subscribe--show-social-icons": true
           }
         }

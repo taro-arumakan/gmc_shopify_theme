@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "164016757166a86406": {
@@ -26,11 +35,11 @@
         "aspect-ratio": 200,
         "overlay-style": "darken-bottom",
         "parallax-enabled": false,
-        "image": "shopify:\/\/shop_images\/210730_83227_93df8aba-158c-4e09-bbee-27ef2df052b9.jpg",
+        "image": "shopify://shop_images/210730_83227_93df8aba-158c-4e09-bbee-27ef2df052b9.jpg",
         "overline": "",
         "title": "GMC",
-        "description": "<p><br\/>web shopご来店有難うございます。<\/p><p>ただ今 GIFT 購入いただきますと、<br\/>無料にてオリジナル風呂敷に包んで発送致します。<\/p><p>どうぞこの機会にcheers☆<\/p><p>GMC MEAT TRIP 2023は<a href=\"\/collections\/gmc-meat-trip-2023\" title=\"GMC Meat Trip 2023\">こちら<\/a><\/p><p><\/p>",
-        "link-url": "shopify:\/\/collections\/gift-贈答",
+        "description": "<p><br/>web shopご来店有難うございます。</p><p>ただ今 GIFT 購入いただきますと、<br/>無料にてオリジナル風呂敷に包んで発送致します。</p><p>どうぞこの機会にcheers☆</p><p>GMC MEAT TRIP 2023は<a href=\"/collections/gmc-meat-trip-2023\" title=\"GMC Meat Trip 2023\">こちら</a></p><p></p>",
+        "link-url": "shopify://collections/gift-贈答",
         "link-text": "ブラウズ",
         "mobile-overlay": true,
         "mobile-hide-description": false,
@@ -48,11 +57,11 @@
             "text-width": "large",
             "text-horizontal-alignment": "right",
             "text-vertical-alignment": "bottom",
-            "image": "shopify:\/\/shop_images\/210730_82812.jpg",
+            "image": "shopify://shop_images/210730_82812.jpg",
             "overline": "Our top picks from around the world",
             "title": "ALL ITEMS",
-            "description": "<p>世界各国の生産者との繋がりからセレクトした上質なお肉。<br\/>シンプルな味付けと素材に合わせた火入れでお肉の奥深い世界をお伝えします。<\/p>",
-            "link-url": "shopify:\/\/collections\/gift-贈答",
+            "description": "<p>世界各国の生産者との繋がりからセレクトした上質なお肉。<br/>シンプルな味付けと素材に合わせた火入れでお肉の奥深い世界をお伝えします。</p>",
+            "link-url": "shopify://collections/gift-贈答",
             "link-text": "shop now",
             "mobile-text-alignment": "center",
             "mobile-hide-description": false
@@ -64,11 +73,11 @@
             "text-width": "large",
             "text-horizontal-alignment": "left",
             "text-vertical-alignment": "bottom",
-            "image": "shopify:\/\/shop_images\/210730_83227.jpg",
-            "overline": "鹿児島県産 六白黒豚 \/ 黒豚ハンバーグ",
+            "image": "shopify://shop_images/210730_83227.jpg",
+            "overline": "鹿児島県産 六白黒豚 / 黒豚ハンバーグ",
             "title": "Black Pork Hamburg",
-            "description": "<p>鹿児島県の六白黒豚生産者、南州農場から日本が誇る最高峰銘柄豚。<br\/>甘味のある脂身と旨味の濃い赤身が特徴のかごしま黒豚を100%使用。<\/p>",
-            "link-url": "shopify:\/\/products\/職人がひとつひとつ焼き上げたgmc薩摩黒豚ハンバーグ-6個入のコピー",
+            "description": "<p>鹿児島県の六白黒豚生産者、南州農場から日本が誇る最高峰銘柄豚。<br/>甘味のある脂身と旨味の濃い赤身が特徴のかごしま黒豚を100%使用。</p>",
+            "link-url": "shopify://products/職人がひとつひとつ焼き上げたgmc薩摩黒豚ハンバーグ-6個入のコピー",
             "link-text": "SHOP NOW",
             "mobile-text-alignment": "center",
             "mobile-hide-description": false
@@ -80,11 +89,11 @@
             "text-width": "large",
             "text-horizontal-alignment": "center",
             "text-vertical-alignment": "center",
-            "image": "shopify:\/\/shop_images\/210730_83535.jpg",
-            "overline": "All Meats \/ BBQ精肉",
+            "image": "shopify://shop_images/210730_83535.jpg",
+            "overline": "All Meats / BBQ精肉",
             "title": "Premium BBQ Meats",
-            "description": "<p>最高なお肉があればBBQはこの世で最も楽しいアクティビティの一つとなる。<br\/>笑い声、良き友、好奇心。伝統から少し離れてみる心意気が最高のスパイス。<\/p>",
-            "link-url": "shopify:\/\/products\/gmc-特製bbqセット-8人前",
+            "description": "<p>最高なお肉があればBBQはこの世で最も楽しいアクティビティの一つとなる。<br/>笑い声、良き友、好奇心。伝統から少し離れてみる心意気が最高のスパイス。</p>",
+            "link-url": "shopify://products/gmc-特製bbqセット-8人前",
             "link-text": "SHOP NOW",
             "mobile-text-alignment": "center",
             "mobile-hide-description": false
@@ -96,11 +105,11 @@
             "text-width": "large",
             "text-horizontal-alignment": "left",
             "text-vertical-alignment": "center",
-            "image": "shopify:\/\/shop_images\/1_3722.jpg",
-            "overline": "gmc Wacca \/ 愛犬用プレミアム食肉",
+            "image": "shopify://shop_images/1_3722.jpg",
+            "overline": "gmc Wacca / 愛犬用プレミアム食肉",
             "title": "Premium Dog Food",
-            "description": "<p>北海道オホーツクで天然の牧草や木の実を食べて育ったエゾシカのみを使用。<br\/>契約猟師がハントしているため狩猟日、猟場も明確です。<\/p>",
-            "link-url": "shopify:\/\/products\/gourmet-dog-food-combo",
+            "description": "<p>北海道オホーツクで天然の牧草や木の実を食べて育ったエゾシカのみを使用。<br/>契約猟師がハントしているため狩猟日、猟場も明確です。</p>",
+            "link-url": "shopify://products/gourmet-dog-food-combo",
             "link-text": "shop now",
             "mobile-text-alignment": "center",
             "mobile-hide-description": false
@@ -178,13 +187,13 @@
         "aspect-ratio": 56,
         "play-button-style": "solid",
         "overlay-style": "darken-bottom",
-        "video-url": "https:\/\/www.youtube.com\/watch?v=jjyoFw8tYRY",
-        "image": "shopify:\/\/shop_images\/2_6737_38fb903d-3e71-4fcd-8025-1486890b0b2f.jpg",
+        "video-url": "https://www.youtube.com/watch?v=jjyoFw8tYRY",
+        "image": "shopify://shop_images/2_6737_38fb903d-3e71-4fcd-8025-1486890b0b2f.jpg",
         "overline": "Genki Meat Cheers YouTube Channel",
         "heading": "",
-        "description": "<p>お肉の最適な焼き方をお伝えします！<\/p>",
+        "description": "<p>お肉の最適な焼き方をお伝えします！</p>",
         "button-text": "チャンネルへGO",
-        "button-url": "https:\/\/www.youtube.com\/channel\/UCaFEU-umMmWuISQYSy_UR3g\/videos",
+        "button-url": "https://www.youtube.com/channel/UCaFEU-umMmWuISQYSy_UR3g/videos",
         "mobile-image-display-type": "original",
         "mobile-aspect-ratio": 134,
         "mobile-text-alignment": "center",
@@ -197,65 +206,65 @@
         "overlay-block-0": {
           "type": "image",
           "settings": {
-            "image": "shopify:\/\/shop_images\/1_4110.jpg",
+            "image": "shopify://shop_images/1_4110.jpg",
             "x-blocks": "1",
             "y-blocks": "1",
             "image-display-type": "fill",
             "aspect-ratio": 56,
             "title": "About Meat",
-            "link-url": "shopify:\/\/pages\/about-meat",
+            "link-url": "shopify://pages/about-meat",
             "link-text": ""
           }
         },
         "image_7YmkDA": {
           "type": "image",
           "settings": {
-            "image": "shopify:\/\/shop_images\/210730_83380.jpg",
+            "image": "shopify://shop_images/210730_83380.jpg",
             "x-blocks": "1",
             "y-blocks": "1",
             "image-display-type": "fill",
             "aspect-ratio": 56,
             "title": "Black Pork Hamburg",
-            "link-url": "shopify:\/\/products\/職人がひとつひとつ焼き上げたgmc薩摩黒豚ハンバーグ-6個入のコピー",
+            "link-url": "shopify://products/職人がひとつひとつ焼き上げたgmc薩摩黒豚ハンバーグ-6個入のコピー",
             "link-text": ""
           }
         },
         "overlay-block-1": {
           "type": "image",
           "settings": {
-            "image": "shopify:\/\/shop_images\/210730_82428.jpg",
+            "image": "shopify://shop_images/210730_82428.jpg",
             "x-blocks": "1",
             "y-blocks": "1",
             "image-display-type": "fill",
             "aspect-ratio": 56,
             "title": "Premium Dog Food",
-            "link-url": "shopify:\/\/products\/gourmet-dog-food-combo",
+            "link-url": "shopify://products/gourmet-dog-food-combo",
             "link-text": ""
           }
         },
         "overlay-block-2": {
           "type": "image",
           "settings": {
-            "image": "shopify:\/\/shop_images\/2_6909.jpg",
+            "image": "shopify://shop_images/2_6909.jpg",
             "x-blocks": "1",
             "y-blocks": "1",
             "image-display-type": "fill",
             "aspect-ratio": 56,
             "title": "Premium BBQ Meats",
-            "link-url": "shopify:\/\/products\/gmc-特製bbqセット-8人前",
+            "link-url": "shopify://products/gmc-特製bbqセット-8人前",
             "link-text": ""
           }
         },
         "overlay-block-3": {
           "type": "image",
           "settings": {
-            "image": "shopify:\/\/shop_images\/1_3848_105f4d46-8b6f-4e3c-85c1-800b28827fa6.jpg",
+            "image": "shopify://shop_images/1_3848_105f4d46-8b6f-4e3c-85c1-800b28827fa6.jpg",
             "x-blocks": "2",
             "y-blocks": "1",
             "image-display-type": "fill",
             "aspect-ratio": 58,
             "title": "SHOP",
-            "link-url": "https:\/\/gmc.mazina.co.jp#gmc_grill",
+            "link-url": "https://gmc.mazina.co.jp#gmc_grill",
             "link-text": ""
           }
         }
@@ -269,7 +278,7 @@
       ],
       "custom_css": [
         ".featured-grid--item:nth-child(odd):last-child {width: 100%;}",
-        "@media only screen and (min-width: 768px) {.featured-grid--item:nth-child(odd):last-child {grid-column: 2 \/ span 2; }}"
+        "@media only screen and (min-width: 768px) {.featured-grid--item:nth-child(odd):last-child {grid-column: 2 / span 2; }}"
       ],
       "settings": {
         "top-border": false,
@@ -306,19 +315,16 @@
         },
         "164018150735c4d43c-1": {
           "type": "heading",
-          "settings": {
-          }
+          "settings": {}
         },
         "164018150735c4d43c-2": {
           "type": "vendor",
           "disabled": true,
-          "settings": {
-          }
+          "settings": {}
         },
         "164018150735c4d43c-3": {
           "type": "price",
-          "settings": {
-          }
+          "settings": {}
         },
         "164018150735c4d43c-4": {
           "type": "options",
@@ -368,7 +374,7 @@
         "background-color": "none",
         "light-text": false,
         "container-width": "4",
-        "custom_html": "<a name=\"gmc_grill\"><\/a>"
+        "custom_html": "<a name=\"gmc_grill\"></a>"
       }
     },
     "16401814158380a11c": {
@@ -392,11 +398,11 @@
         "aspect-ratio": 56,
         "overlay-style": "darken-bottom",
         "parallax-enabled": false,
-        "image": "shopify:\/\/shop_images\/postcard_YY_omote_3_f7c87838-d1cc-40a6-8446-e50d263eb26f.jpg",
+        "image": "shopify://shop_images/postcard_YY_omote_3_f7c87838-d1cc-40a6-8446-e50d263eb26f.jpg",
         "overline": "炭火グリルレストラン",
         "title": "GMC Grill",
-        "description": "<p><strong><br\/><\/strong><a href=\"\/collections\/gmc-grill-menu\" title=\"GMC Grill Menu\">メニューはこちら<\/a><\/p><p>11:30-15:00(14:30.LO)<br\/>18:00-22:00(21:00.LO)<\/p><p>定休日: 水曜<\/p><p><\/p>",
-        "link-url": "https:\/\/gmc.mazina.co.jp\/pages\/gmc-grill-dinner-menu",
+        "description": "<p><strong><br/></strong><a href=\"/collections/gmc-grill-menu\" title=\"GMC Grill Menu\">メニューはこちら</a></p><p>11:30-15:00(14:30.LO)<br/>18:00-22:00(21:00.LO)</p><p>定休日: 水曜日 & 木曜日</p><p></p>",
+        "link-url": "https://gmc.mazina.co.jp/pages/gmc-grill-dinner-menu",
         "link-text": "",
         "mobile-overlay": false,
         "mobile-hide-description": false,
@@ -416,9 +422,10 @@
         "container-width": "4",
         "theme": "grayscale",
         "heading": "",
-        "address": "<p>〒299-4301<br\/>千葉県長生郡一宮町一宮10072-2<br\/>0475-36-6865<\/p>",
+        "address": "<p>〒299-4301<br/>千葉県長生郡一宮町一宮10072-2<br/>0475-36-6865</p>",
         "hours": "",
-        "api-key": "AIzaSyAioJ2j410LopRaonQS04ybG0xwMNyLhbQ",
+        "image": "shopify://shop_images/Screenshot_2024-12-02_at_19.41.15.png",
+        "api-key": "",
         "map-address": "千葉県長生郡一宮町一宮10072-2"
       }
     }

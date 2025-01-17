@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "blog": {
     "all": "Tutto",
@@ -44,7 +53,7 @@
     "all_items_added": "Tutti gli articoli sono stati aggiunti al carrello.",
     "checkout": "Pagamento",
     "continue": "Continua a fare acquisti",
-    "empty_html": "<span data-item='rte-content'>Al momento il tuo carrello è vuoto.<br\/> <a href='{{ collections_url }}'>Clicca qui per continuare a fare acquisti<\/a>.<\/span>",
+    "empty_html": "<span data-item='rte-content'>Al momento il tuo carrello è vuoto.<br/> <a href='{{ collections_url }}'>Clicca qui per continuare a fare acquisti</a>.</span>",
     "minus": "Meno",
     "order_notes": "Lascia una nota per il tuo ordine",
     "plus": "Più",
@@ -296,9 +305,9 @@
       "other_pickup_locations": "Visualizza luoghi di ritiro",
       "map": "mappa",
       "available": "Ritiro disponibile",
-      "available_at_html": "Ritiro disponibile presso <strong>{{ location_name }}<\/strong>",
+      "available_at_html": "Ritiro disponibile presso <strong>{{ location_name }}</strong>",
       "unavailable": "Ritiro al momento non disponibile",
-      "unavailable_at_html": "Ritiro attualmente non disponibile presso <strong>{{ location_name }}<\/strong>",
+      "unavailable_at_html": "Ritiro attualmente non disponibile presso <strong>{{ location_name }}</strong>",
       "return": "Ritorna al prodotto",
       "view_store_info": "Visualizza informazioni sul negozio"
     },
