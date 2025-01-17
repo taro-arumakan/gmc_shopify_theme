@@ -1,0 +1,85 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "page",
+      "disabled": true,
+      "custom_css": [],
+      "settings": {
+        "show-title": true,
+        "background-color": "none",
+        "light-text": false,
+        "container-width": "4",
+        "spacing-above": true,
+        "spacing-below": true
+      }
+    },
+    "image_with_text_PBV9Cp": {
+      "type": "image-with-text",
+      "settings": {
+        "top-border": false,
+        "spacing-above": false,
+        "spacing-below": false,
+        "background-color": "none",
+        "container-width": "6",
+        "light-text": true,
+        "overlap": false,
+        "heading-type": "featured-heading",
+        "text-position": "overlay",
+        "text-horizontal-alignment": "center",
+        "text-vertical-alignment": "bottom",
+        "text-width": "medium",
+        "text-style": "none",
+        "text-background-color": "transparent",
+        "image-display-type": "medium",
+        "aspect-ratio": 56,
+        "overlay-style": "darken-top",
+        "parallax-enabled": false,
+        "image": "shopify://shop_images/matsuyoshi.png",
+        "overline": "",
+        "title": "",
+        "description": "",
+        "link-url": "",
+        "link-text": "",
+        "mobile-overlay": true,
+        "mobile-hide-description": false,
+        "mobile-image-display-type": "original",
+        "mobile-aspect-ratio": 134,
+        "mobile-text-alignment": "center"
+      }
+    },
+    "featured_text_3WqCXi": {
+      "type": "featured-text",
+      "custom_css": [
+        "@media only screen and (max-width: 767px) {.stacked-text--root {text-align: left;} }"
+      ],
+      "settings": {
+        "top-border": false,
+        "spacing-above": true,
+        "spacing-below": true,
+        "background-color": "none",
+        "light-text": false,
+        "heading-type": "section-heading",
+        "container-width": "4",
+        "overline": "",
+        "heading": "",
+        "description": "<p>ご縁有り、また地元浅草でお店を開店出来ることになりました。</p><p>2010年より鹿児島県の黒豚農家との繋がりから地元浅草で開店した《トンテキ元気》。<br/>2020年まで皆様に支えられ、浅草六区の中心地、地上5階建 《豚ハビル》にて丁度10年間、営業いたしました。</p><p>話は古くなりますが、昭和十二年、ひいばあちゃんが時アジア最大である国際劇場隣で土産物屋を開業したのが浅草での商売のはじまり。<br/>今回は当時の屋号 《浅草 松よし》を使わせて頂き、浅草にとんかつ屋を開店いたします。</p><p>またお店に想いを込め、喜んでいただけるよう、美味しい調理提供に努めます。</p><p>一宮町と二拠点生活になりますが、皆様とまた浅草でお会い出来るのを楽しみにしています。</p>",
+        "link-url": "https://gmc.mazina.co.jp",
+        "link-text": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_with_text_PBV9Cp",
+    "featured_text_3WqCXi"
+  ]
+}
