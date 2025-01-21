@@ -1,6 +1,14 @@
 <!doctype html>
 <html class="no-js" lang="{{ request.locale.iso_code }}" dir="ltr">
   <head>
+
+    {% if request.host == "matsuyoshi.gmcgrill.com" %}
+      {% if request.path == "/" %}
+        <meta http-equiv="refresh" content="0;URL='https://gmcgrill.com/pages/matsuyoshi'" />
+      {% else %}
+        <meta http-equiv="refresh" content="0;URL='https://gmcgrill.com{{ request.path }}'" />
+      {% endif %}
+    {% endif %}
     <!-- Blockshop Theme - Version 9.4.3 by Troop Themes - https://troopthemes.com/ -->
 
     <meta charset="UTF-8">
