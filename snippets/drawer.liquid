@@ -1,13 +1,13 @@
-<drawer-root class="drawer--root">
+<drawer-element class="drawer--root">
   <div class="drawer--overlay" aria-hidden="true"></div>
 
   <div class="drawer--focus-trigger" tabindex="0"></div>
   <div class="drawer--focus-start" tabindex="0"></div>
 
   <div
-    class="drawer--instance"
+    class="drawer--side"
     data-side="top"
-    data-focus-id="search-input"
+    data-focus-id="search_input"
     aria-expanded="false"
   >
     <div class="drawer--container" data-view="search">
@@ -16,7 +16,7 @@
   </div>
 
   <div
-    class="drawer--instance"
+    class="drawer--side"
     data-side="right"
     aria-expanded="false"
   >
@@ -40,23 +40,14 @@
   </div>
 
   <div
-    class="drawer--instance"
+    class="drawer--side"
     data-side="left"
     aria-expanded="false"
   >
-    <div
-      class="drawer--container"
-      data-view="y-menu"
-      {% unless settings.transitions--other %}
-        data-transition-container="y-menu"
-        data-transition-cascade="vertical"
-        data-transition-cascade-interval="120"
-        data-transition-type="fade-in"
-      {% endunless %}
-    >
+    <div class="drawer--container" data-view="y-menu">
       {%- render 'mobile-nav' -%}
     </div>
   </div>
 
   <div class="drawer--focus-trigger" tabindex="0"></div>
-</drawer-root>
+</drawer-element>

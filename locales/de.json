@@ -52,8 +52,8 @@
   "cart": {
     "all_items_added": "Alle Artikel wurden in den Warenkorb gelegt.",
     "checkout": "Kasse",
-    "continue": "Weiter einkaufen",
     "empty_html": "<span data-item='rte-content'>Ihr Warenkorb ist derzeit leer.<br/> <a href='{{ collections_url }}'>Klicken Sie hier, um weiter einzukaufen</a>.</span>",
+    "empty_with_list_html": "<span data-item='rte-content'>Ihr Warenkorb ist derzeit leer.<br/> Durchsuchen Sie unsere Auswahl:</span>",
     "minus": "Minus",
     "order_notes": "Hinterlassen Sie eine Anmerkung zu Ihrer Bestellung",
     "plus": "Plus",
@@ -72,10 +72,7 @@
     "continue_shopping": "Weiter einkaufen",
     "filter_feedback": "Keine Produkte entsprechen diesem Filter.",
     "no_products_feedback": "Es gibt keine Produkte in dieser Kollektion.",
-    "placeholder": {
-      "collection_title": "Name der Kollektion",
-      "collection_description": "Die Beschreibung Ihrer Kollektion wird hier angezeigt"
-    },
+    "numbered_title": "Kollektion {{ count }}",
     "view_more": "Mehr anzeigen"
   },
   "customer": {
@@ -179,6 +176,9 @@
   "general": {
     "a11y": {
       "close": "Schließen",
+      "next": "Weiter",
+      "pause_play": "pausieren / abspielen",
+      "previous": "Vorheriger",
       "skip_main": "Zum Hauptinhalt wechseln",
       "skip_pagination": "Zur Paginierung wechseln"
     },
@@ -269,7 +269,8 @@
       "account_view_link": "Konto",
       "back": "Zurück",
       "cart": "Warenkorb",
-      "search": "Suchen"
+      "search": "Suchen",
+      "toggle_drawer": "Schublade umschalten"
     },
     "footer": {
       "navigation": "Navigation"
@@ -287,13 +288,16 @@
   },
   "products": {
     "add_to_cart": "In den Warenkorb legen",
-    "color": "Farbe",
+    "buy_it_now": "Kaufe es jetzt",
+    "change": "ändern",
+    "choose_options": "Optionen wählen",
     "empty_page_content_html": "Sie haben noch keine Seite verlinkt. Um dies zu konfigurieren, müssen Sie zum Block {{ size_chart_path }} gehen.",
     "from": "Von",
     "low_in_stock": {
-      "one": "Nur noch 1 Artikel verfügbar",
-      "other": "Nur noch {{ count }} Artikel verfügbar"
+      "one": "Schnell, nur noch 1 Artikel übrig!",
+      "other": "Schnell, nur noch {{ count }} Artikel übrig!"
     },
+    "hotspot": "Produkt-Hotspot",
     "image_modal": "Produktbild vergrößern",
     "n_items_left": "Es können nur noch [num_items] Artikel in den Warenkorb gelegt werden",
     "new": "Neu",
@@ -311,8 +315,8 @@
       "return": "Zurück zum Produkt",
       "view_store_info": "Geschäftsinformationen anzeigen"
     },
+    "quick_add": "schnell hinzufügen",
     "sale": "Sale",
-    "select_options": "Optionen auswählen",
     "size_chart": "Größentabelle",
     "size_chart_path": "Produktseite > Variantenpicker",
     "sku": "Art.-Nr.",
@@ -345,14 +349,16 @@
       "sec": "Sek"
     },
     "featured_collection": {
-      "skip_link": "Karussell überspringen",
-      "view_collection": "Galerie anzeigen"
+      "skip_link": "Karussell überspringen"
     },
     "featured_blog": {
       "continue_reading": "Weiterlesen",
       "date": "Vor 2 Stunden",
       "excerpt": "Hier wird der Auszug aus dem Artikel angezeigt.",
       "item_title": "Blogbeitrag"
+    },
+    "header": {
+      "empty_page_content": "Sie haben noch keine Seite verlinkt."
     },
     "image_comparison": {
       "cursor": "Mauszeiger"

@@ -1,0 +1,23 @@
+<script>
+  if (Shopify) {
+    Shopify.routes = {
+      ...Shopify.routes,
+      all_products_collection: '{{ routes.all_products_collection_url }}',
+      cart: '{{ routes.cart_url }}',
+      cart_add: '{{ routes.cart_add_url }}',
+      cart_change: '{{ routes.cart_change_url }}',
+      cart_update: '{{ routes.cart_update_url }}',
+      libraries: {
+        swipe_listener: "{{ 'swipe-listener.min.js' | asset_url }}",
+        masonry: "{{ 'masonry.min.js' | asset_url }}",
+        plyr: "/cdn/shopifycloud/plyr/v2.0/shopify-plyr.en.js",
+        vimeo: "https://player.vimeo.com/api/player.js"
+      },
+      product_recommendations: '{{ routes.product_recommendations_url }}',
+      predictive_search: '{{ routes.predictive_search_url }}',
+      search: '{{ routes.search_url }}',
+      root: '{{ routes.root_url }}{% unless routes.root_url == '/' %}/{% endunless %}',
+      youtube: 'https://youtube.com/iframe_api'
+    }
+  }
+</script>

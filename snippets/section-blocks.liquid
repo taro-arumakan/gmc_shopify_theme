@@ -1,0 +1,245 @@
+{%- liquid
+  assign bg_color = bg_color | default: 'transparent'
+  assign in_button_group = false
+  assign in_icon_group = false
+  assign transition_blocks = 0
+-%}
+
+{%- capture block_html -%}
+  {%- for block in section.blocks -%}
+    {%- liquid
+      if in_button_group and block.type != 'button'
+        assign in_button_group = false
+        assign transition_blocks = transition_blocks | plus: 1
+        echo '</div>'
+      elsif in_icon_group and block.type != 'icon'
+        assign in_icon_group = false
+        assign transition_blocks = transition_blocks | plus: 1
+        echo '</div>'
+      endif
+    -%}
+
+    {%- if block.type == 'button' and in_button_group == false -%}
+      {%- assign in_button_group = true -%}
+      <div
+        class="section-blocks--button-group"
+        {% unless settings.transitions--text %}
+          data-transition-item="{{ section.id }}"
+          data-transition-type="fade-in"
+        {% endunless %}
+      >
+    {%- elsif block.type == 'icon' and in_icon_group == false -%}
+      {%- assign in_icon_group = true -%}
+      <div
+        class="section-blocks--icon-group"
+        {% unless settings.transitions--text %}
+          data-transition-item="{{ section.id }}"
+          data-transition-type="fade-in"
+        {% endunless %}
+      >
+    {%- elsif block.type != 'empty-space' -%}
+      {%- assign transition_blocks = transition_blocks | plus: 1 -%}
+    {%- endif -%}
+
+    {%- if block.type == 'heading' and block.settings.title != blank -%}
+      <div
+        class="section-blocks--block"
+        data-block-type="{{ block.type }}"
+        {% unless settings.transitions--text %}
+          data-transition-item="{{ section.id }}"
+        {% endunless %}
+        {{ block.shopify_attributes }}
+      >
+        <h2 class="section-blocks--title" data-item="{{ block.settings.heading-type }}">
+          {%-
+            render 'utils',
+            name: 'highlighted-text',
+            text: block.settings.title,
+            highlight_color: block.settings.highlight-color,
+            highlight_text: block.settings.highlight-text,
+            highlight_type: block.settings.highlight-type
+          -%}
+        </h2>
+      </div>
+
+    {%- elsif block.type == 'overline' and block.settings.overline != blank -%}
+      <div
+        class="section-blocks--block"
+        data-block-type="{{ block.type }}"
+        {% unless settings.transitions--text %}
+          data-transition-item="{{ section.id }}"
+        {% endunless %}
+        {{ block.shopify_attributes }}
+      >
+        <h3 class="section-blocks--overline" data-item="overline">
+          {{- block.settings.overline | escape -}}
+        </h3>
+      </div>
+
+    {%- elsif block.type == 'description' and block.settings.description != blank -%}
+      {%- assign description_type = block.settings.description-type | default: 'paragraph' -%}
+      
+      <div
+        class="section-blocks--block"
+        data-block-type="{{ block.type }}"
+        data-item="{{ description_type }}"
+        {% if block.settings.mobile-hide-enabled %}
+          data-mq="medium-large"
+        {% endif %}
+        {% unless settings.transitions--text %}
+          data-transition-item="{{ section.id }}"
+        {% endunless %}
+        {{ block.shopify_attributes }}
+      >
+        {{- block.settings.description -}}
+      </div>
+
+    {%- elsif block.type == 'button' and block.settings.link-text != blank -%}
+      <div
+        class="section-blocks--block"
+        data-block-type="{{ block.type }}"
+        {{ block.shopify_attributes }}
+      >
+        <a
+          class="section-blocks--button"
+          href="{{ block.settings.link-url }}"
+          data-item="{{ block.settings.style }}"
+          data-text="{{ block.settings.link-text }}"
+        >
+          <span>{{- block.settings.link-text -}}</span>
+        </a>
+      </div>
+
+    {%- elsif block.type == 'icon' -%}
+      <div
+        class="section-blocks--block"
+        data-block-type="{{ block.type }}"
+        {{ block.shopify_attributes }}
+      >
+        {%- render 'icon-block', settings: block.settings -%}
+      </div>
+
+    {%- elsif block.type == 'image' -%}
+      <div
+        class="section-blocks--block"
+        data-block-type="{{ block.type }}"
+        style="--width:{{ block.settings.width }}px;--mobile-width:{{ block.settings.mobile-width }}px;"
+        {{ block.shopify_attributes }}
+      >
+        {%- if block.settings.image == blank -%}
+          {%- render 'placeholder', type: 'logo', aspect_ratio: 3 -%}
+        {%- else -%}
+          {%- assign block_sizes = block.settings.width | append: "px" -%}
+          {{-
+            block.settings.image |
+            image_url: width: block.settings.width |
+            image_tag: loading: loading, fetchpriority: fetchpriority, sizes: block_sizes
+          -}}
+        {%- endif -%}
+      </div>
+
+    {%- elsif block.type == 'custom-liquid' and block.settings.custom-liquid != blank -%}
+      <div
+        class="section-blocks--block"
+        data-block-type="{{ block.type }}"
+        {% unless settings.transitions--text %}
+          data-transition-item="{{ section.id }}"
+          data-transition-type="fade-in"
+        {% endunless %}
+        {{ block.shopify_attributes }}
+      >
+        {{- block.settings.custom-liquid -}}
+      </div>
+
+    {%- elsif block.type == 'newsletter' -%}
+      <div
+        class="section-blocks--block"
+        data-block-type="{{ block.type }}"
+        {% unless settings.transitions--text %}
+          data-transition-item="{{ section.id }}"
+          data-transition-type="fade-in"
+        {% endunless %}
+        {{ block.shopify_attributes }}
+      >
+        {%-
+          render 'subscribe-form',
+          id: block.id,
+          alignment: text_x_alignment
+        -%}
+      </div>
+
+    {%- elsif block.type == 'countdown' -%}
+      <div
+        class="section-blocks--block"
+        data-block-type="{{ block.type }}"
+        {% unless settings.transitions--text %}
+          data-transition-item="{{ section.id }}"
+          data-transition-type="fade-in"
+        {% endunless %}
+        {{ block.shopify_attributes }}
+      >
+        {%-
+          render 'countdown-timer',
+          expiry_date: block.settings.expiry-date,
+          expiry_hours: block.settings.expiry-hours,
+          expiry_minutes: block.settings.expiry-minutes,
+          light_number: block.settings.light-number,
+          hide_when_expired: block.settings.hide-when-expired,
+          show_button_when: block.settings.show-button-when,
+          number_size: block.settings.number-size,
+          mobile_number_size: block.settings.mobile-number-size,
+          timer_bg_color: block.settings.timer-bg-color
+        -%}
+      </div>
+
+    {%- elsif block.type == 'empty-space' -%}
+      {%- assign desktop_height = block.settings.desktop-height -%}
+      {%- assign mobile_height = block.settings.mobile-height -%}
+      <div
+        class="section-blocks--block"
+        data-block-type="{{ block.type }}"
+        style="--desktop-height:{{ desktop_height }}px;--mobile-height:{{ mobile_height }}px;"
+        {{ block.shopify_attributes }}
+      ></div>
+
+    {%- endif -%}
+
+    {%- assign last_block_type = block.type -%}
+  {%- endfor -%}
+
+  {%- if in_button_group or in_icon_group -%}
+    </div>
+    {%- assign transition_blocks = transition_blocks | plus: 1 -%}
+  {%- endif -%}
+{%- endcapture -%}
+
+<div
+  class="section-blocks--root"
+  data-background-color="{{ bg_color }}"
+  data-container="block"
+  data-mobile-x-alignment="{{ mobile_x_alignment }}"
+  {% if mobile_y_alignment %}
+    data-mobile-y-alignment="{{ mobile_y_alignment }}"
+  {% endif %}
+  data-translucent="{{ settings.content--box-translucent }}"
+  data-text-style="{{ text_style }}"
+  data-x-alignment="{{ x_alignment }}"
+  {% if y_alignment %}
+    data-y-alignment="{{ y_alignment }}"
+  {% endif %}
+  {% if white_text %}
+    data-text-color="white"
+  {% endif %}
+  {% unless settings.transitions--text %}
+    data-transition-container="{{ section.id }}"
+    data-transition-type="slide-in"
+    data-transition-cascade="vertical"
+    data-transition-cascade-interval="{{ 2000 | divided_by: transition_blocks | at_most: 500 }}"
+  {% endunless %}
+  {% if text_width %}
+    data-text-width
+    style="--text-width:{{ text_width }}px;"
+  {% endif %}
+>
+  {{- block_html -}}
+</div>

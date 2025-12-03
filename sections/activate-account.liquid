@@ -5,16 +5,22 @@
   assign activate_password_confirm_t = 'customer.activate_account.password_confirm' | t
   assign activate_cancel_t = 'customer.activate_account.cancel' | t
   assign activate_submit_t = 'customer.activate_account.submit' | t
-
-  render 'section-assets', name: 'customer', type: 'style'
 -%}
 
 <div
   class="customer--root account--activate"
+  data-container-width="2"
   data-section-id="{{ section.id }}"
+  data-background-color="none"
 >
   <div class="customer--wrapper">
-    <h1 data-item="section-heading">
+    <h1
+      data-item="section-heading"
+      {% unless settings.transitions--text %}
+        data-transition-item="viewport"
+        data-transition-type="slide-in"
+      {% endunless %}
+    >
       {{- activate_title_t -}}
     </h1>
 
@@ -54,10 +60,7 @@
           value="{{ activate_submit_t }}"
           type="submit"
           class="account--activate--button"
-          data-item="button"
-          {% unless settings.transitions--buttons %}
-            data-transition-button
-          {% endunless %}
+          data-item="button-1"
         >
           <span>{{- activate_submit_t -}}</span>
         </button>

@@ -1,14 +1,13 @@
 {%- liquid
-  assign current_variant = product.selected_or_first_available_variant
-  assign featured_media = current_variant.featured_media | default: product.featured_media
   assign load_model = false
-  assign load_image_modal = false
   assign load_video = false
   assign load_zoom = false
   assign load_thumbs = false
-  if layout == 'thumbnails' and thumbs_enabled and product.media.size != 1
-    assign load_thumbs = true
-    render 'section-assets', name: 'product-thumbs', type: 'script'
+  assign modal_index = 0
+
+  assign featured_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media
+  if product.has_only_default_variant
+    assign featured_media = product.media[0]
   endif
 
   assign columns = 1
@@ -16,9 +15,9 @@
     assign columns = 2
   endif
 
-  unless settings.quick-add--enabled
-    render 'section-assets', name: 'product-media--variants', type: 'script'
-  endunless
+  if layout == 'thumbnails' and product.media.size != 1
+    assign load_thumbs = true
+  endif
 -%}
 
 {%- if product.media.size > 0 -%}
@@ -36,17 +35,45 @@
       if media.id == featured_media.id
         assign media_active = true
       endif
+
+      if request.page_type != 'product'
+        assign loading = 'lazy'
+        assign fetchpriority = 'auto'
+      elsif media_active and layout == 'thumbnails'
+        assign fetchpriority = 'high'
+        assign loading = 'eager'
+      elsif media_active and layout == 'mixed'
+        assign fetchpriority = 'high'
+        assign loading = 'eager'
+      elsif layout == 'one' and forloop.index0 < 2
+        assign loading = 'eager'
+        if forloop.index0 == 1
+          assign fetchpriority = 'high'
+        endif
+      elsif layout == 'two' and forloop.index0 < 4
+        assign loading = 'eager'
+        if forloop.index0 < 2
+          assign fetchpriority = 'high'
+        endif
+      else
+        assign loading = 'lazy'
+        assign fetchpriority = 'auto'
+      endif
     -%}
 
     {%- capture media_html -%}
       {%-
-        render "product-media",
+        render 'product-media',
         index: forloop.index0,
+        fetchpriority: fetchpriority,
         product: product,
+        product_id: product_id,
         product_media: media,
+        loading: loading,
         media_active: media_active,
         media_size: media_size,
         modal_enabled: modal_enabled,
+        modal_index: modal_index,
         sizes: sizes,
         zoom_enabled: zoom_enabled,
         video_looping_enabled: video_looping_enabled
@@ -57,16 +84,14 @@
       {%- echo modal_html -%}
 
       {%- if modal_enabled and media.media_type == 'image' -%}
-        {%- assign load_image_modal = true -%}
-
         <div
           class="modal--view"
           aria-hidden="true"
-          data-modal-index="{{ forloop.index0 }}"
+          data-modal-index="{{ modal_index }}"
           data-id="{{ media.id }}"
           data-background-color="none"
           data-transition-item="viewport"
-          data-transition-type="{% if media_active %}fade-out{% else %}fade-in{% endif %}"
+          data-transition-type="{% if media_active %}scale-out{% else %}scale-in{% endif %}"
           data-transition-trigger="custom"
         >
           {{-
@@ -74,15 +99,24 @@
             image_url: width: media.preview_image.width |
             image_tag:
               widths: "500, 767, 1000, 1200, 1500, 1800, 2100, 2400, 3000",
-              sizes: '100vw'
+              sizes: '100vw',
+              loading: 'lazy'
           -}}
         </div>
+
+        {%- assign modal_index = modal_index | plus: 1 -%}
       {%- endif -%}
 
     {%- endcapture -%}
 
     {%- liquid
-      if media_active
+      unless layout == 'mixed'
+        capture all_media_html
+          echo all_media_html
+          echo media_html
+        endcapture
+
+      elsif media_active
         capture active_media_html
           echo media_html
         endcapture
@@ -92,7 +126,7 @@
           echo inactive_media_html
           echo media_html
         endcapture
-      endif
+      endunless
     -%}
 
     {%- if load_thumbs -%}
@@ -105,13 +139,13 @@
           data-id="{{ media.id }}"
           tabindex="0"
         >
-          {%- assign sizes = thumbnail_width | append: 'px' -%}
+          {%- assign thumbnail_sizes = thumbnail_width | append: 'px' -%}
           {{-
             media.preview_image |
             image_url: width: media.preview_image.width |
             image_tag:
               widths: "50, 100, 200",
-              sizes: sizes,
+              sizes: thumbnail_sizes,
               loading: 'lazy'
           -}}
 
@@ -126,43 +160,12 @@
       {%- endcapture -%}
     {%- endif -%}
   {%- endfor -%}
-
-{%- else -%}
-  {%- capture active_media_html -%}
-    <div class="product-media--root" data-active="true" data-id="1">
-      {%- render "placeholder", type: "product", aspect_ratio: 1, placeholder_index: 1 -%}
-    </div>
-  {%- endcapture -%}
-
-  {%- for i in (1..4) -%}
-    {%- capture inactive_media_html -%}
-      {% assign inactive_i = i | plus: 1 %}
-      {{- inactive_media_html -}}
-
-      <div class="product-media--root" data-active="false" data-id="{{ i | plus: 1 }}">
-        {%- render "placeholder", type: "product", aspect_ratio: 1, placeholder_index: inactive_i -%}
-      </div>
-    {%- endcapture -%}
-
-    {%- if load_thumbs -%}
-      {%- capture thumbs_html -%}
-        {{- thumbs_html -}}
-
-        <div class="product-media--thumb" data-id="{{ i }}">
-          {%- render "placeholder", type: "product", aspect_ratio: 1, placeholder_index: i -%}
-        </div>
-      {%- endcapture -%}
-    {%- endif -%}
-  {%- endfor -%}
 {%- endif -%}
 
 {%- if load_model -%}
-  <script type="application/json" id="product-model--json">
+  <script type="application/json" id="{{ product_id }}-model_json">
     {%- assign product_models = product.media | where: 'media_type', 'model' -%}
     {{- product_models | json -}}
-  </script>
-  <script type="module">
-    import "{{ 'product-model.js' | asset_url }}";
   </script>
   <link
     href="/cdn/shopifycloud/model-viewer-ui/assets/v1.0/model-viewer-ui.css"
@@ -171,28 +174,23 @@
   />
 {%- endif -%}
 
-{%- if load_video -%}
-  <script type="module">
-    import "{{ 'product-video.js' | asset_url }}";
-  </script>
-{%- endif -%}
-
-{%- if load_zoom -%}
-  <script type="module">
-    import "{{ 'product-zoom.js' | asset_url }}";
-  </script>
-{%- endif -%}
-
 <product-media-variants
   class="product-media--variants--root"
   data-id="{{ product_id }}"
   data-layout="{{ layout }}"
+  data-first-variant-media="{{ featured_media.id }}"
   data-variant-scroll="{{ variant_scroll_enabled }}"
 >
   <div class="product-media--variants">
     {%- if layout == 'mixed' -%}
       <div class="product-media--active">
-        {{- active_media_html -}}
+        {%- if product.media.size > 0 -%}
+          {{- active_media_html -}}
+        {%- else -%}
+          <div class="product-media--root" data-active="true" data-id="1">
+            {%- render 'placeholder', type: 'product', aspect_ratio: 1, placeholder_index: 1 -%}
+          </div>
+        {%- endif -%}
       </div>
     {%- endif -%}
 
@@ -206,27 +204,59 @@
         data-columns="{{ columns }}"
       {%- endif -%}
     >
-      {%- if layout != 'mixed' -%}
-        {{- active_media_html -}}
-      {%- endif -%}
+      {%- if product.media.size > 0 -%}
+        {%- liquid
+          unless layout == 'mixed'
+            echo all_media_html
+          else
+            echo inactive_media_html
+          endunless
+        -%}
 
-      {{- inactive_media_html -}}
+      {%- else -%}
+        {%- for i in (1..4) -%}
+          <div
+            class="product-media--root"
+            data-id="{{ i }}"
+            data-active="{% if i == 1 %}true{% else %}false{% endif %}"
+          >
+            {%-
+              render 'placeholder',
+              type: 'product',
+              aspect_ratio: 1,
+              placeholder_index: i
+            -%}
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
     </div>
   </div>
 
   {%- if load_thumbs -%}
-    <product-thumbs-root class="product-media--thumbs" data-id="{{ product_id }}">
+    <product-thumbs-element class="product-media--thumbs" data-id="{{ product_id }}">
       <div class="product-media--thumbs-wrapper">
-        {{- thumbs_html -}}
+        {%- if product.media.size > 0 -%}
+          {{- thumbs_html -}}
+        {%- else -%}
+          {%- for i in (1..4) -%}
+            <div
+              class="product-media--thumb"
+              data-id="{{ i }}"
+              data-active="{% if i == 1 %}true{% else %}false{% endif %}"
+            >
+              {%- render 'placeholder', type: 'product', aspect_ratio: 1, placeholder_index: i -%}
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
       </div>
-    </product-thumbs-root>
+    </product-thumbs-element>
   {%- endif -%}
 </product-media-variants>
 
-{%- if load_image_modal -%}
-  <modal-root
+{%- if modal_index > 0 -%}
+  <modal-element
     class="modal--root"
-    data-id="product"
+    data-id="{{ product_id }}_main-product"
     data-background-color="dark"
     data-translucent="true"
     data-transition-item="viewport"
@@ -235,5 +265,5 @@
     aria-hidden="true"
   >
     {{- modal_html -}}
-  </modal-root>
+  </modal-element>
 {%- endif -%}

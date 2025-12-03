@@ -52,9 +52,8 @@
   "cart": {
     "all_items_added": "All items have been added to the cart.",
     "checkout": "Checkout",
-    "continue": "Continue Shopping",
     "empty_html": "<span data-item='rte-content'>Your cart is currently empty.<br/> <a href='{{ collections_url }}'>Click here to continue shopping</a>.</span>",
-    "gift_card_message": "Add your message to print on a free gift card to a recipient",
+    "empty_with_list_html": "<span data-item='rte-content'>Your cart is currently empty.<br/> Browse our selections:</span>",
     "minus": "Minus",
     "order_notes": "Leave a note with your order",
     "plus": "Plus",
@@ -69,14 +68,11 @@
     "your_cart": "Your Cart"
   },
   "collections": {
-    "browse": "browse collections",
+    "browse": "Browse collections",
     "continue_shopping": "Continue shopping",
     "filter_feedback": "No products match this filter.",
     "no_products_feedback": "There are no products in this collection.",
-    "placeholder": {
-      "collection_title": "Collection name",
-      "collection_description": "Your collection description will display here"
-    },
+    "numbered_title": "Collection {{ count }}",
     "view_more": "View more"
   },
   "customer": {
@@ -180,6 +176,9 @@
   "general": {
     "a11y": {
       "close": "close",
+      "next": "next",
+      "pause_play": "pause / play",
+      "previous": "previous",
       "skip_main": "Skip to main content",
       "skip_pagination": "Skip to pagination"
     },
@@ -198,12 +197,12 @@
       "decline": "decline"
     },
     "filter": {
-      "apply": "apply",
+      "apply": "Apply",
       "from": "from",
       "no_filters": "No filters available",
-      "reset": "reset",
-      "search_by_name": "search by name",
-      "sort_by": "sort by",
+      "reset": "Reset",
+      "search_by_name": "Search by name",
+      "sort_by": "Sort by",
       "to": "to"
     },
     "localization": {
@@ -225,7 +224,7 @@
     },
     "search": {
       "blog": "Blog",
-      "cancel": "cancel",
+      "cancel": "Cancel",
       "collections": "Collections",
       "clear": "clear",
       "filter_feedback": "No products match this filter.",
@@ -270,7 +269,8 @@
       "account_view_link": "Account",
       "back": "Back",
       "cart": "Cart",
-      "search": "Search"
+      "search": "Search",
+      "toggle_drawer": "Toggle drawer"
     },
     "footer": {
       "navigation": "Navigation"
@@ -279,7 +279,7 @@
       "login_link": "Login",
       "login_title": "Enter store using password",
       "login_button": "enter",
-      "login_cancel": "Go Back",
+      "login_cancel": "Go back",
       "powered_by_shopify_html": "This shop will be powered by {{ shopify }}",
       "shopify_info": "Create your own online store with Shopify",
       "sub_title": "This is a message for your visitors, you edit this in your admin",
@@ -287,14 +287,17 @@
     }
   },
   "products": {
-    "add_to_cart": "Add to Cart",
-    "color": "color",
+    "add_to_cart": "Add to cart",
+    "buy_it_now": "Buy it now",
+    "change": "change",
+    "choose_options": "choose options",
     "empty_page_content_html": "You haven't linked a page yet. To configure this you'll need to go to the {{ size_chart_path }} block.",
     "from": "From",
     "low_in_stock": {
-      "one": "Only 1 item left",
-      "other": "Only {{ count }} items left"
+      "one": "Hurry, only 1 item left!",
+      "other": "Hurry, only {{ count }} items left!"
     },
+    "hotspot": "Product hotspot",
     "image_modal": "Enlarge product image",
     "n_items_left": "There are only [num_items] items left to add to the cart",
     "new": "New",
@@ -312,8 +315,8 @@
       "return": "Return to product",
       "view_store_info": "View store information"
     },
+    "quick_add": "quick add",
     "sale": "Sale",
-    "select_options": "select options",
     "size_chart": "Size chart",
     "size_chart_path": "Product page > Variant picker",
     "sku": "SKU",
@@ -346,14 +349,16 @@
       "sec": "sec"
     },
     "featured_collection": {
-      "skip_link": "skip carousel",
-      "view_collection": "View Collection"
+      "skip_link": "skip carousel"
     },
     "featured_blog": {
       "continue_reading": "Continue reading",
       "date": "2 hours ago",
       "excerpt": "This is where the article excerpt will display.",
       "item_title": "Blog post"
+    },
+    "header": {
+      "empty_page_content": "You haven't linked a page yet."
     },
     "image_comparison": {
       "cursor": "Cursor"
@@ -362,13 +367,13 @@
       "open": "Open in maps"
     },
     "navigation": {
-      "browse": "browse",
-      "clear_all": "clear all",
+      "browse": "Browse",
+      "clear_all": "Clear all",
       "large_layout": "toggle larger product view",
-      "refine": "refine",
-      "results_for": "results for",
+      "refine": "Refine",
+      "results_for": "Results for",
       "small_layout": "toggle smaller product view",
-      "sort_by": "sort by"
+      "sort_by": "Sort by"
     },
     "onboarding": {
       "collection_title": "Collection title",

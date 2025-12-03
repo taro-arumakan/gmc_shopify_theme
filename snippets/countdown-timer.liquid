@@ -3,8 +3,6 @@
   assign hour = 'sections.countdown.hour' | t
   assign min = 'sections.countdown.min' | t
   assign sec = 'sections.countdown.sec' | t
-
-  render 'section-assets', name: 'countdown-timer'
 -%}
 
 {%- capture time_units -%}
@@ -14,7 +12,6 @@
 
 <countdown-timer
   class="countdown-timer--root"
-  data-item="section-heading"
   data-expiry-date="{{ expiry_date }}"
   data-expiry-hours="{{ expiry_hours }}"
   data-expiry-minutes="{{ expiry_minutes }}"
@@ -22,11 +19,12 @@
   data-show-button-when="{{ show_button_when }}"
   data-light-number="{{ light_number }}"
   data-timer-bg="{{ timer_bg_color }}"
+  data-view="{{ view }}"
   style="--number-size:{{ number_size }}px;--mobile-number-size:{{ mobile_number_size }}px;"
 >
   {%- for unit in time_units -%}
-    <div class="countdown-timer--item" data-item="nav-text">
-      <div class="countdown-timer--digits">
+    <div class="countdown-timer--item">
+      <div class="countdown-timer--digits" data-item="nav-text">
         {%- for i in (1..2) -%}
           <div
             class="countdown-timer--digit"
@@ -41,6 +39,7 @@
             >0</div>
             <div
               data-transition-item="viewport"
+              data-transition-type=""
               data-transition-active="true"
               data-transition-trigger="custom"
             >9</div>
@@ -48,13 +47,27 @@
         {%- endfor -%}
       </div>
 
-      <div class="countdown-timer--unit">
-        {{ unit }}
-      </div>
+      {%- unless view == 'small' -%}
+        <div class="countdown-timer--unit" data-item="nav-text">
+          {{ unit }}
+        </div>
+      {%- endunless -%}
     </div>
 
-    {%- unless forloop.last -%}
-      <span class="countdown-timer--seperator" aria-hidden="true">:</span>
+    {%- if view == 'small' -%}
+      <span
+        class="countdown-timer--small-unit"
+        data-item="nav-text"
+        aria-hidden="true"
+      >{{ unit | slice: 0 }}</span>
+    {%- endif -%}
+
+    {%- unless forloop.last or view == 'small' -%}
+      <span
+        class="countdown-timer--separator"
+        aria-hidden="true"
+        data-item="nav-text"
+      >:</span>
     {%- endunless -%}
   {%- endfor -%}
 </countdown-timer>

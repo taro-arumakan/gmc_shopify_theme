@@ -1,0 +1,603 @@
+{%- liquid
+  assign bg_color = section.settings.background-color
+  assign border = section.settings.border
+  assign home_page_only = section.settings.home-page-only
+  assign mobile_description = section.settings.description
+  assign mobile_heading = section.settings.heading
+  assign mobile_icon = section.settings.icon
+  assign mobile_icon_image = section.settings.icon-image
+  assign mobile_link_url = section.settings.link-url
+  assign white_text = section.settings.white-text
+-%}
+
+{%- unless home_page_only and request.page_type != 'index' -%}
+  <div
+    class="split-announcements--root"
+    data-section-id="{{ section.id }}"
+    data-background-color="{{ bg_color }}"
+    data-border="{{ border }}"
+    data-container-width="5"
+    data-mobile-spacing-above="none"
+    data-mobile-spacing-below="none"
+    data-spacing-above="none"
+    data-spacing-below="none"
+    {% if white_text %}
+      data-text-color="white"
+    {% endif %}
+    style="--store-message--columns:{{ section.blocks.size }};"
+  >
+    <div class="split-announcements--wrapper">
+      <div class="split-announcements--container" data-mq="medium-large">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign description = block.settings.description
+            assign heading = block.settings.heading
+            assign icon = block.settings.icon
+            assign icon_image = block.settings.icon-image
+            assign link_url = block.settings.link-url
+
+            assign block_tag = 'div'
+            unless link_url == blank
+              assign block_tag = 'a'
+            endunless
+          -%}
+
+          <{{ block_tag }}
+            class="split-announcements--block"
+            {%- unless link_url == blank -%}
+              href="{{ link_url }}"
+            {%- endunless -%}
+            {{ block.shopify_attributes }}
+          >
+            {%- if icon_image or icon != 'none' -%}
+              <div class="split-announcements--icon">
+                {%- liquid
+                  if icon_image
+                    echo icon_image | image_url: width: 50, height: 50 | image_tag: alt: icon_image.alt
+                  else
+                    render 'icons', icon: icon
+                  endif
+                -%}
+              </div>
+            {%- endif -%}
+
+            {%- unless heading == blank and description == blank -%}
+              <div class="split-announcements--text">
+                {%- unless heading == blank -%}
+                  <div class="split-announcements--heading" data-item="block-heading">
+                    {{- heading -}}
+                  </div>
+                {%- endunless -%}
+
+                {%- unless description == blank -%}
+                  <div class="split-announcements--description" data-item="paragraph">
+                    {{- description -}}
+                  </div>
+                {%- endunless -%}
+              </div>
+            {%- endunless -%}
+          </{{ block_tag }}>
+        {%- endfor -%}
+      </div>
+
+      {%- unless mobile_heading == blank and mobile_description == blank -%}
+        <div class="split-announcements--container" data-mq="small">
+          {%- liquid
+            assign mobile_tag = 'div'
+            unless mobile_link_url == blank
+              assign mobile_tag = 'a'
+            endunless
+          -%}
+
+          <{{ mobile_tag }}
+            class="split-announcements--block"
+            {%- unless mobile_link_url == blank -%}
+              href="{{ mobile_link_url }}"
+            {%- endunless -%}
+          >
+            {%- if mobile_icon_image or mobile_icon != 'none' -%}
+              <div class="split-announcements--icon">
+                {%- liquid
+                  if mobile_icon_image
+                    echo mobile_icon_image | image_url: width: 50, height: 50 | image_tag: alt: mobile_icon_image.alt
+                  else
+                    render 'icons', icon: mobile_icon
+                  endif
+                -%}
+              </div>
+            {%- endif -%}
+
+            {%- unless mobile_heading == blank and mobile_description == blank -%}
+              <div class="split-announcements--text">
+                {%- unless mobile_heading == blank -%}
+                  <div class="split-announcements--heading" data-item="block-heading">
+                    {{- mobile_heading -}}
+                  </div>
+                {%- endunless -%}
+
+                {%- unless mobile_description == blank -%}
+                  <div class="split-announcements--description" data-item="paragraph">
+                    {{- mobile_description -}}
+                  </div>
+                {%- endunless -%}
+              </div>
+            {%- endunless -%}
+          </{{ mobile_tag }}>
+        </div>
+      {%- endunless -%}
+    </div>
+  </div>
+{%- endunless -%}
+
+{% schema %}
+{
+  "name": "Split announcements",
+  "class": "section--split-announcements",
+  "tag": "aside",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "home-page-only",
+      "label": "Show only on home page",
+      "default": true
+    },
+    {
+      "id": "border",
+      "label": "Border",
+      "type": "select",
+      "options": [
+        {
+          "label": "Top",
+          "value": "top"
+        },
+        {
+          "label": "Bottom",
+          "value": "bottom"
+        },
+        {
+          "label": "Both",
+          "value": "both"
+        },
+        {
+          "label": "None",
+          "value": "none"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "id": "background-color",
+      "label": "Background color",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Light",
+          "value": "light"
+        },
+        {
+          "label": "Dark",
+          "value": "dark"
+        },
+        {
+          "label": "Accent 1",
+          "value": "accent-1"
+        },
+        {
+          "label": "Accent 2",
+          "value": "accent-2"
+        },
+        {
+          "label": "Accent 3",
+          "value": "accent-3"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "id": "white-text",
+      "label": "Use white text color",
+      "type": "checkbox",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "id": "icon",
+      "type": "select",
+      "label": "Icon",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Bell",
+          "value": "bell-ringing"
+        },
+        {
+          "label": "Calendar",
+          "value": "calendar"
+        },
+        {
+          "label": "Camera",
+          "value": "camera"
+        },
+        {
+          "label": "Checkmark",
+          "value": "check-fat"
+        },
+        {
+          "label": "Clipboard",
+          "value": "clipboard-text"
+        },
+        {
+          "label": "Clock",
+          "value": "clock"
+        },
+        {
+          "label": "Credit card",
+          "value": "credit-card"
+        },
+        {
+          "label": "Dollar sign",
+          "value": "currency-dollar"
+        },
+        {
+          "label": "Download",
+          "value": "download-simple"
+        },
+        {
+          "label": "Envelope",
+          "value": "envelope"
+        },
+        {
+          "label": "Earth",
+          "value": "globe-hemisphere-west"
+        },
+        {
+          "label": "Flower",
+          "value": "flower"
+        },
+        {
+          "label": "Gem",
+          "value": "sketch-logo"
+        },
+        {
+          "label": "Handshake",
+          "value": "handshake"
+        },
+        {
+          "label": "Headset",
+          "value": "headset"
+        },
+        {
+          "label": "Heart",
+          "value": "heart"
+        },
+        {
+          "label": "Key",
+          "value": "key"
+        },
+        {
+          "label": "Leaf",
+          "value": "leaf"
+        },
+        {
+          "label": "Lock",
+          "value": "lock-key"
+        },
+        {
+          "label": "Map",
+          "value": "map-pin"
+        },
+        {
+          "label": "Medal",
+          "value": "medal"
+        },
+        {
+          "label": "Message",
+          "value": "chat-circle-text"
+        },
+        {
+          "label": "Music",
+          "value": "music-notes"
+        },
+        {
+          "label": "Package",
+          "value": "package"
+        },
+        {
+          "label": "Paw",
+          "value": "paw-print"
+        },
+        {
+          "label": "People",
+          "value": "users-four"
+        },
+        {
+          "label": "Pencil",
+          "value": "pencil"
+        },
+        {
+          "label": "Phone",
+          "value": "device-mobile"
+        },
+        {
+          "label": "Plant",
+          "value": "plant"
+        },
+        {
+          "label": "Rabbit",
+          "value": "rabbit"
+        },
+        {
+          "label": "Recycle",
+          "value": "recycle"
+        },
+        {
+          "label": "Science",
+          "value": "atom"
+        },
+        {
+          "label": "Shield",
+          "value": "shield-check"
+        },
+        {
+          "label": "Smile",
+          "value": "smiley"
+        },
+        {
+          "label": "Star",
+          "value": "star"
+        },
+        {
+          "label": "Storefront",
+          "value": "storefront"
+        },
+        {
+          "label": "Sun",
+          "value": "sun"
+        },
+        {
+          "label": "Tree",
+          "value": "tree"
+        },
+        {
+          "label": "Truck",
+          "value": "truck"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon-image",
+      "label": "Icon image",
+      "info": "50 x 50px recommended"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description",
+      "default": "Description"
+    },
+    {
+      "type": "url",
+      "id": "link-url",
+      "label": "Link"
+    }
+  ],
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "store-message",
+      "name": "Store message",
+      "settings": [
+        {
+          "id": "icon",
+          "type": "select",
+          "label": "Icon",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "Bell",
+              "value": "bell-ringing"
+            },
+            {
+              "label": "Calendar",
+              "value": "calendar"
+            },
+            {
+              "label": "Camera",
+              "value": "camera"
+            },
+            {
+              "label": "Checkmark",
+              "value": "check-fat"
+            },
+            {
+              "label": "Clipboard",
+              "value": "clipboard-text"
+            },
+            {
+              "label": "Clock",
+              "value": "clock"
+            },
+            {
+              "label": "Credit card",
+              "value": "credit-card"
+            },
+            {
+              "label": "Dollar sign",
+              "value": "currency-dollar"
+            },
+            {
+              "label": "Download",
+              "value": "download-simple"
+            },
+            {
+              "label": "Envelope",
+              "value": "envelope"
+            },
+            {
+              "label": "Earth",
+              "value": "globe-hemisphere-west"
+            },
+            {
+              "label": "Flower",
+              "value": "flower"
+            },
+            {
+              "label": "Gem",
+              "value": "sketch-logo"
+            },
+            {
+              "label": "Handshake",
+              "value": "handshake"
+            },
+            {
+              "label": "Headset",
+              "value": "headset"
+            },
+            {
+              "label": "Heart",
+              "value": "heart"
+            },
+            {
+              "label": "Key",
+              "value": "key"
+            },
+            {
+              "label": "Leaf",
+              "value": "leaf"
+            },
+            {
+              "label": "Lock",
+              "value": "lock-key"
+            },
+            {
+              "label": "Map",
+              "value": "map-pin"
+            },
+            {
+              "label": "Medal",
+              "value": "medal"
+            },
+            {
+              "label": "Message",
+              "value": "chat-circle-text"
+            },
+            {
+              "label": "Music",
+              "value": "music-notes"
+            },
+            {
+              "label": "Package",
+              "value": "package"
+            },
+            {
+              "label": "Paw",
+              "value": "paw-print"
+            },
+            {
+              "label": "People",
+              "value": "users-four"
+            },
+            {
+              "label": "Pencil",
+              "value": "pencil"
+            },
+            {
+              "label": "Phone",
+              "value": "device-mobile"
+            },
+            {
+              "label": "Plant",
+              "value": "plant"
+            },
+            {
+              "label": "Rabbit",
+              "value": "rabbit"
+            },
+            {
+              "label": "Recycle",
+              "value": "recycle"
+            },
+            {
+              "label": "Science",
+              "value": "atom"
+            },
+            {
+              "label": "Shield",
+              "value": "shield-check"
+            },
+            {
+              "label": "Smile",
+              "value": "smiley"
+            },
+            {
+              "label": "Star",
+              "value": "star"
+            },
+            {
+              "label": "Storefront",
+              "value": "storefront"
+            },
+            {
+              "label": "Sun",
+              "value": "sun"
+            },
+            {
+              "label": "Tree",
+              "value": "tree"
+            },
+            {
+              "label": "Truck",
+              "value": "truck"
+            }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon-image",
+          "label": "Icon image",
+          "info": "If an image is set, it will override the icon"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Heading"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "Description"
+        },
+        {
+          "type": "url",
+          "id": "link-url",
+          "label": "Link"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -14,10 +14,6 @@
     assign product_limit = 4
   endif
 
-  comment
-    Translations
-  endcomment
-
   assign blog_t = 'general.search.blog' | t
   assign collections_t = 'general.search.collections' | t
   assign pages_t = 'general.search.pages' | t
@@ -25,10 +21,6 @@
   assign queries_t = 'general.search.queries' | t
   assign products_t = 'general.search.products' | t
   assign view_all_t = 'general.search.view_all' | t
-
-  comment
-    Variables
-  endcomment
 
   assign article_results = predictive_search.resources.articles
   assign collection_results = predictive_search.resources.collections
@@ -60,10 +52,6 @@
     endif
   endif
 -%}
-
-{%- capture button_text -%}
-  {{- view_all_t }} &rarr;
-{%- endcapture -%}
 
 {%- if show_resources_column -%}
   <div class="predictive-search--resources">
@@ -109,7 +97,7 @@
     >
       {%- liquid
         for product in products limit: product_limit
-          render 'product--item', product_item: product, section_id: 'search', sizes: '(max-width: 767px) 50vw, 25vw'
+          render 'product-card', product_item: product, transition_id: 'search', sizes: '(max-width: 767px) 50vw, 25vw', loading: 'lazy'
         endfor
       -%}
     </div>
@@ -125,13 +113,10 @@
     <div class="predictive-search--view-all">
       <a
         href="{{ routes.search_url }}?type=product&q={{ predictive_search.terms }}*"
-        data-item="button"
-        data-text="{{- button_text -}}"
-        {% unless settings.transitions--buttons %}
-          data-transition-button
-        {% endunless %}
+        data-item="button-1"
+        data-text="{{- view_all_t -}}"
       >
-        <span>{{- button_text -}}</span>
+        <span>{{- view_all_t -}}</span>
       </a>
     </div>
   {%- endif -%}

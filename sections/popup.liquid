@@ -21,13 +21,6 @@
       endcase
     endfor
   endcapture
-
-  if load_popup
-    render 'section-assets', name: 'popup', type: 'script'
-  endif
-  if load_consent_tracking
-    render 'section-assets', name: 'consent-tracking', type: 'script'
-  endif
 -%}
 
 <div
@@ -42,8 +35,14 @@
 {% schema %}
   {
     "name": "Popups",
+    "class": "section--popup",
+    "tag": "aside",
     "limit": 1,
     "settings": [
+      {
+        "type": "paragraph",
+        "content": "Add/edit/hide each popup in this section's block settings."
+      },
       {
         "id": "limit",
         "label": "Limit to one popup per page load",
@@ -67,7 +66,7 @@
             "type": "select",
             "options": [
               {
-                "label": "Transparent",
+                "label": "None",
                 "value": "none"
               },
               {
@@ -85,6 +84,10 @@
               {
                 "label": "Accent 2",
                 "value": "accent-2"
+              },
+              {
+                "label": "Accent 3",
+                "value": "accent-3"
               }
             ],
             "default": "dark"
@@ -96,8 +99,8 @@
             "default": true
           },
           {
-            "id": "light-text",
-            "label": "Use light text color",
+            "id": "white-text",
+            "label": "Use white text color",
             "type": "checkbox",
             "default": true
           },
@@ -124,6 +127,12 @@
             "default": "center"
           },
           {
+            "type": "checkbox",
+            "id": "social-enabled",
+            "label": "Show social icons",
+            "default": true
+          },
+          {
             "type": "header",
             "content": "Content"
           },
@@ -144,12 +153,6 @@
             "id": "social-title",
             "label": "Social media title",
             "default": "Follow us"
-          },
-          {
-            "type": "checkbox",
-            "id": "social-enabled",
-            "label": "Show social icons",
-            "default": true
           },
           {
             "type": "header",
@@ -192,7 +195,8 @@
           {
             "type": "text",
             "id": "referrer-url",
-            "label": "Targeted referrer"
+            "label": "Targeted referrer",
+            "visible_if": "{{ block.settings.referrer-enabled }}"
           },
           {
             "type": "checkbox",
@@ -203,7 +207,8 @@
           {
             "type": "url",
             "id": "page-url",
-            "label": "Targeted page"
+            "label": "Targeted page",
+            "visible_if": "{{ block.settings.page-enabled }}"
           }
         ]
       },
@@ -221,7 +226,7 @@
             "type": "select",
             "options": [
               {
-                "label": "Transparent",
+                "label": "None",
                 "value": "none"
               },
               {
@@ -239,6 +244,10 @@
               {
                 "label": "Accent 2",
                 "value": "accent-2"
+              },
+              {
+                "label": "Accent 3",
+                "value": "accent-3"
               }
             ],
             "default": "dark"
@@ -250,8 +259,8 @@
             "default": true
           },
           {
-            "id": "light-text",
-            "label": "Use light text color",
+            "id": "white-text",
+            "label": "Use white text color",
             "type": "checkbox",
             "default": true
           },
@@ -332,7 +341,8 @@
           {
             "type": "text",
             "id": "referrer-url",
-            "label": "Targeted referrer"
+            "label": "Targeted referrer",
+            "visible_if": "{{ block.settings.referrer-enabled }}"
           },
           {
             "type": "checkbox",
@@ -343,11 +353,8 @@
           {
             "type": "url",
             "id": "page-url",
-            "label": "Targeted page"
-          },
-          {
-            "type": "header",
-            "content": "Mobile"
+            "label": "Targeted page",
+            "visible_if": "{{ block.settings.page-enabled }}"
           },
           {
             "type": "checkbox",
@@ -362,7 +369,28 @@
             "min": 1,
             "max": 10,
             "step": 0.5,
-            "default": 7.5
+            "default": 7.5,
+            "visible_if": "{{ block.settings.scroll-text }}"
+          },
+          {
+            "type": "header",
+            "content": "Mobile"
+          },
+          {
+            "type": "checkbox",
+            "id": "mobile-scroll-text",
+            "label": "Scroll text",
+            "default": true
+          },
+          {
+            "id": "mobile-animation-speed",
+            "label": "Scroll speed",
+            "type": "range",
+            "min": 1,
+            "max": 10,
+            "step": 0.5,
+            "default": 7.5,
+            "visible_if": "{{ block.settings.mobile-scroll-text }}"
           }
         ]
       },
@@ -380,7 +408,7 @@
             "type": "select",
             "options": [
               {
-                "label": "Transparent",
+                "label": "None",
                 "value": "none"
               },
               {
@@ -398,6 +426,10 @@
               {
                 "label": "Accent 2",
                 "value": "accent-2"
+              },
+              {
+                "label": "Accent 3",
+                "value": "accent-3"
               }
             ],
             "default": "dark"
@@ -409,8 +441,8 @@
             "default": true
           },
           {
-            "id": "light-text",
-            "label": "Use light text color",
+            "id": "white-text",
+            "label": "Use white text color",
             "type": "checkbox",
             "default": true
           },
@@ -459,9 +491,37 @@
             "default": "/"
           },
           {
+            "id": "button-style",
+            "label": "Button style",
+            "type": "select",
+            "options": [
+              {
+                "label": "Style 1",
+                "value": "button-1"
+              },
+              {
+                "label": "Style 2",
+                "value": "button-2"
+              },
+              {
+                "label": "Style 3",
+                "value": "button-3"
+              },
+              {
+                "label": "Style 4",
+                "value": "button-4"
+              },
+              {
+                "label": "Link",
+                "value": "block-link"
+              }
+            ],
+            "default": "button-2"
+          },
+          {
             "type": "text",
             "id": "link-text",
-            "label": "Link text",
+            "label": "Optional link",
             "default": "Shop the sale"
           },
           {
@@ -505,7 +565,8 @@
           {
             "type": "text",
             "id": "referrer-url",
-            "label": "Targeted referrer"
+            "label": "Targeted referrer",
+            "visible_if": "{{ block.settings.referrer-enabled }}"
           },
           {
             "type": "checkbox",
@@ -516,11 +577,13 @@
           {
             "type": "url",
             "id": "page-url",
-            "label": "Targeted page"
+            "label": "Targeted page",
+            "visible_if": "{{ block.settings.page-enabled }}"
           },
           {
             "type": "header",
-            "content": "Countdown features"
+            "content": "Countdown features",
+            "visible_if": "{{ block.settings.countdown-enabled }}"
           },
           {
             "type": "checkbox",
@@ -537,20 +600,23 @@
               { "label": "Light", "value": "light" },
               { "label": "Dark", "value": "dark" }
             ],
-            "default": "dark"
+            "default": "dark",
+            "visible_if": "{{ block.settings.countdown-enabled }}"
           },
           {
             "id": "light-number",
             "label": "Use light number color",
             "type": "checkbox",
-            "default": true
+            "default": true,
+            "visible_if": "{{ block.settings.countdown-enabled }}"
           },
           {
             "id": "expiry-date",
             "label": "Expiry date",
             "type": "text",
-            "default": "01-01-2026",
-            "info": "DD-MM-YYYY"
+            "default": "DD-MM-YYYY",
+            "info": "DD-MM-YYYY",
+            "visible_if": "{{ block.settings.countdown-enabled }}"
           },
           {
             "label": "Expiry hours",
@@ -560,7 +626,8 @@
             "max": 23,
             "step": 1,
             "default": 0,
-            "info": "Represents the hour in UTC standard time"
+            "info": "Represents the hour in UTC standard time",
+            "visible_if": "{{ block.settings.countdown-enabled }}"
           },
           {
             "label": "Expiry minutes",
@@ -570,13 +637,15 @@
             "max": 59,
             "step": 1,
             "default": 0,
-            "info": "Represents the minutes in UTC standard time"
+            "info": "Represents the minutes in UTC standard time",
+            "visible_if": "{{ block.settings.countdown-enabled }}"
           },
           {
             "id": "hide-when-expired",
             "label": "Hide popup when countdown expires",
             "type": "checkbox",
-            "default": true
+            "default": true,
+            "visible_if": "{{ block.settings.countdown-enabled }}"
           },
           {
             "type": "select",
@@ -587,7 +656,8 @@
               { "label": "Timer reaches zero", "value": "finished" },
               { "label": "Always", "value": "always" }
             ],
-            "default": "always"
+            "default": "always",
+            "visible_if": "{{ block.settings.countdown-enabled }}"
           }
         ]
       },
@@ -610,7 +680,7 @@
             "type": "select",
             "options": [
               {
-                "label": "Transparent",
+                "label": "None",
                 "value": "none"
               },
               {
@@ -628,6 +698,10 @@
               {
                 "label": "Accent 2",
                 "value": "accent-2"
+              },
+              {
+                "label": "Accent 3",
+                "value": "accent-3"
               }
             ],
             "default": "dark"
@@ -639,8 +713,8 @@
             "default": true
           },
           {
-            "id": "light-text",
-            "label": "Use light text color",
+            "id": "white-text",
+            "label": "Use white text color",
             "type": "checkbox",
             "default": true
           },
@@ -669,6 +743,32 @@
             "label": "Text alignment",
             "type": "text_alignment",
             "default": "center"
+          },
+          {
+            "id": "accept-button-style",
+            "label": "Accept button style",
+            "type": "select",
+            "options": [
+              { "label": "Style 1", "value": "button-1" },
+              { "label": "Style 2", "value": "button-2" },
+              { "label": "Style 3", "value": "button-3" },
+              { "label": "Style 4", "value": "button-4" },
+              { "label": "Link", "value": "block-link" }
+            ],
+            "default": "button-2"
+          },
+          {
+            "id": "decline-button-style",
+            "label": "Decline button style",
+            "type": "select",
+            "options": [
+              { "label": "Style 1", "value": "button-1" },
+              { "label": "Style 2", "value": "button-2" },
+              { "label": "Style 3", "value": "button-3" },
+              { "label": "Style 4", "value": "button-4" },
+              { "label": "Link", "value": "block-link" }
+            ],
+            "default": "button-4"
           },
           {
             "type": "header",

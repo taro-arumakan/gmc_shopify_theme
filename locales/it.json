@@ -52,8 +52,8 @@
   "cart": {
     "all_items_added": "Tutti gli articoli sono stati aggiunti al carrello.",
     "checkout": "Pagamento",
-    "continue": "Continua a fare acquisti",
     "empty_html": "<span data-item='rte-content'>Al momento il tuo carrello è vuoto.<br/> <a href='{{ collections_url }}'>Clicca qui per continuare a fare acquisti</a>.</span>",
+    "empty_with_list_html": "<span data-item='rte-content'>Il tuo carrello è vuoto.<br/> Sfoglia le nostre selezioni:</span>",
     "minus": "Meno",
     "order_notes": "Lascia una nota per il tuo ordine",
     "plus": "Più",
@@ -68,14 +68,11 @@
     "your_cart": "Il tuo carrello"
   },
   "collections": {
-    "browse": "sfoglia raccolte",
+    "browse": "Sfoglia raccolte",
     "continue_shopping": "Prosegui con gli acquisti",
     "filter_feedback": "Nessun prodotto corrisponde a questo filtro.",
     "no_products_feedback": "Al momento non ci sono prodotti in questa raccolta.",
-    "placeholder": {
-      "collection_title": "Nome raccolta",
-      "collection_description": "Qui verrà mostrata la descrizione della tua raccolta"
-    },
+    "numbered_title": "Raccolta {{ count }}",
     "view_more": "Visualizza altre"
   },
   "customer": {
@@ -179,6 +176,9 @@
   "general": {
     "a11y": {
       "close": "chiudi",
+      "next": "Avanti",
+      "pause_play": "pausa / riproduci",
+      "previous": "Precedente",
       "skip_main": "Salta e vai al contenuto principale",
       "skip_pagination": "Salta e vai all'impaginazione"
     },
@@ -197,10 +197,10 @@
       "decline": "rifiuta"
     },
     "filter": {
-      "apply": "applica",
+      "apply": "Applica",
       "from": "da",
       "no_filters": "Nessun filtro disponibile",
-      "reset": "reimposta",
+      "reset": "Reimposta",
       "search_by_name": "cerca per nome",
       "sort_by": "ordina per",
       "to": "a"
@@ -224,7 +224,7 @@
     },
     "search": {
       "blog": "Blog",
-      "cancel": "annulla",
+      "cancel": "Annulla",
       "collections": "Raccolte",
       "clear": "cancella",
       "filter_feedback": "Nessun prodotto corrisponde a questo filtro.",
@@ -269,7 +269,8 @@
       "account_view_link": "Account",
       "back": "Indietro",
       "cart": "Carrello",
-      "search": "Cerca"
+      "search": "Cerca",
+      "toggle_drawer": "Attivare/disattivare cassetto"
     },
     "footer": {
       "navigation": "Navigazione"
@@ -287,13 +288,16 @@
   },
   "products": {
     "add_to_cart": "Aggiungi al carrello",
-    "color": "colore",
+    "buy_it_now": "Compralo ora",
+    "change": "cambiare",
+    "choose_options": "scegli opzioni",
     "empty_page_content_html": "Non hai ancora collegato una pagina. Per configurare questo contenuto, dovrai andare al blocco {{ size_chart_path }}.",
     "from": "Da",
     "low_in_stock": {
-      "one": "Solo 1 articolo rimasto",
-      "other": "Solo {{ count }} articoli rimasti"
+      "one": "Affrettati, ne rimane solo 1!",
+      "other": "Affrettati, ne rimangono solo {{ count }}!"
     },
+    "hotspot": "Punto caldo del prodotto",
     "image_modal": "Ingrandisci immagine prodotto",
     "n_items_left": "Restano solo [num_items] articoli da aggiungere al carrello",
     "new": "Nuovo",
@@ -311,8 +315,8 @@
       "return": "Ritorna al prodotto",
       "view_store_info": "Visualizza informazioni sul negozio"
     },
+    "quick_add": "aggiungi rapidamente",
     "sale": "Vendita",
-    "select_options": "seleziona opzioni",
     "size_chart": "Tabella taglie",
     "size_chart_path": "Pagina prodotto > Selettore varianti",
     "sku": "SKU",
@@ -345,14 +349,16 @@
       "sec": "sec"
     },
     "featured_collection": {
-      "skip_link": "salta carousel",
-      "view_collection": "Visualizza raccolta"
+      "skip_link": "salta carousel"
     },
     "featured_blog": {
       "continue_reading": "Continua a leggere",
       "date": "2 ore fa",
       "excerpt": "Qui è dove verrà mostrato l'estratto dell'articolo.",
       "item_title": "Post del blog"
+    },
+    "header": {
+      "empty_page_content": "Non hai ancora collegato una pagina."
     },
     "image_comparison": {
       "cursor": "Puntatore del mouse"
@@ -361,13 +367,13 @@
       "open": "Apri nelle mappe"
     },
     "navigation": {
-      "browse": "naviga",
-      "clear_all": "cancella tutto",
+      "browse": "Naviga",
+      "clear_all": "Cancella tutto",
       "large_layout": "attiva visualizzazione ingrandita del prodotto",
-      "refine": "rifinisci",
-      "results_for": "risultati per",
+      "refine": "Žifinisci",
+      "results_for": "Risultati per",
       "small_layout": "attiva visualizzazione rimpicciolita del prodotto",
-      "sort_by": "ordina per"
+      "sort_by": "Ordina per"
     },
     "onboarding": {
       "collection_title": "Titolo raccolta",

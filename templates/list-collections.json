@@ -11,88 +11,10 @@
   "sections": {
     "main": {
       "type": "list-collections",
-      "disabled": true,
-      "settings": {
-        "view": "collection-thumbnails",
-        "spacing-above": true,
-        "spacing-below": true,
-        "collection-list": [
-          "gmc-meat-trip-2023"
-        ],
-        "heading": "Collections",
-        "container-width": "4",
-        "width": 2,
-        "light-text": false,
-        "text-style": "none",
-        "heading-type": "block-heading",
-        "image-type": "collection",
-        "overlay-style": "darken-bottom",
-        "spacing": true,
-        "mobile-width": "2",
-        "mobile-overlay": true
-      }
-    },
-    "grid_with_overlay_HeCxmH": {
-      "type": "grid-with-overlay",
-      "blocks": {
-        "image_ULxYBz": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/1_3848_105f4d46-8b6f-4e3c-85c1-800b28827fa6.jpg",
-            "x-blocks": "1",
-            "y-blocks": "1",
-            "image-display-type": "fill",
-            "aspect-ratio": 56,
-            "title": "About Meat",
-            "link-url": "shopify://pages/about-meat",
-            "link-text": "お肉への想い"
-          }
-        },
-        "image_x8DKYi": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/376886321_17993713538474730_7888887659607403635_n.jpg",
-            "x-blocks": "1",
-            "y-blocks": "1",
-            "image-display-type": "fill",
-            "aspect-ratio": 56,
-            "title": "GMC Meat Trip 2023",
-            "link-url": "shopify://collections/gmc-meat-trip-2023",
-            "link-text": "旅日記2023"
-          }
-        }
-      },
-      "block_order": [
-        "image_ULxYBz",
-        "image_x8DKYi"
-      ],
-      "settings": {
-        "top-border": false,
-        "spacing-above": true,
-        "spacing-below": true,
-        "background-color": "none",
-        "heading-light-text": false,
-        "container-width": "4",
-        "spacing": true,
-        "width": 2,
-        "light-text": false,
-        "text-style": "none",
-        "heading-type": "block-heading",
-        "overlay-style": "hover",
-        "overline": "",
-        "heading": "About Us",
-        "description": "",
-        "link-url": "",
-        "link-text": "",
-        "mobile-width": "1",
-        "mobile-overlay": false,
-        "mobile-image-display-type": "original",
-        "mobile-aspect-ratio": 134
-      }
+      "settings": {}
     }
   },
   "order": [
-    "main",
-    "grid_with_overlay_HeCxmH"
+    "main"
   ]
 }

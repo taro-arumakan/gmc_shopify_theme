@@ -9,13 +9,6 @@
  */
 {
   "layout": false,
-  "sections": {
-    "main": {
-      "type": "product--item",
-      "settings": {}
-    }
-  },
-  "order": [
-    "main"
-  ]
+  "sections": { "main": { "type": "product-card", "settings": {} } },
+  "order": ["main"]
 }

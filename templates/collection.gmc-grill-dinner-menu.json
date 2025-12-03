@@ -10,7 +10,7 @@
 {
   "sections": {
     "collection-header": {
-      "type": "collection--header",
+      "type": "collection-header",
       "settings": {
         "show-title": true,
         "heading-type": "section-heading",
@@ -30,7 +30,7 @@
       }
     },
     "navigation": {
-      "type": "collection--navigation",
+      "type": "collection-navigation",
       "disabled": true,
       "settings": {
         "show-browse-button": true,
@@ -46,7 +46,7 @@
       }
     },
     "main": {
-      "type": "collection--body",
+      "type": "main-collection",
       "disabled": true,
       "settings": {
         "products-per-row--desktop": 4,
@@ -58,8 +58,8 @@
       "type": "featured-text",
       "settings": {
         "top-border": false,
-        "spacing-above": true,
-        "spacing-below": false,
+        "spacing-above": "medium",
+        "spacing-below": "none",
         "background-color": "none",
         "light-text": false,
         "heading-type": "section-heading",
@@ -75,8 +75,8 @@
       "type": "featured-text",
       "settings": {
         "top-border": false,
-        "spacing-above": true,
-        "spacing-below": false,
+        "spacing-above": "medium",
+        "spacing-below": "none",
         "background-color": "none",
         "light-text": false,
         "heading-type": "section-heading",
@@ -121,8 +121,8 @@
       ],
       "settings": {
         "top-border": false,
-        "spacing-above": true,
-        "spacing-below": false,
+        "spacing-above": "medium",
+        "spacing-below": "none",
         "background-color": "none",
         "light-text": false,
         "container-width": "6",
@@ -135,8 +135,8 @@
       "type": "featured-text",
       "settings": {
         "top-border": false,
-        "spacing-above": true,
-        "spacing-below": false,
+        "spacing-above": "medium",
+        "spacing-below": "none",
         "background-color": "none",
         "light-text": false,
         "heading-type": "section-heading",
@@ -174,8 +174,8 @@
       ],
       "settings": {
         "top-border": false,
-        "spacing-above": false,
-        "spacing-below": false,
+        "spacing-above": "none",
+        "spacing-below": "none",
         "background-color": "none",
         "light-text": false,
         "container-width": "4",
@@ -188,8 +188,8 @@
       "type": "featured-text",
       "settings": {
         "top-border": false,
-        "spacing-above": true,
-        "spacing-below": false,
+        "spacing-above": "medium",
+        "spacing-below": "none",
         "background-color": "none",
         "light-text": false,
         "heading-type": "section-heading",
@@ -205,8 +205,8 @@
       "type": "featured-text",
       "settings": {
         "top-border": false,
-        "spacing-above": true,
-        "spacing-below": false,
+        "spacing-above": "medium",
+        "spacing-below": "none",
         "background-color": "none",
         "light-text": false,
         "heading-type": "section-heading",
@@ -308,8 +308,8 @@
       ],
       "settings": {
         "top-border": false,
-        "spacing-above": true,
-        "spacing-below": false,
+        "spacing-above": "medium",
+        "spacing-below": "none",
         "background-color": "none",
         "light-text": false,
         "container-width": "4",
@@ -322,8 +322,8 @@
       "type": "featured-text",
       "settings": {
         "top-border": false,
-        "spacing-above": true,
-        "spacing-below": false,
+        "spacing-above": "medium",
+        "spacing-below": "none",
         "background-color": "none",
         "light-text": false,
         "heading-type": "section-heading",
@@ -339,8 +339,8 @@
       "type": "featured-text",
       "settings": {
         "top-border": false,
-        "spacing-above": true,
-        "spacing-below": false,
+        "spacing-above": "medium",
+        "spacing-below": "none",
         "background-color": "none",
         "light-text": false,
         "heading-type": "section-heading",
@@ -392,8 +392,8 @@
       ],
       "settings": {
         "top-border": false,
-        "spacing-above": true,
-        "spacing-below": false,
+        "spacing-above": "medium",
+        "spacing-below": "none",
         "background-color": "none",
         "light-text": false,
         "container-width": "4",
@@ -559,8 +559,8 @@
       ],
       "settings": {
         "top-border": false,
-        "spacing-above": true,
-        "spacing-below": true,
+        "spacing-above": "medium",
+        "spacing-below": "medium",
         "background-color": "none",
         "light-text": false,
         "container-width": "4",
@@ -573,8 +573,8 @@
       "type": "featured-text",
       "settings": {
         "top-border": false,
-        "spacing-above": true,
-        "spacing-below": true,
+        "spacing-above": "medium",
+        "spacing-below": "medium",
         "background-color": "none",
         "light-text": false,
         "heading-type": "section-heading",
@@ -590,8 +590,8 @@
       "type": "featured-text",
       "settings": {
         "top-border": false,
-        "spacing-above": true,
-        "spacing-below": true,
+        "spacing-above": "medium",
+        "spacing-below": "medium",
         "background-color": "none",
         "light-text": false,
         "heading-type": "section-heading",
@@ -792,8 +792,8 @@
       ],
       "settings": {
         "top-border": false,
-        "spacing-above": true,
-        "spacing-below": true,
+        "spacing-above": "medium",
+        "spacing-below": "medium",
         "background-color": "none",
         "light-text": false,
         "container-width": "4",
@@ -885,8 +885,8 @@
       ],
       "settings": {
         "top-border": false,
-        "spacing-above": true,
-        "spacing-below": true,
+        "spacing-above": "medium",
+        "spacing-below": "medium",
         "background-color": "none",
         "light-text": false,
         "container-width": "4",

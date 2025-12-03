@@ -1,0 +1,43 @@
+<link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+<link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+
+<script type="importmap">
+  {
+    "imports": {
+      "@troop-themes/main": "{{ 'theme.js' | asset_url }}"
+    }
+  }
+</script>
+
+{%- assign font_heading_url = settings.typography--heading | font_url -%}
+{%- unless font_heading_url == blank -%}
+  <link
+    rel="preload"
+    href="{{ font_heading_url }}"
+    as="font"
+    type="font/woff2"
+    crossorigin
+  >
+{%- endunless -%}
+
+{%- assign font_nav_url = settings.typography--nav | font_url -%}
+{%- unless font_nav_url == blank -%}
+  <link
+    rel="preload"
+    href="{{ font_nav_url }}"
+    as="font"
+    type="font/woff2"
+    crossorigin
+  >
+{%- endunless -%}
+
+{%- assign font_paragraph_url = settings.typography--paragraph | font_url -%}
+{%- unless font_paragraph_url == blank -%}
+  <link
+    rel="preload"
+    href="{{ font_paragraph_url }}"
+    as="font"
+    type="font/woff2"
+    crossorigin
+  >
+{%- endunless -%}

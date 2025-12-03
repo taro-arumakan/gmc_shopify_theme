@@ -1,45 +1,51 @@
 {%- liquid
-  assign bg_color = section.settings['background-color']
-  assign container_width = section.settings['container-width']
+  assign bg_color = section.settings.background-color
+  assign border = section.settings.border
+  assign button_style = section.settings.button-style
+  assign container_width = section.settings.container-width
   assign heading = section.settings.heading
-  assign heading_alignment = section.settings['heading-alignment']
-  assign light_text = section.settings['light-text']
-  assign show_description = section.settings['show-description']
-  assign spacing_above = section.settings['spacing-above']
-  assign spacing_below = section.settings['spacing-below']
-  assign top_border = section.settings['top-border']
-
-  render 'section-assets', name: 'service-list'
+  assign link_text = section.settings.link-text
+  assign link_url = section.settings.link-url
+  assign mobile_spacing_above = section.settings.mobile-spacing-above
+  assign mobile_spacing_below = section.settings.mobile-spacing-below
+  assign show_description = section.settings.show-description
+  assign section_alignment = section.settings.section-alignment
+  assign spacing_above = section.settings.spacing-above
+  assign spacing_below = section.settings.spacing-below
+  assign white_text = section.settings.white-text
 -%}
 
-<service-list-root
+<service-list-element
   class="service-list--root"
   data-section-id="{{ section.id }}"
   data-section-type="service_list"
   data-background-color="{{ bg_color }}"
+  data-border="{{ border }}"
   data-container-width="{{ container_width }}"
-  data-light-text="{{ light_text }}"
+  data-mobile-spacing-above="{{ mobile_spacing_above }}"
+  data-mobile-spacing-below="{{ mobile_spacing_below }}"
   data-show-description="{{ show_description }}"
   data-spacing-above="{{ spacing_above }}"
   data-spacing-below="{{ spacing_below }}"
-  data-top-border="{{ top_border }}"
+  {% if white_text %}
+    data-text-color="white"
+  {% endif %}
 >
-  <div
-    class="service-list--wrapper"
-    data-transition-container="{{ section.id }}"
-    data-transition-type="slide-in"
-    data-transition-cascade="vertical"
-    data-transition-cascade-interval="120"
-  >
+  <div class="service-list--wrapper" data-container="section">
     {%- unless heading == blank -%}
-      <h2
-        class="service-list--title"
-        data-item="section-heading"
-        data-heading-alignment="{{ heading_alignment }}"
-        data-transition-item="{{ section.id }}"
+      <div
+        class="service-list--header"
+        data-container="block"
+        data-text-alignment="{{ section_alignment }}"
+        {% unless settings.transitions--text %}
+          data-transition-item="viewport"
+          data-transition-type="slide-in"
+        {% endunless %}
       >
-        {{- heading | escape -}}
-      </h2>
+        <h2 class="service-list--title" data-item="section-heading">
+          {{- heading | escape -}}
+        </h2>
+      </div>
     {%- endunless -%}
 
     <div class="service-list--container">
@@ -47,30 +53,19 @@
         <div class="service-list--single-column">
           <ul class="service-list--blocks">
             {%- for block in section.blocks -%}
-              {%- if block.type == 'header' -%}
+              {%- if block.type == "header" -%}
                 {%- unless forloop.first -%}
-                  </ul>
-                  <ul class="service-list--blocks">
+                  </ul><ul class="service-list--blocks">
                 {%- endunless -%}
 
-                <li
-                  class="service-list--block-header"
-                  {{ block.shopify_attributes }}
-                  data-transition-item="{{ section.id }}"
-                  data-transition-type="slide-in"
-                >
+                <li class="service-list--block-header" {{ block.shopify_attributes }}>
                   <h3 class="service-list--block-header--text" data-item="block-heading">
                     {{- block.settings.title | escape -}}
                   </h3>
                 </li>
 
               {%- else -%}
-                <li
-                  class="service-list--block"
-                  {{ block.shopify_attributes }}
-                  data-transition-item="{{ section.id }}"
-                  data-transition-type="slide-in"
-                >
+                <li class="service-list--block" {{ block.shopify_attributes }}>
                   <div class="service-list--info">
                     {%- if block.settings.title.size > 0 -%}
                       <div class="service-list--block-title">
@@ -80,7 +75,7 @@
                       </div>
                     {%- endif -%}
                     {%- if block.settings.price.size > 0 -%}
-                      <div class="service-list--price" data-item="accent-text">
+                      <div class="service-list--price" data-item="nav-text">
                         {{- block.settings.price | escape -}}
                       </div>
                     {%- endif -%}
@@ -102,34 +97,114 @@
         <div class="service-list--right-column"></div>
       {%- endif -%}
     </div>
+
+    {%- unless link_text == blank -%}
+      <div
+        class="service-list--footer"
+        data-container="block"
+        data-text-alignment="{{ section_alignment }}"
+      >
+        <a
+          class="service-list--button"
+          href="{{ link_url }}"
+          data-item="{{ button_style }}"
+          data-text="{{ link_text }}"
+        >
+          <span>{{ link_text }}</span>
+        </a>
+      </div>
+    {%- endunless -%}
   </div>
-</service-list-root>
+</service-list-element>
 
 {% schema %}
 {
   "name": "Service list",
+  "class": "section--service-list",
   "settings": [
     {
       "type": "header",
       "content": "Style and layout"
     },
     {
-      "id": "top-border",
-      "label": "Top border",
-      "type": "checkbox",
-      "default": false
+      "id": "border",
+      "label": "Border",
+      "type": "select",
+      "options": [
+        {
+          "label": "Top",
+          "value": "top"
+        },
+        {
+          "label": "Bottom",
+          "value": "bottom"
+        },
+        {
+          "label": "Both",
+          "value": "both"
+        },
+        {
+          "label": "None",
+          "value": "none"
+        }
+      ],
+      "default": "none"
     },
     {
       "id": "spacing-above",
       "label": "Spacing above",
-      "type": "checkbox",
-      "default": true
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "large"
     },
     {
       "id": "spacing-below",
       "label": "Spacing below",
-      "type": "checkbox",
-      "default": true
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "large"
     },
     {
       "id": "background-color",
@@ -137,7 +212,7 @@
       "type": "select",
       "options": [
         {
-          "label": "Transparent",
+          "label": "None",
           "value": "none"
         },
         {
@@ -155,45 +230,36 @@
         {
           "label": "Accent 2",
           "value": "accent-2"
+        },
+        {
+          "label": "Accent 3",
+          "value": "accent-3"
         }
       ],
       "default": "none"
     },
     {
-      "id": "light-text",
-      "label": "Use light text color",
+      "id": "white-text",
+      "label": "Use white text color",
       "type": "checkbox",
       "default": false
+    },
+    {
+      "id": "section-alignment",
+      "label": "Heading and call-to-action alignment",
+      "type": "text_alignment",
+      "default": "center"
     },
     {
       "id": "container-width",
       "label": "Maximum width of container",
       "type": "select",
       "options": [
-        {
-          "label": "Extra small",
-          "value": "1"
-        },
-        {
-          "label": "Small",
-          "value": "2"
-        },
-        {
-          "label": "Medium",
-          "value": "3"
-        },
-        {
-          "label": "Large",
-          "value": "4"
-        },
-        {
-          "label": "Extra large",
-          "value": "5"
-        },
-        {
-          "label": "Full width",
-          "value": "6"
-        }
+        { "label": "Extra small", "value": "1" },
+        { "label": "Small", "value": "2" },
+        { "label": "Medium", "value": "3" },
+        { "label": "Large", "value": "4" },
+        { "label": "Extra large", "value": "5" }
       ],
       "default": "4"
     },
@@ -214,10 +280,103 @@
       "default": "Service list"
     },
     {
-      "id": "heading-alignment",
-      "label": "Position heading",
-      "type": "text_alignment",
-      "default": "center"
+      "type": "url",
+      "id": "link-url",
+      "label": "Link"
+    },
+    {
+      "id": "button-style",
+      "label": "Button style",
+      "type": "select",
+      "options": [
+        {
+          "label": "Style 1",
+          "value": "button-1"
+        },
+        {
+          "label": "Style 2",
+          "value": "button-2"
+        },
+        {
+          "label": "Style 3",
+          "value": "button-3"
+        },
+        {
+          "label": "Style 4",
+          "value": "button-4"
+        },
+        {
+          "label": "Link",
+          "value": "block-link"
+        }
+      ],
+      "default": "button-1"
+    },
+    {
+      "type": "text",
+      "id": "link-text",
+      "label": "Optional link",
+      "default": "Optional link"
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "id": "mobile-spacing-above",
+      "label": "Spacing above",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "id": "mobile-spacing-below",
+      "label": "Spacing below",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "medium"
     }
   ],
   "blocks": [

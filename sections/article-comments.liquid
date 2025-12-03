@@ -16,11 +16,21 @@
   <div
     class="article-comments--root"
     data-section-id="{{ section.id }}"
-    data-spacing-above="false"
+    data-background-color="none"
+    data-container-width="2"
+    data-spacing-above="none"
+    data-spacing-below="large"
   >
     <div class="article-comments-wrapper">
       {%- if disqus_enabled -%}
-        <h2 class="article-comments--heading" data-item="section-heading">
+        <h2
+          class="article-comments--heading"
+          data-item="section-heading"
+          {% unless settings.transitions--text %}
+            data-transition-item="viewport"
+            data-transition-type="slide-in"
+          {% endunless %}
+        >
           {{- comments_t -}}
         </h2>
         <div id="disqus_thread" class="article-comments--disqus"></div>
@@ -30,12 +40,18 @@
             this.page.title = '{{ shop.name }} - {{ article.title }}';
             this.page.url = '{{ canonical_url }}';
           }
-
-          theme.utils.libraryLoader('disqus', "https://{{ disqus_shortname }}.disqus.com/embed.js");
         </script>
+        <script src="https://{{ disqus_shortname }}.disqus.com/embed.js" defer="defer"></script>
 
       {%- elsif show_comments -%}
-        <h2 class="article-comments--heading" data-item='section-heading'>
+        <h2
+          class="article-comments--heading"
+          data-item='section-heading'
+          {% unless settings.transitions--text %}
+            data-transition-item="viewport"
+            data-transition-type="slide-in"
+          {% endunless %}
+        >
           {{- comments_t -}}
         </h2>
         {%- render 'comments' -%}
@@ -49,6 +65,7 @@
 {% schema %}
 {
   "name": "Comments",
+  "class": "section--article-comments",
   "settings": [
     {
       "id": "show-comments",

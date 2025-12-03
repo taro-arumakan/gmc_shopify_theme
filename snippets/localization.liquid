@@ -23,11 +23,16 @@
       assign locale_values = locale_values | split: ','
       assign locale_names = locale_names | split: ','
 
-      render 'disclosure', label_name: locale_label_t, option_names: locale_names, option_values: locale_values, current_value: localization.language.iso_code, id: locale_id, input_name: 'locale_code', type: 'localization'
+      render 'disclosure', label_name: localization.language.endonym_name, option_names: locale_names, option_values: locale_values, current_value: localization.language.iso_code, id: locale_id, input_name: 'locale_code', type: 'localization'
     endif
 
     if region_enabled
       for country in localization.available_countries
+        assign loading = 'lazy'
+        if localization.country.name == country.name
+          assign loading = 'eager'
+        endif
+
         capture flag
           echo country | image_url: width: 26 | image_tag: class: 'icon--flag', loading: loading
         endcapture
@@ -39,9 +44,9 @@
 
         capture region_names
           echo region_names
-          echo '<span class="disclosure-option--wrapper">' | append: flag
-          echo '<p>' | append: country.name | append: '</p></span><p>('
-          echo country.currency.iso_code | append: ' ' | append: country.currency.symbol | append: ')</p>,'
+          echo '<span class="disclosure-option--wrapper" data-country="' | append: country.name | append: '">'
+          echo flag | append: '</span><p>'
+          echo country.currency.iso_code | append: ' ' | append: country.currency.symbol | append: '</p>,'
         endcapture
       endfor
 

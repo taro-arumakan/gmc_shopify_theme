@@ -10,7 +10,7 @@
 {
   "sections": {
     "main": {
-      "type": "product",
+      "type": "main-product",
       "blocks": {
         "heading": {
           "type": "heading",
@@ -71,10 +71,10 @@
       ],
       "settings": {
         "container-width": "4",
-        "spacing-above": true,
-        "spacing-below": true,
+        "spacing-above": "medium",
+        "spacing-below": "medium",
         "media-layout": "thumbnails",
-        "text-column-width": 30,
+        "text-column-width": 280,
         "media-gap": 8,
         "column-spacing": "close",
         "text-alignment": "left",
@@ -95,8 +95,8 @@
       "disabled": true,
       "settings": {
         "top-border": false,
-        "spacing-above": true,
-        "spacing-below": true,
+        "spacing-above": "medium",
+        "spacing-below": "medium",
         "background-color": "none",
         "light-text": false,
         "container-width": "4",
@@ -107,8 +107,8 @@
       "type": "featured-collection",
       "settings": {
         "top-border": false,
-        "spacing-above": false,
-        "spacing-below": true,
+        "spacing-above": "none",
+        "spacing-below": "medium",
         "featured-collection--image--show": false,
         "featured-collection--description--show": false,
         "background-color": "none",

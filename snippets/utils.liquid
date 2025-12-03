@@ -1,11 +1,6 @@
-{%- comment -%} utilities {%- endcomment -%}
-
-{%- case utility -%}
-
-  {%- comment -%} 'timesince' requires passing 'created_at' {%- endcomment -%}
+{%- case name -%}
   {%- when 'timesince' -%}
-
-    {%- comment -%} Variables {%- endcomment -%}
+    {%- comment -%} 'timesince' requires passing 'created_at' {%- endcomment -%}
     {%- liquid
       assign now_timestamp = 'now' | date: '%s'
       assign date_start = created_at | date: '%s'
@@ -27,17 +22,162 @@
       endif
     -%}
 
-  {%- comment -%} 'emphasized-text' requires passing 'text' {%- endcomment -%}
-  {%- when 'emphasized-text' -%}
-    {%- assign parts = text | split: '[' -%}
+  {%- when 'highlighted-text' -%}
+    {%- comment -%}
+      requires passing 'text', 'highlight_type', 'highlight_color', 'highlight_text'
+    {%- endcomment -%}
+    {%- liquid
+      assign scrolling_highlight = false
+      if highlight_type == 'underline-reveal' or highlight_type == 'opacity-fill'
+        assign scrolling_highlight = true
+      endif
+    -%}
 
-    {%- for part in parts -%}
-      {%- if part contains ']' -%}
-        {%- assign subparts = part | split: ']' -%}
-        <span class="emphasized">{{ subparts[0] }}</span> {{ subparts[1] | default: '' -}}
-      {%- else -%}
-        {{- part -}}
-      {%- endif -%}
-    {%- endfor -%}
+    {%- if text contains '[' -%}
+      {%- assign parts = text | split: '[' -%}
+
+      {%- for part in parts -%}
+        {%- if part contains ']' -%}
+          {%- assign subparts = part | split: ']' -%}
+
+          {%- if subparts[0] contains '|' -%}
+            <rotating-text data-text-highlight="rotating">
+              {%- assign rotating_parts = subparts[0] | split: '|' -%}
+              {%- for rotating_part in rotating_parts -%}
+                <span
+                  class="rotating-item"
+                  data-state="{% if forloop.first %}current{% else %}next{% endif %}"
+                >{{ rotating_part | strip }}</span>
+              {%- endfor -%}
+            </rotating-text><span>{{ subparts[1] | default: '' -}}</span>
+
+          {%- elsif scrolling_highlight -%}
+            <scroll-progress
+              data-text-highlight="{{ highlight_type }}"
+              data-progress-type="linear"
+              style="
+                {%- unless highlight_text == 'none' -%}
+                  --highlight-text:var(--bg-color--{{ highlight_text }});
+                {%- else -%}
+                  --highlight-text:currentColor;
+                {%- endunless -%}
+                {%- if highlight_type == 'underline-reveal' %}--letters:{{ subparts[0] | size }};{% endif -%}"
+            >
+              {%- if highlight_type == 'underline-reveal' -%}
+                {%- assign letters = subparts[0] | split: '' -%}
+                {%- for letter in letters -%}
+                  <span style="--index:{{ forloop.index }}">
+                    {%- liquid
+                      if letter == ' '
+                        echo '&nbsp;'
+                      else
+                        echo letter
+                      endif
+                    -%}
+                  </span>
+                {%- endfor -%}
+
+              {%- elsif highlight_type == 'opacity-fill' -%}
+                <span>{{ subparts[0] }}</span>
+                <div>{{ subparts[0] }}</div>
+
+              {%- endif -%}
+            </scroll-progress>{{ subparts[1] | default: '' -}}
+
+          {%- else -%}
+            <span
+              data-text-highlight="{{ highlight_type }}"
+              {% if highlight_type == 'glow' %}
+                data-text="{{ subparts[0] }}"
+              {% endif %}
+              style="--highlight-color:var(--bg-color--{{ highlight_color }});
+                {%- unless highlight_text == 'none' -%}
+                  --highlight-text:var(--bg-color--{{ highlight_text }});
+                {%- else -%}
+                  --highlight-text:currentColor;
+                {%- endunless -%}"
+            >{{ subparts[0] }}</span>
+            {%- if subparts[1] -%}<span>{{ subparts[1] | default: '' -}}</span>{%- endif -%}
+
+          {%- endif -%}
+
+        {%- elsif part != blank -%}
+          <span>{{- part -}}</span>
+        {%- endif -%}
+      {%- endfor -%}
+    {%- else -%}
+      {{- text -}}
+    {%- endif -%}
+
+  {%- when 'sizes' -%}
+    {%- comment -%}
+      requires passing 'container_width', 'columns', 'mobile_columns', and 'mobile_full_width'
+      optional: 'column_spacing' (boolean, defaults to true), 'mobile_column_spacing' (boolean, defaults to true)
+      when column_spacing is false, no spacing between columns is applied
+    {%- endcomment -%}
+    {%- liquid
+      assign container_width = container_width | default: '5'
+      assign desktop_spacing_value = column_spacing | default: 32
+      assign mobile_spacing_value = mobile_column_spacing | default: 16
+
+      assign mobile_size = 100
+      assign mobile_padding = 0
+      if mobile_columns >= 1
+        assign mobile_size = mobile_size | divided_by: mobile_columns
+        assign mobile_padding = mobile_columns | minus: 1 | times: mobile_spacing_value
+      else
+        assign mobile_size = mobile_size | divided_by: mobile_columns | ceil
+      endif
+
+      unless mobile_full_width
+        assign mobile_padding = mobile_padding | plus: 32
+      endunless
+
+      assign mobile_padding = mobile_padding | divided_by: mobile_columns | round: 2
+      if mobile_padding > 0
+        assign mobile_sizes = '(max-width: 767px) calc(' | append: mobile_size | append: 'vw - ' | append: mobile_padding | append: 'px)'
+      else
+        assign mobile_sizes = '(max-width: 767px) ' | append: mobile_size | append: 'vw'
+      endif
+
+      assign desktop_size = 100
+      if container_width == '4'
+        assign desktop_size = 1200
+      elsif container_width == '3'
+        assign desktop_size = 1000
+      elsif container_width == '2'
+        assign desktop_size = 800
+      elsif container_width == '1'
+        assign desktop_size = 650
+      endif
+
+      assign desktop_padding = 0
+      if columns >= 1
+        assign desktop_size = desktop_size | divided_by: columns
+        assign desktop_padding = columns | minus: 1 | times: desktop_spacing_value
+      else
+        assign desktop_size = desktop_size | divided_by: columns | ceil
+      endif
+
+      if additional_padding
+        assign desktop_padding = desktop_padding | plus: additional_padding
+      endif
+
+      if container_width == '6'
+        assign desktop_sizes = desktop_size | append: 'vw'
+      elsif container_width == '5'
+        assign desktop_padding  = desktop_padding | plus: 96
+        assign desktop_sizes = desktop_size | append: 'vw'
+      else
+        assign desktop_sizes = desktop_size | append: 'px'
+      endif
+
+      assign desktop_padding = desktop_padding | divided_by: columns | round: 2
+      if desktop_padding > 0
+        assign desktop_sizes = 'calc(' | append: desktop_sizes | append: ' - ' | append: desktop_padding | append: 'px)'
+      endif
+
+      echo mobile_sizes | append: ', ' | append: desktop_sizes
+    -%}
 
 {%- endcase -%}

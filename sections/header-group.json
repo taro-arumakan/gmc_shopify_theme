@@ -15,29 +15,19 @@
       "type": "announcement",
       "disabled": true,
       "settings": {
-        "home-page-only": true,
-        "background-color": "dark",
-        "light-text": true,
-        "text": "税込1万円以上お買い上げで 送料無料 📦",
-        "link": ""
+        "background-color": "dark"
       }
     },
     "header": {
       "type": "header",
       "settings": {
-        "transparent-menu": true,
         "background-color": "light",
-        "light-text": false,
-        "header-account-show": true,
-        "cart--icon": "bag",
-        "header-menu-center": false,
-        "menu": "main-menu",
-        "show-region-selector": false,
-        "show-locale-selector": false,
-        "header-logo-center": false,
         "logo": "shopify://shop_images/GMC_kaku.png",
         "logo-height": 55,
-        "mobile-logo-height": 40
+        "mobile-logo-height": 40,
+        "menu": "main-menu",
+        "show-region-selector": false,
+        "show-locale-selector": false
       }
     }
   },

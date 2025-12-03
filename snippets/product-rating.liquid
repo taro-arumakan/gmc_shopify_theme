@@ -15,10 +15,9 @@
     role="img"
     aria-label="{{ product_rating_t }}"
     style="--rating:{{ rating_integer }};--rating-max:{{ rating_max }};--rating-decimal:{{ rating_decimal }};"
+    data-item="nav-text"
+    data-count="{{- reviews.rating_count -}}"
   >
     <div class="product-rating--stars"></div>
-    <span class="product-rating--count" data-item="accent-text" aria-label="{{ total_reviews_t }}">
-      {{- reviews.rating_count -}}
-    </span>
   </div>
 {%- endif -%}

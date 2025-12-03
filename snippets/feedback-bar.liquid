@@ -9,7 +9,7 @@
   assign success_t = 'general.mailing_list.success_message' | t
 -%}
 
-<feedback-bar-root
+<feedback-bar-element
   class="feedback-bar--root"
   data-transition-item="viewport"
   data-transition-type="slide-in"
@@ -21,8 +21,8 @@
     class="feedback-bar--message"
     data-background-color="dark"
     data-translucent="true"
-    data-light-text="true"
-    data-item="accent-text"
+    data-text-color="white"
+    data-item="nav-text"
   ></div>
   <script type="application/json">
     {
@@ -36,4 +36,4 @@
       "product--n-items": "{{- n_items_left_t -}}"
     }
   </script>
-</feedback-bar-root>
+</feedback-bar-element>

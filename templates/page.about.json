@@ -12,12 +12,16 @@
     "16324732604d3e7054": {
       "type": "image-with-text",
       "settings": {
-        "spacing-above": false,
-        "spacing-below": true,
+        "spacing-above": "none",
+        "spacing-below": "large",
         "background-color": "none",
+        "container-width": "6",
+        "white-text": "false",
         "overlap": false,
-        "text-position": "center",
-        "text-width": "medium",
+        "text-position": "overlay",
+        "text-width": 500,
+        "text-style": "none",
+        "overlay-style": "darken-bottom",
         "parallax-enabled": false,
         "overline": "About",
         "title": "Our story",
@@ -32,31 +36,56 @@
       "settings": {
         "show-title": false,
         "background-color": "none",
-        "light-text": false,
-        "spacing-above": false,
-        "spacing-below": true
+        "white-text": false,
+        "container-width": "1",
+        "spacing-above": "none",
+        "spacing-below": "large"
       }
     },
     "16324732989269ca2c": {
       "type": "featured-text",
+      "blocks": {
+        "overline": {
+          "type": "overline",
+          "settings": {
+            "overline": "Overline text"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading-type": "featured-heading",
+            "title": "Introduce your brand",
+            "highlight-type": "none",
+            "highlight-color": "",
+            "highlight-text": ""
+          }
+        }
+      },
+      "block_order": ["overline", "heading"],
       "settings": {
-        "spacing-above": false,
-        "spacing-below": true,
+        "spacing-above": "none",
+        "spacing-below": "large",
         "background-color": "none",
-        "light-text": false,
-        "overline": "Overline text",
-        "heading": "Introduce your brand"
+        "white-text": false,
+        "container-width": "4",
+        "text-alignment": "center",
+        "mobile-text-alignment": "center"
       }
     },
     "163247330191cc65e8": {
       "type": "image-with-text",
       "settings": {
-        "spacing-above": false,
-        "spacing-below": true,
+        "spacing-above": "none",
+        "spacing-below": "large",
         "background-color": "none",
+        "container-width": "2",
+        "white-text": "false",
         "overlap": false,
         "text-position": "left",
-        "text-width": "small",
+        "text-width": 400,
+        "text-style": "none",
+        "overlay-style": "darken-bottom",
         "parallax-enabled": false,
         "overline": "Overline text",
         "title": "Image with Text",
@@ -69,12 +98,16 @@
     "1632473305029b8e81": {
       "type": "image-with-text",
       "settings": {
-        "spacing-above": false,
-        "spacing-below": true,
+        "spacing-above": "none",
+        "spacing-below": "large",
         "background-color": "none",
+        "container-width": "2",
+        "white-text": "false",
         "overlap": false,
         "text-position": "right",
-        "text-width": "small",
+        "text-width": 400,
+        "text-style": "none",
+        "overlay-style": "darken-bottom",
         "parallax-enabled": false,
         "overline": "Overline text",
         "title": "Image with Text",
@@ -88,10 +121,12 @@
       "type": "featured-video",
       "settings": {
         "background-color": "none",
-        "light-text": true,
+        "white-text": true,
+        "overlay-style": "darken-bottom",
         "video-url": "",
         "heading": "Video",
-        "button-text": "button",
+        "description": "<p>Add a description here</p>",
+        "button-text": "Button",
         "button-url": ""
       }
     }

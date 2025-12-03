@@ -4,9 +4,9 @@
 -%}
 
 <!doctype html>
-<html class="no-js" lang="{{ request.locale.iso_code }}" dir="ltr">
+<html lang="{{ request.locale.iso_code }}" dir="ltr">
   <head>
-    <!-- ... Theme - Version ... by Troop Themes - https://troopthemes.com/ -->
+    <!-- Blockshop theme - Version 12.2.1 by Troop Themes - https://troopthemes.com/ -->
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,13 +19,9 @@
     </title>
     <meta name="description" content="{{ 'layout.gift_card.subtext' | t }}">
 
-    {{ 'gift-card.css' | asset_url | stylesheet_tag }}
-
     <link href="//fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
 
     <script type='text/javascript'>
-      document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
-
       function createQrCode() {
         new QRCode(document.getElementById('QrCode'), {
           text: '{{ gift_card.qr_identifier }}',
@@ -61,9 +57,9 @@
   </head>
 
   <body
-    data-theme-id="..."
-    data-theme-name="..."
-    data-theme-version="..."
+    data-theme-id="606"
+    data-theme-name="Blockshop"
+    data-theme-version="12.2.1"
   >
     {{ content_for_layout }}
   </body>

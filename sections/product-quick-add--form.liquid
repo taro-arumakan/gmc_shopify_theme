@@ -1,0 +1,70 @@
+{%- liquid
+  assign product_id = 'quick-add_' | append: product.id
+  assign show_quantity = settings.quick-add--show-quantity
+  assign swatches = settings.product--swatches
+  assign variant_style = settings.quick-add--variant-style
+-%}
+
+{%-
+  form 'product',
+  product,
+  class: 'product-quick-add--form',
+  data-container: 'block',
+  data-handle: product.handle,
+  data-section-id: 'product-quick-add--form'
+-%}
+  <div class="product-quick-add--form--wrapper" data-container="block">
+    <div class="product-quick-add--media" data-container="block">
+      {%-
+        render 'main-product-carousel',
+        product_id: product_id,
+        section: section,
+        product: product,
+        async: true
+      -%}
+
+      {%- liquid
+        assign total_slides = 4
+        if product.media.size > 0
+          assign total_slides = product.media.size
+        endif
+
+        render 'carousel-nav-arrow', id: product_id, total_slides_mobile: total_slides, total_slides: total_slides, mobile_only: false
+      -%}
+    </div>
+
+    <a href="{{ product.url }}">
+      <h2 class="product-quick-add--title" data-item="section-heading">
+        {{- product.title -}}
+      </h2>
+    </a>
+
+    {%- liquid
+      render 'product-price', product: product, id: product_id
+
+      if show_quantity
+        render 'quantity-selector', id: product_id, type: 'product'
+      else
+        echo '<input type="hidden" name="quantity" value="1" min="1" pattern="[0-9]*" tabindex="-1">'
+      endif
+    -%}
+
+    {%-
+      render 'product-options',
+      id: product_id,
+      product: product,
+      swatches: swatches,
+      variant_style: variant_style
+    -%}
+  </div>
+
+  {%-
+    render 'product-buy-buttons',
+    id: product_id,
+    product: product,
+    form: form,
+    smart_payment_enabled: settings.quick-add--smart-payment-enabled,
+    primary_button_style: settings.quick-add--primary-button-style,
+    secondary_button_style: settings.quick-add--secondary-button-style
+  -%}
+{%- endform -%}

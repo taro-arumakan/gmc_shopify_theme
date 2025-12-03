@@ -3,17 +3,13 @@
     "name": "theme_info",
     "theme_name": "Blockshop",
     "theme_author": "Troop Themes",
-    "theme_version": "9.4.3",
+    "theme_version": "12.2.1",
     "theme_documentation_url": "https://support.troopthemes.com/guide/getting-started/",
     "theme_support_url": "http://support.troopthemes.com/"
   },
   {
     "name": "Colors",
     "settings": [
-      {
-        "type": "header",
-        "content": "General"
-      },
       {
         "id": "color--accent-1",
         "label": "Accent 1",
@@ -23,6 +19,12 @@
       {
         "id": "color--accent-2",
         "label": "Accent 2",
+        "type": "color",
+        "default": "#fff4cc"
+      },
+      {
+        "id": "color--accent-3",
+        "label": "Accent 3",
         "type": "color",
         "default": "#fff4cc"
       },
@@ -52,29 +54,25 @@
       },
       {
         "type": "color",
-        "id": "color--alternative",
-        "label": "Light text",
-        "default": "#ffffff",
-        "info": "Commonly used for text over images"
+        "id": "color--alert",
+        "label": "Alert",
+        "default": "#d32f2f"
       },
       {
-        "type": "color",
-        "id": "color--button",
-        "label": "Button text",
-        "default": "#ffffff"
+        "label": "Border opacity",
+        "id": "border--opacity",
+        "type": "range",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "%",
+        "default": 10
       },
       {
-        "type": "color",
-        "id": "bg-color--button",
-        "label": "Button background",
-        "default": "#444444"
-      },
-      {
-        "type": "textarea",
-        "id": "color--swatches",
-        "label": "Color swatch configuration",
-        "default": "yellow green: #9acd32\nRed: rgb(139,0,0)\norange: orange.PNG\nStealth Grey: stealth-grey.jpg",
-        "info": "Each rule must be its own line. [Learn more](https://support.troopthemes.com/guide/color-swatch-guide) about naming conventions."
+        "type": "checkbox",
+        "id": "drop-shadows-enabled",
+        "label": "Enable drop shadows",
+        "default": true
       }
     ]
   },
@@ -91,24 +89,17 @@
         "type": "range",
         "id": "typography--heading--spacing",
         "label": "Heading letter spacing",
-        "min": -5,
-        "max": 20,
+        "min": -1,
+        "max": 10,
         "step": 1,
-        "default": -1,
+        "default": 2,
         "unit": "px"
       },
       {
         "id": "typography--heading--uppercase",
         "label": "Uppercase headings",
         "type": "checkbox",
-        "default": false
-      },
-      {
-        "id": "typography--hollow",
-        "label": "Hollow emphasized text",
-        "type": "checkbox",
-        "default": false,
-        "info": "Applies to featured and banner headings."
+        "default": true
       },
       {
         "type": "header",
@@ -118,19 +109,21 @@
         "type": "range",
         "id": "typography--banner--size",
         "label": "Size",
-        "min": 0,
-        "max": 80,
+        "min": 24,
+        "max": 104,
         "step": 1,
-        "default": 40
+        "unit": "px",
+        "default": 61
       },
       {
         "type": "range",
         "id": "typography--banner--mobile-size",
         "label": "Mobile size",
-        "min": 0,
-        "max": 60,
+        "min": 24,
+        "max": 84,
         "step": 1,
-        "default": 20
+        "unit": "px",
+        "default": 44
       },
       {
         "type": "header",
@@ -140,67 +133,165 @@
         "type": "range",
         "id": "typography--featured--size",
         "label": "Size",
-        "min": 0,
-        "max": 60,
+        "min": 24,
+        "max": 84,
         "step": 1,
-        "default": 35
+        "unit": "px",
+        "default": 59
       },
       {
         "type": "range",
         "id": "typography--featured--mobile-size",
         "label": "Mobile size",
-        "min": 0,
-        "max": 40,
+        "min": 24,
+        "max": 64,
         "step": 1,
+        "unit": "px",
+        "default": 44
+      },
+      {
+        "type": "header",
+        "content": "Section heading"
+      },
+      {
+        "type": "range",
+        "id": "typography--section--size",
+        "label": "Size",
+        "min": 14,
+        "max": 80,
+        "step": 1,
+        "unit": "px",
+        "default": 28
+      },
+      {
+        "type": "range",
+        "id": "typography--section--mobile-size",
+        "label": "Mobile size",
+        "min": 14,
+        "max": 48,
+        "step": 1,
+        "unit": "px",
         "default": 20
       },
       {
         "type": "header",
-        "content": "Other headings"
+        "content": "Block heading"
       },
       {
-        "id": "typography--heading--size",
+        "type": "range",
+        "id": "typography--block--size",
         "label": "Size",
-        "type": "select",
-        "options": [
-          {
-            "label": "Extra Large",
-            "value": "x-large"
-          },
-          {
-            "label": "Large",
-            "value": "large"
-          },
-          {
-            "label": "Medium",
-            "value": "medium"
-          },
-          {
-            "label": "Small",
-            "value": "small"
-          }
-        ],
-        "default": "medium"
+        "min": 10,
+        "max": 36,
+        "step": 1,
+        "unit": "px",
+        "default": 16
+      },
+      {
+        "type": "range",
+        "id": "typography--block--mobile-size",
+        "label": "Mobile size",
+        "min": 14,
+        "max": 22,
+        "step": 1,
+        "unit": "px",
+        "default": 20
       },
       {
         "type": "header",
-        "content": "Navigation and buttons"
+        "content": "Navigation"
       },
       {
-        "id": "typography--accent",
+        "id": "typography--nav",
         "label": "Font",
         "type": "font_picker",
         "default": "roboto_n4"
       },
       {
         "type": "range",
+        "id": "typography--nav--size",
+        "label": "Size",
+        "min": 10,
+        "max": 16,
+        "step": 1,
+        "unit": "px",
+        "default": 12
+      },
+      {
+        "id": "typography--nav--uppercase",
+        "label": "Uppercase",
+        "type": "checkbox",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Sub navigation"
+      },
+      {
+        "type": "range",
+        "id": "typography--sub-nav--size",
+        "label": "Size",
+        "min": 8,
+        "max": 16,
+        "step": 1,
+        "unit": "px",
+        "default": 10
+      },
+      {
+        "id": "typography--sub-nav--uppercase",
+        "label": "Uppercase",
+        "type": "checkbox",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Buttons"
+      },
+      {
+        "type": "range",
+        "id": "typography--button--size",
+        "label": "Size",
+        "min": 10,
+        "max": 16,
+        "step": 1,
+        "unit": "px",
+        "default": 14
+      },
+      {
+        "type": "range",
         "id": "typography--button--spacing",
         "label": "Letter spacing",
-        "min": -5,
-        "max": 20,
+        "min": -1,
+        "max": 10,
         "step": 1,
         "default": 0,
         "unit": "px"
+      },
+      {
+        "id": "typography--button--uppercase",
+        "label": "Uppercase",
+        "type": "checkbox",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Overline"
+      },
+      {
+        "type": "range",
+        "id": "typography--overline--size",
+        "label": "Size",
+        "min": 10,
+        "max": 16,
+        "step": 1,
+        "unit": "px",
+        "default": 10
+      },
+      {
+        "id": "typography--overline--uppercase",
+        "label": "Uppercase",
+        "type": "checkbox",
+        "default": true
       },
       {
         "type": "header",
@@ -213,31 +304,32 @@
         "default": "roboto_n4"
       },
       {
+        "type": "range",
         "id": "typography--paragraph--size",
         "label": "Size",
-        "type": "select",
-        "options": [
-          {
-            "label": "Large",
-            "value": "large"
-          },
-          {
-            "label": "Medium",
-            "value": "medium"
-          },
-          {
-            "label": "Small",
-            "value": "small"
-          }
-        ],
-        "default": "medium"
+        "min": 10,
+        "max": 22,
+        "step": 1,
+        "unit": "px",
+        "default": 14
+      },
+      {
+        "type": "range",
+        "id": "typography--featured-paragraph--size",
+        "label": "Featured size",
+        "min": 10,
+        "max": 22,
+        "step": 1,
+        "unit": "px",
+        "default": 14,
+        "info": "Size when paragraphs are used over top of media."
       },
       {
         "type": "range",
         "id": "typography--paragraph--spacing",
         "label": "Letter spacing",
-        "min": -5,
-        "max": 20,
+        "min": -1,
+        "max": 10,
         "step": 1,
         "default": 0,
         "unit": "px"
@@ -251,7 +343,7 @@
         "content": "Text visibility"
       },
       {
-        "label": "Image background opacity",
+        "label": "Image darkness",
         "id": "content--image-opacity",
         "type": "range",
         "min": 0,
@@ -261,7 +353,7 @@
         "default": 65
       },
       {
-        "label": "Text shadow opacity",
+        "label": "Text shadows",
         "id": "content--shadow-opacity",
         "type": "range",
         "min": 0,
@@ -283,52 +375,112 @@
     "name": "Buttons & Inputs",
     "settings": [
       {
-        "type": "header",
-        "content": "Buttons"
-      },
-      {
-        "id": "buttons--style",
-        "label": "Style",
-        "type": "select",
-        "options": [
-          {
-            "label": "Solid",
-            "value": "button"
-          },
-          {
-            "label": "Outline",
-            "value": "secondary-button"
-          },
-          {
-            "label": "Link",
-            "value": "block-link"
-          }
-        ],
-        "default": "button"
-      },
-      {
-        "id": "buttons--radius",
-        "label": "Corner radius",
-        "type": "range",
-        "min": 0,
-        "max": 25,
-        "step": 1,
-        "unit": "px",
-        "default": 2
-      },
-      {
-        "type": "header",
-        "content": "Inputs"
-      },
-      {
         "id": "inputs--radius",
-        "label": "Corner radius",
+        "label": "Inputs corner radius",
         "type": "range",
         "min": 0,
         "max": 25,
         "step": 1,
         "unit": "px",
         "default": 2
+      },
+      {
+        "id": "button--radius",
+        "label": "Buttons corner radius",
+        "type": "range",
+        "min": 0,
+        "max": 25,
+        "step": 1,
+        "unit": "px",
+        "default": 2
+      },
+      {
+        "type": "header",
+        "content": "Button style 1"
+      },
+      {
+        "id": "button--bg-color-1",
+        "label": "Background",
+        "type": "color",
+        "default": "#444444"
+      },
+      {
+        "id": "button--color-1",
+        "label": "Text",
+        "type": "color",
+        "default": "#ffffff"
+      },
+      {
+        "id": "button--border-1",
+        "label": "Border",
+        "type": "color",
+        "default": "transparent"
+      },
+      {
+        "type": "header",
+        "content": "Button style 2"
+      },
+      {
+        "id": "button--bg-color-2",
+        "label": "Background",
+        "type": "color",
+        "default": "#ffffff"
+      },
+      {
+        "id": "button--color-2",
+        "label": "Text",
+        "type": "color",
+        "default": "#444444"
+      },
+      {
+        "id": "button--border-2",
+        "label": "Border",
+        "type": "color",
+        "default": "transparent"
+      },
+      {
+        "type": "header",
+        "content": "Button style 3"
+      },
+      {
+        "id": "button--bg-color-3",
+        "label": "Background",
+        "type": "color",
+        "default": "transparent"
+      },
+      {
+        "id": "button--color-3",
+        "label": "Text",
+        "type": "color",
+        "default": "#444444"
+      },
+      {
+        "id": "button--border-3",
+        "label": "Border",
+        "type": "color",
+        "default": "#444444"
+      },
+      {
+        "type": "header",
+        "content": "Button style 4"
+      },
+      {
+        "id": "button--bg-color-4",
+        "label": "Background",
+        "type": "color",
+        "default": "transparent"
+      },
+      {
+        "id": "button--color-4",
+        "label": "Text",
+        "type": "color",
+        "default": "#ffffff"
+      },
+      {
+        "id": "button--border-4",
+        "label": "Border",
+        "type": "color",
+        "default": "#ffffff"
       }
     ]
   },
@@ -340,10 +492,10 @@
         "label": "Corner radius",
         "type": "range",
         "min": 0,
-        "max": 40,
+        "max": 32,
         "step": 1,
         "unit": "px",
-        "default": 8
+        "default": 4
       },
       {
         "id": "image--product-size",
@@ -367,7 +519,8 @@
             "value": "portrait"
           }
         ],
-        "default": "natural"
+        "default": "natural",
+        "info": "Product grid images only."
       },
       {
         "id": "image--collection-size",
@@ -392,7 +545,7 @@
           }
         ],
         "default": "square",
-        "info": "Featured collection section and Collection list page with thumbnail view."
+        "info": "Collections list section and Collection list page with thumbnail view."
       },
       {
         "id": "image--article-size",
@@ -446,17 +599,39 @@
         "info": "To display a rating, add a product rating app. [Learn more](https://help.shopify.com/en/manual/products/product-reviews)"
       },
       {
+        "type": "select",
+        "id": "product--swatches",
+        "label": "Swatches",
+        "options": [
+          {
+            "label": "Circle",
+            "value": "circle"
+          },
+          {
+            "label": "Square",
+            "value": "square"
+          },
+          {
+            "label": "None",
+            "value": "none"
+          }
+        ],
+        "default": "circle",
+        "info": "Connect options to swatch colors or images using Shopify metafields. [Learn more](https://help.shopify.com/en/manual/custom-data/metafields/category-metafields/using-category-metafields)"
+      },
+      {
         "type": "checkbox",
-        "id": "product--swatches-enabled",
-        "label": "Enable color swatches",
-        "default": false,
-        "info": "Display color swatches when available. [Learn more](https://support.troopthemes.com/guide/color-swatch-guide)"
+        "id": "product--limit-swatches",
+        "label": "Limit number of swatches displayed",
+        "default": true,
+        "visible_if": "{{ settings.product--swatches != 'none' }}"
       },
       {
         "type": "checkbox",
         "id": "product--hide-single-swatch",
         "label": "Hide single swatches",
-        "default": true
+        "default": true,
+        "visible_if": "{{ settings.product--swatches != 'none' }}"
       },
       {
         "type": "text_alignment",
@@ -525,13 +700,17 @@
           {
             "label": "Accent 2",
             "value": "accent-2"
+          },
+          {
+            "label": "Accent 3",
+            "value": "accent-3"
           }
         ],
         "default": "light"
       },
       {
-        "id": "product--label-light-text",
-        "label": "Use light text color",
+        "id": "product--label-white-text",
+        "label": "Use white text color",
         "type": "checkbox",
         "default": false
       },
@@ -569,7 +748,8 @@
         "max": 90,
         "step": 1,
         "default": 90,
-        "info": "Number of days shown"
+        "info": "Number of days shown",
+        "visible_if": "{{ settings.product--show-new-label == true }}"
       },
       {
         "id": "product--featured-tags",
@@ -611,18 +791,68 @@
         "id": "quick-add--show-quantity",
         "label": "Show quantity selector",
         "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "quick-add--smart-payment-enabled",
+        "label": "Show dynamic checkout button",
+        "info": "Lets customers check out directly using a familiar payment method. [Learn more](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+        "default": true
+      },
+      {
+        "id": "quick-add--primary-button-style",
+        "label": "Primary button style",
+        "type": "select",
+        "options": [
+          {
+            "label": "Style 1",
+            "value": "button-1"
+          },
+          {
+            "label": "Style 2",
+            "value": "button-2"
+          },
+          {
+            "label": "Style 3",
+            "value": "button-3"
+          },
+          {
+            "label": "Style 4",
+            "value": "button-4"
+          }
+        ],
+        "default": "button-1"
+      },
+      {
+        "id": "quick-add--secondary-button-style",
+        "label": "Secondary button style",
+        "type": "select",
+        "options": [
+          {
+            "label": "Style 1",
+            "value": "button-1"
+          },
+          {
+            "label": "Style 2",
+            "value": "button-2"
+          },
+          {
+            "label": "Style 3",
+            "value": "button-3"
+          },
+          {
+            "label": "Style 4",
+            "value": "button-4"
+          }
+        ],
+        "default": "button-3",
+        "visible_if": "{{ settings.quick-add--smart-payment-enabled == true }}"
       }
     ]
   },
   {
     "name": "Search",
     "settings": [
-      {
-        "type": "checkbox",
-        "id": "search--show-in-header",
-        "label": "Show in header and mobile menu",
-        "default": true
-      },
       {
         "id": "search--list-heading",
         "label": "List heading",
@@ -699,16 +929,116 @@
         "default": "drawer"
       },
       {
+        "type": "select",
+        "id": "checkout-button-style",
+        "label": "Checkout button style",
+        "options": [
+          {
+            "label": "Style 1",
+            "value": "button-1"
+          },
+          {
+            "label": "Style 2",
+            "value": "button-2"
+          },
+          {
+            "label": "Style 3",
+            "value": "button-3"
+          },
+          {
+            "label": "Style 4",
+            "value": "button-4"
+          }
+        ],
+        "default": "button-1"
+      },
+      {
         "type": "checkbox",
         "id": "cart--show-note",
         "label": "Enable order notes",
         "default": true
+      },
+      {
+        "type": "header",
+        "content": "Free shipping calculator"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart--shipping-enabled",
+        "label": "Enable",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "cart--shipping-limit",
+        "label": "Limit",
+        "default": "100",
+        "info": "Use round numbers. Exclude currency, symbols, and letters.",
+        "visible_if": "{{ settings.cart--shipping-enabled == true }}"
+      },
+      {
+        "type": "text",
+        "id": "cart--shipping-before",
+        "label": "Before reaching limit",
+        "default": "You are [$] from free shipping.",
+        "info": "Inserting the text '[$]' will automatically insert the remaining amount.",
+        "visible_if": "{{ settings.cart--shipping-enabled == true }}"
+      },
+      {
+        "type": "text",
+        "id": "cart--shipping-after",
+        "label": "After reaching limit",
+        "default": "Congratulations! You qualify for free shipping.",
+        "visible_if": "{{ settings.cart--shipping-enabled == true }}"
+      },
+      {
+        "type": "header",
+        "content": "Empty cart",
+        "info": "Display a list of links when cart is empty."
+      },
+      {
+        "type": "checkbox",
+        "id": "cart--empty-enabled",
+        "label": "Enable",
+        "default": false
+      },
+      {
+        "label": "Custom link list",
+        "id": "cart--empty-list",
+        "type": "link_list",
+        "default": "main-menu",
+        "info": "This menu won't show dropdown items.",
+        "visible_if": "{{ settings.cart--empty-enabled == true }}"
       }
     ]
   },
   {
     "name": "Social media",
     "settings": [
+      {
+        "type": "paragraph",
+        "content": "Social links configured in your [store's brand settings](/admin/settings/branding) will be used by default."
+      },
+      {
+        "id": "social--hover-color",
+        "label": "Hover color",
+        "type": "select",
+        "options": [
+          {
+            "label": "Match brand",
+            "value": "brand"
+          },
+          {
+            "label": "Opacity",
+            "value": "opacity"
+          },
+          {
+            "label": "None",
+            "value": "none"
+          }
+        ],
+        "default": "brand"
+      },
       {
         "type": "text",
         "id": "social--instagram--url",
@@ -762,6 +1092,24 @@
         "id": "social--tiktok--url",
         "label": "TikTok",
         "info": "https://tiktok.com/@shopify"
+      },
+      {
+        "type": "text",
+        "id": "social--tumblr--url",
+        "label": "Tumblr",
+        "info": "https://shopify.tumblr.com"
+      },
+      {
+        "type": "text",
+        "id": "social--snapchat--url",
+        "label": "Snapchat",
+        "info": "https://snapchat.com/add/shopify"
+      },
+      {
+        "type": "text",
+        "id": "social--bluesky--url",
+        "label": "Bluesky",
+        "info": "https://bsky.app/profile/shopify"
       }
     ]
   },

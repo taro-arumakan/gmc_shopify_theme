@@ -1,0 +1,474 @@
+{%- liquid
+  assign product_hotspot_t = 'products.hotspot' | t
+
+  assign bg_color = section.settings.background-color
+  assign border = section.settings.border
+  assign container_width = section.settings.container-width
+  assign heading = section.settings.heading
+  assign heading_alignment = section.settings.heading-alignment
+  assign hotspot_color = section.settings.hotspot-color
+  assign image = section.settings.image
+  assign mobile_full_width = section.settings.mobile-full-width
+  assign mobile_image = section.settings.mobile-image
+  assign mobile_spacing_above = section.settings.mobile-spacing-above
+  assign mobile_spacing_below = section.settings.mobile-spacing-below
+  assign spacing_above = section.settings.spacing-above
+  assign spacing_below = section.settings.spacing-below
+
+  capture sizes
+    render 'utils', name: 'sizes', container_width: container_width, columns: 1
+  endcapture
+
+  assign full_width = false
+  if container_width == '6'
+    assign full_width = true
+  endif
+-%}
+
+<shop-the-banner
+  class="shop-the-banner--root"
+  data-section-id="{{ section.id }}"
+  data-background-color="{{ bg_color }}"
+  data-border="{{ border }}"
+  data-container-width="{{ container_width }}"
+  data-mobile-full-width="{{ mobile_full_width }}"
+  data-mobile-spacing-above="{{ mobile_spacing_above }}"
+  data-mobile-spacing-below="{{ mobile_spacing_below }}"
+  data-spacing-above="{{ spacing_above }}"
+  data-spacing-below="{{ spacing_below }}"
+>
+  <div class="shop-the-banner--wrapper" data-container="section">
+    {%- unless heading == blank -%}
+      <div
+        class="shop-the-banner--title"
+        data-container="block"
+        data-text-alignment="{{ heading_alignment }}"
+        {% unless settings.transitions--text %}
+          data-transition-item="viewport"
+          data-transition-type="slide-in"
+        {% endunless %}
+      >
+        <h2 data-item="section-heading">
+          {{- heading | escape -}}
+        </h2>
+      </div>
+    {%- endunless -%}
+
+    <div class="shop-the-banner--content">
+      <div
+        class="shop-the-banner--image"
+        {% unless settings.transitions--image %}
+          data-transition-item="viewport"
+          data-transition-type="image"
+        {% endunless %}
+      >
+        {%- liquid
+          if image
+            render 'image', image: image, full_width: full_width, mobile_full_width: mobile_full_width, mobile_image: mobile_image, sizes: sizes
+          else
+            render 'placeholder', type: 'collection', aspect_ratio: 1.33, full_width: full_width, mobile_full_width: mobile_full_width, placeholder_index: 1
+          endif
+        -%}
+      </div>
+
+      {%- for block in section.blocks -%}
+        {%- capture css_vars -%}
+          --x-pos:{{ block.settings.horizontal }}%;
+          --y-pos:{{ block.settings.vertical }}%;
+          --mobile-x-pos:{{ block.settings.mobile-horizontal }}%;
+          --mobile-y-pos:{{ block.settings.mobile-vertical }}%;
+        {%- endcapture -%}
+
+        <div class="shop-the-banner--block" style="{{ css_vars }}">
+          <button
+            class="shop-the-banner--button"
+            data-transition-item="viewport"
+            data-transition-type="grow"
+            data-transition-trigger="custom"
+            aria-label="{{ product_hotspot_t }}"
+            {{ block.shopify_attributes }}
+          >
+            <div
+              class="shop-the-banner--hotspot"
+              data-item="hotspot"
+              style="--hotspot-color:var(--bg-color--{{ hotspot_color }});"
+            >
+              <span data-item="hidden-text">
+                {{- block.settings.product.title -}}
+              </span>
+            </div>
+          </button>
+
+          <div
+            class="shop-the-banner--product"
+            data-transition-item="viewport"
+            data-transition-type="scale-in"
+            data-transition-trigger="custom"
+          >
+            {%- liquid
+              unless block.settings.product == blank
+                render 'product-card--mini', product_item: block.settings.product
+              else
+                render 'product-card--mini', onboarding: true, placeholder_index: forloop.index
+              endunless
+            -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</shop-the-banner>
+
+{% schema %}
+{
+  "name": "Shop the banner",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Style and layout"
+    },
+    {
+      "id": "border",
+      "label": "Border",
+      "type": "select",
+      "options": [
+        {
+          "label": "Top",
+          "value": "top"
+        },
+        {
+          "label": "Bottom",
+          "value": "bottom"
+        },
+        {
+          "label": "Both",
+          "value": "both"
+        },
+        {
+          "label": "None",
+          "value": "none"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "id": "spacing-above",
+      "label": "Spacing above",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "large"
+    },
+    {
+      "id": "spacing-below",
+      "label": "Spacing below",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "large"
+    },
+    {
+      "id": "container-width",
+      "label": "Maximum width of container",
+      "type": "select",
+      "options": [
+        {
+          "label": "Extra small",
+          "value": "1"
+        },
+        {
+          "label": "Small",
+          "value": "2"
+        },
+        {
+          "label": "Medium",
+          "value": "3"
+        },
+        {
+          "label": "Large",
+          "value": "4"
+        },
+        {
+          "label": "Extra large",
+          "value": "5"
+        },
+        {
+          "label": "Full width",
+          "value": "6"
+        }
+      ],
+      "default": "4"
+    },
+    {
+      "id": "background-color",
+      "label": "Background color",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Light",
+          "value": "light"
+        },
+        {
+          "label": "Dark",
+          "value": "dark"
+        },
+        {
+          "label": "Accent 1",
+          "value": "accent-1"
+        },
+        {
+          "label": "Accent 2",
+          "value": "accent-2"
+        },
+        {
+          "label": "Accent 3",
+          "value": "accent-3"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "id": "hotspot-color",
+      "label": "Hotspot color",
+      "type": "select",
+      "options": [
+        { "label": "White", "value": "white" },
+        { "label": "Light", "value": "light" },
+        { "label": "Dark", "value": "dark" },
+        { "label": "Accent 1", "value": "accent-1" },
+        { "label": "Accent 2", "value": "accent-2" },
+        { "label": "Accent 3", "value": "accent-3" }
+      ],
+      "default": "white"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "label": "Heading",
+      "id": "heading",
+      "type": "text",
+      "default": "Shop the banner"
+    },
+    {
+      "id": "heading-alignment",
+      "label": "Heading alignment",
+      "type": "text_alignment",
+      "default": "center"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "id": "mobile-full-width",
+      "label": "Full width",
+      "type": "checkbox",
+      "default": true
+    },
+    {
+      "id": "mobile-spacing-above",
+      "label": "Spacing above",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "id": "mobile-spacing-below",
+      "label": "Spacing below",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile-image",
+      "label": "Mobile image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hotspot",
+      "name": "Product hotspot",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "label": "Horizontal position",
+          "id": "horizontal",
+          "type": "range",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 50
+        },
+        {
+          "label": "Vertical position",
+          "id": "vertical",
+          "type": "range",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 50
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "label": "Mobile horizontal position",
+          "id": "mobile-horizontal",
+          "type": "range",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 50
+        },
+        {
+          "label": "Mobile vertical position",
+          "id": "mobile-vertical",
+          "type": "range",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 50
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop the banner",
+      "settings": {},
+      "blocks": [
+        {
+          "type": "hotspot",
+          "settings": {
+            "horizontal": 35,
+            "vertical": 33,
+            "mobile-horizontal": 35,
+            "mobile-vertical": 35
+          }
+        },
+        {
+          "type": "hotspot",
+          "settings": {
+            "horizontal": 44,
+            "vertical": 62,
+            "mobile-horizontal": 45,
+            "mobile-vertical": 66
+          }
+        },
+        {
+          "type": "hotspot",
+          "settings": {
+            "horizontal": 65,
+            "vertical": 50,
+            "mobile-horizontal": 65,
+            "mobile-vertical": 47
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

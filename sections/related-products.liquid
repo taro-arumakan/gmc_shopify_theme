@@ -1,39 +1,52 @@
 {%- liquid
   assign bg_color = section.settings.background-color
+  assign border = section.settings.border
   assign container_width = section.settings.container-width
   assign max_products = 4
-  assign light_text = section.settings.light-text
+  assign mobile_spacing_above = section.settings.mobile-spacing-above
+  assign mobile_spacing_below = section.settings.mobile-spacing-below
   assign title = section.settings.title
-  assign top_border = section.settings.top-border
   assign spacing_above = section.settings.spacing-above
   assign spacing_below = section.settings.spacing-below
+  assign white_text = section.settings.white-text
 
-  render 'section-assets', name: 'related-products', type: 'style'
-  render 'section-assets', name: 'product-recommendations', type: 'script'
+  assign loading = 'lazy'
+  if section.index == 1
+    assign loading = 'eager'
+  endif
 -%}
 
-<product-recommendations-root
+<product-recommendations-element
   class="related-products--root"
   data-section-id="{{ section.id }}"
   data-background-color="{{ bg_color }}"
+  data-border="{{ border }}"
   data-container-width="{{ container_width }}"
   data-intent="related"
   data-max-products="{{ max_products }}"
-  data-light-text="{{ light_text }}"
+  data-mobile-spacing-above="{{ mobile_spacing_above }}"
+  data-mobile-spacing-below="{{ mobile_spacing_below }}"
+  {% if white_text %}
+    data-text-color="white"
+  {% endif %}
   data-product-id="{{ product.id }}"
   data-spacing-above="{{ spacing_above }}"
   data-spacing-below="{{ spacing_below }}"
-  data-top-border="{{ top_border }}"
-  style="display:none;"
+  aria-hidden="false"
 >
   <div class="related-products--wrapper" data-container="section">
-    {%- if title != blank -%}
+    {%- unless title == blank -%}
       <div class="related-products--header" data-container="block">
-        <h2 class="related-products--title" data-item="section-heading">
+        <h2
+          class="related-products--title"
+          data-item="section-heading"
+          data-transition-item="viewport"
+          data-transition-type="slide-in"
+        >
           {{- title -}}
         </h2>
       </div>
-    {%- endif -%}
+    {%- endunless -%}
 
     <div
       class="related-products--grid"
@@ -51,15 +64,16 @@
     >
       {%- for product in recommendations.products limit: max_products -%}
         {%-
-          render 'product--item',
+          render 'product-card',
           product_item: product,
-          section_id: section.id,
-          sizes: '(max-width: 767px) 50vw, 25vw'
+          transition_id: section.id,
+          sizes: '(max-width: 767px) 50vw, 25vw',
+          loading: loading
         -%}
       {%- endfor -%}
     </div>
   </div>
-</product-recommendations-root>
+</product-recommendations-element>
 
 {% schema %}
 {
@@ -75,56 +89,84 @@
       "content": "Style and layout"
     },
     {
-      "id": "top-border",
-      "label": "Top border",
-      "type": "checkbox",
-      "default": false
-    },
-    {
-      "id": "spacing-above",
-      "label": "Spacing above",
-      "type": "checkbox",
-      "default": true
-    },
-    {
-      "id": "spacing-below",
-      "label": "Spacing below",
-      "type": "checkbox",
-      "default": true
-    },
-    {
-      "id": "background-color",
-      "label": "Background color",
+      "id": "border",
+      "label": "Border",
       "type": "select",
       "options": [
         {
-          "label": "Transparent",
+          "label": "Top",
+          "value": "top"
+        },
+        {
+          "label": "Bottom",
+          "value": "bottom"
+        },
+        {
+          "label": "Both",
+          "value": "both"
+        },
+        {
+          "label": "None",
           "value": "none"
-        },
-        {
-          "label": "Light",
-          "value": "light"
-        },
-        {
-          "label": "Dark",
-          "value": "dark"
-        },
-        {
-          "label": "Accent 1",
-          "value": "accent-1"
-        },
-        {
-          "label": "Accent 2",
-          "value": "accent-2"
         }
       ],
       "default": "none"
     },
     {
-      "id": "light-text",
-      "label": "Use light text color",
-      "type": "checkbox",
-      "default": false
+      "id": "spacing-above",
+      "label": "Spacing above",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "large"
+    },
+    {
+      "id": "spacing-below",
+      "label": "Spacing below",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "large"
     },
     {
       "id": "container-width",
@@ -159,6 +201,44 @@
       "default": "4"
     },
     {
+      "id": "background-color",
+      "label": "Background color",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Light",
+          "value": "light"
+        },
+        {
+          "label": "Dark",
+          "value": "dark"
+        },
+        {
+          "label": "Accent 1",
+          "value": "accent-1"
+        },
+        {
+          "label": "Accent 2",
+          "value": "accent-2"
+        },
+        {
+          "label": "Accent 3",
+          "value": "accent-3"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "id": "white-text",
+      "label": "Use white text color",
+      "type": "checkbox",
+      "default": false
+    },
+    {
       "type": "header",
       "content": "Content"
     },
@@ -167,6 +247,66 @@
       "id": "title",
       "label": "Heading",
       "default": "You may also like"
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "id": "mobile-spacing-above",
+      "label": "Spacing above",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "id": "mobile-spacing-below",
+      "label": "Spacing below",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "medium"
     }
   ]
 }

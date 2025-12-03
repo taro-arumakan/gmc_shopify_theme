@@ -2,9 +2,19 @@
   assign submit_t = 'general.mailing_list.submit' | t
   assign placeholder_t = 'general.mailing_list.placeholder' | t
   assign shopify_disclaimer_t = 'shopify.online_store.spam_detection.disclaimer_html' | t
+
+  assign mobile_alignment = mobile_alignment | default: alignment
 -%}
 
-<subscribe-form class="subscribe-form--root">
+<subscribe-form
+  class="subscribe-form--root"
+  data-text-alignment="{{ alignment }}"
+  data-mobile-text-alignment="{{ mobile_alignment }}"
+  {% if transition_id and settings.transitions--text == false %}
+    data-transition-item="{{ transition_id }}"
+    data-transition-type="fade-in"
+  {% endif %}
+>
   {%- form 'customer', id: id, class: 'subscribe-form', aria-busy: 'false' -%}
     <input type="hidden" name="contact[tags]" value="newsletter" />
     <input
@@ -27,6 +37,7 @@
       autocomplete="email"
       placeholder="{{ placeholder_t }}"
       name="contact[email]"
+      data-item="nav-text"
     />
 
     <button
@@ -34,7 +45,7 @@
       type="submit"
       aria-label="{{ submit_t }}"
     >
-      {%- render 'css-icons', icon: 'next' -%}
+      {%- render 'nav-arrow', direction: 'right' -%}
       {%- render 'icons', icon: 'spinner' -%}
     </button>
 

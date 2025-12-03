@@ -9,35 +9,55 @@
  */
 {
   "sections": {
+    "1632436597fbc1d0e4": {
+      "type": "image-with-text",
+      "settings": {
+        "spacing-above": "none",
+        "spacing-below": "large",
+        "background-color": "none",
+        "container-width": "6",
+        "white-text": true,
+        "overlap": false,
+        "text-position": "overlay",
+        "text-width": 500,
+        "text-style": "none",
+        "overlay-style": "darken-bottom",
+        "parallax-enabled": false,
+        "overline": "Contact us",
+        "title": "Get in touch",
+        "description": "",
+        "link-url": "",
+        "link-text": "",
+        "mobile-spacing-above": "none",
+        "mobile-spacing-below": "none",
+        "mobile-overlay": true
+      }
+    },
     "main": {
       "type": "page",
       "settings": {
         "show-title": false,
         "background-color": "none",
-        "light-text": false,
-        "container-width": "4",
-        "spacing-above": false,
-        "spacing-below": true
+        "white-text": false,
+        "container-width": "1",
+        "spacing-above": "none",
+        "spacing-below": "large"
       }
     },
     "1632180071f18cee62": {
       "type": "contact",
       "settings": {
-        "top-border": false,
-        "spacing-above": true,
-        "spacing-below": true,
+        "spacing-above": "none",
+        "spacing-below": "large",
         "background-color": "none",
-        "light-text": false,
+        "white-text": false,
         "container-width": "2",
         "heading": "",
-        "store-address": "",
-        "store-hours": "",
-        "show-social-sharing": false
+        "store-address": "842 Beech Street\nMountain View, CA 94041",
+        "store-hours": "<p>Monday - Friday<br/>12pm - 8pm<br/><br/>Saturday - Sunday<br/>12pm - 5pm</p>",
+        "show-social-sharing": true
       }
     }
   },
-  "order": [
-    "main",
-    "1632180071f18cee62"
-  ]
+  "order": ["1632436597fbc1d0e4", "main", "1632180071f18cee62"]
 }

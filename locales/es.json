@@ -52,8 +52,8 @@
   "cart": {
     "all_items_added": "Todos los artículos se han agregado a su carrito.",
     "checkout": "Finalizar compra",
-    "continue": "Seguir comprando",
     "empty_html": "<span data-item='rte-content'>Su carrito está vacío.<br/> <a href='{{ collections_url }}'>Haga clic aquí para seguir comprando</a>.</span>",
+    "empty_with_list_html": "<span data-item='rte-content'>Su carrito está vacío.<br/> Explore nuestras selecciones:</span>",
     "minus": "Menos",
     "order_notes": "Deje una nota con su pedido",
     "plus": "Más",
@@ -68,14 +68,11 @@
     "your_cart": "Su carrito"
   },
   "collections": {
-    "browse": "explorar colecciones",
+    "browse": "Explorar colecciones",
     "continue_shopping": "Continuar comprando",
     "filter_feedback": "No se encontró ningún producto que coincida con este filtro.",
     "no_products_feedback": "No hay productos en esta colección.",
-    "placeholder": {
-      "collection_title": "Nombre de la colección",
-      "collection_description": "La descripción de su colección se mostrará aquí"
-    },
+    "numbered_title": "Colección {{ count }}",
     "view_more": "Ver más"
   },
   "customer": {
@@ -179,6 +176,9 @@
   "general": {
     "a11y": {
       "close": "cerrar",
+      "next": "Siguiente",
+      "pause_play": "pausar / reproducir",
+      "previous": "Anterior",
       "skip_main": "Saltar al contenido principal",
       "skip_pagination": "Saltar a la paginación"
     },
@@ -197,10 +197,10 @@
       "decline": "rechazar"
     },
     "filter": {
-      "apply": "aplicar",
+      "apply": "Aplicar",
       "from": "de",
       "no_filters": "No hay filtros disponibles",
-      "reset": "restablecer",
+      "reset": "Restablecer",
       "search_by_name": "buscar por nombre",
       "sort_by": "ordenar por",
       "to": "hasta"
@@ -224,7 +224,7 @@
     },
     "search": {
       "blog": "Blog",
-      "cancel": "cancelar",
+      "cancel": "Cancelar",
       "collections": "Colecciones",
       "clear": "borrar",
       "filter_feedback": "No se encontró ningún producto que coincida con este filtro.",
@@ -269,7 +269,8 @@
       "account_view_link": "Cuenta",
       "back": "Volver",
       "cart": "Carrito",
-      "search": "Buscar"
+      "search": "Buscar",
+      "toggle_drawer": "Alternar cajón"
     },
     "footer": {
       "navigation": "Navegación"
@@ -287,13 +288,16 @@
   },
   "products": {
     "add_to_cart": "Añadir al carrito",
-    "color": "color",
+    "buy_it_now": "Compra ahora",
+    "change": "cambiar",
+    "choose_options": "elegir opciones",
     "empty_page_content_html": "Aún no ha enlazado una página. Para configurarlo, tendrá que ir al bloque {{ size_chart_path }}.",
     "from": "De",
     "low_in_stock": {
-      "one": "Solo queda 1 artículo",
-      "other": "Solo quedan {{ count }} artículos"
+      "one": "¡Date prisa, solo queda 1 artículo!",
+      "other": "¡Date prisa, solo quedan {{ count }} artículos!"
     },
+    "hotspot": "Punto caliente de producto",
     "image_modal": "Ampliar la imagen del producto",
     "n_items_left": "Solo quedan [num_items] artículos por añadir al carrito",
     "new": "Novedades",
@@ -311,8 +315,8 @@
       "return": "Volver al producto",
       "view_store_info": "Ver información de la tienda"
     },
+    "quick_add": "añadir rápidamente",
     "sale": "Rebajas",
-    "select_options": "seleccionar opciones",
     "size_chart": "Tabla de tallas",
     "size_chart_path": "Página del producto > Selector de variantes",
     "sku": "SKU",
@@ -345,14 +349,16 @@
       "sec": "seg"
     },
     "featured_collection": {
-      "skip_link": "saltar carrusel",
-      "view_collection": "Ver colección"
+      "skip_link": "saltar carrusel"
     },
     "featured_blog": {
       "continue_reading": "Continuar leyendo",
       "date": "Hace 2 horas",
       "excerpt": "Aquí se mostrará el extracto del artículo.",
       "item_title": "Entrada de blog"
+    },
+    "header": {
+      "empty_page_content": "Todavía no has vinculado una página."
     },
     "image_comparison": {
       "cursor": "Puntero"
@@ -361,13 +367,13 @@
       "open": "Abrir en Google Maps"
     },
     "navigation": {
-      "browse": "explorar",
-      "clear_all": "borrar todo",
+      "browse": "Rxplorar",
+      "clear_all": "Borrar todo",
       "large_layout": "alternar vista de producto más grande",
-      "refine": "refinar",
-      "results_for": "resultados para",
+      "refine": "Refinar",
+      "results_for": "Resultados para",
       "small_layout": "alternar vista de producto más pequeña",
-      "sort_by": "ordenar por"
+      "sort_by": "Ordenar por"
     },
     "onboarding": {
       "collection_title": "Título de la colección",

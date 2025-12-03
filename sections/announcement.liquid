@@ -1,68 +1,280 @@
 {%- liquid
-  assign bg_color = section.settings.background-color
-  assign icon = section.settings.icon
-  assign light_text = section.settings.light-text
-  assign link = section.settings.link
-  assign text = section.settings.text
+  assign next_t = 'general.a11y.next' | t
+  assign previous_t = 'general.a11y.previous' | t
 
-  assign enabled = true
-  if section.settings.home-page-only and template != 'index'
-    assign enabled = false
+  assign animation_speed = section.settings.animation-speed
+  assign bg_color = section.settings.background-color
+  assign border = section.settings.border
+  assign rotate_frequency = section.settings.rotate-frequency
+  assign scroll_text = section.settings.scroll-text
+  assign show_social_icons = section.settings.show-social-icons
+  assign sticky_enabled = section.settings.sticky-enabled
+  assign white_text = section.settings.white-text
+
+  assign arrows_enabled = section.settings.arrows-enabled
+  if section.blocks.size < 2
+    assign arrows_enabled = false
+  endif
+
+  assign num_desktop_blocks = 0
+  assign num_mobile_blocks = 0
+
+  assign region_enabled = false
+  if section.settings.show-region-selector and localization.available_countries.size > 1
+    assign region_enabled = true
+  endif
+
+  assign locale_enabled = false
+  if section.settings.show-locale-selector and localization.available_languages.size > 1
+    assign locale_enabled = true
   endif
 
   capture link_settings
-    echo settings.color--alternative
     echo settings.color--accent-1
     echo settings.color--accent-2
+    echo settings.color--accent-3
   endcapture
 -%}
 
-{%- if enabled -%}
-  <div
-    class="announcement--root"
-    data-section-id="{{ section.id }}"
-    data-section-type="announcement"
-    data-background-color="{{ bg_color }}"
-    data-light-text="{{ light_text }}"
-    data-spacing="none"
-  >
-    {%- if link != blank -%}
-      <a class="announcement--link" href="{{ link }}">
+{%- capture blocks -%}
+  {%- for block in section.blocks -%}
+    {%- liquid
+      assign countdown_enabled = block.settings.countdown-enabled
+      assign icon = block.settings.icon
+      assign icon_image = block.settings.icon-image
+      assign link = block.settings.link
+      assign hide_on_desktop = block.settings.hide-on-desktop
+      assign hide_on_mobile = block.settings.hide-on-mobile
+      assign page_enabled = block.settings.page-enabled
+      assign page_url = block.settings.page-url
+      assign text = block.settings.text
+
+      if page_enabled and page_url != request.path
+        continue
+      endif
+
+      if hide_on_desktop and hide_on_mobile
+        continue
+      elsif hide_on_desktop
+        assign num_mobile_blocks = num_mobile_blocks | plus: 1
+      elsif hide_on_mobile
+        assign num_desktop_blocks = num_desktop_blocks | plus: 1
+      else
+        assign num_desktop_blocks = num_desktop_blocks | plus: 1
+        assign num_mobile_blocks = num_mobile_blocks | plus: 1
+      endif
+
+      assign block_index = 0
+      if scroll_text
+        assign block_index = 9
+      endif
+
+      assign tag = 'div'
+      unless link == blank
+        assign tag = 'a'
+      endunless
+    -%}
+
+    <{{ tag }}
+      class="announcement--block"
+      {%- unless link == blank -%}
+        href="{{ link }}"
+      {%- endunless -%}
+      aria-hidden="{% if forloop.index == 1 %}false{% else %}true{% endif %}"
+      data-transition-item="viewport"
+      data-transition-trigger="custom"
+      data-transition-type="slide-in"
+      data-transition-active="false"
+      {%- if hide_on_desktop -%}
+        data-mq="small"
+      {%- elsif hide_on_mobile -%}
+        data-mq="medium-large"
+      {%- else -%}
+        data-mq=""
+      {%- endif -%}
+      {{ block.shopify_attributes }}
+    >
+      {%- for i in (0..block_index) -%}
+        <div class="announcement--block-wrapper">
+          {%- if icon_image or icon != 'none' -%}
+            <div class="announcement--icon">
+              {%- liquid
+                if icon_image
+                  echo icon_image | image_url: width: 50, height: 50 | image_tag: alt: icon_image.alt
+                else
+                  render 'icons', icon: icon
+                endif
+              -%}
+            </div>
+          {%- endif -%}
+
+          {%- if text != blank -%}
+            <div class="announcement--text" data-item="nav-text">
+              {{- text | escape -}}
+            </div>
+          {%- endif -%}
+
+          {%- if countdown_enabled -%}
+            {%-
+              render 'countdown-timer',
+              expiry_date: block.settings.expiry-date,
+              expiry_hours: block.settings.expiry-hours,
+              expiry_minutes: block.settings.expiry-minutes,
+              light_number: block.settings.light-number,
+              hide_when_expired: block.settings.hide-when-expired,
+              number_size: 16,
+              mobile_number_size: 16,
+              timer_bg_color: block.settings.timer-bg-color,
+              view: 'small'
+            -%}
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </{{ tag }}>
+  {%- endfor -%}
+{%- endcapture -%}
+
+<announcement-bar-element
+  class="announcement--root"
+  data-section-id="{{ section.id }}"
+  data-section-type="announcement"
+  data-countdown-container
+  data-background-color="{{ bg_color }}"
+  data-border="{{ border }}"
+  data-rotate-frequency="{{ rotate_frequency }}"
+  data-scroll-text="{{ scroll_text }}"
+  data-sticky-enabled="{{ sticky_enabled }}"
+  {% if white_text %}
+    data-text-color="white"
+  {% endif %}
+  {% if num_desktop_blocks == 0 and num_mobile_blocks == 0 %}
+    data-mq="none"
+  {% elsif num_desktop_blocks == 0 %}
+    data-mq="small"
+  {% elsif num_mobile_blocks == 0 %}
+    data-mq="medium-large"
+  {% endif %}
+  {% if scroll_text %}
+    style="--announcement--animation-speed:{{ animation_speed }};"
+  {% endif %}
+>
+  <div class="announcement--left" data-mq="medium-large">
+    {%- liquid
+      if show_social_icons
+        render 'social-icons', type: 'follow', alignment: 'left'
+      endif
+    -%}
+  </div>
+
+  <div class="announcement--center">
+    {%- if arrows_enabled -%}
+      <button
+        class="announcement--previous"
+        aria-label="{{ previous_t }}"
+        aria-hidden="true"
+      >
+        {%- render 'icons', icon: 'chevron-left' -%}
+      </button>
     {%- endif -%}
 
-    <div class="announcement--wrapper">
-      {%- if icon -%}
-        <div class="announcement--icon">
-          {{-
-            icon |
-              image_url: width: 50, height: 50 |
-              image_tag: alt: icon.alt
-          -}}
-        </div>
-      {%- endif -%}
-
-      {%- if text != blank -%}
-        <div class="announcement--text" data-item="accent-text">
-          {{- text | escape -}}
-        </div>
-      {%- endif -%}
+    <div class="announcement--blocks">
+      {{- blocks -}}
     </div>
 
-    {%- if link != blank -%}
-      </a>
+    {%- if arrows_enabled -%}
+      <button
+        class="announcement--next"
+        aria-label="{{ next_t }}"
+        aria-hidden="true"
+      >
+        {%- render 'icons', icon: 'chevron-right' -%}
+      </button>
     {%- endif -%}
   </div>
+
+  <div class="announcement--right" data-mq="medium-large">
+    {%- if locale_enabled or region_enabled -%}
+      {%-
+        render 'localization',
+        locale_enabled: locale_enabled,
+        region_enabled: region_enabled,
+        id: 'announcement'
+      -%}
+    {%- endif -%}
+  </div>
+</announcement-bar-element>
+
+<style>
+  :root {
+    --announcement--sticky: {% if sticky_enabled %}1{% else %}0{% endif %};
+  }
+
+  .section--header ~ #shopify-section-{{ section.id }} {
+    top: calc(var(--header--sticky, 0) * var(--header--height, 0px));
+    z-index: 4;
+  }
+</style>
+
+{% comment %} Measure header ASAP to prevent CLS {% endcomment %}
+<script>
+  document.documentElement.style.setProperty(
+    '--announcement--height',
+    `${document.querySelector('.announcement--root').offsetHeight.toFixed(2)}px`
+  );
+</script>
+
+{%- if locale_enabled or region_enabled -%}
+  <element-relocator data-move-into=".mobile-nav--localization" data-mq="none">
+    {%-
+      render 'localization',
+      locale_enabled: locale_enabled,
+      region_enabled: region_enabled,
+      id: 'mobile-nav'
+    -%}
+  </element-relocator>
+{%- endif -%}
+
+{%- if show_social_icons -%}
+  <element-relocator data-move-into=".mobile-nav--social-icons" data-mq="none">
+    {%- render 'social-icons', type: 'follow', alignment: 'left', mobile_alignment: 'left' -%}
+  </element-relocator>
 {%- endif -%}
 
 {% schema %}
 {
   "name": "Announcement bar",
+  "class": "section--announcement",
+  "tag": "aside",
   "settings": [
     {
       "type": "checkbox",
-      "id": "home-page-only",
-      "label": "Home page only",
-      "default": true
+      "id": "sticky-enabled",
+      "label": "Enable sticky bar",
+      "default": false
+    },
+    {
+      "id": "border",
+      "label": "Border",
+      "type": "select",
+      "options": [
+        {
+          "label": "Top",
+          "value": "top"
+        },
+        {
+          "label": "Bottom",
+          "value": "bottom"
+        },
+        {
+          "label": "Both",
+          "value": "both"
+        },
+        {
+          "label": "None",
+          "value": "none"
+        }
+      ],
+      "default": "none"
     },
     {
       "id": "background-color",
@@ -70,7 +282,7 @@
       "type": "select",
       "options": [
         {
-          "label": "Transparent",
+          "label": "None",
           "value": "none"
         },
         {
@@ -88,32 +300,375 @@
         {
           "label": "Accent 2",
           "value": "accent-2"
+        },
+        {
+          "label": "Accent 3",
+          "value": "accent-3"
         }
       ],
       "default": "accent-1"
     },
     {
-      "id": "light-text",
-      "label": "Use light text color",
+      "id": "white-text",
+      "label": "Use white text color",
       "type": "checkbox",
       "default": false
     },
     {
-      "type": "image_picker",
-      "id": "icon",
-      "label": "Icon image",
-      "info": "50 x 50px recommended"
+      "id": "arrows-enabled",
+      "label": "Enable arrows",
+      "type": "checkbox",
+      "default": true
     },
     {
-      "type": "text",
-      "id": "text",
-      "label": "Text",
-      "default": "Announcement for sales, promos, shipping info & more — Click and Collect available"
+      "label": "Rotate frequency",
+      "id": "rotate-frequency",
+      "type": "range",
+      "min": 3,
+      "max": 15,
+      "step": 1,
+      "unit": "sec",
+      "default": 7
     },
     {
-      "type": "url",
-      "id": "link",
-      "label": "Link"
+      "type": "paragraph",
+      "content": "To enable transparent announcements, use the toolbar block of the header section."
+    },
+    {
+      "type": "header",
+      "content": "Links",
+      "info": "Social media icons and localization options will show in the menu on mobile"
+    },
+    {
+      "type": "checkbox",
+      "id": "show-social-icons",
+      "label": "Show social icons",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Country/region Selector",
+      "info": "To add a country/region, go to your [markets settings](/admin/settings/markets)."
+    },
+    {
+      "type": "checkbox",
+      "id": "show-region-selector",
+      "label": "Show country/region selector",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Language Selector",
+      "info": "To add a language, go to your [language settings](/admin/settings/languages)."
+    },
+    {
+      "type": "checkbox",
+      "id": "show-locale-selector",
+      "label": "Show language selector",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "checkbox",
+      "id": "scroll-text",
+      "label": "Scroll text",
+      "default": true
+    },
+    {
+      "id": "animation-speed",
+      "label": "Scroll speed",
+      "type": "range",
+      "min": 1,
+      "max": 10,
+      "step": 0.5,
+      "default": 3
+    }
+  ],
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "Announcement",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "id": "icon",
+          "type": "select",
+          "label": "Icon",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "Bell",
+              "value": "bell-ringing"
+            },
+            {
+              "label": "Calendar",
+              "value": "calendar"
+            },
+            {
+              "label": "Camera",
+              "value": "camera"
+            },
+            {
+              "label": "Checkmark",
+              "value": "check-fat"
+            },
+            {
+              "label": "Clipboard",
+              "value": "clipboard-text"
+            },
+            {
+              "label": "Clock",
+              "value": "clock"
+            },
+            {
+              "label": "Credit card",
+              "value": "credit-card"
+            },
+            {
+              "label": "Dollar sign",
+              "value": "currency-dollar"
+            },
+            {
+              "label": "Download",
+              "value": "download-simple"
+            },
+            {
+              "label": "Envelope",
+              "value": "envelope"
+            },
+            {
+              "label": "Earth",
+              "value": "globe-hemisphere-west"
+            },
+            {
+              "label": "Flower",
+              "value": "flower"
+            },
+            {
+              "label": "Gem",
+              "value": "sketch-logo"
+            },
+            {
+              "label": "Handshake",
+              "value": "handshake"
+            },
+            {
+              "label": "Headset",
+              "value": "headset"
+            },
+            {
+              "label": "Heart",
+              "value": "heart"
+            },
+            {
+              "label": "Key",
+              "value": "key"
+            },
+            {
+              "label": "Leaf",
+              "value": "leaf"
+            },
+            {
+              "label": "Lock",
+              "value": "lock-key"
+            },
+            {
+              "label": "Map",
+              "value": "map-pin"
+            },
+            {
+              "label": "Medal",
+              "value": "medal"
+            },
+            {
+              "label": "Message",
+              "value": "chat-circle-text"
+            },
+            {
+              "label": "Music",
+              "value": "music-notes"
+            },
+            {
+              "label": "Package",
+              "value": "package"
+            },
+            {
+              "label": "Paw",
+              "value": "paw-print"
+            },
+            {
+              "label": "People",
+              "value": "users-four"
+            },
+            {
+              "label": "Pencil",
+              "value": "pencil"
+            },
+            {
+              "label": "Phone",
+              "value": "device-mobile"
+            },
+            {
+              "label": "Plant",
+              "value": "plant"
+            },
+            {
+              "label": "Rabbit",
+              "value": "rabbit"
+            },
+            {
+              "label": "Recycle",
+              "value": "recycle"
+            },
+            {
+              "label": "Science",
+              "value": "atom"
+            },
+            {
+              "label": "Shield",
+              "value": "shield-check"
+            },
+            {
+              "label": "Smile",
+              "value": "smiley"
+            },
+            {
+              "label": "Star",
+              "value": "star"
+            },
+            {
+              "label": "Storefront",
+              "value": "storefront"
+            },
+            {
+              "label": "Sun",
+              "value": "sun"
+            },
+            {
+              "label": "Tree",
+              "value": "tree"
+            },
+            {
+              "label": "Truck",
+              "value": "truck"
+            }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon-image",
+          "label": "Icon image",
+          "info": "If an image is set, it will override the icon"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Announcement for sales, promos & more"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "header",
+          "content": "Features"
+        },
+        {
+          "type": "checkbox",
+          "id": "hide-on-desktop",
+          "label": "Hide in desktop",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "hide-on-mobile",
+          "label": "Hide in mobile",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "page-enabled",
+          "label": "Limit to specific page",
+          "default": false
+        },
+        {
+          "type": "url",
+          "id": "page-url",
+          "label": "Targeted page"
+        },
+        {
+          "type": "header",
+          "content": "Countdown features"
+        },
+        {
+          "type": "checkbox",
+          "id": "countdown-enabled",
+          "label": "Enable countdown",
+          "default": true
+        },
+        {
+          "id": "timer-bg-color",
+          "label": "Timer background color",
+          "type": "select",
+          "options": [
+            { "label": "None", "value": "none" },
+            { "label": "Light", "value": "light" },
+            { "label": "Dark", "value": "dark" }
+          ],
+          "default": "dark"
+        },
+        {
+          "id": "light-number",
+          "label": "Use light number color",
+          "type": "checkbox",
+          "default": true
+        },
+        {
+          "id": "expiry-date",
+          "label": "Expiry date",
+          "type": "text",
+          "default": "DD-MM-YYYY",
+          "info": "DD-MM-YYYY"
+        },
+        {
+          "label": "Expiry hours",
+          "id": "expiry-hours",
+          "type": "range",
+          "min": 0,
+          "max": 23,
+          "step": 1,
+          "default": 0,
+          "info": "Represents the hour in UTC standard time"
+        },
+        {
+          "label": "Expiry minutes",
+          "id": "expiry-minutes",
+          "type": "range",
+          "min": 0,
+          "max": 59,
+          "step": 1,
+          "default": 0,
+          "info": "Represents the minutes in UTC standard time"
+        },
+        {
+          "id": "hide-when-expired",
+          "label": "Hide section when countdown expires",
+          "type": "checkbox",
+          "default": true
+        }
+      ]
     }
   ]
 }

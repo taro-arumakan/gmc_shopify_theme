@@ -52,8 +52,8 @@
   "cart": {
     "all_items_added": "Tous les articles ont été ajoutés à votre panier.",
     "checkout": "Paiement",
-    "continue": "Continuer vos achats",
     "empty_html": "<span data-item='rte-content'>Votre panier est actuellement vide.<br/> <a href='{{ collections_url }}'>Cliquez ici pour continuer vos achats</a>.</span>",
+    "empty_with_list_html": "<span data-item='rte-content'>Votre panier est actuellement vide.<br/> Parcourez nos sélections:</span>",
     "minus": "Moins",
     "order_notes": "Laissez une note avec votre commande",
     "plus": "Plus",
@@ -68,14 +68,11 @@
     "your_cart": "Votre panier"
   },
   "collections": {
-    "browse": "consulter les collections",
+    "browse": "Consulter les collections",
     "continue_shopping": "Continuer vos achats",
     "filter_feedback": "Aucun produit ne correspond à ce filtre.",
     "no_products_feedback": "Il n'y a pas de produits dans cette collection.",
-    "placeholder": {
-      "collection_title": "Nom de la collection",
-      "collection_description": "La description de votre collection s'affichera ici"
-    },
+    "numbered_title": "Collection {{ count }}",
     "view_more": "Voir plus"
   },
   "customer": {
@@ -179,6 +176,9 @@
   "general": {
     "a11y": {
       "close": "fermer",
+      "next": "Suivant",
+      "pause_play": "pause / lecture",
+      "previous": "Précédent",
       "skip_main": "Aller au contenu principal",
       "skip_pagination": "Aller à la pagination"
     },
@@ -197,10 +197,10 @@
       "decline": "refuser"
     },
     "filter": {
-      "apply": "appliquer",
+      "apply": "Appliquer",
       "from": "de",
       "no_filters": "Aucun filtre disponible",
-      "reset": "réinitialiser",
+      "reset": "Réinitialiser",
       "search_by_name": "rechercher par nom",
       "sort_by": "trier par",
       "to": "au"
@@ -224,7 +224,7 @@
     },
     "search": {
       "blog": "Blog",
-      "cancel": "annuler",
+      "cancel": "Annuler",
       "collections": "Collections",
       "clear": "effacer",
       "filter_feedback": "Aucun produit ne correspond à ce filtre.",
@@ -269,7 +269,8 @@
       "account_view_link": "Compte",
       "back": "Retour",
       "cart": "Panier",
-      "search": "Rechercher"
+      "search": "Rechercher",
+      "toggle_drawer": "Basculer le tiroir"
     },
     "footer": {
       "navigation": "Navigation"
@@ -287,13 +288,16 @@
   },
   "products": {
     "add_to_cart": "Ajouter au panier",
-    "color": "couleur",
+    "buy_it_now": "Achetez maintenant",
+    "change": "changer",
+    "choose_options": "choisir des options",
     "empty_page_content_html": "Vous n'avez pas encore lié de page. Pour configurer cela, vous devez aller dans le bloc {{ size_chart_path }}.",
     "from": "De",
     "low_in_stock": {
-      "one": "Plus qu'1 article restant",
-      "other": "Plus que {{ count }} articles restants"
+      "one": "Dépêchez-vous, il ne reste plus qu'1 article !",
+      "other": "Dépêchez-vous, il ne reste plus que {{ count }} articles !"
     },
+    "hotspot": "Point chaud de produit",
     "image_modal": "Agrandir l'image du produit",
     "n_items_left": "Il ne reste que [num_items] articles à ajouter au panier",
     "new": "Nouveau",
@@ -311,8 +315,8 @@
       "return": "Retour au produit",
       "view_store_info": "Voir les informations de la boutique"
     },
+    "quick_add": "ajouter rapidement",
     "sale": "Promotion",
-    "select_options": "sélectionner les options",
     "size_chart": "Charte des grandeurs",
     "size_chart_path": "Page produit > Sélecteur de variantes",
     "sku": "UGS",
@@ -345,14 +349,16 @@
       "sec": "sec"
     },
     "featured_collection": {
-      "skip_link": "ignorer carousel",
-      "view_collection": "Voir la collection"
+      "skip_link": "ignorer carousel"
     },
     "featured_blog": {
       "continue_reading": "Continuer à lire",
       "date": "Il y a 2 heures",
       "excerpt": "C'est ici que s'affichera l'extrait de l'article.",
       "item_title": "Article de blog"
+    },
+    "header": {
+      "empty_page_content": "Vous n'avez pas encore lié de page."
     },
     "image_comparison": {
       "cursor": "Curseur"
@@ -361,13 +367,13 @@
       "open": "Ouvrir dans plans"
     },
     "navigation": {
-      "browse": "rechercher",
-      "clear_all": "tout effacer",
+      "browse": "Rechercher",
+      "clear_all": "Tout effacer",
       "large_layout": "agrandir l'image du produit",
-      "refine": "affiner",
-      "results_for": "résultats pour",
+      "refine": "Affiner",
+      "results_for": "Résultats pour",
       "small_layout": "diminuer l'image du produit",
-      "sort_by": "trier par"
+      "sort_by": "Trier par"
     },
     "onboarding": {
       "collection_title": "Titre de la collection",

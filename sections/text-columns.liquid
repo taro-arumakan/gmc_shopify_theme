@@ -2,35 +2,142 @@
   assign aspect_ratio = section.settings.aspect-ratio
   assign bg_color = section.settings.background-color
   assign block_spacing = section.settings.block-spacing
+  assign border = section.settings.border
+  assign button_style = section.settings.button-style
   assign container_width = section.settings.container-width
   assign columns = section.settings.width
   assign description = section.settings.description
   assign heading = section.settings.heading
   assign image_width = section.settings.image-width
-  assign light_text = section.settings.light-text
   assign link_text = section.settings.link-text
   assign link_url = section.settings.link-url
   assign mobile_columns = section.settings.mobile-width
+  assign mobile_heading_alignment = section.settings.mobile-heading-alignment
+  assign mobile_media_layout = section.settings.mobile-media-layout
+  assign mobile_spacing_above = section.settings.mobile-spacing-above
+  assign mobile_spacing_below = section.settings.mobile-spacing-below
+  assign mobile_text_alignment = section.settings.mobile-text-alignment
   assign overline = section.settings.overline
+  assign section_alignment = section.settings.section-alignment
   assign spacing_above = section.settings.spacing-above
   assign spacing_below = section.settings.spacing-below
   assign text_alignment = section.settings.text-alignment
-  assign top_border = section.settings.top-border
+  assign white_text = section.settings.white-text
 
-  assign header_text_exists = true
-  if overline == blank and heading == blank and description == blank
-    assign header_text_exists = false
+  assign header_exists = false
+  unless overline == blank and heading == blank and description == blank
+    assign header_exists = true
+  endunless
+
+  assign loading = 'lazy'
+  if section.index < 3
+    assign loading = 'eager'
   endif
 
-  assign footer_text_exists = true
-  if link_text == blank
-    assign footer_text_exists = false
-  endif
+  capture sizes
+    render 'utils', name: 'sizes', container_width: container_width, columns: columns, column_spacing: block_spacing, mobile_columns: mobile_columns
+  endcapture
 -%}
 
-{%- capture sizes -%}
-  '(max-width: 767px) {{ 100 | divided_by: mobile_columns }}vw, {{ 100 | divided_by: columns }}vw'
-{%- endcapture %}
+{%- for block in section.blocks -%}
+  {%- capture block_html -%}
+    {%- liquid
+      echo block_html
+
+      assign block_link_url = block.settings.link-url
+      assign block_link_text = block.settings.link-text
+      assign block_description = block.settings.description
+      assign image = block.settings.image
+      assign link_wrapper = false
+      assign show_image = block.settings.show-image
+      assign title = block.settings.title
+
+      if block_link_text == blank and block_link_url != blank and block_description == blank
+        assign link_wrapper = true
+      endif
+    -%}
+
+    <div
+      class="featured-grid--item"
+      {% unless settings.transitions--other %}
+        data-transition-item="{{ section.id }}"
+      {% endunless %}
+      {{ block.shopify_attributes }}
+    >
+      {%- if link_wrapper -%}
+        <a
+          class="featured-grid--item--link-wrapper"
+          href="{{ block_link_url }}"
+          {%- if title != blank -%}
+            aria-label="{{ title }}"
+          {%- elsif heading != blank -%}
+            aria-label="{{ heading }}"
+          {%- else -%}
+            aria-label="{{ image.alt }}"
+          {%- endif -%}
+        >
+      {%- endif -%}
+
+      <div class="featured-grid--item--container" data-container="block">
+        {%- if show_image -%}
+          <div
+            class="featured-grid--item--media"
+            data-item="image"
+            data-text-alignment="{{ text_alignment }}"
+            data-mobile-text-alignment="{{ mobile_text_alignment }}"
+            {% unless settings.transitions--image %}
+              data-transition-item
+              data-transition-type="zoom-in"
+              data-transition-trigger="hover"
+            {% endunless %}
+            {% unless image_width == 0 %}
+              style="--width:{{ image_width }}px;"
+            {% endunless %}
+          >
+            {%- if image -%}
+              {%- assign twice_width = image.width | times: 2 -%}
+              {{-
+                image |
+                image_url: width: twice_width |
+                image_tag:
+                  widths: '200, 300, 400, 500, 600, 700, 800, 900, 1000, 1200, 1500',
+                  sizes: sizes,
+                  loading: loading
+              -}}
+            {%- else -%}
+              {%- render 'placeholder', type: 'image' -%}
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        {%- unless title == blank and block_description == blank and block_link_text == blank -%}
+          {%-
+            render 'stacked-text',
+            white_text: white_text,
+            cover_link: false,
+            heading_type: 'block-heading',
+            button_style: 'block-link',
+            description: block_description,
+            id: 'viewport',
+            link_text: block_link_text,
+            link_url: block_link_url,
+            mobile_x_alignment: mobile_text_alignment,
+            mobile_y_alignment: 'none',
+            title: title,
+            x_alignment: text_alignment,
+            y_alignment: 'none'
+          -%}
+        {%- endunless -%}
+      </div>
+
+      {%- if link_wrapper -%}
+        </a>
+      {%- endif -%}
+    </div>{%- unless forloop.last -%}<span class="divider"></span>{%- endunless -%}
+  {%- endcapture -%}
+{%- endfor -%}
+
+{%- assign block_html_arr = block_html | split: '<span class="divider"></span>' -%}
 
 <div
   class="featured-grid--root"
@@ -38,206 +145,234 @@
   data-aspect-ratio="{{ aspect_ratio }}"
   data-background-color="{{ bg_color }}"
   data-block-spacing="{{ block_spacing }}"
-  data-container="section"
+  data-border="{{ border }}"
   data-container-width="{{ container_width }}"
-  data-footer-text-exists="{{ footer_text_exists }}"
-  data-header-text-exists="{{ header_text_exists }}"
-  data-light-text="{{ light_text }}"
+  data-mobile-spacing-above="{{ mobile_spacing_above }}"
+  data-mobile-spacing-below="{{ mobile_spacing_below }}"
   data-mobile-overlay="false"
   data-spacing-above="{{ spacing_above }}"
   data-spacing-below="{{ spacing_below }}"
-  data-text-alignment="{{ text_alignment }}"
   data-text-position="bottom"
-  data-top-border="{{ top_border }}"
+  {% if white_text %}
+    data-text-color="white"
+  {% endif %}
 >
-  {%- if header_text_exists -%}
-    <div class="featured-grid--header" data-container="block">
-      {%- unless overline == blank -%}
-        <h4 data-item="overline">
-          {{- overline | escape -}}
-        </h4>
-      {%- endunless -%}
-
-      {%- unless heading == blank -%}
-        <h2 class="featured-grid--heading" data-item="section-heading">
-          {{- heading | escape -}}
-        </h2>
-      {%- endunless -%}
-
-      {%- unless description == blank -%}
-        <h3 class="featured-grid--description" data-item="paragraph">
-          {{- description -}}
-        </h3>
-      {%- endunless -%}
-    </div>
-  {%- endif -%}
-
-  <div class="featured-grid--body">
-    <div
-      class="featured-grid--body--container"
-      data-container="panel"
-      data-columns="{{ columns }}"
-      data-mobile-columns="{{ mobile_columns }}"
-      data-block-spacing="{{ block_spacing }}"
-      {% unless settings.transitions--other %}
-        data-transition-container="{{ section.id }}"
-        data-transition-type="fade-in"
-        data-transition-cascade="horizontal"
-        data-transition-cascade-interval="200"
-      {% endunless %}
-    >
-      {%- for block in section.blocks -%}
-        {%- liquid
-          assign block_link_url = block.settings.link-url
-          assign block_link_text = block.settings.link-text
-          assign block_description = block.settings.description
-          assign image = block.settings.image
-          assign link_wrapper = false
-          assign show_image = block.settings.show-image
-          assign title = block.settings.title
-
-          if block_link_text == blank and block_link_url != blank and block_description == blank
-            assign link_wrapper = true
-          endif
-        -%}
-
+  <div
+    class="featured-grid--wrapper"
+    data-container="section"
+    {% unless settings.transitions--other %}
+      data-transition-container="{{ section.id }}"
+      data-transition-type="fade-in"
+      data-transition-cascade="horizontal"
+      data-transition-cascade-interval="200"
+    {% endunless %}
+  >
+    {%- if header_exists or mobile_media_layout == 'slideshow' -%}
+      <div
+        class="featured-grid--header-nav"
+        data-container="nav"
+        data-text-alignment="{{ section_alignment }}"
+        data-mobile-text-alignment="{{ mobile_heading_alignment }}"
+      >
         <div
-          class="featured-grid--item"
-          data-image-enabled="{{ show_image }}"
-          {% unless settings.transitions--other %}
-            data-transition-item="{{ section.id }}"
-          {%- endunless -%}
-          {{ block.shopify_attributes }}
+          class="featured-grid--header"
+          data-container="block"
+          {% unless settings.transitions--text %}
+            data-transition-container="{{ section.id }}-header"
+            data-transition-type="slide-in"
+            data-transition-cascade="vertical"
+            data-transition-cascade-interval="500"
+          {% endunless %}
         >
-          {%- if link_wrapper -%}
-            <a
-              class="featured-grid--item--link-wrapper"
-              href="{{ block_link_url }}"
-              {%- if title != blank -%}
-                aria-label="{{ title }}"
-              {%- elsif heading != blank -%}
-                aria-label="{{ heading }}"
-              {%- else -%}
-                aria-label="{{ image.alt }}"
-              {%- endif -%}
-            >
-          {%- endif -%}
-
-          <div class="featured-grid--item--container">
-            {%- if show_image -%}
+          {%- if header_exists -%}
+            {%- unless heading == blank -%}
               <div
-                class="featured-grid--item--image"
-                data-item="image"
-                {% unless settings.transitions--image %}
-                  data-transition-item
-                  data-transition-type="zoom-in"
-                  data-transition-trigger="hover"
-                {% endunless %}
-                {% unless image_width == 0 %}
-                  style="max-width:{{ image_width }}px;"
+                class="featured-grid--heading"
+                {% unless settings.transitions--text %}
+                  data-transition-item="{{ section.id }}-header"
                 {% endunless %}
               >
-                {%- if image -%}
-                  {%- assign twice_width = image.width | times: 2 -%}
-                  {{-
-                    image |
-                    image_url: width: twice_width |
-                    image_tag:
-                      widths: "300, 500, 767, 1000, 1200, 1500",
-                      sizes: sizes
-                  -}}
-                {%- else -%}
-                  {%- render "placeholder", type: "image" -%}
-                {%- endif -%}
+                <h2 data-item="section-heading">
+                  {{- heading | escape -}}
+                </h2>
               </div>
-            {%- endif -%}
+            {%- endunless -%}
 
-            {%- if title != blank or block_description != blank or block_link_text != blank -%}
-              <div class="featured-grid--item--text">
-                {%- unless title == blank -%}
-                  <h3 class="featured-grid--item--title" data-item="block-heading">
-                    {{- title | escape -}}
-                  </h3>
-                {%- endunless -%}
-
-                {%- unless block_description == blank -%}
-                  <div class="featured-grid--item--description" data-item="rte-content">
-                    {{- block_description -}}
-                  </div>
-                {%- endunless -%}
-
-                {%- unless block_link_text == blank -%}
-                  <div class="featured-grid--item--link" data-item="block-link">
-                    <a
-                      class="featured-grid--item--link-container"
-                      {% unless block_link_url == blank %}
-                        href="{{ block_link_url }}"
-                      {% endunless %}
-                    >
-                      {{- block_link_text -}}
-                    </a>
-                  </div>
-                {%- endunless -%}
+            {%- unless overline == blank -%}
+              <div
+                class="featured-grid--overline"
+                {% unless settings.transitions--text %}
+                  data-transition-item="{{ section.id }}-header"
+                {% endunless %}
+              >
+                <p data-item="overline">
+                  {{- overline | escape -}}
+                </p>
               </div>
-            {%- endif -%}
+            {%- endunless -%}
 
-            </div>
-
-          {%- if link_wrapper -%}
-            </a>
+            {%- unless description == blank -%}
+              <div
+                class="featured-grid--description"
+                {% unless settings.transitions--text %}
+                  data-transition-item="{{ section.id }}-header"
+                {% endunless %}
+              >
+                <h3 data-item="paragraph">
+                  {{- description -}}
+                </h3>
+              </div>
+            {%- endunless -%}
           {%- endif -%}
         </div>
 
-      {%- endfor -%}
-    </div>
-  </div>
+        {%- liquid
+          if mobile_media_layout == 'slideshow'
+            assign blocks_per_slide_desktop = columns | plus: 0.0
+            assign blocks_per_slide_mobile = mobile_columns | plus: 0.0
+            assign total_slides = block_html_arr.size | divided_by: blocks_per_slide_desktop | ceil
+            assign total_slides_mobile = block_html_arr.size | divided_by: blocks_per_slide_mobile | ceil
+            render 'carousel-nav-arrow', id: section.id, total_slides_mobile: total_slides_mobile, mobile_only: true
+          endif
+        -%}
+      </div>
+    {%- endif -%}
 
-  {%- if footer_text_exists -%}
-    <div class="featured-grid--footer" data-container="panel">
-      <div class="featured-grid--footer--block" data-container="block">
+    {%- if mobile_media_layout == 'grid' -%}
+      <div
+        class="featured-grid--body"
+        data-container="panel"
+        data-columns="{{ columns }}"
+        data-mobile-columns="{{ mobile_columns }}"
+        data-block-spacing="{{ block_spacing }}"
+      >
+        {%- liquid
+          for block_html in block_html_arr
+            echo block_html
+          endfor
+        -%}
+      </div>
+    {%- else -%}
+      {%-
+        render 'carousel',
+        section: section,
+        blocks: block_html_arr,
+        blocks_per_slide: columns,
+        blocks_per_slide_mobile: mobile_columns,
+        mobile_only: true,
+        mobile_next_visible: false,
+        total_blocks: block_html_arr.size,
+        total_slides: block_html_arr.size | divided_by: mobile_columns
+      -%}
+    {%- endif -%}
+
+    {%- unless link_text == blank -%}
+      <div
+        class="featured-grid--footer"
+        data-container="block"
+        data-text-alignment="{{ section_alignment }}"
+      >
         <a
-          class="featured-grid--footer--button"
+          class="featured-grid--button"
           href="{{ link_url }}"
-          data-item="{{ settings.buttons--style }}"
-          data-text="{{- link_text -}}"
-          {% unless settings.transitions--buttons %}
-            data-transition-button
-          {% endunless %}
+          data-item="{{ button_style }}"
+          data-text="{{ link_text }}"
         >
-          <div class="featured-grid--footer--button-container">
-            {{- link_text -}}
-          </div>
+          <span>{{ link_text }}</span>
         </a>
       </div>
-    </div>
-  {%- endif -%}
+    {%- endunless -%}
+  </div>
 </div>
 
 {% schema %}
 {
   "name": "Text columns with images",
+  "class": "section--text-columns",
   "settings": [
     {
       "type": "header",
       "content": "Layout and Color"
     },
     {
-      "id": "top-border",
-      "label": "Top border",
-      "type": "checkbox",
-      "default": false
+      "id": "border",
+      "label": "Border",
+      "type": "select",
+      "options": [
+        {
+          "label": "Top",
+          "value": "top"
+        },
+        {
+          "label": "Bottom",
+          "value": "bottom"
+        },
+        {
+          "label": "Both",
+          "value": "both"
+        },
+        {
+          "label": "None",
+          "value": "none"
+        }
+      ],
+      "default": "none"
     },
     {
       "id": "spacing-above",
       "label": "Spacing above",
-      "type": "checkbox",
-      "default": true
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "large"
     },
     {
       "id": "spacing-below",
       "label": "Spacing below",
-      "type": "checkbox",
-      "default": true
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "large"
     },
     {
       "id": "block-spacing",
@@ -251,7 +386,7 @@
       "type": "select",
       "options": [
         {
-          "label": "Transparent",
+          "label": "None",
           "value": "none"
         },
         {
@@ -269,45 +404,42 @@
         {
           "label": "Accent 2",
           "value": "accent-2"
+        },
+        {
+          "label": "Accent 3",
+          "value": "accent-3"
         }
       ],
       "default": "none"
     },
     {
-      "id": "light-text",
-      "label": "Use light text color",
+      "id": "white-text",
+      "label": "Use white text color",
       "type": "checkbox",
       "default": false
+    },
+    {
+      "id": "section-alignment",
+      "label": "Heading and call-to-action alignment",
+      "type": "text_alignment",
+      "default": "center"
+    },
+    {
+      "id": "text-alignment",
+      "label": "Block text alignment",
+      "type": "text_alignment",
+      "default": "center"
     },
     {
       "id": "container-width",
       "label": "Maximum width of container",
       "type": "select",
       "options": [
-        {
-          "label": "Extra small",
-          "value": "1"
-        },
-        {
-          "label": "Small",
-          "value": "2"
-        },
-        {
-          "label": "Medium",
-          "value": "3"
-        },
-        {
-          "label": "Large",
-          "value": "4"
-        },
-        {
-          "label": "Extra large",
-          "value": "5"
-        },
-        {
-          "label": "Full width",
-          "value": "6"
-        }
+        { "label": "Extra small", "value": "1" },
+        { "label": "Small", "value": "2" },
+        { "label": "Medium", "value": "3" },
+        { "label": "Large", "value": "4" },
+        { "label": "Extra large", "value": "5" }
       ],
       "default": "4"
     },
@@ -343,12 +475,6 @@
       "info": "Set to 0 for auto sizing"
     },
     {
-      "id": "text-alignment",
-      "label": "Text alignment",
-      "type": "text_alignment",
-      "default": "center"
-    },
-    {
       "type": "header",
       "content": "Content"
     },
@@ -375,23 +501,130 @@
       "label": "Link"
     },
     {
+      "id": "button-style",
+      "label": "Button style",
+      "type": "select",
+      "options": [
+        {
+          "label": "Style 1",
+          "value": "button-1"
+        },
+        {
+          "label": "Style 2",
+          "value": "button-2"
+        },
+        {
+          "label": "Style 3",
+          "value": "button-3"
+        },
+        {
+          "label": "Style 4",
+          "value": "button-4"
+        },
+        {
+          "label": "Link",
+          "value": "block-link"
+        }
+      ],
+      "default": "button-1"
+    },
+    {
       "type": "text",
       "id": "link-text",
-      "label": "Link text"
+      "label": "Optional link"
     },
     {
       "type": "header",
       "content": "Mobile"
     },
     {
+      "id": "mobile-spacing-above",
+      "label": "Spacing above",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "id": "mobile-spacing-below",
+      "label": "Spacing below",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "id": "mobile-heading-alignment",
+      "label": "Heading alignment",
+      "type": "text_alignment",
+      "default": "left",
+      "info": "Align the heading to balance it with the slideshow navigation arrows."
+    },
+    {
+      "id": "mobile-text-alignment",
+      "label": "Block text alignment",
+      "type": "text_alignment",
+      "default": "center"
+    },
+    {
       "id": "mobile-width",
       "label": "Blocks per row for small devices",
-      "type": "radio",
+      "type": "select",
       "options": [
         { "value": "1", "label": "1" },
         { "value": "2", "label": "2" }
       ],
       "default": "1"
+    },
+    {
+      "id": "mobile-media-layout",
+      "label": "Media layout",
+      "type": "select",
+      "options": [
+        { "label": "Slideshow", "value": "slideshow" },
+        { "label": "Grid", "value": "grid" }
+      ],
+      "default": "slideshow"
     }
   ],
   "blocks": [
@@ -429,9 +662,9 @@
         },
         {
           "id": "link-text",
-          "label": "Link text",
+          "label": "Optional link",
           "type": "text",
-          "default": "View more"
+          "default": "Optional link"
         }
       ]
     }

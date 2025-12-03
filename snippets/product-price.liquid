@@ -6,41 +6,36 @@
   if current_variant.compare_at_price > current_variant.price
     assign compare_enabled = true
   endif
-
-  unless settings.quick-add--enabled
-    render 'section-assets', name: 'product-price', type: 'script'
-  endunless
 -%}
 
-<product-price-root class="product-price--root" data-id="{{ id }}">
+<product-price-element
+  class="product-price--root"
+  data-id="{{ id }}"
+  data-money-format="{{ shop.money_format | escape }}"
+>
   <div class="product-price--wrapper">
-    <div class="product-price--original" data-item='accent-text'>
+    <div class="product-price--original" data-item='nav-text'>
       {{ current_variant.price | money }}
     </div>
 
     <div
       class="product-price--compare"
-      data-item='light-accent-text'
-      {% unless compare_enabled %}
-        style="display:none;"
-      {% else %}
-        style="display:inline-block;"
-      {% endunless %}
+      data-item="nav-text"
+      data-text-color="gray"
+      aria-hidden="{% if compare_enabled %}false{% else %}true{% endif %}"
     >
-      {%- if compare_enabled -%}
-        {{- current_variant.compare_at_price | money -}}
-      {%- endif -%}
+      {%- liquid
+        if compare_enabled
+          echo current_variant.compare_at_price | money
+        endif
+      -%}
     </div>
   </div>
 
   <div
     class="product-price--unit-container"
     data-item="small-text"
-    {% if current_variant.unit_price_measurement %}
-      style="display:flex;"
-    {% else %}
-      style="display:none;"
-    {% endif %}
+    aria-hidden="{% if current_variant.unit_price_measurement %}false{% else %}true{% endif %}"
   >
     <span class="product-price--unit-price">
       {{- current_variant.unit_price | money -}}
@@ -60,4 +55,4 @@
       {{- tax_included_t -}}
     </div>
   {%- endif -%}
-</product-price-root>
+</product-price-element>

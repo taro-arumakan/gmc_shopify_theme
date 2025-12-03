@@ -7,13 +7,10 @@
       break
     endif
   endfor
-
-  render 'section-assets', name: 'product-pickup'
 -%}
 
-<product-pickup-root
+<product-pickup-element
   class="product-pickup--root"
-  style="display:block;"
   data-first-variant-id="{{ current_variant.id }}"
   data-load-first-variant="{{ first_variant_has_pickup }}"
   data-loading="false"
@@ -27,4 +24,4 @@
       {%- render 'icons', icon: 'spinner' -%}
     </div>
   {%- endif -%}
-</product-pickup-root>
+</product-pickup-element>

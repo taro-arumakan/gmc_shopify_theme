@@ -2,12 +2,10 @@
   assign email_t = 'general.mailing_list.email' | t
   assign placeholder_t = 'general.mailing_list.placeholder' | t
   assign shopify_disclaimer_t = 'shopify.online_store.spam_detection.disclaimer_html' | t
-  assign close_t = 'general.a11y.close' | t
 
   assign bg_color = block.settings.background-color
   assign days_range = block.settings.days-range
   assign delay = block.settings.delay
-  assign light_text = block.settings.light-text
   assign description = block.settings.description
   assign heading = block.settings.heading
   assign page_enabled = block.settings.page-enabled
@@ -20,6 +18,7 @@
   assign social_title = block.settings.social-title | escape
   assign text_alignment = block.settings.text-alignment
   assign translucent = block.settings.translucent
+  assign white_text = block.settings.white-text
 -%}
 
 {%- unless page_enabled and page_url != request.path -%}
@@ -32,7 +31,9 @@
     data-translucent="{{ translucent }}"
     data-show-again-after="{{ days_range }}"
     data-show-at-bottom="{{ show_at_bottom }}"
-    data-light-text="{{ light_text }}"
+    {% if white_text %}
+      data-text-color="white"
+    {% endif %}
     data-position="{{ position }}"
     data-referrer-enabled="{{ referrer_enabled }}"
     data-referrer-url="{{ referrer_url }}"
@@ -60,13 +61,11 @@
 
       {%- liquid
         if social_enabled
-          render 'social-icons', type: 'follow', heading: social_title, align: text_alignment, mobile_align: 'center'
+          render 'social-icons', type: 'follow', heading: social_title, alignment: text_alignment, mobile_alignment: 'center'
         endif
       -%}
     </div>
 
-    <button aria-label="{{ close_t }}" class="popup--block--close">
-      {%- render 'icons', icon: 'cross' -%}
-    </button>
+    <button class="layout--close" aria-label="{{ 'general.a11y.close' | t }}"></button>
   </popup-block>
 {%- endunless -%}

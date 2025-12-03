@@ -1,40 +1,58 @@
 <div
   class="social-icons--root"
   data-type="{{ type }}"
-  data-align="{{ align }}"
-  data-mobile-align="{{ mobile_align }}"
+  data-hover-color="{{ settings.social--hover-color }}"
+  data-alignment="{{ alignment }}"
+  data-mobile-alignment="{{ mobile_alignment }}"
+  {% unless heading == blank %}
+    data-container="block"
+  {% endunless %}
 >
   {%- case type -%}
     {%- when 'follow' -%}
       {%-
-        assign types = "facebook x instagram linkedin pinterest vimeo youtube tiktok threads" | split: ' '
+        assign types = "facebook x instagram linkedin tumblr snapchat pinterest vimeo youtube tiktok threads bluesky" | split: ' '
       -%}
 
       {%- for type in types -%}
-        {%- capture follow_url -%}
-          social--{{ type }}--url
-        {%- endcapture -%}
+        {%- liquid
+          capture setting_url
+            echo 'social--' | append: type | append: '--url'
+          endcapture
+
+          capture brand_url
+            if type == 'x'
+              echo shop.brand.metafields.social_links.twitter.value
+            else
+              echo shop.brand.metafields.social_links[type].value
+            endif
+          endcapture
+        -%}
 
         {%- capture icons_html -%}
           {{- icons_html -}}
 
-          {%- if settings[follow_url].size > 0 -%}
+          {%- unless settings[setting_url] == blank and brand_url == blank -%}
             <a
               class="social-{{ type }}--link"
               rel="noreferrer"
               target="_blank"
-              href="{{ settings[follow_url] | escape }}"
+              {%- if settings[setting_url] != blank -%}
+                href="{{ settings[setting_url] | escape }}"
+              {%- elsif brand_url != blank -%}
+                href="{{ brand_url | escape }}"
+              {%- endif -%}
               aria-label="{{ type }}"
             >
               {%- render 'icons', icon: type -%}
             </a>
-          {%- endif -%}
+          {%- endunless -%}
         {%- endcapture -%}
       {%- endfor -%}
 
-      {%- if icons_html != blank -%}
+      {%- unless icons_html == blank -%}
         {%- unless heading == blank -%}
-          <p class="social-icons--title" data-item="accent-text">
+          <p class="social-icons--title" data-item="nav-text">
             {{- heading -}}
           </p>
         {%- endunless -%}
@@ -42,7 +60,7 @@
         <div class="social-icons--items">
           {{- icons_html -}}
         </div>
-      {%- endif -%}
+      {%- endunless -%}
 
     {%- when 'share' -%}
       {%- liquid
@@ -58,10 +76,6 @@
         assign email = social_settings.email-enabled
         assign url = social_settings.url-enabled
 
-        if url
-          render 'section-assets', name: 'share-url', type: 'script'
-        endif
-
         if request.page_type == 'product'
           assign media = product.featured_media | image_url: width: 1024, height: 1024
           assign title = product.title | strip_html | escape | replace: ' ', '%20'
@@ -72,11 +86,11 @@
       -%}
 
       {%- if facebook or x or pinterest or email or url -%}
-        {%- if heading -%}
-          <div class="social-icons--title" data-item="accent-text">
+        {%- unless heading == blank -%}
+          <div class="social-icons--title" data-item="nav-text">
             {{- heading -}}
           </div>
-        {%- endif -%}
+        {%- endunless -%}
 
         <div class="social-icons--items">
           {%- if facebook -%}

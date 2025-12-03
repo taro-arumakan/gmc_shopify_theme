@@ -8,13 +8,6 @@
  * ------------------------------------------------------------
  */
 {
-  "sections": {
-    "main": {
-      "type": "account",
-      "settings": {}
-    }
-  },
-  "order": [
-    "main"
-  ]
+  "sections": { "main": { "type": "account", "settings": {} } },
+  "order": ["main"]
 }

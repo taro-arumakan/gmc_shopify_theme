@@ -1,25 +1,30 @@
-{%- render 'section-assets', name: 'product-low-stock', type: 'script' -%}
+{%- liquid
+  assign threshold = block_settings.threshold
+  assign width = current_variant.inventory_quantity | times: 100.0 | divided_by: threshold
+-%}
 
-<product-low-stock-root
+<product-low-stock-element
   class="product-low-stock--root"
-  style="display:block;"
   data-id="{{ id }}"
-  data-item="paragraph"
   data-initial-availability="{{ current_variant.available }}"
   data-initial-quantity="{{ current_variant.inventory_quantity | default: 0 }}"
+  style="--progress-percent:{{ width }}%;"
   {% if threshold > 0 %}
     data-threshold="{{ threshold }}"
   {% endif %}
 >
-  <script type="application/json" id="product-low-stock--json">
-    [
-      {%- for variant in product.variants -%}
-        {
-          "available": {{ variant.available }},
-          "id": {{ variant.id }},
-          "quantity": {{ variant.inventory_quantity | default: 0 }}
-        }{%- unless forloop.last -%},{%- endunless -%}
-      {%- endfor -%}
-    ]
+  <p class="product-low-stock--message" data-item="caption"></p>
+
+  {%- if block_settings.progress-bar-enabled -%}
+    <div class="product-low-stock--bar"></div>
+  {%- endif -%}
+
+  <script type="application/json" id="{{ id }}-low_stock_translations">
+    {
+      "low_in_stock": {
+        "one": "{{ "products.low_in_stock" | t: count: 1 }}",
+        "other": "{{ "products.low_in_stock" | t: count: 2 }}"
+      }
+    }
   </script>
-</product-low-stock-root>
+</product-low-stock-element>

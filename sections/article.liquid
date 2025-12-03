@@ -14,37 +14,68 @@
   assign show_author = section.settings.show-author
   assign show_featured = section.settings.show-featured
 
-  assign sizes = '(max-width: 767px) 100vw, 100vw'
-  if heading_position == 'left'
-    assign sizes = '(max-width: 767px) 100vw, 50vw'
+  assign loading = 'lazy'
+  assign fetchpriority = 'auto'
+  if section.index == 1
+    assign loading = 'eager'
+    assign fetchpriority = 'high'
   endif
 
-  render 'section-assets', name: 'article', type: 'style'
+  capture sizes
+    assign columns = 1
+    if heading_position == 'left'
+      assign columns = 2
+    endif
+
+    render 'utils', name: 'sizes', container_width: '4', columns: columns, column_spacing: 0, mobile_columns: 1, mobile_full_width: true
+  endcapture
 -%}
 
 {% comment %} View {% endcomment %}
 <article
   class="article--root"
   data-section-id="{{ section.id }}"
+  data-background-color="none"
+  data-container-width="{% if show_featured %}4{% else %}2{% endif %}"
   data-heading-position="{{ heading_position }}"
   data-show-author="{{ show_author }}"
   data-show-date="{{ show_date }}"
   data-show-featured="{{ show_featured }}"
 >
   <div class="article--wrapper">
-    <div class="article--heading">
-      <div class="article--header--info">
-        <h1 class="article--title" data-item="section-heading">
+    <div
+      class="article--heading"
+      {% unless settings.transitions--text %}
+        data-transition-container="{{ section.id }}"
+        data-transition-type="slide-in"
+        data-transition-cascade="vertical"
+        data-transition-cascade-interval="500"
+      {% endunless %}
+    >
+      <div class="article--header--info" data-container="block">
+        <h1
+          class="article--title"
+          data-item="section-heading"
+          {% unless settings.transitions--text %}
+            data-transition-item="{{ section.id }}"
+          {% endunless %}
+        >
           {{- article.title -}}
         </h1>
 
         {%- if show_date or show_author -%}
-          <div class="article--info" data-position="grouped-with-title">
+          <div
+            class="article--info"
+            data-mq="medium-large"
+            {% unless settings.transitions--text %}
+              data-transition-item="{{ section.id }}"
+            {% endunless %}
+          >
             {%- if show_date -%}
-              <div class="article--timesince" data-item="light-accent-text">
+              <div class="article--timesince" data-item="nav-text" data-text-color="gray">
                 {%-
-                  render "utils",
-                  utility: "timesince",
+                  render 'utils',
+                  name: 'timesince',
                   created_at: article.published_at
                 -%}
               </div>
@@ -64,24 +95,30 @@
       </div>
 
       {%- if show_featured and article.image -%}
-        <div class="article--image" style="--aspect-ratio:{{ article.image.aspect_ratio }};">
-          {{-
-            article.image |
-            image_url: width: article.image.width |
-            image_tag:
-              widths: "300, 500, 767, 1000, 1200, 1500, 1800, 2400, 3000",
-              sizes: sizes
-          -}}
-        </div>
+        {%-
+          render 'image',
+          class: 'article--image',
+          fetchpriority: fetchpriority,
+          image: article.image,
+          loading: loading,
+          mobile_full_width: true,
+          sizes: sizes
+        -%}
       {%- endif -%}
 
       {%- if show_date or show_author -%}
-        <div class="article--info" data-position="by-self">
+        <div
+          class="article--info"
+          data-mq="small"
+          {% unless settings.transitions--text %}
+            data-transition-item="{{ section.id }}"
+          {% endunless %}
+        >
           {%- if show_date -%}
-            <div class="article--timesince" data-item='light-accent-text'>
+            <div class="article--timesince" data-item="nav-text" data-text-color="gray">
               {%-
-                render "utils",
-                utility: "timesince",
+                render 'utils',
+                name: 'timesince',
                 created_at: article.published_at
               -%}
             </div>
@@ -111,6 +148,7 @@
 {% schema %}
 {
   "name": "Article",
+  "class": "section--article",
   "settings": [
     {
       "type": "header",
@@ -124,7 +162,7 @@
     },
     {
       "id": "heading-position",
-      "label": "Position heading",
+      "label": "Heading alignment",
       "type": "select",
       "options": [
         { "value": "above", "label": "Above" },

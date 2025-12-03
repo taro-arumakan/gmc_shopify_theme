@@ -10,29 +10,35 @@
 {
   "sections": {
     "collection-header": {
-      "type": "collection--header",
+      "type": "collection-header",
       "settings": {
+        "spacing-above": "x-large",
+        "spacing-below": "none",
         "show-title": true,
-        "heading-type": "section-heading",
+        "heading-type": "featured-heading",
         "heading-alignment": "center",
         "show-description": true,
         "description-alignment": "with-title",
-        "light-text": true,
+        "white-text": true,
         "show-image": true,
         "use-image-fallback": true,
         "image-display-type": "medium",
         "aspect-ratio": 56,
         "mobile-image-display-type": "original",
         "mobile-aspect-ratio": 134,
-        "text-style": "none",
         "overlay-style": "darken-bottom",
-        "parallax-enabled": false
+        "text-style": "none",
+        "parallax-enabled": false,
+        "mobile-spacing-above": "x-large",
+        "mobile-spacing-below": "none"
       }
     },
-    "navigation": {
-      "type": "collection--navigation",
+    "collection-navigation": {
+      "type": "collection-navigation",
       "settings": {
-        "show-browse-button": true,
+        "spacing-above": "medium",
+        "spacing-below": "none",
+        "show-browse-button": false,
         "show-sort-button": true,
         "show-refine-button": true,
         "show-layout-buttons": true,
@@ -40,70 +46,322 @@
         "custom-list-collections": "",
         "show-sort-list": true,
         "show-refine-list": true,
-        "swatches-enabled": false,
-        "show-search-link": true
+        "swatches": "circle",
+        "show-search-link": true,
+        "mobile-spacing-above": "medium",
+        "mobile-spacing-below": "none"
       }
     },
-    "main": {
-      "type": "collection--body",
+    "main-collection": {
+      "type": "main-collection",
       "blocks": {
-        "grid-promo-1": {
+        "promotion": {
           "type": "promotion",
           "disabled": true,
           "settings": {
-            "row-number": 2,
-            "column-number": 2,
-            "promo-width": 2,
+            "position": 6,
+            "promo-width": "2",
             "heading-type": "featured-heading",
             "text-horizontal-alignment": "center",
             "text-vertical-alignment": "center",
-            "text-width": "medium",
-            "text-style": "none",
-            "text-background-color": "light",
-            "overlay-style": "darken-bottom",
-            "image-display-type": "x-small",
-            "aspect-ratio": 56,
+            "text-width": 500,
+            "overlay-style": "darken",
+            "text-style": "text-shadow",
+            "background-color": "none",
+            "text-background-color": "transparent",
+            "border-type": "thick",
             "parallax-enabled": false,
-            "light-text": true,
-            "image": "{{ collection.image }}",
-            "overline": "Overline text{{ collection.title }}",
-            "title": "Grid promotion{{ collection.title }}",
-            "description": "<p>Create eye-catching promos within collection grids to increase discoverability and accelerate conversions.</p>",
+            "white-text": true,
+            "overline": "",
+            "title": "Nude & Natural",
+            "highlight-type": "italic",
+            "highlight-color": "light",
+            "highlight-text": "none",
+            "description": "",
             "link-url": "",
-            "link-text": "Optional link",
+            "link-text": "SHOP SKIN",
+            "mobile-text-horizontal-alignment": "center",
+            "mobile-text-vertical-alignment": "center",
             "mobile-hide-description": false,
-            "mobile-image-display-type": "original",
-            "mobile-aspect-ratio": 134,
-            "mobile-text-alignment": "center"
+            "mobile-hide-border": false
           }
         }
       },
       "block_order": [
-        "grid-promo-1"
+        "promotion"
       ],
       "settings": {
+        "spacing-above": "medium",
+        "spacing-below": "x-large",
         "products-per-row--desktop": 4,
         "products-per-row--mobile": "2",
-        "number-of-rows": 6
+        "number-of-rows": 5,
+        "mobile-spacing-above": "medium",
+        "mobile-spacing-below": "x-large"
+      }
+    },
+    "countdown": {
+      "type": "countdown",
+      "blocks": {
+        "overline": {
+          "type": "overline",
+          "settings": {
+            "overline": "Limited time only"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading-type": "section-heading",
+            "title": "Sale up to 25% off",
+            "highlight-type": "none",
+            "highlight-color": "",
+            "highlight-text": ""
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "description": "<p>When the timer runs out, so do the deals!</p>",
+            "description-type": "featured-paragraph",
+            "mobile-hide-enabled": false
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "style": "button-2",
+            "link-url": "",
+            "link-text": "Shop now"
+          }
+        }
+      },
+      "block_order": [
+        "overline",
+        "heading",
+        "description",
+        "button"
+      ],
+      "disabled": true,
+      "settings": {
+        "border": "none",
+        "spacing-above": "x-large",
+        "spacing-below": "x-large",
+        "container-width": "3",
+        "background-color": "dark",
+        "outer-background": true,
+        "reverse-layout": false,
+        "text-alignment": "left",
+        "white-text": true,
+        "text-style": "none",
+        "overlay-style": "darken",
+        "parallax-enabled": true,
+        "timer-bg-color": "dark",
+        "light-number": true,
+        "number-size": 40,
+        "expiry-date": "DD-MM-YYYY",
+        "expiry-hours": 0,
+        "expiry-minutes": 0,
+        "hide-when-expired": true,
+        "show-button-when": "always",
+        "mobile-spacing-above": "x-large",
+        "mobile-spacing-below": "x-large",
+        "mobile-text-alignment": "center",
+        "mobile-number-size": 20
       }
     },
     "recent-products": {
       "type": "recent-products",
       "settings": {
-        "top-border": false,
-        "spacing-above": false,
-        "spacing-below": true,
+        "border": "none",
+        "spacing-above": "x-large",
+        "spacing-below": "none",
         "background-color": "none",
-        "light-text": false,
+        "white-text": false,
         "heading-alignment": "center",
-        "heading": "Recently viewed"
+        "heading": "Recently viewed",
+        "mobile-spacing-above": "x-large",
+        "mobile-spacing-below": "none"
+      }
+    },
+    "grid-with-overlay-1": {
+      "type": "grid-with-overlay",
+      "blocks": {
+        "image-1": {
+          "type": "image",
+          "settings": {
+            "x-blocks": "1",
+            "y-blocks": "2",
+            "text-width": 500,
+            "text-horizontal-alignment": "center",
+            "text-vertical-alignment": "center",
+            "title": "Just Dropped",
+            "link-url": "",
+            "link-text": "",
+            "mobile-text-horizontal-alignment": "center",
+            "mobile-text-vertical-alignment": "center"
+          }
+        },
+        "image-2": {
+          "type": "image",
+          "settings": {
+            "x-blocks": "1",
+            "y-blocks": "2",
+            "text-width": 500,
+            "text-horizontal-alignment": "center",
+            "text-vertical-alignment": "center",
+            "title": "Best Sellers",
+            "link-url": "",
+            "link-text": "",
+            "mobile-text-horizontal-alignment": "center",
+            "mobile-text-vertical-alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "image-1",
+        "image-2"
+      ],
+      "disabled": true,
+      "settings": {
+        "border": "none",
+        "spacing-above": "x-large",
+        "spacing-below": "none",
+        "container-width": "3",
+        "background-color": "none",
+        "heading-white-text": false,
+        "section-alignment": "center",
+        "spacing": true,
+        "width": 2,
+        "row-height": 250,
+        "white-text": true,
+        "overlay-style": "darken",
+        "text-style": "none",
+        "heading-type": "featured-heading",
+        "overline": "Explore",
+        "heading": "Collections",
+        "description": "",
+        "link-url": "",
+        "button-style": "button-1",
+        "link-text": "",
+        "mobile-full-width": false,
+        "mobile-spacing-above": "x-large",
+        "mobile-spacing-below": "none",
+        "mobile-width": "1",
+        "mobile-spacing": true,
+        "mobile-image-display-type": "original",
+        "mobile-aspect-ratio": 134
+      }
+    },
+    "grid-with-overlay-2": {
+      "type": "grid-with-overlay",
+      "blocks": {
+        "image-1": {
+          "type": "image",
+          "settings": {
+            "x-blocks": "1",
+            "y-blocks": "1",
+            "text-width": 500,
+            "text-horizontal-alignment": "center",
+            "text-vertical-alignment": "center",
+            "title": "#GlowUp",
+            "link-url": "",
+            "link-text": "",
+            "mobile-text-horizontal-alignment": "center",
+            "mobile-text-vertical-alignment": "center"
+          }
+        },
+        "image-2": {
+          "type": "image",
+          "settings": {
+            "x-blocks": "1",
+            "y-blocks": "1",
+            "text-width": 500,
+            "text-horizontal-alignment": "center",
+            "text-vertical-alignment": "center",
+            "title": "#BeautyBliss",
+            "link-url": "",
+            "link-text": "",
+            "mobile-text-horizontal-alignment": "center",
+            "mobile-text-vertical-alignment": "center"
+          }
+        },
+        "image-3": {
+          "type": "image",
+          "settings": {
+            "x-blocks": "1",
+            "y-blocks": "1",
+            "text-width": 500,
+            "text-horizontal-alignment": "center",
+            "text-vertical-alignment": "center",
+            "title": "#Yourbrand",
+            "link-url": "",
+            "link-text": "",
+            "mobile-text-horizontal-alignment": "center",
+            "mobile-text-vertical-alignment": "center"
+          }
+        },
+        "image-4": {
+          "type": "image",
+          "settings": {
+            "x-blocks": "1",
+            "y-blocks": "1",
+            "text-width": 500,
+            "text-horizontal-alignment": "center",
+            "text-vertical-alignment": "center",
+            "title": "#SkinSecrets",
+            "link-url": "",
+            "link-text": "",
+            "mobile-text-horizontal-alignment": "center",
+            "mobile-text-vertical-alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "image-1",
+        "image-2",
+        "image-3",
+        "image-4"
+      ],
+      "disabled": true,
+      "settings": {
+        "border": "none",
+        "spacing-above": "x-large",
+        "spacing-below": "x-large",
+        "container-width": "4",
+        "background-color": "none",
+        "heading-white-text": false,
+        "section-alignment": "center",
+        "spacing": true,
+        "width": 4,
+        "row-height": 250,
+        "white-text": true,
+        "overlay-style": "darken",
+        "text-style": "none",
+        "heading-type": "block-heading",
+        "overline": "",
+        "heading": "",
+        "description": "<p>Shop THE FEED @YOUR.BRAND</p>",
+        "link-url": "",
+        "button-style": "button-1",
+        "link-text": "",
+        "mobile-full-width": false,
+        "mobile-spacing-above": "x-large",
+        "mobile-spacing-below": "x-large",
+        "mobile-width": "2",
+        "mobile-spacing": true,
+        "mobile-image-display-type": "original",
+        "mobile-aspect-ratio": 134
       }
     }
   },
   "order": [
     "collection-header",
-    "navigation",
-    "main",
-    "recent-products"
+    "collection-navigation",
+    "main-collection",
+    "countdown",
+    "recent-products",
+    "grid-with-overlay-1",
+    "grid-with-overlay-2"
   ]
 }

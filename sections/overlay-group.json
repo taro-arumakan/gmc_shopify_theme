@@ -14,34 +14,26 @@
     "popup": {
       "type": "popup",
       "blocks": {
-        "newsletter": {
-          "type": "newsletter",
+        "consent-tracking": {
+          "type": "consent-tracking",
           "settings": {
             "background-color": "dark",
             "translucent": true,
-            "light-text": true,
-            "position": "right",
+            "white-text": true,
+            "position": "left",
             "text-alignment": "center",
-            "heading": "Sign up and save",
-            "description": "<p>Describe the benefits of the newsletter – dazzling discounts, sneak peeks, limited-edition treats, exclusive deals, fashion tips.</p>",
-            "social-title": "",
-            "social-enabled": true,
-            "delay": 5,
-            "show-at-bottom": true,
-            "days-range": 7,
-            "referrer-enabled": false,
-            "referrer-url": "",
-            "page-enabled": false,
-            "page-url": ""
+            "heading": "Cookie consent",
+            "description": "<p>We use cookies and similar technologies to provide the best experience on our website. Refer to our Privacy Policy for more information.</p>"
           }
         },
-        "small-promotion": {
+        "776ac910-dab0-424a-9062-ef264316728d": {
           "type": "small-promotion",
+          "disabled": true,
           "settings": {
             "background-color": "dark",
             "translucent": true,
-            "light-text": true,
-            "heading-type": "paragraph",
+            "white-text": true,
+            "heading-type": "block-heading",
             "position": "left",
             "heading": "10% off your first order",
             "delay": 3,
@@ -50,83 +42,74 @@
             "referrer-enabled": false,
             "referrer-url": "",
             "page-enabled": false,
-            "page-url": "",
             "scroll-text": true,
-            "animation-speed": 7.5
+            "animation-speed": 7.5,
+            "mobile-scroll-text": true,
+            "mobile-animation-speed": 7.5
           }
         },
-        "large-promotion": {
+        "fdcb46d0-db95-4b99-9bed-299f61067fab": {
           "type": "large-promotion",
+          "disabled": true,
           "settings": {
-            "background-color": "dark",
+            "background-color": "accent-1",
             "translucent": true,
-            "light-text": true,
+            "white-text": true,
             "position": "left",
             "text-alignment": "center",
-            "heading": "Up to 40% off",
-            "description": "<p></p>",
-            "link-url": "/",
+            "heading": "Up to 40% off!",
+            "description": "<p>When the timer runs out, so do the discounts!</p>",
             "link-text": "Shop the sale",
-            "delay": 3,
+            "delay": 10,
             "show-at-bottom": true,
             "days-range": 7,
             "referrer-enabled": false,
             "referrer-url": "",
             "page-enabled": false,
-            "page-url": "",
             "countdown-enabled": true,
             "timer-bg-color": "dark",
             "light-number": true,
-            "expiry-date": "01-01-2026",
+            "expiry-date": "DD-MM-YYYY",
             "expiry-hours": 0,
             "expiry-minutes": 0,
             "hide-when-expired": true,
             "show-button-when": "always"
           }
         },
-        "consent-tracking": {
-          "type": "consent-tracking",
+        "5e9e1428-915c-4d68-b662-db6bc17e6b5d": {
+          "type": "newsletter",
           "settings": {
-            "background-color": "dark",
+            "background-color": "accent-1",
             "translucent": true,
-            "light-text": true,
-            "position": "left",
+            "white-text": true,
+            "position": "right",
             "text-alignment": "center",
-            "heading": "Cookie consent",
-            "description": "<p>We use cookies and similar technologies to provide the best experience on our website. Refer to our Privacy Policy for more information.</p>"
+            "heading": "Join the Glow Club",
+            "description": "<p>Be the first to know about new drops, skincare tips, and exclusive deals!</p>",
+            "social-title": "Follow us",
+            "social-enabled": true,
+            "delay": 15,
+            "show-at-bottom": true,
+            "days-range": 1,
+            "referrer-enabled": false,
+            "referrer-url": "",
+            "page-enabled": false,
+            "page-url": ""
           }
         }
       },
       "block_order": [
-        "newsletter",
-        "small-promotion",
-        "large-promotion",
-        "consent-tracking"
+        "consent-tracking",
+        "776ac910-dab0-424a-9062-ef264316728d",
+        "fdcb46d0-db95-4b99-9bed-299f61067fab",
+        "5e9e1428-915c-4d68-b662-db6bc17e6b5d"
       ],
-      "disabled": true,
       "settings": {
-        "limit": true
-      }
-    },
-    "age-verification": {
-      "type": "age-verification",
-      "disabled": true,
-      "settings": {
-        "background-color": "dark",
-        "translucent": true,
-        "light-text": true,
-        "heading": "Confirm your age",
-        "description": "<p>Are you 18 years old or older?</p>",
-        "decline-text": "No I'm not",
-        "approve-text": "Yes I am",
-        "declined-heading": "Come back when you're older",
-        "declined-description": "<p>Sorry, the content of this store can't be seen by a younger audience. Come back when you're older.</p>",
-        "return-text": "Oops, I entered incorrectly"
+        "limit": false
       }
     }
   },
   "order": [
-    "popup",
-    "age-verification"
+    "popup"
   ]
 }

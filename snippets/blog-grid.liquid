@@ -1,0 +1,96 @@
+{%- liquid
+  assign articles_printed_count = 0
+  assign grid_direction = grid_direction | default: 'horizontal'
+  assign tag_found = false
+
+  assign columns = 3
+  if grid_direction == 'vertical'
+    assign columns = 1
+  endif
+
+  unless container_width
+    assign container_width = '5'
+  endunless
+
+  capture sizes
+    render 'utils', name: 'sizes', container_width: container_width, columns: columns, mobile_columns: 1
+  endcapture
+
+  capture article_items
+    if blog.articles.size > 0
+      for article in blog.articles
+        for tag in article.tags
+          assign escaped_tag = tag | downcase | escape
+
+          if escaped_tag == selected_tag
+            assign tag_found = true
+
+            render 'article-card', featured_article: article, show_cta: show_cta, show_date: show_date, show_excerpt: show_excerpt, type: 'full_article', transition_id: transition_id, sizes: sizes, loading: loading
+
+            echo '<span class="divider"></span>'
+            assign articles_printed_count = articles_printed_count | plus: 1
+            break
+          endif
+        endfor
+
+        if articles_printed_count == 3
+          break
+        endif
+      endfor
+
+      unless tag_found
+        for article in blog.articles limit: 3
+          render 'article-card', featured_article: article, show_cta: show_cta, show_date: show_date, show_excerpt: show_excerpt, type: 'full_article', transition_id: transition_id, sizes: sizes, loading: loading
+
+          echo '<span class="divider"></span>'
+        endfor
+      endunless
+
+    else
+      for i in (1..3)
+        render 'article-card', show_cta: show_cta, show_date: show_date, show_excerpt: show_excerpt, type: 'placeholder', transition_id: transition_id
+
+        echo '<span class="divider"></span>'
+      endfor
+    endif
+  endcapture
+
+  assign article_items_arr = article_items | split: '<span class="divider"></span>'
+-%}
+
+<div
+  class="blog-grid--root"
+  {% if mobile_media_layout == 'grid' %}
+    data-container="panel"
+    data-fixed-columns="true"
+    data-mobile-columns="1"
+    data-columns="{{ columns }}"
+  {% endif %}
+  data-text-alignment="{{ alignment }}"
+  data-mobile-text-alignment="{{ mobile_alignment }}"
+  {% unless settings.transitions--other %}
+    data-transition-container="{{ section.id }}"
+    data-transition-type="fade-in"
+    data-transition-cascade-interval="200"
+    data-transition-cascade="{{ grid_direction }}"
+  {% endunless %}
+>
+  {%- if mobile_media_layout == 'grid' -%}
+    {%- liquid
+      for article_item in article_items_arr
+        echo article_item
+      endfor
+    -%}
+  {%- else -%}
+    {%-
+      render 'carousel',
+      section: section,
+      blocks: article_items_arr,
+      blocks_per_slide: 3,
+      blocks_per_slide_mobile: 1,
+      mobile_only: true,
+      total_blocks: article_items_arr.size,
+      total_slides: article_items_arr.size
+    -%}
+  {%- endif -%}
+</div>

@@ -1,0 +1,51 @@
+{%- liquid
+  assign next_t = 'general.a11y.next' | t
+  assign previous_t = 'general.a11y.previous' | t
+
+  assign total_slides = total_slides | default: 1
+  assign total_slides_mobile = total_slides_mobile | default: 1
+
+  if mobile_only == nil
+    assign mobile_only = true
+  endif
+-%}
+
+{%- unless total_slides_mobile == 1 and total_slides == 1 -%}
+  <div
+    class="carousel-nav-arrow"
+    data-id="{{ id }}"
+    {% if mobile_only or total_slides == 1 %}
+      data-mq="small"
+    {% endif %}
+  >
+    <button
+      class="carousel-nav-arrow--prev"
+      type="button"
+      aria-disabled="true"
+      aria-label="{{ previous_t }}"
+    >
+      {%- render 'icons', icon: 'chevron-left' -%}
+    </button>
+
+    <span
+      class="carousel-nav-arrow--current"
+      data-item="paragraph"
+      data-value="1"
+    ></span>
+    <span
+      class="carousel-nav-arrow--total"
+      data-item="paragraph"
+      data-value="{{ total_slides }}"
+      data-mobile-value="{{ total_slides_mobile }}"
+    ></span>
+
+    <button
+      class="carousel-nav-arrow--next"
+      type="button"
+      aria-disabled="false"
+      aria-label="{{ next_t }}"
+    >
+      {%- render 'icons', icon: 'chevron-right' -%}
+    </button>
+  </div>
+{%- endunless -%}

@@ -1,89 +1,196 @@
 {%- liquid
   assign bg_color = section.settings.background-color
+  assign border = section.settings.border
   assign container_width = section.settings.container-width
   assign heading = section.settings.heading
   assign heading_alignment = section.settings.heading-alignment
-  assign light_text = section.settings.light-text
+  assign mobile_full_width = section.settings.mobile-full-width
+  assign mobile_spacing_above = section.settings.mobile-spacing-above
+  assign mobile_spacing_below = section.settings.mobile-spacing-below
   assign spacing_above = section.settings.spacing-above
   assign spacing_below = section.settings.spacing-below
-  assign top_border = section.settings.top-border
+  assign two_columns_enabled = section.settings.two-columns-enabled
+  assign white_text = section.settings.white-text
+
+  assign block_remainder = section.blocks.size | modulo: 2
+  assign block_quotient = section.blocks.size | divided_by: 2
+  assign last_left_block_index = block_remainder | plus: block_quotient
+
+  assign left_column_blocks = ''
+  assign right_column_blocks = ''
 -%}
 
-{%- if section.blocks.size > 0 -%}
-  <div
-    class="collapsible-rows--root"
-    data-section-id="{{ section.id }}"
-    data-background-color="{{ bg_color }}"
-    data-container-width="{{ container_width }}"
-    data-light-text="{{ light_text }}"
-    data-spacing-above="{{ spacing_above }}"
-    data-spacing-below="{{ spacing_below }}"
-    data-top-border="{{ top_border }}"
-    {% unless settings.transitions--other %}
-      data-transition-container="{{ section.id }}"
-      data-transition-type="fade-in"
-      data-transition-cascade="vertical"
-      data-transition-cascade-interval="120"
-    {% endunless %}
-  >
-    <div class="collapsible-rows--wrapper">
-      {%- if heading != blank -%}
-        <div class="collapsible-rows--header" data-heading-alignment="{{ heading_alignment }}">
-          <h2 data-item="section-heading">
-            {{- heading | escape -}}
-          </h2>
-        </div>
-      {%- endif -%}
+{%- for block in section.blocks -%}
+  {%- assign id = section.id | append: '--collapsible-row--' | append: forloop.index -%}
 
-      {%- for block in section.blocks -%}
-        {%- assign unique_id = section.id | append: '--collapsible-row--' | append: forloop.index -%}
-        <div
-          class="collapsible-rows--block"
-          data-fit-together="true"
-          {% unless settings.transitions--other %}
-            data-transition-item="{{ section.id }}"
-          {% endunless %}
-          {{ block.shopify_attributes }}
-        >
-          {%-
-            render 'collapsible-row',
-            description: block.settings.description,
-            heading: block.settings.heading,
-            default_open: block.settings.default-open,
-            page_content: block.settings.page-content,
-            unique_id: unique_id
-          -%}
-        </div>
-      {%- endfor -%}
+  {%- capture block_html -%}
+    <div
+      class="collapsible-rows--block"
+      data-fit-together="true"
+      {% unless settings.transitions--other %}
+        data-transition-item="{{ section.id }}"
+      {% endunless %}
+      {{ block.shopify_attributes }}
+    >
+      {% render 'collapsible-row',
+        description: block.settings.description,
+        heading: block.settings.heading,
+        default_open: block.settings.default-open,
+        page_content: block.settings.page-content,
+        id: id,
+        white_text: white_text
+      %}
     </div>
+  {%- endcapture -%}
+
+  {%- liquid
+    if forloop.index <= last_left_block_index
+      assign left_column_blocks = left_column_blocks | append: block_html
+    else
+      assign right_column_blocks = right_column_blocks | append: block_html
+    endif
+  -%}
+{%- endfor -%}
+
+<div
+  class="collapsible-rows--root"
+  data-section-id="{{ section.id }}"
+  data-background-color="{{ bg_color }}"
+  data-border="{{ border }}"
+  data-container-width="{{ container_width }}"
+  data-mobile-full-width="{{ mobile_full_width }}"
+  data-mobile-spacing-above="{{ mobile_spacing_above }}"
+  data-mobile-spacing-below="{{ mobile_spacing_below }}"
+  {% if white_text %}
+    data-text-color="white"
+  {% endif %}
+  data-spacing-above="{{ spacing_above }}"
+  data-spacing-below="{{ spacing_below }}"
+  {% unless settings.transitions--other %}
+    data-transition-container="{{ section.id }}"
+    data-transition-type="fade-in"
+    data-transition-cascade="vertical"
+    data-transition-cascade-interval="120"
+  {% endunless %}
+>
+  <div class="collapsible-rows--wrapper" data-container="section">
+    {%- unless heading == blank -%}
+      <div
+        class="collapsible-rows--header"
+        data-container="block"
+        data-text-alignment="{{ heading_alignment }}"
+        {% unless settings.transitions--text %}
+          data-transition-item="viewport"
+          data-transition-type="slide-in"
+        {% endunless %}
+      >
+        <h2 data-item="section-heading">
+          {{- heading | escape -}}
+        </h2>
+      </div>
+    {%- endunless -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="collapsible-rows--main" data-two-columns="{{ two_columns_enabled }}">
+        <div class="collapsible-rows--left">
+          {{- left_column_blocks -}}
+        </div>
+        <div class="collapsible-rows--right">
+          {{- right_column_blocks -}}
+        </div>
+      </div>
+    {%- endif -%}
   </div>
-{%- endif -%}
+</div>
 
 {% schema %}
   {
     "name": "Collapsible rows",
+    "class": "section--collapsible-rows",
     "settings": [
       {
         "type": "header",
         "content": "Style and layout"
       },
       {
-        "id": "top-border",
-        "label": "Top border",
-        "type": "checkbox",
-        "default": false
+        "id": "border",
+        "label": "Border",
+        "type": "select",
+        "options": [
+          {
+            "label": "Top",
+            "value": "top"
+          },
+          {
+            "label": "Bottom",
+            "value": "bottom"
+          },
+          {
+            "label": "Both",
+            "value": "both"
+          },
+          {
+            "label": "None",
+            "value": "none"
+          }
+        ],
+        "default": "none"
       },
       {
         "id": "spacing-above",
         "label": "Spacing above",
-        "type": "checkbox",
-        "default": true
+        "type": "select",
+        "options": [
+          {
+            "label": "None",
+            "value": "none"
+          },
+          {
+            "label": "Small",
+            "value": "small"
+          },
+          {
+            "label": "Medium",
+            "value": "medium"
+          },
+          {
+            "label": "Large",
+            "value": "large"
+          },
+          {
+            "label": "Extra large",
+            "value": "x-large"
+          }
+        ],
+        "default": "large"
       },
       {
         "id": "spacing-below",
         "label": "Spacing below",
-        "type": "checkbox",
-        "default": true
+        "type": "select",
+        "options": [
+          {
+            "label": "None",
+            "value": "none"
+          },
+          {
+            "label": "Small",
+            "value": "small"
+          },
+          {
+            "label": "Medium",
+            "value": "medium"
+          },
+          {
+            "label": "Large",
+            "value": "large"
+          },
+          {
+            "label": "Extra large",
+            "value": "x-large"
+          }
+        ],
+        "default": "large"
       },
       {
         "id": "background-color",
@@ -91,7 +198,7 @@
         "type": "select",
         "options": [
           {
-            "label": "Transparent",
+            "label": "None",
             "value": "none"
           },
           {
@@ -109,13 +216,17 @@
           {
             "label": "Accent 2",
             "value": "accent-2"
+          },
+          {
+            "label": "Accent 3",
+            "value": "accent-3"
           }
         ],
         "default": "none"
       },
       {
-        "id": "light-text",
-        "label": "Use light text color",
+        "id": "white-text",
+        "label": "Use white text color",
         "type": "checkbox",
         "default": false
       },
@@ -124,32 +235,19 @@
         "label": "Maximum width of container",
         "type": "select",
         "options": [
-          {
-            "label": "Extra small",
-            "value": "1"
-          },
-          {
-            "label": "Small",
-            "value": "2"
-          },
-          {
-            "label": "Medium",
-            "value": "3"
-          },
-          {
-            "label": "Large",
-            "value": "4"
-          },
-          {
-            "label": "Extra large",
-            "value": "5"
-          },
-          {
-            "label": "Full width",
-            "value": "6"
-          }
+          { "label": "Extra small", "value": "1" },
+          { "label": "Small", "value": "2" },
+          { "label": "Medium", "value": "3" },
+          { "label": "Large", "value": "4" },
+          { "label": "Extra large", "value": "x-large" }
         ],
-        "default": "1"
+        "default": "3"
+      },
+      {
+        "id": "two-columns-enabled",
+        "label": "Two column layout",
+        "type": "checkbox",
+        "default": true
       },
       {
         "type": "header",
@@ -163,9 +261,75 @@
       },
       {
         "id": "heading-alignment",
-        "label": "Position heading",
+        "label": "Heading alignment",
         "type": "text_alignment",
         "default": "center"
+      },
+      {
+        "type": "header",
+        "content": "Mobile"
+      },
+      {
+        "id": "mobile-full-width",
+        "label": "Full width",
+        "type": "checkbox",
+        "default": false
+      },
+      {
+        "id": "mobile-spacing-above",
+        "label": "Spacing above",
+        "type": "select",
+        "options": [
+          {
+            "label": "None",
+            "value": "none"
+          },
+          {
+            "label": "Small",
+            "value": "small"
+          },
+          {
+            "label": "Medium",
+            "value": "medium"
+          },
+          {
+            "label": "Large",
+            "value": "large"
+          },
+          {
+            "label": "Extra large",
+            "value": "x-large"
+          }
+        ],
+        "default": "medium"
+      },
+      {
+        "id": "mobile-spacing-below",
+        "label": "Spacing below",
+        "type": "select",
+        "options": [
+          {
+            "label": "None",
+            "value": "none"
+          },
+          {
+            "label": "Small",
+            "value": "small"
+          },
+          {
+            "label": "Medium",
+            "value": "medium"
+          },
+          {
+            "label": "Large",
+            "value": "large"
+          },
+          {
+            "label": "Extra large",
+            "value": "x-large"
+          }
+        ],
+        "default": "medium"
       }
     ],
     "blocks": [
@@ -204,6 +368,9 @@
       {
         "name": "Collapsible rows",
         "blocks": [
+          {
+            "type": "collapsible-row"
+          },
           {
             "type": "collapsible-row"
           },

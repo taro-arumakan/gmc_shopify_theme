@@ -1,0 +1,291 @@
+{%- liquid
+
+  assign new_t = 'products.new' | t
+  assign off_t = 'products.off' | t
+  assign out_of_stock_t = 'products.out_of_stock' | t
+  assign sale_t = 'products.sale' | t
+
+  assign compare_price = false
+  assign featured_tags = settings.product--featured-tags | remove: ' ' | split: ','
+  assign heading_type = settings.product--heading-type
+  assign hide_single_swatch = settings.product--hide-single-swatch
+  assign image_aspect_ratio = settings.image--product-size
+  assign label_color = settings.product--label-color
+  assign label_white_text = settings.product--label-white-text
+  assign label_shape = settings.product--label-shape
+  assign new_label_period = settings.product--new-label-period
+  assign rating_enabled = settings.product--show-rating
+  assign show_new_label = settings.product--show-new-label
+  assign swatches = settings.product--swatches
+  assign show_sale_label = settings.product--show-sale-label
+  assign show_vendor = settings.product--show-vendor
+
+  assign swatch_option = false
+  assign tag = 'div'
+  unless swatches == 'none'
+    for option in product_item.options_with_values
+      assign swatch_count = option.values | map: 'swatch' | compact | size
+      if swatch_count > 0
+        assign swatch_option = option
+        assign tag = 'product-card'
+        break
+      endif
+    endfor
+  endunless
+
+  unless text_alignment
+    assign text_alignment = settings.product--text-alignment
+  endunless
+
+  if show_new_label
+    assign now_timestamp = 'now' | date: '%s'
+    assign new_label_period_in_seconds = new_label_period | times: 86400
+    assign valid_date = now_timestamp | minus: new_label_period_in_seconds | plus: 0
+    assign publish_date = product_item.created_at | date: '%s' | plus: 0
+
+    assign is_new_product = false
+    if valid_date < publish_date
+      assign is_new_product = true
+    endif
+  endif
+
+  unless onboarding
+    assign onboarding = false
+  endunless
+
+  unless placeholder_index
+    assign placeholder_index = 1
+  endunless
+
+  if onboarding
+    assign excerpt = 'sections.onboarding.description' | t
+    assign title = 'sections.onboarding.product_title' | t
+    assign url = product_item.url | within: collection
+    assign vendor = 'sections.onboarding.vendor' | t
+
+  else
+    assign title = product_item.title
+    assign url = product_item.url | within: collection
+    assign vendor = product_item.vendor
+
+    if product_item.compare_at_price > product_item.price and product_item.available
+      assign compare_price = product_item.compare_at_price | money
+    endif
+
+    assign excerpt = product_item.metafields.global.description_tag | newline_to_br
+    if excerpt == blank
+      assign excerpt = product_item.description | strip_html | truncate: 100 | newline_to_br
+    endif
+
+  endif
+
+  capture display_labels
+    unless product_item.available or onboarding
+      echo out_of_stock_t
+      assign label_type = 'out-of-stock'
+
+    elsif show_sale_label != 'false' and compare_price and onboarding == false
+      if show_sale_label == 'show-text'
+        assign sale_text = sale_t
+      elsif show_sale_label == 'show-percent'
+        assign price_diff = product_item.compare_at_price | minus: product_item.price
+        assign percent_diff = price_diff | times: 100 | divided_by: product_item.compare_at_price
+        assign sale_text = percent_diff | append: '% ' | append: off_t
+      endif
+
+      echo sale_text
+      assign label_type = 'sale'
+
+    elsif show_new_label and is_new_product and onboarding == false
+      echo new_t
+      assign label_type = 'new'
+
+    endunless
+  endcapture
+
+  capture featured_label
+    if featured_tags.size > 0 and product_item.available and onboarding == false
+      assign break_loop = false
+
+      for featured_tag in featured_tags
+        assign formatted_featured_tag = featured_tag | downcase
+
+        for product_tag in product_item.tags
+          assign formatted_product_tag = product_tag | remove: ' ' | downcase
+
+          if formatted_product_tag == formatted_featured_tag
+            echo product_tag | escape
+            assign label_type = product_tag | handleize
+            assign break_loop = true
+            break
+          endif
+        endfor
+
+        if break_loop
+          break
+        endif
+      endfor
+    endif
+  endcapture
+-%}
+
+{%- capture main_image -%}
+  {%- if onboarding -%}
+    {%-
+      render 'placeholder',
+      type: 'product',
+      placeholder_index: placeholder_index,
+      class: 'product-card--image'
+    -%}
+  {%- else -%}
+    {%- if product_item.featured_media.preview_image -%}
+      {{-
+        product_item.featured_media.preview_image |
+        image_url: width: product_item.featured_media.preview_image.width |
+        image_tag:
+          class: 'product-card--image',
+          widths: '200, 300, 400, 500, 600, 700, 800, 900, 1000',
+          sizes: sizes,
+          loading: loading
+      -}}
+
+    {%- else -%}
+      {%-
+        render 'placeholder',
+        type: 'product',
+        placeholder_index: placeholder_index,
+        class: 'product-card--image'
+      -%}
+
+    {%- endif -%}
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- capture hover_image -%}
+  {%- if settings.product--hover-image-enabled -%}
+    {%- if product_item.media.size > 1 -%}
+      {{-
+        product_item.media[1].preview_image |
+        image_url: width: product_item.media[1].preview_image.width |
+        image_tag:
+          class: 'product-card--hover-image',
+          widths: '200, 300, 400, 500, 600, 700, 800, 900, 1000',
+          sizes: sizes,
+          loading: 'lazy'
+      -}}
+    {%- elsif product_item.media.size == 0 or onboarding -%}
+      {%-
+        render 'placeholder',
+        type: 'collection',
+        placeholder_index: placeholder_index,
+        class: 'product-card--hover-image'
+      -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endcapture -%}
+
+<{{ tag }}
+  class="product-card--root"
+  data-handle="{{ product_item.handle }}"
+  data-product-item
+  data-text-layout="{{ text_alignment }}"
+  data-container="block"
+  data-aspect-ratio="{{ image_aspect_ratio }}"
+  {% unless settings.transitions--other %}
+    data-transition-item="{{ transition_id }}"
+  {% endunless %}
+  {% if swatch_option %}
+    data-swatch-option-position="{{ swatch_option.position }}"
+  {% endif %}
+>
+  <a
+    href="{{ url }}"
+    class="product-card--image-wrapper"
+    tabindex="-1"
+  >
+    {%- unless display_labels == blank and featured_label == blank -%}
+      <div
+        class="product--labels"
+        data-item="overline"
+        data-text-color="{% if label_white_text %}white{% else %}body{% endif %}"
+      >
+        {%- if display_labels != blank -%}
+          <div
+            class="product--label"
+            data-background-color="{{ label_color }}"
+            data-label-shape="{{ label_shape }}"
+            data-label-type="{{ label_type }}"
+          >
+            {{- display_labels -}}
+          </div>
+        {%- endif -%}
+        {%- if featured_label != blank -%}
+          <div
+            class="product--label"
+            data-background-color="{{ label_color }}"
+            data-label-shape="{{ label_shape }}"
+            data-label-type="{{ label_type }}"
+          >
+            {{- featured_label -}}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endunless -%}
+
+    {%- liquid
+      echo main_image
+
+      if hover_image
+        echo hover_image
+      endif
+
+      render 'product-quick-add', product: product_item, onboarding: onboarding, hover: true
+    -%}
+  </a>
+
+  <div class="product-card--details">
+    <div class="product-card--details-wrapper">
+      {%- if show_vendor -%}
+        <div class="product-card--vendor" data-item="sub-nav-text">
+          {{- vendor -}}
+        </div>
+      {%- endif -%}
+
+      <a href="{{ url }}" class="product-card--title-link">
+        <p class="product-card--title" data-item="{{ heading_type }}">
+          {{- title -}}
+        </p>
+      </a>
+
+      {%- liquid
+        if rating_enabled
+          render 'product-rating', product: product_item
+        endif
+      -%}
+
+      {%- if swatch_option -%}
+        <div class="product-card--swatches--horizontal-view">
+          {%- liquid
+            unless hide_single_swatch and swatch_option.values.size == 1
+              assign swatch_id = transition_id | append: '--x-view--' | append: product_item.id
+              render 'swatches', id: swatch_id, option: swatch_option, grid_item: true, shape: swatches
+            endunless
+          -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- render 'product-card--price', product: product_item, onboarding: onboarding -%}
+
+    {%- if swatch_option -%}
+      <div class="product-card--swatches--column-view">
+        {%- liquid
+          unless hide_single_swatch and swatch_option.values.size == 1
+            assign swatch_id = transition_id | append: '--y-view--' | append: product_item.id
+            render 'swatches', id: swatch_id, option: swatch_option, grid_item: true, shape: swatches
+          endunless
+        -%}
+      </div>
+    {%- endif -%}
+  </div>
+</{{ tag }}>

@@ -1,0 +1,27 @@
+{%- liquid
+  assign icon = settings.icon
+  assign icon_image = settings.icon-image
+  assign icon_width = settings.icon-width
+  assign text = settings.text
+-%}
+
+<div class="icon-block--root">
+  {%- if icon_image or icon != 'none' -%}
+    <div class="icon-block" style="--width:{{ icon_width }}px;">
+      {%- liquid
+        if icon_image
+          assign icon_image_width = icon_width | times: 2
+          echo icon_image | image_url: width: icon_image_width | image_tag
+        else
+          render 'icons', icon: icon
+        endif
+      -%}
+    </div>
+
+    {%- unless text == blank -%}
+      <p data-item="paragraph">
+        {{- text -}}
+      </p>
+    {%- endunless -%}
+  {%- endif -%}
+</div>

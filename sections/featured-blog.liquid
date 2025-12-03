@@ -1,147 +1,203 @@
 {%- liquid
-  assign articles_printed_count = 0
   assign bg_color = section.settings.background-color
   assign blog = blogs[section.settings.blog]
   assign blog_heading = section.settings.blog-heading | escape
+  assign border = section.settings.border
+  assign button_style = section.settings.button-style
   assign container_width = section.settings.container-width
-  assign heading_alignment = section.settings.heading-alignment
-  assign light_text = section.settings.light-text
+  assign mobile_heading_alignment = section.settings.mobile-heading-alignment
+  assign mobile_media_layout = section.settings.mobile-media-layout
+  assign mobile_spacing_above = section.settings.mobile-spacing-above
+  assign mobile_spacing_below = section.settings.mobile-spacing-below
+  assign mobile_text_alignment = section.settings.mobile-text-alignment
+  assign section_alignment = section.settings.section-alignment
   assign selected_tag = section.settings.tag-select | downcase | escape
+  assign show_cta = section.settings.show-cta
   assign show_date = section.settings.show-date
   assign show_excerpt = section.settings.show-excerpt
   assign spacing_above = section.settings.spacing-above
   assign spacing_below = section.settings.spacing-below
+  assign text_alignment = section.settings.text-alignment
   assign view_more_text = section.settings.view-more-text | escape
-  assign tag_found = false
-  assign top_border = section.settings.top-border
+  assign white_text = section.settings.white-text
 
-  render 'section-assets', name: 'featured-blog', type: 'style'
-  render 'section-assets', name: 'article-item', type: 'style'
+  assign loading = 'lazy'
+  if section.index < 3
+    assign loading = 'eager'
+  endif
 -%}
 
-{% comment %} View {% endcomment %}
 <div
   class="featured-blog--root"
   data-section-id="{{ section.id }}"
   data-aspect-ratio="{{ settings.image--article-size }}"
   data-background-color="{{ bg_color }}"
+  data-border="{{ border }}"
   data-container-width="{{ container_width }}"
-  data-light-text="{{ light_text }}"
+  data-mobile-spacing-above="{{ mobile_spacing_above }}"
+  data-mobile-spacing-below="{{ mobile_spacing_below }}"
+  {% if white_text %}
+    data-text-color="white"
+  {% endif %}
   data-spacing-above="{{ spacing_above }}"
   data-spacing-below="{{ spacing_below }}"
-  data-top-border="{{ top_border }}"
 >
   <div class="featured-blog--wrapper" data-container="section">
-    {%- unless blog_heading == blank -%}
-      {%- unless blog == blank -%}
-        <a href="{{ blog.url }}">
-      {%- endunless -%}
-
+    <div
+      class="featured-blog--header-nav"
+      data-container="nav"
+      data-text-alignment="{{ section_alignment }}"
+      data-mobile-text-alignment="{{ mobile_heading_alignment }}"
+    >
       <div
         class="featured-blog--header"
         data-container="block"
-        data-heading-alignment="{{ heading_alignment }}"
+        {% unless settings.transitions--text %}
+          data-transition-item="viewport"
+          data-transition-type="slide-in"
+        {% endunless %}
       >
-        <h2 class="featured-blog--heading" data-item="section-heading">
-          {{- blog_heading -}}
-        </h2>
+        {%- unless blog_heading == blank -%}
+          <h2 class="featured-blog--heading" data-item="section-heading">
+            {{- blog_heading -}}
+          </h2>
+        {%- endunless -%}
       </div>
 
-      {%- unless blog == blank -%}
-        </a>
-      {%- endunless -%}
-    {%- endunless -%}
-
-    <div
-      class="featured-blog--grid"
-      data-container="panel"
-      data-columns="3"
-      data-fixed-columns="true"
-      data-mobile-columns="1"
-      {% unless settings.transitions--other %}
-        data-transition-container="{{ section.id }}"
-        data-transition-type="fade-in"
-        data-transition-cascade="horizontal"
-        data-transition-cascade-interval="200"
-      {% endunless %}
-    >
       {%- liquid
-        if blog.articles.size > 0
-          for article in blog.articles
-            for tag in article.tags
-              assign escaped_tag = tag | downcase | escape
-
-              if escaped_tag == selected_tag
-                assign tag_found = true
-
-                render "article--item", featured_article: article, show_date: show_date, show_excerpt: show_excerpt, type: 'full_article', transition_name: section.id, sizes: '(max-width: 767px) 100vw, 33.3vw'
-                assign articles_printed_count = articles_printed_count | plus: 1
-                break
-              endif
-            endfor
-
-            if articles_printed_count == 3
-              break
-            endif
-          endfor
-
-          if tag_found == false
-            for article in blog.articles limit: 3
-              render "article--item", featured_article: article, show_date: show_date, show_excerpt: show_excerpt, type: 'full_article', transition_name: section.id, sizes: '(max-width: 767px) 100vw, 33.3vw'
-            endfor
+        if mobile_media_layout == 'slideshow'
+          assign total_slides_mobile = 3
+          if blog.articles.size < 3 and blog.articles.size > 0
+            assign total_slides_mobile = blog.articles.size
           endif
 
-        else
-          for i in (1..3)
-            render "article--item", show_date: show_date, show_excerpt: show_excerpt, type: 'placeholder', transition_name: section.id
-          endfor
-
+          render 'carousel-nav-arrow', id: section.id, total_slides_mobile: total_slides_mobile
         endif
       -%}
     </div>
 
-    {%- if view_more_text != blank -%}
-      <div class="featured-blog--footer" data-container="block">
+    {%-
+      render 'blog-grid',
+      section: section,
+      alignment: text_alignment,
+      blog: blog,
+      container_width: container_width,
+      mobile_alignment: mobile_text_alignment,
+      mobile_media_layout: mobile_media_layout,
+      loading: loading,
+      selected_tag: selected_tag,
+      show_cta: show_cta,
+      show_date: show_date,
+      show_excerpt: show_excerpt,
+      transition_id: section.id
+    -%}
+
+    {%- unless view_more_text == blank -%}
+      <div
+        class="featured-blog--footer"
+        data-container="block"
+        data-text-alignment="{{ section_alignment }}"
+      >
         <a
-          data-item="{{ settings.buttons--style }}"
+          data-item="{{ button_style }}"
           data-text="{{ view_more_text }}"
           href="{{ blog.url }}"
-          {% unless settings.transitions--buttons %}
-            data-transition-button
-          {% endunless %}
         >
           <div>{{ view_more_text }}</div>
         </a>
       </div>
-    {%- endif -%}
+    {%- endunless -%}
   </div>
 </div>
 
 {% schema %}
 {
   "name": "Blog posts",
+  "class": "section--featured-blog",
   "settings": [
     {
       "type": "header",
       "content": "Style and layout"
     },
     {
-      "id": "top-border",
-      "label": "Top border",
-      "type": "checkbox",
-      "default": false
+      "id": "border",
+      "label": "Border",
+      "type": "select",
+      "options": [
+        {
+          "label": "Top",
+          "value": "top"
+        },
+        {
+          "label": "Bottom",
+          "value": "bottom"
+        },
+        {
+          "label": "Both",
+          "value": "both"
+        },
+        {
+          "label": "None",
+          "value": "none"
+        }
+      ],
+      "default": "none"
     },
     {
       "id": "spacing-above",
       "label": "Spacing above",
-      "type": "checkbox",
-      "default": true
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "large"
     },
     {
       "id": "spacing-below",
       "label": "Spacing below",
-      "type": "checkbox",
-      "default": true
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "large"
     },
     {
       "id": "background-color",
@@ -149,7 +205,7 @@
       "type": "select",
       "options": [
         {
-          "label": "Transparent",
+          "label": "None",
           "value": "none"
         },
         {
@@ -167,45 +223,42 @@
         {
           "label": "Accent 2",
           "value": "accent-2"
+        },
+        {
+          "label": "Accent 3",
+          "value": "accent-3"
         }
       ],
       "default": "none"
     },
     {
-      "id": "light-text",
-      "label": "Use light text color",
+      "id": "white-text",
+      "label": "Use white text color",
       "type": "checkbox",
       "default": false
+    },
+    {
+      "id": "section-alignment",
+      "label": "Heading and call-to-action alignment",
+      "type": "text_alignment",
+      "default": "center"
+    },
+    {
+      "id": "text-alignment",
+      "label": "Block text alignment",
+      "type": "text_alignment",
+      "default": "center"
     },
     {
       "id": "container-width",
       "label": "Maximum width of container",
       "type": "select",
       "options": [
-        {
-          "label": "Extra small",
-          "value": "1"
-        },
-        {
-          "label": "Small",
-          "value": "2"
-        },
-        {
-          "label": "Medium",
-          "value": "3"
-        },
-        {
-          "label": "Large",
-          "value": "4"
-        },
-        {
-          "label": "Extra large",
-          "value": "5"
-        },
-        {
-          "label": "Full width",
-          "value": "6"
-        }
+        { "label": "Extra small", "value": "1" },
+        { "label": "Small", "value": "2" },
+        { "label": "Medium", "value": "3" },
+        { "label": "Large", "value": "4" },
+        { "label": "Extra large", "value": "5" }
       ],
       "default": "4"
     },
@@ -215,6 +268,12 @@
       "type": "text",
       "default": "pinned",
       "info": "Tag articles with 'pinned' or change this to match an existing tag"
+    },
+    {
+      "id": "show-cta",
+      "label": "Show call-to-action",
+      "type": "checkbox",
+      "default": true
     },
     {
       "id": "show-date",
@@ -244,16 +303,121 @@
       "default": "Blog posts"
     },
     {
-      "id": "heading-alignment",
-      "label": "Position heading",
-      "type": "text_alignment",
-      "default": "center"
+      "id": "button-style",
+      "label": "Button style",
+      "type": "select",
+      "options": [
+        {
+          "label": "Style 1",
+          "value": "button-1"
+        },
+        {
+          "label": "Style 2",
+          "value": "button-2"
+        },
+        {
+          "label": "Style 3",
+          "value": "button-3"
+        },
+        {
+          "label": "Style 4",
+          "value": "button-4"
+        },
+        {
+          "label": "Link",
+          "value": "block-link"
+        }
+      ],
+      "default": "button-1"
     },
     {
       "id": "view-more-text",
       "label": "View more text",
       "type": "text",
       "default": "View more"
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "id": "mobile-spacing-above",
+      "label": "Spacing above",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "id": "mobile-spacing-below",
+      "label": "Spacing below",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "id": "mobile-heading-alignment",
+      "label": "Heading alignment",
+      "type": "text_alignment",
+      "default": "left",
+      "info": "Align the heading to balance it with the slideshow navigation arrows."
+    },
+    {
+      "id": "mobile-text-alignment",
+      "label": "Block text alignment",
+      "type": "text_alignment",
+      "default": "center"
+    },
+    {
+      "id": "mobile-media-layout",
+      "label": "Media layout",
+      "type": "select",
+      "options": [
+        { "label": "Slideshow", "value": "slideshow" },
+        { "label": "Grid", "value": "grid" }
+      ],
+      "default": "slideshow"
     }
   ],
   "presets": [

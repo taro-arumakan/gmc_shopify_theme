@@ -1,0 +1,55 @@
+{%- liquid
+  assign title = product_item.title
+  if onboarding
+    assign title = 'sections.onboarding.product_title' | t
+  endif
+
+  assign placeholder_index = placeholder_index | default: 1
+-%}
+
+<a
+  class="product-card--mini"
+  href="{{ product_item.url }}"
+  aria-label="{{ title }}"
+  data-background-color="none"
+  data-translucent="true"
+  data-product-item
+>
+  <div class="product-card--mini--wrapper">
+    <div class="product-card--mini--image">
+      {%- if product_item.featured_media.preview_image -%}
+        {{-
+          product_item.featured_media.preview_image |
+          image_url: width: product_item.featured_media.preview_image.width |
+          image_tag: widths: '240', sizes: '120px'
+        -}}
+      {%- else -%}
+        {%-
+          render 'placeholder',
+          type: 'product',
+          aspect_ratio: 1,
+          placeholder_index: placeholder_index
+        -%}
+      {%- endif -%}
+    </div>
+
+    <div class="product-card--mini--info">
+      <div data-item="paragraph">
+        {{- title -}}
+      </div>
+
+      {%-
+        render 'product-card--price',
+        product: product_item,
+        onboarding: onboarding
+      -%}
+    </div>
+
+    {%-
+      render 'product-quick-add',
+      product: product_item,
+      onboarding: onboarding,
+      hover: false
+    -%}
+  </div>
+</a>

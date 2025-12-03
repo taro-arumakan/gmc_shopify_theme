@@ -10,45 +10,48 @@
   endif
 
   assign mobile_overlay_style = "none"
-  unless overlay_style == "none"
-    if mobile_overlay
-      assign mobile_overlay_style = overlay_style
-    endif
-  endunless
+  if overlay_style != "none" and mobile_overlay
+    assign mobile_overlay_style = overlay_style
+  endif
 
+  assign description_type = 'paragraph'
   if text_position == 'left' or text_position == 'right'
     assign text_x_alignment = 'left'
     assign text_y_alignment = 'center'
   elsif text_position == 'top' or text_position == 'bottom'
     assign text_x_alignment = 'center'
     assign text_y_alignment = 'center'
+  else
+    assign description_type = 'featured-paragraph'
+  endif
+
+  assign link_tag = 'div'
+  if image_link
+    assign link_tag = 'a'
   endif
 %}
 
 {%- unless sizes -%}
   {%- capture sizes -%}
-    '(max-width: 767px) {{ 100 | divided_by: mobile_per_row }}vw, {{ 100 | divided_by: per_row }}vw'
+    (max-width: 767px) {{ 100 | divided_by: mobile_per_row }}vw, {{ 100 | divided_by: per_row }}vw
   {%- endcapture %}
 {%- endunless -%}
 
 <div
   class="featured-content--root"
+  data-full-width="{{ full_width }}"
+  data-mobile-full-width="{{ mobile_full_width }}"
   data-mobile-overlay="{{ mobile_overlay }}"
   data-overlap="{{ overlap }}"
   data-text-position="{{ text_position }}"
-  {%- if attributes -%}
+  {% if attributes %}
     {{- attributes -}}
-  {%- endif -%}
+  {% endif %}
 >
   {%- if cover_link -%}
     <a
-      class="featured-content--cover-link"
       href="{{ link_url }}"
-      {%- if title != blank -%}
-        aria-label="{{ title }}"
-      {%- else -%}
-        aria-label="{{ image.alt }}"
-      {%- endif -%}
+      aria-label="{% unless title == blank %}{{ image.alt }}{% else %}{{ title }}{% endunless %}"
     >
   {%- endif -%}
 
@@ -58,67 +61,85 @@
       data-background-color="{{ text_bg_color }}"
     {%- endunless -%}
   >
-    <div class="featured-content--image">
-      {%- if image_link -%}
-        <a
-          href="{{ link_url }}"
-          {%- if title != blank -%}
-            aria-label="{{ title }}"
-          {%- else -%}
-            aria-label="{{ image.alt }}"
-          {%- endif -%}
-        >
-      {%- endif -%}
-
+    <{{ link_tag }}
+      class="featured-content--image"
+      {% if image_link %}
+        href="{{ link_url }}"
+        aria-label="{% unless title == blank %}{{ image.alt }}{% else %}{{ title }}{% endunless %}"
+      {% endif %}
+      {% unless settings.transitions--image or image_transition_disabled %}
+        data-transition-item="viewport"
+        data-transition-type="image"
+      {% endunless %}
+    >
       {%- if image -%}
         {%-
-          render "image",
+          render 'image',
           image: image,
           aspect_ratio: image_aspect_ratio,
           display_type: image_display_type,
-          mobile_image: mobile_image,
-          mobile_display_type: mobile_image_display_type,
+          fetchpriority: fetchpriority,
+          full_width: full_width,
+          loading: loading,
           mobile_aspect_ratio: mobile_image_aspect_ratio,
+          mobile_display_type: mobile_image_display_type,
+          mobile_full_width: mobile_full_width,
+          mobile_image: mobile_image,
           mobile_overlay_style: mobile_overlay_style,
           overlay_style: overlay_style,
           parallax: parallax_enabled,
           sizes: sizes
         -%}
       {%- else -%}
+        {%- liquid
+          assign placeholder_index = placeholder_index | default: 2
+          assign placeholder_color = 'default'
+          if white_text and text_position == 'overlay'
+            assign placeholder_color = 'dark'
+          endif
+        -%}
+
         {%-
-          render "placeholder",
-          type: "lifestyle",
+          render 'placeholder',
+          type: 'lifestyle',
           aspect_ratio: image_aspect_ratio,
+          color: placeholder_color,
           display_type: image_display_type,
-          mobile_display_type: mobile_image_display_type,
+          full_width: full_width,
           mobile_aspect_ratio: mobile_image_aspect_ratio,
+          mobile_display_type: mobile_image_display_type,
+          mobile_full_width: mobile_full_width,
           mobile_overlay_style: mobile_overlay_style,
           overlay_style: overlay_style,
           parallax: parallax_enabled,
-          placeholder_index: 2
+          placeholder_index: placeholder_index
         -%}
       {%- endif -%}
-
-      {%- if image_link -%}
-        </a>
-      {%- endif -%}
-    </div>
+    </{{ link_tag }}>
 
     {%-
-      render "stacked-text",
+      render 'stacked-text',
       bg_color: text_bg_color,
+      button_style: button_style,
       cover_link: cover_link,
       description: description,
+      description_type: description_type,
       heading_type: heading_type,
+      highlight_color: highlight_color,
+      highlight_text: highlight_text,
+      highlight_type: highlight_type,
       id: id,
-      light_text: light_text,
       link_text: link_text,
       link_url: link_url,
+      mobile_button_style: mobile_button_style,
       mobile_hide_description: mobile_hide_description,
-      mobile_alignment: mobile_text_alignment,
+      mobile_x_alignment: mobile_text_x_alignment,
+      mobile_y_alignment: mobile_text_y_alignment,
+      mobile_white_text: mobile_white_text,
       overline: overline,
       style: text_style,
       title: title,
+      white_text: white_text,
       width: text_width,
       x_alignment: text_x_alignment,
       y_alignment: text_y_alignment

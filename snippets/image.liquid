@@ -1,11 +1,12 @@
 {%- liquid
-  unless display_type
-    assign display_type = 'original'
-  endunless
-
-  unless mobile_display_type
-    assign mobile_display_type = display_type
-  endunless
+  assign display_type = display_type | default: 'original'
+  assign background = background | default: false
+  assign draggable = draggable | default: false
+  assign mobile_display_type = mobile_display_type | default: display_type
+  assign mobile_overlay_style = mobile_overlay_style | default: overlay_style
+  assign mobile_widths = '200, 300, 400, 500, 600, 700, 800, 900, 1000, 1200, 1400, 1600'
+  assign sizes = sizes | default: '100vw'
+  assign widths = widths | default: '200, 300, 400, 500, 600, 700, 800, 900, 1000, 1200, 1400, 1600, 1800, 2000, 2200, 2500, 2800, 3000'
 
   if aspect_ratio == blank or display_type == 'original'
     assign aspect_ratio = image.aspect_ratio | round: 4
@@ -17,53 +18,45 @@
       assign mobile_aspect_ratio = mobile_image.aspect_ratio | round: 4
     endif
   endif
-
-  unless mobile_overlay_style
-    assign mobile_overlay_style = overlay_style
-  endunless
-
-  unless sizes
-    assign sizes = '100vw'
-  endunless
-
-  unless full_width
-    assign full_width = false
-  endunless
-
-  capture image_properties
-    echo '--aspect-ratio:' | append: aspect_ratio | append: ';'
-    echo '--mobile-aspect-ratio:' | append: mobile_aspect_ratio | append: ';'
-  endcapture
 -%}
 
+{%- if parallax -%}
+  <scroll-progress class="image--scroll-progress">
+{%- endif -%}
+
 <picture
-  class="image--root"
+  class="image--root{% if class %} {{ class }}{% endif %}"
   data-background="{{ background }}"
   data-display-type="{{ display_type }}"
+  data-full-width="{{ full_width }}"
   data-mobile-display-type="{{ mobile_display_type }}"
+  data-mobile-full-width="{{ mobile_full_width }}"
+  data-mobile-overlay-style="{{ mobile_overlay_style }}"
   data-parallax="{{ parallax }}"
   data-overlay-style="{{ overlay_style }}"
-  data-mobile-overlay-style="{{ mobile_overlay_style }}"
-  data-full-width="{{ full_width }}"
-  style="{{ image_properties }}"
+  style="--aspect-ratio:{{ aspect_ratio }};--mobile-aspect-ratio:{{ mobile_aspect_ratio }};"
 >
   {%- if mobile_image -%}
-    <source
-      media="(max-width: 767px)"
-      srcset="
-        {{- mobile_image | image_url: width: 400 }} 400w,
-        {{- mobile_image | image_url: width: 768 }} 768w"
-      alt="{{ mobile_image.alt }}"
-      height="{{ mobile_image.width | divided_by: mobile_aspect_ratio | round }}"
-      width="{{ mobile_image.width }}"
-    >
+    {{-
+      mobile_image |
+      image_url: width: mobile_image.width |
+      image_tag: sizes: sizes, widths: mobile_widths |
+      replace: '<img', '<source media="(max-width: 767px)"' |
+      replace: 'src=', 'data-src='
+    -}}
   {%- endif -%}
 
-  {{-
-    image |
-    image_url: width: image.width |
-    image_tag:
-      widths: "300, 500, 767, 1000, 1200, 1500, 1800, 2400, 3000",
-      sizes: sizes
-  -}}
+  {%- if image -%}
+    {{-
+      image |
+      image_url: width: image.width |
+      image_tag: widths: widths, sizes: sizes, loading: loading, fetchpriority: fetchpriority, draggable: draggable
+    -}}
+  {% else %}
+    <img sizes="{{ sizes }}">
+  {% endif %}
 </picture>
+
+{%- if parallax -%}
+  </scroll-progress>
+{%- endif -%}

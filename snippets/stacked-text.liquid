@@ -4,45 +4,67 @@
     assign text_exists = true
   endif
 
-  unless bg_color
-    assign bg_color = 'transparent'
-  endunless
+  assign bg_color = bg_color | default: 'transparent'
+  assign description_type = description_type | default: 'rte-content'
+
+  if mobile_white_text == nil
+    assign mobile_white_text = white_text
+  endif
 -%}
 
 {%- if text_exists -%}
   <div
     class="stacked-text--root"
-    data-light-text="{{ light_text }}"
-    data-mobile-alignment="{{ mobile_alignment }}"
+    {% if white_text %}
+      data-text-color="white"
+    {% else %}
+      data-text-color="body"
+    {% endif %}
+    {% if mobile_white_text %}
+      data-mobile-text-color="white"
+    {% else %}
+      data-mobile-text-color="body"
+    {% endif %}
+    data-mobile-x-alignment="{{ mobile_x_alignment }}"
+    data-mobile-y-alignment="{{ mobile_y_alignment }}"
     data-x-alignment="{{ x_alignment }}"
     data-y-alignment="{{ y_alignment }}"
-    data-width="{{ width }}"
   >
     <div
       class="stacked-text--wrapper"
       data-text-style="{{ style }}"
+      data-text-width
       data-background-color="{{ bg_color }}"
       data-translucent="{{ settings.content--box-translucent }}"
-      {% unless settings.transitions--text %}
+      data-container="block"
+      {% unless settings.transitions--text or id == 'viewport' %}
         data-transition-container="{{ id }}"
         data-transition-type="slide-in"
         data-transition-cascade="vertical"
         data-transition-cascade-interval="500"
       {% endunless %}
+      style="--text-width:{{ width }}px;"
     >
-      {%- if title != blank -%}
+      {%- unless title == blank -%}
         <div
           {% unless settings.transitions--text %}
             data-transition-item="{{ id }}"
           {% endunless %}
         >
           <h2 class="stacked-text--title" data-item="{{ heading_type }}">
-            {%- render "utils", utility: "emphasized-text", text: title -%}
+            {%-
+              render 'utils',
+              name: 'highlighted-text',
+              text: title,
+              highlight_color: highlight_color,
+              highlight_text: highlight_text,
+              highlight_type: highlight_type
+            -%}
           </h2>
         </div>
-      {%- endif -%}
+      {%- endunless -%}
 
-      {%- if overline != blank -%}
+      {%- unless overline == blank -%}
         <div
           class="stacked-text--overline"
           {% unless settings.transitions--text %}
@@ -53,12 +75,12 @@
             {{- overline | escape -}}
           </h3>
         </div>
-      {%- endif -%}
+      {%- endunless -%}
 
-      {%- if description != blank -%}
+      {%- unless description == blank -%}
         <div
           class="stacked-text--description"
-          data-item="rte-content"
+          data-item="{{ description_type }}"
           {% if mobile_hide_description %}
             data-mq="medium-large"
           {% endif %}
@@ -68,20 +90,20 @@
         >
           {{- description -}}
         </div>
-      {%- endif -%}
+      {%- endunless -%}
 
-      {%- if link_text != blank -%}
+      {%- unless link_text == blank -%}
         {%- if cover_link -%}
           <div
             class="stacked-text--button"
-            data-item="{{- settings.buttons--style -}}"
+            data-item="{{ button_style }}"
+            {% unless mobile_button_style == blank %}
+              data-mobile-item="{{ mobile_button_style }}"
+            {% endunless %}
             data-text="{{ link_text }}"
             {% unless settings.transitions--text %}
               data-transition-item="{{ id }}"
               data-transition-type="fade-in"
-            {% endunless %}
-            {% unless settings.transitions--buttons %}
-              data-transition-button
             {% endunless %}
           >
             <span>{{- link_text -}}</span>
@@ -90,20 +112,20 @@
           <a
             class="stacked-text--button"
             href="{{ link_url }}"
-            data-item="{{- settings.buttons--style -}}"
+            data-item="{{ button_style }}"
+            {% unless mobile_button_style == blank %}
+              data-mobile-item="{{ mobile_button_style }}"
+            {% endunless %}
             data-text="{{ link_text }}"
             {% unless settings.transitions--text %}
               data-transition-item="{{ id }}"
               data-transition-type="fade-in"
             {% endunless %}
-            {% unless settings.transitions--buttons %}
-              data-transition-button
-            {% endunless %}
           >
             <span>{{- link_text -}}</span>
           </a>
         {%- endif -%}
-      {%- endif -%}
+      {%- endunless -%}
     </div>
   </div>
 {%- endif -%}

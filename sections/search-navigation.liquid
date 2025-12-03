@@ -1,0 +1,246 @@
+{%- liquid
+  assign results_for_t = 'sections.navigation.results_for' | t
+
+  assign mobile_spacing_above = section.settings.mobile-spacing-above
+  assign mobile_spacing_below = section.settings.mobile-spacing-below
+  assign show_sort_button = section.settings.show-sort-button
+  assign show_refine_button = section.settings.show-refine-button
+  assign spacing_above = section.settings.spacing-above
+  assign spacing_below = section.settings.spacing-below
+
+  assign result_type = 'article'
+  for item in search.results limit: 1
+    if item.object_type == 'product'
+      assign result_type = 'product'
+    endif
+  endfor
+-%}
+
+{%- capture results_string -%}
+  {{ search.results_count }} {{ results_for_t }} "{{ search.terms | replace: '*', '' }}"
+{%- endcapture -%}
+
+{%- capture ajax_url -%}
+  {{ routes.search_url }}?type=product&q={{ search.terms }}&
+{%- endcapture -%}
+
+{%- if result_type == 'product' or search.results.size == 0 -%}
+  {%-
+    render 'navigation',
+    ajax_url: ajax_url,
+    custom_collection_list: false,
+    mobile_buttons: 'sort,refine',
+    mobile_spacing_above: mobile_spacing_above,
+    mobile_spacing_below: mobile_spacing_below,
+    results_string: results_string,
+    show_browse_button: false,
+    show_collection_list: false,
+    show_layout_buttons: section.settings.show-layout-buttons,
+    show_search_link: section.settings.show-search-link,
+    show_sort_button: show_sort_button,
+    show_sort_list: section.settings.show-sort-list,
+    show_refine_button: show_refine_button,
+    show_refine_list: section.settings.show-refine-list,
+    spacing_above: spacing_above,
+    spacing_below: spacing_below,
+    storage_name: 'search_layout',
+    swatches: section.settings.swatches
+  -%}
+
+  {%- if show_sort_button or show_refine_button -%}
+    <element-relocator data-move-into=".drawer--container[data-view='filter']" data-mq="none">
+      {%-
+        render 'filter',
+        filters: search.filters,
+        show_collection_list: false,
+        show_refine_list: section.settings.show-refine-list,
+        show_search_link: section.settings.show-search-link,
+        show_sort_list: section.settings.show-sort-list,
+        sort_by: search.sort_by,
+        sort_options: search.sort_options,
+        swatches: section.settings.swatches
+      -%}
+    </element-relocator>
+  {%- endif -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Search navigation",
+  "class": "section--search-navigation",
+  "settings": [
+    {
+      "id": "spacing-above",
+      "label": "Spacing above",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "id": "spacing-below",
+      "label": "Spacing below",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "content": "Quick links",
+      "type": "header"
+    },
+    {
+      "label": "Show sort by button",
+      "id": "show-sort-button",
+      "type": "checkbox",
+      "default": true
+    },
+    {
+      "label": "Show refine button",
+      "id": "show-refine-button",
+      "type": "checkbox",
+      "default": true
+    },
+    {
+      "label": "Show layout buttons",
+      "id": "show-layout-buttons",
+      "type": "checkbox",
+      "default": true
+    },
+    {
+      "content": "Drawer",
+      "type": "header"
+    },
+    {
+      "label": "Show sort by list",
+      "id": "show-sort-list",
+      "type": "checkbox",
+      "default": true
+    },
+    {
+      "label": "Show refine list",
+      "id": "show-refine-list",
+      "type": "checkbox",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "swatches",
+      "label": "Swatches",
+      "options": [
+        { "label": "Circle", "value": "circle" },
+        { "label": "Square", "value": "square" },
+        { "label": "None", "value": "none" }
+      ],
+      "default": "circle",
+      "info": "Connect options to swatch colors or images using Shopify metafields. [Learn more](https://help.shopify.com/en/manual/custom-data/metafields/category-metafields/using-category-metafields)"
+    },
+    {
+      "label": "Show search link",
+      "id": "show-search-link",
+      "type": "checkbox",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "id": "mobile-spacing-above",
+      "label": "Spacing above",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "id": "mobile-spacing-below",
+      "label": "Spacing below",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "none"
+    }
+  ]
+}
+{% endschema %}

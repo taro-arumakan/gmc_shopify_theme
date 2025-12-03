@@ -1,0 +1,63 @@
+{%- liquid
+  assign compare_price_t = 'sections.onboarding.compare_price' | t
+  assign from_t = 'products.from' | t
+  assign price_t = 'sections.onboarding.price' | t
+
+  assign current_variant = product.selected_or_first_available_variant
+
+  if onboarding
+    assign currencies_using_comma_decimals = 'ANG,ARS,BRL,BYN,BYR,CLF,CLP,COP,CRC,CZK,DKK,EUR,HRK,HUF,IDR,ISK,MZN,NOK,PLN,RON,RUB,SEK,UYU,VES,VND' | split: ','
+    if currencies_using_comma_decimals contains cart.currency.iso_code
+      assign compare_price_t = compare_price_t | replace: '.', ','
+      assign price_t = price_t | replace: '.', ','
+    endif
+
+    assign compare_price = cart.currency.symbol | append: compare_price_t
+    assign price = price_t
+  else
+    assign compare_price = false
+    if product.compare_at_price > product.price and product.available
+      assign compare_price = product.compare_at_price | money
+    endif
+
+    assign price = product.price | money
+  endif
+-%}
+
+<div class="product--price-container">
+  <div class="product--price-wrapper">
+    {%- if product.price_varies -%}
+      <span class="product--from" data-item="nav-text">
+        {{- from_t -}}
+      </span>
+    {%- endif -%}
+
+    {%- if compare_price -%}
+      <span class="product--compare-price" data-item="nav-text" data-text-color="gray">
+        {{- compare_price -}}
+      </span>
+    {%- endif -%}
+
+    <span class="product--price" data-item="nav-text">
+      {{- price -}}
+    </span>
+  </div>
+
+  {%- if current_variant.unit_price_measurement -%}
+    <div class="product--unit-price-container" data-item="small-text">
+      <span class="product--unit-price">
+        {{- current_variant.unit_price | money -}}
+      </span>/
+
+      {%- if current_variant.unit_price_measurement.reference_value != 1 -%}
+        <span class="product--reference-value">
+          {{- current_variant.unit_price_measurement.reference_value -}}
+        </span>
+      {%- endif -%}
+
+      <span class="product--reference-unit">
+        {{- current_variant.unit_price_measurement.reference_unit -}}
+      </span>
+    </div>
+  {%- endif -%}
+</div>

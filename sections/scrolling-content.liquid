@@ -1,19 +1,20 @@
 {%- liquid
-  assign animation_speed = section.settings.animation-speed
   assign animation_direction = section.settings.animation-direction
+  assign animation_speed = section.settings.animation-speed
   assign bg_color = section.settings.background-color
   assign bg_image = section.settings.background-image
-  assign light_text = section.settings.light-text
+  assign border = section.settings.border
+  assign gap = section.settings.gap
   assign mobile_image = section.settings.mobile-image
+  assign mobile_spacing_above = section.settings.mobile-spacing-above
+  assign mobile_spacing_below = section.settings.mobile-spacing-below
   assign overlay_style = section.settings.overlay-style
   assign parallax_enabled = section.settings.parallax-enabled
   assign pause_on_hover = section.settings.pause-on-hover
   assign spacing_above = section.settings.spacing-above
   assign spacing_below = section.settings.spacing-below
   assign text_size = section.settings.text-size
-  assign top_border = section.settings.top-border
-
-  render 'section-assets', name: 'scrolling-content', type: 'style'
+  assign white_text = section.settings.white-text
 -%}
 
 {%- capture content_html -%}
@@ -44,6 +45,10 @@
           echo '--scrolling-content--block-height:' | append: image_height | append: 'px;'
           echo '--scrolling-content--block-mobile-height:' | append: mobile_image_height | append: 'px;'
         endcapture
+      else
+        assign highlight_type = block.settings.highlight-type
+        assign highlight_color = block.settings.highlight-color
+        assign highlight_text = block.settings.highlight-text
       endif
     -%}
 
@@ -82,7 +87,7 @@
               render 'placeholder', type: 'collection', aspect_ratio: 1.33, placeholder_index: 1
             endif
           else
-            echo block.settings.text
+            render 'utils', name: 'highlighted-text', text: block.settings.text, highlight_color: highlight_color, highlight_text: highlight_text, highlight_type: highlight_type
           endif
         -%}
       </div>
@@ -97,37 +102,48 @@
 <div
   class="scrolling-content--root"
   data-section-id="{{ section.id }}"
-  data-top-border="{{ top_border }}"
-  data-container-width="6"
   data-background-color="{{ bg_color }}"
-  data-light-text="{{ light_text }}"
+  data-border="{{ border }}"
+  data-container-width="6"
+  data-mobile-spacing-above="{{ mobile_spacing_above }}"
+  data-mobile-spacing-below="{{ mobile_spacing_below }}"
   data-hover-pause="{{ pause_on_hover }}"
   data-direction="{{ animation_direction }}"
   data-spacing-above="{{ spacing_above }}"
   data-spacing-below="{{ spacing_below }}"
-  style="--scrolling-content--animation-speed:{{ animation_speed }};"
+  {% if white_text %}
+    data-text-color="white"
+  {% endif %}
+  style="--scrolling-content--animation-speed:{{ animation_speed }};--scrolling-content--gap:{{ gap }}px;"
 >
   <div class="scrolling-content--wrapper">
-    {%- for i in (0..9) -%}
-      <div class="scrolling-content--container">
-        {{- content_html -}}
-      </div>
-    {%- endfor -%}
-  </div>
+    <scrolling-content class="scrolling-content--blocks">
+      {%- for i in (0..9) -%}
+        <div
+          class="scrolling-content--container"
+          {% unless forloop.first %}
+            tabindex="-1"
+          {% endunless %}
+        >
+          {{- content_html -}}
+        </div>
+      {%- endfor -%}
+    </scrolling-content>
 
-  {%- if bg_image -%}
-    {%-
-      render 'image',
-      image: bg_image,
-      aspect_ratio: aspect_ratio,
-      mobile_aspect_ratio: mobile_aspect_ratio,
-      background: true,
-      overlay_style: overlay_style,
-      mobile_overlay_style: overlay_style,
-      mobile_image: mobile_image,
-      parallax: parallax_enabled
-    -%}
-  {%- endif -%}
+    {%- if bg_image -%}
+      {%-
+        render 'image',
+        image: bg_image,
+        aspect_ratio: aspect_ratio,
+        mobile_aspect_ratio: mobile_aspect_ratio,
+        background: true,
+        overlay_style: overlay_style,
+        mobile_overlay_style: overlay_style,
+        mobile_image: mobile_image,
+        parallax: parallax_enabled
+      -%}
+    {%- endif -%}
+  </div>
 </div>
 
 {% schema %}
@@ -140,22 +156,84 @@
       "content": "Style and layout"
     },
     {
-      "id": "top-border",
-      "label": "Top border",
-      "type": "checkbox",
-      "default": false
+      "id": "border",
+      "label": "Border",
+      "type": "select",
+      "options": [
+        {
+          "label": "Top",
+          "value": "top"
+        },
+        {
+          "label": "Bottom",
+          "value": "bottom"
+        },
+        {
+          "label": "Both",
+          "value": "both"
+        },
+        {
+          "label": "None",
+          "value": "none"
+        }
+      ],
+      "default": "none"
     },
     {
       "id": "spacing-above",
       "label": "Spacing above",
-      "type": "checkbox",
-      "default": true
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "medium"
     },
     {
       "id": "spacing-below",
       "label": "Spacing below",
-      "type": "checkbox",
-      "default": true
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "medium"
     },
     {
       "id": "background-color",
@@ -163,7 +241,7 @@
       "type": "select",
       "options": [
         {
-          "label": "Transparent",
+          "label": "None",
           "value": "none"
         },
         {
@@ -181,6 +259,10 @@
         {
           "label": "Accent 2",
           "value": "accent-2"
+        },
+        {
+          "label": "Accent 3",
+          "value": "accent-3"
         }
       ],
       "default": "none"
@@ -195,11 +277,11 @@
       "label": "Enable parallax",
       "type": "checkbox",
       "default": false,
-      "info": "Fixes image position when you scroll, use images with a height of at least 2000px to preserve resolution"
+      "info": "Creates a subtle depth effect on scroll, making images engaging"
     },
     {
       "id": "overlay-style",
-      "label": "Image overlay",
+      "label": "Image darkness",
       "type": "select",
       "options": [
         {
@@ -211,11 +293,11 @@
           "value": "darken"
         },
         {
-          "label": "Dark gradient from top",
+          "label": "Darken top down",
           "value": "darken-top"
         },
         {
-          "label": "Dark gradient from bottom",
+          "label": "Darken bottom up",
           "value": "darken-bottom"
         }
       ],
@@ -223,8 +305,8 @@
       "info": "Can enhance text visibility"
     },
     {
-      "id": "light-text",
-      "label": "Use light text color",
+      "id": "white-text",
+      "label": "Use white text color",
       "type": "checkbox",
       "default": false
     },
@@ -233,8 +315,10 @@
       "id": "text-size",
       "type": "select",
       "options": [
-        { "label": "Paragraph text", "value": "paragraph" },
-        { "label": "Heading", "value": "section-heading" }
+        { "label": "Featured", "value": "featured-heading" },
+        { "label": "Large", "value": "section-heading" },
+        { "label": "Medium", "value": "block-heading" },
+        { "label": "Small", "value": "paragraph" }
       ],
       "default": "section-heading"
     },
@@ -253,13 +337,22 @@
       "default": "left"
     },
     {
+      "id": "gap",
+      "label": "Space between blocks",
+      "type": "range",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 32
+    },
+    {
       "id": "animation-speed",
       "label": "Scroll speed",
       "type": "range",
       "min": 1,
       "max": 10,
       "step": 0.5,
-      "default": 6
+      "default": 2
     },
     {
       "id": "pause-on-hover",
@@ -270,6 +363,62 @@
     {
       "type": "header",
       "content": "Mobile"
+    },
+    {
+      "id": "mobile-spacing-above",
+      "label": "Spacing above",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "id": "mobile-spacing-below",
+      "label": "Spacing below",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "medium"
     },
     {
       "type": "image_picker",
@@ -287,6 +436,114 @@
           "id": "text",
           "type": "text",
           "default": "Your scrolling text here"
+        },
+        {
+          "id": "highlight-type",
+          "label": "Highlight type",
+          "type": "select",
+          "options": [
+            {
+              "label": "Italic",
+              "value": "italic"
+            },
+            {
+              "label": "Bold",
+              "value": "bold"
+            },
+            {
+              "label": "Bold italic",
+              "value": "bold-italic"
+            },
+            {
+              "label": "Text color",
+              "value": "color"
+            },
+            {
+              "label": "Outlined",
+              "value": "outlined"
+            },
+            {
+              "label": "Highlight",
+              "value": "highlight"
+            },
+            {
+              "label": "Half highlight",
+              "value": "half-highlight"
+            },
+            {
+              "label": "Underline",
+              "value": "underline"
+            },
+            {
+              "label": "Reverse opacity",
+              "value": "reverse-opacity"
+            }
+          ],
+          "default": "italic"
+        },
+        {
+          "id": "highlight-color",
+          "label": "Highlight color",
+          "type": "select",
+          "options": [
+            {
+              "label": "Transparent",
+              "value": "transparent"
+            },
+            {
+              "label": "Light",
+              "value": "light"
+            },
+            {
+              "label": "Dark",
+              "value": "dark"
+            },
+            {
+              "label": "Accent 1",
+              "value": "accent-1"
+            },
+            {
+              "label": "Accent 2",
+              "value": "accent-2"
+            },
+            {
+              "label": "Accent 3",
+              "value": "accent-3"
+            }
+          ],
+          "default": "accent-2"
+        },
+        {
+          "id": "highlight-text",
+          "label": "Highlighted text color",
+          "type": "select",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "Light",
+              "value": "light"
+            },
+            {
+              "label": "Dark",
+              "value": "dark"
+            },
+            {
+              "label": "Accent 1",
+              "value": "accent-1"
+            },
+            {
+              "label": "Accent 2",
+              "value": "accent-2"
+            },
+            {
+              "label": "Accent 3",
+              "value": "accent-3"
+            }
+          ],
+          "default": "none"
         },
         {
           "type": "url",

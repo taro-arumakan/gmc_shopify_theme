@@ -23,11 +23,9 @@
   else
     assign step = 0.1
   endif
-
-  render 'section-assets', name: 'price-range'
 -%}
 
-<price-range-root>
+<price-range-element>
   <div class="price-range--wrapper">
     <button type="button" class="price-range--button" data-min-price>
       <div>&nbsp;</div>
@@ -48,7 +46,7 @@
       <input
         class="price-range--input"
         name="{{ filter.min_value.param_name }}"
-        id="price-range--min"
+        id="price_range_min"
         {%- if filter.min_value.value and uses_comma_decimals -%}
           value="{{ min_value | replace: '.', '' | replace: ',', '.' }}"
         {%- elsif filter.min_value.value -%}
@@ -68,7 +66,7 @@
       >
       <label
         class="price-range--label"
-        for="price-range--min"
+        for="price_range_min"
         data-item="hidden-text"
       >
         {{- from_t -}}
@@ -84,7 +82,7 @@
       <input
         class="price-range--input"
         name="{{ filter.max_value.param_name }}"
-        id="price-range--max"
+        id="price_range_max"
         {%- if filter.max_value.value and uses_comma_decimals -%}
           value="{{ max_value | replace: '.', '' | replace: ',', '.' }}"
         {%- elsif filter.max_value.value -%}
@@ -106,11 +104,11 @@
       >
       <label
         class="price-range--label"
-        for="price-range--max"
+        for="price_range_max"
         data-item="hidden-text"
       >
         {{- to_t -}}
       </label>
     </div>
   </div>
-</price-range-root>
+</price-range-element>

@@ -1,0 +1,854 @@
+{%- liquid
+  assign bg_color = section.settings.background-color
+  assign block_spacing = section.settings.block-spacing
+  assign border = section.settings.border
+  assign button_style = section.settings.button-style
+  assign container_width = section.settings.container-width
+  assign columns = section.settings.width
+  assign description = section.settings.description
+  assign heading = section.settings.heading
+  assign link_text = section.settings.link-text
+  assign link_url = section.settings.link-url
+  assign mobile_columns = section.settings.mobile-width
+  assign mobile_heading_alignment = section.settings.mobile-heading-alignment
+  assign mobile_media_layout = section.settings.mobile-media-layout
+  assign mobile_spacing_above = section.settings.mobile-spacing-above
+  assign mobile_spacing_below = section.settings.mobile-spacing-below
+  assign mobile_text_alignment = section.settings.mobile-text-alignment
+  assign outer_background = section.settings.outer-background
+  assign overline = section.settings.overline
+  assign section_alignment = section.settings.section-alignment
+  assign spacing_above = section.settings.spacing-above
+  assign spacing_below = section.settings.spacing-below
+  assign text_alignment = section.settings.text-alignment
+  assign white_text = section.settings.white-text
+
+  assign image_width = section.settings.icon-width
+  if image_width == 0
+    assign image_width = 44
+  endif
+
+  assign header_exists = false
+  unless overline == blank and heading == blank and description == blank
+    assign header_exists = true
+  endunless
+-%}
+
+{%- capture sizes -%}
+  (max-width: 767px) {{ 100 | divided_by: mobile_columns }}vw, {{ 100 | divided_by: columns }}vw
+{%- endcapture %}
+
+{%- for block in section.blocks -%}
+  {%- capture block_html -%}
+    {%- liquid
+      echo block_html
+
+      assign block_link_url = block.settings.link-url
+      assign block_link_text = block.settings.link-text
+      assign block_description = block.settings.description
+      assign icon = block.settings.icon
+      assign icon_image = block.settings.icon-image
+      assign link_wrapper = false
+      assign title = block.settings.title
+
+      if block_link_text == blank and block_link_url != blank and block_description == blank
+        assign link_wrapper = true
+      endif
+    -%}
+
+    <div
+      class="featured-grid--item"
+      {% unless settings.transitions--other %}
+        data-transition-item="{{ section.id }}"
+      {% endunless %}
+      {{ block.shopify_attributes }}
+    >
+      {%- if link_wrapper -%}
+        <a
+          class="featured-grid--item--link-wrapper"
+          href="{{ block_link_url }}"
+          {%- if title != blank -%}
+            aria-label="{{ title }}"
+          {%- elsif heading != blank -%}
+            aria-label="{{ heading }}"
+          {%- else -%}
+            aria-label="{{ image.alt }}"
+          {%- endif -%}
+        >
+      {%- endif -%}
+
+      <div class="featured-grid--item--container" data-container="block">
+        {%- if icon_image or icon != 'none' -%}
+          <div
+            class="featured-grid--item--media"
+            data-text-alignment="{{ text_alignment }}"
+            data-mobile-text-alignment="{{ mobile_text_alignment }}"
+            data-item="icon"
+            style="--width:{{ image_width }}px;"
+          >
+            {%- if icon_image -%}
+              {%- assign twice_width = icon_image.width | times: 2 -%}
+              {{-
+                icon_image |
+                image_url: width: twice_width |
+                image_tag:
+                  widths: '200, 300, 400, 500, 600, 700, 800, 900, 1000, 1200, 1500',
+                  sizes: sizes
+              -}}
+            {%- else -%}
+              {%- render 'icons', icon: icon -%}
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        {%- unless title == blank and block_description == blank and block_link_text == blank -%}
+          {%-
+            render 'stacked-text',
+            white_text: white_text,
+            cover_link: false,
+            heading_type: 'block-heading',
+            button_style: 'block-link',
+            description: block_description,
+            id: 'viewport',
+            link_text: block_link_text,
+            link_url: block_link_url,
+            mobile_x_alignment: mobile_text_alignment,
+            mobile_y_alignment: 'none',
+            title: title,
+            x_alignment: text_alignment,
+            y_alignment: 'none'
+          -%}
+        {%- endunless -%}
+      </div>
+
+      {%- if link_wrapper -%}
+        </a>
+      {%- endif -%}
+    </div>{%- unless forloop.last -%}<span class="divider"></span>{%- endunless -%}
+  {%- endcapture -%}
+{%- endfor -%}
+
+{%- assign block_html_arr = block_html | split: '<span class="divider"></span>' -%}
+
+<div
+  class="featured-grid--root"
+  data-section-id="{{ section.id }}"
+  data-background-color="{{ bg_color }}"
+  data-block-spacing="{{ block_spacing }}"
+  data-container-width="{{ container_width }}"
+  data-border="{{ border }}"
+  data-mobile-spacing-above="{{ mobile_spacing_above }}"
+  data-mobile-spacing-below="{{ mobile_spacing_below }}"
+  {% if white_text %}
+    data-text-color="white"
+  {% endif %}
+  data-mobile-overlay="false"
+  data-outer-background="{{ outer_background }}"
+  data-spacing-above="{{ spacing_above }}"
+  data-spacing-below="{{ spacing_below }}"
+  data-text-position="bottom"
+>
+  <div
+    class="featured-grid--wrapper"
+    data-container="section"
+    {% unless settings.transitions--other %}
+      data-transition-container="{{ section.id }}"
+      data-transition-type="fade-in"
+      data-transition-cascade="horizontal"
+      data-transition-cascade-interval="200"
+    {% endunless %}
+  >
+    {%- if header_exists or mobile_media_layout == 'slideshow' -%}
+      <div
+        class="featured-grid--header-nav"
+        data-container="nav"
+        data-text-alignment="{{ section_alignment }}"
+        data-mobile-text-alignment="{{ mobile_heading_alignment }}"
+      >
+        <div
+          class="featured-grid--header"
+          data-container="block"
+          {% unless settings.transitions--text %}
+            data-transition-container="{{ section.id }}-header"
+            data-transition-type="slide-in"
+            data-transition-cascade="vertical"
+            data-transition-cascade-interval="500"
+          {% endunless %}
+        >
+          {%- if header_exists -%}
+            {%- unless heading == blank -%}
+              <div
+                class="featured-grid--heading"
+                {% unless settings.transitions--text %}
+                  data-transition-item="{{ section.id }}-header"
+                {% endunless %}
+              >
+                <h2 data-item="section-heading">
+                  {{- heading | escape -}}
+                </h2>
+              </div>
+            {%- endunless -%}
+
+            {%- unless overline == blank -%}
+              <div
+                class="featured-grid--overline"
+                {% unless settings.transitions--text %}
+                  data-transition-item="{{ section.id }}-header"
+                {% endunless %}
+              >
+                <p data-item="overline">
+                  {{- overline | escape -}}
+                </p>
+              </div>
+            {%- endunless -%}
+
+            {%- unless description == blank -%}
+              <div
+                class="featured-grid--description"
+                {% unless settings.transitions--text %}
+                  data-transition-item="{{ section.id }}-header"
+                {% endunless %}
+              >
+                <h3 data-item="paragraph">
+                  {{- description -}}
+                </h3>
+              </div>
+            {%- endunless -%}
+          {%- endif -%}
+        </div>
+
+        {%- liquid
+          if mobile_media_layout == 'slideshow'
+            assign blocks_per_slide_desktop = columns | plus: 0.0
+            assign blocks_per_slide_mobile = mobile_columns | plus: 0.0
+            assign total_slides = block_html_arr.size | divided_by: blocks_per_slide_desktop | ceil
+            assign total_slides_mobile = block_html_arr.size | divided_by: blocks_per_slide_mobile | ceil
+            render 'carousel-nav-arrow', id: section.id, total_slides_mobile: total_slides_mobile, total_slides: total_slides
+          endif
+        -%}
+      </div>
+    {%- endif -%}
+
+    {%- if mobile_media_layout == 'grid' -%}
+      <div
+        class="featured-grid--body"
+        {% if mobile_media_layout == 'grid' %}
+          data-container="panel"
+          data-columns="{{ columns }}"
+          data-mobile-columns="{{ mobile_columns }}"
+          data-block-spacing="{{ block_spacing }}"
+        {% endif %}
+      >
+        {%- liquid
+          for block_html in block_html_arr
+            echo block_html
+          endfor
+        -%}
+      </div>
+    {%- else -%}
+      {%-
+        render 'carousel',
+        section: section,
+        blocks: block_html_arr,
+        blocks_per_slide: columns,
+        blocks_per_slide_mobile: mobile_columns,
+        mobile_only: true,
+        mobile_next_visible: false,
+        total_blocks: block_html_arr.size,
+        total_slides: block_html_arr.size | divided_by: mobile_columns
+      -%}
+    {%- endif -%}
+
+    {%- unless link_text == blank -%}
+      <div
+        class="featured-grid--footer"
+        data-container="block"
+        data-text-alignment="{{ section_alignment }}"
+      >
+        <a
+          class="featured-grid--button"
+          href="{{ link_url }}"
+          data-item="{{ button_style }}"
+          data-text="{{ link_text }}"
+        >
+          <span>{{- link_text -}}</span>
+        </a>
+      </div>
+    {%- endunless -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Icons row",
+  "class": "section--icons-row",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout and Color"
+    },
+    {
+      "id": "border",
+      "label": "Border",
+      "type": "select",
+      "options": [
+        {
+          "label": "Top",
+          "value": "top"
+        },
+        {
+          "label": "Bottom",
+          "value": "bottom"
+        },
+        {
+          "label": "Both",
+          "value": "both"
+        },
+        {
+          "label": "None",
+          "value": "none"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "id": "spacing-above",
+      "label": "Spacing above",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "large"
+    },
+    {
+      "id": "spacing-below",
+      "label": "Spacing below",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "large"
+    },
+    {
+      "id": "block-spacing",
+      "label": "Show spacing between blocks",
+      "type": "checkbox",
+      "default": true
+    },
+    {
+      "id": "background-color",
+      "label": "Background color",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Light",
+          "value": "light"
+        },
+        {
+          "label": "Dark",
+          "value": "dark"
+        },
+        {
+          "label": "Accent 1",
+          "value": "accent-1"
+        },
+        {
+          "label": "Accent 2",
+          "value": "accent-2"
+        },
+        {
+          "label": "Accent 3",
+          "value": "accent-3"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "id": "outer-background",
+      "label": "Outer background",
+      "type": "checkbox",
+      "default": true
+    },
+    {
+      "id": "white-text",
+      "label": "Use white text color",
+      "type": "checkbox",
+      "default": false
+    },
+    {
+      "id": "section-alignment",
+      "label": "Heading and call-to-action alignment",
+      "type": "text_alignment",
+      "default": "center"
+    },
+    {
+      "id": "text-alignment",
+      "label": "Block text alignment",
+      "type": "text_alignment",
+      "default": "center"
+    },
+    {
+      "id": "container-width",
+      "label": "Maximum width of container",
+      "type": "select",
+      "options": [
+        { "label": "Extra small", "value": "1" },
+        { "label": "Small", "value": "2" },
+        { "label": "Medium", "value": "3" },
+        { "label": "Large", "value": "4" },
+        { "label": "Extra large", "value": "5" }
+      ],
+      "default": "4"
+    },
+    {
+      "id": "width",
+      "label": "Blocks per row",
+      "type": "range",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "id": "icon-width",
+      "label": "Icon width",
+      "type": "range",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "default": 0,
+      "info": "Set to 0 for auto sizing"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "id": "overline",
+      "label": "Overline",
+      "type": "text",
+      "default": "Overline text"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Icons row"
+    },
+    {
+      "id": "description",
+      "type": "richtext",
+      "label": "Description"
+    },
+    {
+      "type": "url",
+      "id": "link-url",
+      "label": "Link"
+    },
+    {
+      "id": "button-style",
+      "label": "Button style",
+      "type": "select",
+      "options": [
+        {
+          "label": "Style 1",
+          "value": "button-1"
+        },
+        {
+          "label": "Style 2",
+          "value": "button-2"
+        },
+        {
+          "label": "Style 3",
+          "value": "button-3"
+        },
+        {
+          "label": "Style 4",
+          "value": "button-4"
+        },
+        {
+          "label": "Link",
+          "value": "block-link"
+        }
+      ],
+      "default": "button-1"
+    },
+    {
+      "type": "text",
+      "id": "link-text",
+      "label": "Optional link"
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "id": "mobile-spacing-above",
+      "label": "Spacing above",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "id": "mobile-spacing-below",
+      "label": "Spacing below",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "id": "mobile-heading-alignment",
+      "label": "Heading alignment",
+      "type": "text_alignment",
+      "default": "left",
+      "info": "Align the heading to balance it with the slideshow navigation arrows."
+    },
+    {
+      "id": "mobile-text-alignment",
+      "label": "Block text alignment",
+      "type": "text_alignment",
+      "default": "center"
+    },
+    {
+      "id": "mobile-width",
+      "label": "Blocks per row for small devices",
+      "type": "select",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ],
+      "default": "1"
+    },
+    {
+      "id": "mobile-media-layout",
+      "label": "Media layout",
+      "type": "select",
+      "options": [
+        { "label": "Slideshow", "value": "slideshow" },
+        { "label": "Grid", "value": "grid" }
+      ],
+      "default": "slideshow"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "icon",
+      "name": "Icon",
+      "settings": [
+        {
+          "id": "icon",
+          "type": "select",
+          "label": "Icon",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "Bell",
+              "value": "bell-ringing"
+            },
+            {
+              "label": "Calendar",
+              "value": "calendar"
+            },
+            {
+              "label": "Camera",
+              "value": "camera"
+            },
+            {
+              "label": "Checkmark",
+              "value": "check-fat"
+            },
+            {
+              "label": "Clipboard",
+              "value": "clipboard-text"
+            },
+            {
+              "label": "Clock",
+              "value": "clock"
+            },
+            {
+              "label": "Credit card",
+              "value": "credit-card"
+            },
+            {
+              "label": "Dollar sign",
+              "value": "currency-dollar"
+            },
+            {
+              "label": "Download",
+              "value": "download-simple"
+            },
+            {
+              "label": "Envelope",
+              "value": "envelope"
+            },
+            {
+              "label": "Earth",
+              "value": "globe-hemisphere-west"
+            },
+            {
+              "label": "Flower",
+              "value": "flower"
+            },
+            {
+              "label": "Gem",
+              "value": "sketch-logo"
+            },
+            {
+              "label": "Handshake",
+              "value": "handshake"
+            },
+            {
+              "label": "Headset",
+              "value": "headset"
+            },
+            {
+              "label": "Heart",
+              "value": "heart"
+            },
+            {
+              "label": "Key",
+              "value": "key"
+            },
+            {
+              "label": "Leaf",
+              "value": "leaf"
+            },
+            {
+              "label": "Lock",
+              "value": "lock-key"
+            },
+            {
+              "label": "Map",
+              "value": "map-pin"
+            },
+            {
+              "label": "Medal",
+              "value": "medal"
+            },
+            {
+              "label": "Message",
+              "value": "chat-circle-text"
+            },
+            {
+              "label": "Music",
+              "value": "music-notes"
+            },
+            {
+              "label": "Package",
+              "value": "package"
+            },
+            {
+              "label": "Paw",
+              "value": "paw-print"
+            },
+            {
+              "label": "People",
+              "value": "users-four"
+            },
+            {
+              "label": "Pencil",
+              "value": "pencil"
+            },
+            {
+              "label": "Phone",
+              "value": "device-mobile"
+            },
+            {
+              "label": "Plant",
+              "value": "plant"
+            },
+            {
+              "label": "Rabbit",
+              "value": "rabbit"
+            },
+            {
+              "label": "Recycle",
+              "value": "recycle"
+            },
+            {
+              "label": "Science",
+              "value": "atom"
+            },
+            {
+              "label": "Shield",
+              "value": "shield-check"
+            },
+            {
+              "label": "Smile",
+              "value": "smiley"
+            },
+            {
+              "label": "Star",
+              "value": "star"
+            },
+            {
+              "label": "Storefront",
+              "value": "storefront"
+            },
+            {
+              "label": "Sun",
+              "value": "sun"
+            },
+            {
+              "label": "Tree",
+              "value": "tree"
+            },
+            {
+              "label": "Truck",
+              "value": "truck"
+            }
+          ],
+          "default": "atom"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon-image",
+          "label": "Icon image",
+          "info": "If an image is set, it will override the icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Add a title or tagline"
+        },
+        {
+          "id": "description",
+          "type": "richtext",
+          "label": "Description",
+          "default": "<p>Add a title or tagline.</p>"
+        },
+        {
+          "type": "url",
+          "id": "link-url",
+          "label": "Link"
+        },
+        {
+          "id": "link-text",
+          "label": "Optional link",
+          "type": "text",
+          "default": "Optional link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Icons row",
+      "blocks": [
+        {
+          "type": "icon",
+          "settings": {
+            "icon": "sun",
+            "description": ""
+          }
+        },
+        {
+          "type": "icon",
+          "settings": {
+            "icon": "tree",
+            "description": ""
+          }
+        },
+        {
+          "type": "icon",
+          "settings": {
+            "icon": "recycle",
+            "description": ""
+          }
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["aside"]
+  }
+}
+{% endschema %}

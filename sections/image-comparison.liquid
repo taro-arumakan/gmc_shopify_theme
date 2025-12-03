@@ -3,87 +3,204 @@
 
   assign aspect_ratio = 100.0 | divided_by: section.settings.aspect-ratio
   assign bg_color = section.settings.background-color
+  assign border = section.settings.border
+  assign button_style = section.settings.button-style
   assign cursor_direction = section.settings.cursor-direction
   assign cursor_position = section.settings.cursor-position
   assign container_width = section.settings.container-width
   assign display_type = section.settings.image-display-type
   assign heading = section.settings.heading | escape
-  assign light_text = section.settings.light-text
   assign link_text = section.settings.link-text
   assign link_url = section.settings.link-url
-  assign mobile_display_type = section.settings.mobile-image-display-type
   assign mobile_aspect_ratio = 100.0 | divided_by: section.settings.mobile-aspect-ratio
-  assign overline = section.settings.overline
+  assign mobile_display_type = section.settings.mobile-image-display-type
+  assign mobile_full_width = section.settings.mobile-full-width
+  assign mobile_spacing_above = section.settings.mobile-spacing-above
+  assign mobile_spacing_below = section.settings.mobile-spacing-below
+  assign overline = section.settings.overline | escape
+  assign section_alignment = section.settings.section-alignment
   assign spacing_above = section.settings.spacing-above
   assign spacing_below = section.settings.spacing-below
-  assign top_border = section.settings.top-border
+  assign white_text = section.settings.white-text
 
   assign full_width = false
-  if container_width == 6
+  if container_width == '6'
     assign full_width = true
   endif
 
-  render 'section-assets', name: 'image-comparison'
+  assign loading = 'lazy'
+  if section.index < 3
+    assign loading = 'eager'
+  endif
 
-  for block in section.blocks
-    if block.type == 'before'
-      assign before_image = block.settings.image
-      assign before_mobile_image = block.settings.mobile-image
-    elsif block.type == 'after'
-      assign after_image = block.settings.image
-      assign after_mobile_image = block.settings.mobile-image
-    endif
-  endfor
+  capture sizes
+    render 'utils', name: 'sizes', container_width: container_width, columns: 1, mobile_columns: 1, mobile_full_width: mobile_full_width
+  endcapture
+
+  assign before_block = section.blocks | find: 'type', 'before'
+  if before_block
+    assign before_image = before_block.settings.image
+    assign before_mobile_image = before_block.settings.mobile-image
+    assign before_overlay = before_block.settings.overlay-style
+    assign before_overline = before_block.settings.overline
+    assign before_heading = before_block.settings.title
+    assign before_heading_type = before_block.settings.heading-type
+    assign before_text_pos = before_block.settings.text-position
+    assign before_white_text = before_block.settings.white-text
+  endif
+
+  assign after_block = section.blocks | find: 'type', 'after'
+  if after_block
+    assign after_image = after_block.settings.image
+    assign after_mobile_image = after_block.settings.mobile-image
+    assign after_overlay = after_block.settings.overlay-style
+    assign after_overline = after_block.settings.overline
+    assign after_heading = after_block.settings.title
+    assign after_heading_type = after_block.settings.heading-type
+    assign after_text_pos = after_block.settings.text-position
+    assign after_white_text = after_block.settings.white-text
+  endif
 -%}
 
-<image-comparison
+<image-comparison-element
   class="image-comparison--root"
   data-section-id="{{ section.id }}"
   data-background-color="{{ bg_color }}"
+  data-border="{{ border }}"
   data-container-width="{{ container_width }}"
   data-cursor-direction="{{ cursor_direction }}"
   data-initial-pos="{{ cursor_position }}"
-  data-light-text="{{ light_text }}"
+  data-mobile-full-width="{{ mobile_full_width }}"
+  data-mobile-spacing-above="{{ mobile_spacing_above }}"
+  data-mobile-spacing-below="{{ mobile_spacing_below }}"
   data-spacing-above="{{ spacing_above }}"
   data-spacing-below="{{ spacing_below }}"
-  data-top-border="{{ top_border }}"
 >
   <div class="image-comparison--wrapper" data-container="section">
-    {%- if overline != blank or heading != blank -%}
-      <div class="image-comparison--header" data-container="block">
-        {%- if overline != blank -%}
-          <p class="image-comparison--overline" data-item="overline">
-            {{- overline | escape -}}
-          </p>
-        {%- endif -%}
+    {%- unless overline == blank and heading == blank -%}
+      <div
+        class="image-comparison--header"
+        data-container="block"
+        data-text-alignment="{{ section_alignment }}"
+        {% if white_text %}
+          data-text-color="white"
+        {% endif %}
+        {% unless settings.transitions--text %}
+          data-transition-container="{{ section.id }}"
+          data-transition-type="slide-in"
+          data-transition-cascade="vertical"
+          data-transition-cascade-interval="500"
+        {% endunless %}
+      >
+        {%- unless heading == blank -%}
+          <div
+            class="image-comparison--heading"
+            {% unless settings.transitions--text %}
+              data-transition-item="{{ section.id }}"
+            {% endunless %}
+          >
+            <h3 data-item="section-heading">
+              {{- heading -}}
+            </h3>
+          </div>
+        {%- endunless -%}
 
-        {%- if heading != blank -%}
-          <h3 class="image-comparison--heading" data-item="section-heading">
-            {{- heading | escape -}}
-          </h3>
-        {%- endif -%}
+        {%- unless overline == blank -%}
+          <div
+            class="image-comparison--overline"
+            {% unless settings.transitions--text %}
+              data-transition-item="{{ section.id }}"
+            {% endunless %}
+          >
+            <p data-item="overline">
+              {{- overline -}}
+            </p>
+          </div>
+        {%- endunless -%}
       </div>
-    {%- endif -%}
+    {%- endunless -%}
 
     <div class="image-comparison--images">
-      <div class="image-comparison--before">
+      <div class="image-comparison--before" {{ before_block.shopify_attributes }}>
         {%- liquid
           if before_image
-            render 'image', image: before_image, mobile_image: before_mobile_image, display_type: display_type, aspect_ratio: aspect_ratio, mobile_display_type: mobile_display_type, mobile_aspect_ratio: mobile_aspect_ratio, full_width: full_width
+            render 'image', aspect_ratio: aspect_ratio, display_type: display_type, full_width: full_width, image: before_image, mobile_aspect_ratio: mobile_aspect_ratio, mobile_display_type: mobile_display_type, mobile_full_width: mobile_full_width, mobile_image: before_mobile_image, mobile_overlay_style: before_overlay, overlay_style: before_overlay, sizes: sizes, loading: loading
           else
-            render 'placeholder', type: 'collection', placeholder_index: 1, display_type: display_type, aspect_ratio: aspect_ratio, mobile_display_type: mobile_display_type, mobile_aspect_ratio: mobile_aspect_ratio, full_width: full_width
+            assign before_placeholder_color = 'default'
+            if before_white_text
+              assign before_placeholder_color = 'dark'
+            endif
+
+            render 'placeholder', aspect_ratio: aspect_ratio, color: before_placeholder_color, display_type: display_type, full_width: full_width, mobile_aspect_ratio: mobile_aspect_ratio, mobile_display_type: mobile_display_type, mobile_full_width: mobile_full_width, mobile_overlay_style: before_overlay, overlay_style: before_overlay, placeholder_index: 1, type: 'lifestyle'
           endif
         -%}
+
+        {%- unless before_overline == blank and before_heading == blank -%}
+          <div
+            class="image-comparison--before-text"
+            data-transition-item="viewport"
+            data-transition-type="fade-in"
+            data-transition-active="true"
+            data-transition-trigger="custom"
+            style="--text-position:{{ before_text_pos }};"
+            {% if before_white_text %}
+              data-text-color="white"
+            {% endif %}
+          >
+            {%- unless before_overline == blank -%}
+              <div class="image-comparison--before-overline" data-item="overline">
+                {{- before_overline -}}
+              </div>
+            {%- endunless -%}
+
+            {%- unless before_heading == blank -%}
+              <div class="image-comparison--before-heading" data-item="{{ before_heading_type }}">
+                {{- before_heading -}}
+              </div>
+            {%- endunless -%}
+          </div>
+        {%- endunless -%}
       </div>
 
-      <div class="image-comparison--after">
+      <div class="image-comparison--after" {{ after_block.shopify_attributes }}>
         {%- liquid
           if after_image
-            render 'image', image: after_image, mobile_image: after_mobile_image, display_type: display_type, aspect_ratio: aspect_ratio, mobile_display_type: mobile_display_type, mobile_aspect_ratio: mobile_aspect_ratio, full_width: full_width
+            render 'image', aspect_ratio: aspect_ratio, display_type: display_type, full_width: full_width, image: after_image, mobile_aspect_ratio: mobile_aspect_ratio, mobile_display_type: mobile_display_type, mobile_full_width: mobile_full_width, mobile_image: after_mobile_image, mobile_overlay_style: after_overlay, overlay_style: after_overlay, sizes: sizes, loading: loading
           else
-            render 'placeholder', type: 'collection', placeholder_index: 2, display_type: display_type, aspect_ratio: aspect_ratio, mobile_display_type: mobile_display_type, mobile_aspect_ratio: mobile_aspect_ratio, full_width: full_width
+            assign after_placeholder_color = 'default'
+            if after_white_text
+              assign after_placeholder_color = 'dark'
+            endif
+
+            render 'placeholder', aspect_ratio: aspect_ratio, color: after_placeholder_color, display_type: display_type, full_width: full_width, mobile_aspect_ratio: mobile_aspect_ratio, mobile_display_type: mobile_display_type, mobile_full_width: mobile_full_width, mobile_overlay_style: after_overlay, overlay_style: after_overlay, placeholder_index: 1, type: 'lifestyle'
           endif
         -%}
+
+        {%- unless after_overline == blank and after_heading == blank -%}
+          <div
+            class="image-comparison--after-text"
+            data-transition-item="viewport"
+            data-transition-type="fade-in"
+            data-transition-active="true"
+            data-transition-trigger="custom"
+            style="--text-position:{{ after_text_pos }};"
+            {% if after_white_text %}
+              data-text-color="white"
+            {% endif %}
+          >
+            {%- unless after_overline == blank -%}
+              <div class="image-comparison--after-overline" data-item="overline">
+                {{- after_overline -}}
+              </div>
+            {%- endunless -%}
+
+            {%- unless after_heading == blank -%}
+              <div class="image-comparison--after-heading" data-item="{{ after_heading_type }}">
+                {{- after_heading -}}
+              </div>
+            {%- endunless -%}
+          </div>
+        {% endunless %}
       </div>
 
       <div class="image-comparison--cursor-wrapper">
@@ -97,23 +214,27 @@
       </div>
     </div>
 
-    {%- if link_text != blank -%}
-      <div class="image-comparison--link" data-container="block">
+    {%- unless link_text == blank -%}
+      <div
+        class="image-comparison--footer"
+        data-container="block"
+        data-text-alignment="{{ section_alignment }}"
+        {% if white_text %}
+          data-text-color="white"
+        {% endif %}
+      >
         <a
-          class="image-comparison--link--container"
+          class="image-comparison--button"
           href="{{ link_url }}"
-          data-item="{{ settings.buttons--style }}"
-          data-text="{{- link_text -}}"
-          {% unless settings.transitions--buttons %}
-            data-transition-button
-          {% endunless %}
+          data-item="{{ button_style }}"
+          data-text="{{ link_text }}"
         >
-          <span>{{- link_text -}}</span>
+          <span>{{ link_text }}</span>
         </a>
       </div>
-    {%- endif -%}
+    {%- endunless -%}
   </div>
-</image-comparison>
+</image-comparison-element>
 
 {% schema %}
 {
@@ -125,39 +246,37 @@
       "content": "Style and layout"
     },
     {
-      "id": "top-border",
-      "label": "Top border",
-      "type": "checkbox",
-      "default": false
+      "id": "border",
+      "label": "Border",
+      "type": "select",
+      "options": [
+        {
+          "label": "Top",
+          "value": "top"
+        },
+        {
+          "label": "Bottom",
+          "value": "bottom"
+        },
+        {
+          "label": "Both",
+          "value": "both"
+        },
+        {
+          "label": "None",
+          "value": "none"
+        }
+      ],
+      "default": "none"
     },
     {
       "id": "spacing-above",
       "label": "Spacing above",
-      "type": "checkbox",
-      "default": true
-    },
-    {
-      "id": "spacing-below",
-      "label": "Spacing below",
-      "type": "checkbox",
-      "default": true
-    },
-    {
-      "id": "image-display-type",
-      "label": "Image display type",
       "type": "select",
       "options": [
         {
-          "label": "Original aspect ratio",
-          "value": "original"
-        },
-        {
-          "label": "Adjustable aspect ratio",
-          "value": "aspect-ratio"
-        },
-        {
-          "label": "X-Small",
-          "value": "x-small"
+          "label": "None",
+          "value": "none"
         },
         {
           "label": "Small",
@@ -172,59 +291,39 @@
           "value": "large"
         },
         {
-          "label": "X-Large",
+          "label": "Extra large",
           "value": "x-large"
-        },
-        {
-          "label": "Fit screen",
-          "value": "fit-screen"
         }
       ],
-      "default": "medium"
+      "default": "large"
     },
     {
-      "id": "aspect-ratio",
-      "label": "Image aspect ratio",
-      "type": "range",
-      "min": 24,
-      "max": 200,
-      "step": 2,
-      "default": 56,
-      "info": "Only applies if adjustable aspect ratio is selected."
-    },
-    {
-      "id": "background-color",
-      "label": "Background color",
+      "id": "spacing-below",
+      "label": "Spacing below",
       "type": "select",
       "options": [
         {
-          "label": "Transparent",
+          "label": "None",
           "value": "none"
         },
         {
-          "label": "Light",
-          "value": "light"
+          "label": "Small",
+          "value": "small"
         },
         {
-          "label": "Dark",
-          "value": "dark"
+          "label": "Medium",
+          "value": "medium"
         },
         {
-          "label": "Accent 1",
-          "value": "accent-1"
+          "label": "Large",
+          "value": "large"
         },
         {
-          "label": "Accent 2",
-          "value": "accent-2"
+          "label": "Extra large",
+          "value": "x-large"
         }
       ],
-      "default": "none"
-    },
-    {
-      "id": "light-text",
-      "label": "Use light text color",
-      "type": "checkbox",
-      "default": false
+      "default": "large"
     },
     {
       "id": "container-width",
@@ -259,6 +358,100 @@
       "default": "4"
     },
     {
+      "id": "background-color",
+      "label": "Background color",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Light",
+          "value": "light"
+        },
+        {
+          "label": "Dark",
+          "value": "dark"
+        },
+        {
+          "label": "Accent 1",
+          "value": "accent-1"
+        },
+        {
+          "label": "Accent 2",
+          "value": "accent-2"
+        },
+        {
+          "label": "Accent 3",
+          "value": "accent-3"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "id": "white-text",
+      "label": "Use white text color",
+      "type": "checkbox",
+      "default": false
+    },
+    {
+      "id": "section-alignment",
+      "label": "Heading and call-to-action alignment",
+      "type": "text_alignment",
+      "default": "center"
+    },
+    {
+      "id": "image-display-type",
+      "label": "Image aspect ratio",
+      "type": "select",
+      "options": [
+        {
+          "label": "Original aspect ratio",
+          "value": "original"
+        },
+        {
+          "label": "Adjustable aspect ratio",
+          "value": "aspect-ratio"
+        },
+        {
+          "label": "Extra small",
+          "value": "x-small"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        },
+        {
+          "label": "Fit screen",
+          "value": "fit-screen"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "id": "aspect-ratio",
+      "label": "Adjustable aspect ratio",
+      "type": "range",
+      "min": 24,
+      "max": 200,
+      "step": 2,
+      "default": 56,
+      "visible_if": "{{ section.settings.image-display-type == 'aspect-ratio' }}"
+    },
+    {
       "type": "header",
       "content": "Content"
     },
@@ -280,9 +473,37 @@
       "label": "Link"
     },
     {
+      "id": "button-style",
+      "label": "Button style",
+      "type": "select",
+      "options": [
+        {
+          "label": "Style 1",
+          "value": "button-1"
+        },
+        {
+          "label": "Style 2",
+          "value": "button-2"
+        },
+        {
+          "label": "Style 3",
+          "value": "button-3"
+        },
+        {
+          "label": "Style 4",
+          "value": "button-4"
+        },
+        {
+          "label": "Link",
+          "value": "block-link"
+        }
+      ],
+      "default": "button-1"
+    },
+    {
       "type": "text",
       "id": "link-text",
-      "label": "Link text",
+      "label": "Optional link",
       "default": "Optional link"
     },
     {
@@ -307,15 +528,77 @@
       "max": 95,
       "step": 1,
       "unit": "%",
-      "default": 75
+      "default": 50
     },
     {
       "type": "header",
       "content": "Mobile"
     },
     {
+      "id": "mobile-full-width",
+      "label": "Full width",
+      "type": "checkbox",
+      "default": false
+    },
+    {
+      "id": "mobile-spacing-above",
+      "label": "Spacing above",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "id": "mobile-spacing-below",
+      "label": "Spacing below",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "medium"
+    },
+    {
       "id": "mobile-image-display-type",
-      "label": "Mobile image display type",
+      "label": "Mobile image aspect ratio",
       "type": "select",
       "options": [
         {
@@ -327,7 +610,7 @@
           "value": "aspect-ratio"
         },
         {
-          "label": "X-Small",
+          "label": "Extra small",
           "value": "x-small"
         },
         {
@@ -343,7 +626,7 @@
           "value": "large"
         },
         {
-          "label": "X-Large",
+          "label": "Extra large",
           "value": "x-large"
         },
         {
@@ -355,13 +638,13 @@
     },
     {
       "id": "mobile-aspect-ratio",
-      "label": "Mobile image aspect ratio",
+      "label": "Mobile adjustable aspect ratio",
       "type": "range",
       "min": 32,
       "max": 200,
       "step": 2,
       "default": 134,
-      "info": "Only applies if adjustable aspect ratio is selected."
+      "visible_if": "{{ section.settings.mobile-image-display-type == 'aspect-ratio' }}"
     }
   ],
   "max_blocks": 2,
@@ -380,6 +663,72 @@
           "id": "mobile-image",
           "type": "image_picker",
           "label": "Mobile image"
+        },
+        {
+          "id": "overlay-style",
+          "label": "Image darkness",
+          "type": "select",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "Darken entire image",
+              "value": "darken"
+            },
+            {
+              "label": "Darken top down",
+              "value": "darken-top"
+            },
+            {
+              "label": "Darken bottom up",
+              "value": "darken-bottom"
+            }
+          ],
+          "default": "none",
+          "info": "Can enhance text visibility"
+        },
+        {
+          "id": "overline",
+          "label": "Overline",
+          "type": "text",
+          "default": "Overline text"
+        },
+        {
+          "id": "title",
+          "label": "Heading",
+          "type": "text",
+          "default": "Before"
+        },
+        {
+          "id": "heading-type",
+          "label": "Heading type",
+          "type": "select",
+          "options": [
+            { "label": "Banner", "value": "banner-heading" },
+            { "label": "Featured", "value": "featured-heading" },
+            { "label": "Large", "value": "section-heading" },
+            { "label": "Medium", "value": "block-heading" }
+          ],
+          "default": "section-heading"
+        },
+        {
+          "id": "text-position",
+          "label": "Text placement",
+          "type": "select",
+          "options": [
+            { "label": "Start", "value": "start" },
+            { "label": "Center", "value": "center" },
+            { "label": "End", "value": "end" }
+          ],
+          "default": "start"
+        },
+        {
+          "id": "white-text",
+          "label": "Use white text color",
+          "type": "checkbox",
+          "default": false
         }
       ]
     },
@@ -397,6 +746,72 @@
           "id": "mobile-image",
           "type": "image_picker",
           "label": "Mobile image"
+        },
+        {
+          "id": "overlay-style",
+          "label": "Image darkness",
+          "type": "select",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "Darken entire image",
+              "value": "darken"
+            },
+            {
+              "label": "Darken top down",
+              "value": "darken-top"
+            },
+            {
+              "label": "Darken bottom up",
+              "value": "darken-bottom"
+            }
+          ],
+          "default": "darken-bottom",
+          "info": "Can enhance text visibility"
+        },
+        {
+          "id": "overline",
+          "label": "Overline",
+          "type": "text",
+          "default": "Overline text"
+        },
+        {
+          "id": "title",
+          "label": "Heading",
+          "type": "text",
+          "default": "After"
+        },
+        {
+          "id": "heading-type",
+          "label": "Heading type",
+          "type": "select",
+          "options": [
+            { "label": "Banner", "value": "banner-heading" },
+            { "label": "Featured", "value": "featured-heading" },
+            { "label": "Large", "value": "section-heading" },
+            { "label": "Medium", "value": "block-heading" }
+          ],
+          "default": "section-heading"
+        },
+        {
+          "id": "text-position",
+          "label": "Text placement",
+          "type": "select",
+          "options": [
+            { "label": "Start", "value": "start" },
+            { "label": "Center", "value": "center" },
+            { "label": "End", "value": "end" }
+          ],
+          "default": "end"
+        },
+        {
+          "id": "white-text",
+          "label": "Use white text color",
+          "type": "checkbox",
+          "default": true
         }
       ]
     }

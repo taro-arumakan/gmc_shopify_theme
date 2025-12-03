@@ -1,49 +1,309 @@
 {%- liquid
   assign aspect_ratio = 100.0 | divided_by: section.settings.aspect-ratio | round: 4
+  assign auto_rotate = section.settings.auto-rotate
+  assign bg_color = section.settings.background-color
+  assign blocks_per_slide = section.settings.blocks-per-slide | plus: 0
+  assign blocks_per_slide_mobile = section.settings.blocks-per-slide-mobile | plus: 0
+  assign border = section.settings.border
   assign display_type = section.settings.image-display-type
+  assign heading_type = section.settings.heading-type
   assign mobile_display_type = section.settings.mobile-image-display-type
   assign mobile_aspect_ratio = 100.0 | divided_by: section.settings.mobile-aspect-ratio | round: 4
-  assign settings_link = settings.color--alternative
-  assign top_border = section.settings.top-border
+  assign mobile_spacing_above = section.settings.mobile-spacing-above
+  assign mobile_spacing_below = section.settings.mobile-spacing-below
+  assign overlay_style = section.settings.overlay-style
+  assign rotate_frequency = section.settings.rotate-frequency
+  assign spacing_above = section.settings.spacing-above
+  assign spacing_below = section.settings.spacing-below
+  assign spacing_around_blocks = section.settings.spacing-around-blocks
+  assign text_bg_color = section.settings.text-background-color
+  assign text_style = section.settings.text-style
+  assign total_blocks = section.blocks.size
+  assign transition_type = section.settings.transition-type
+  assign white_text = section.settings.white-text
 
-  render 'section-assets', name: 'slideshow', type: 'style'
+  assign blocks_per_slide_float = blocks_per_slide | append: ".00"
+  assign blocks_per_slide_float_mobile = blocks_per_slide_mobile | append: ".00"
+  assign total_slides = total_blocks | divided_by: blocks_per_slide_float | ceil
+  assign total_slides_mobile = total_blocks | divided_by: blocks_per_slide_float_mobile | ceil
+  assign total_spaces = blocks_per_slide | times: total_slides
+  assign total_spaces_mobile = blocks_per_slide_mobile | times: total_slides_mobile
+
+  assign arrows_enabled = section.settings.arrows-enabled
+  if total_slides == 1
+    assign arrows_enabled = false
+  endif
+
+  assign max_dots = total_slides
+  if total_slides_mobile > total_slides
+    assign max_dots = total_slides_mobile
+  endif
+
+  capture css_vars
+    echo '--blocks-per-slide:' | append: blocks_per_slide | append: ';'
+    echo '--blocks-per-slide-mobile:' | append: blocks_per_slide_mobile | append: ';'
+    echo '--total-slides:' | append: total_slides | append: ';'
+    echo '--total-slides-mobile:' | append: total_slides_mobile | append: ';'
+    echo '--total-spaces:' | append: total_spaces | append: ';'
+    echo '--total-spaces-mobile:' | append: total_spaces_mobile | append: ';'
+
+    if auto_rotate
+      echo '--rotate-frequency:' | append: rotate_frequency | append: 's;'
+    endif
+  endcapture
+
+  capture sizes
+    assign container_width = '6'
+    assign full_width = true
+    if spacing_around_blocks
+      assign full_width = false
+      assign container_width = '5'
+    endif
+
+    render 'utils', name: 'sizes', container_width: container_width, columns: blocks_per_slide, mobile_columns: blocks_per_slide_mobile, mobile_full_width: full_width
+  endcapture
 -%}
 
-<div
-  class="slideshow--root"
+<slideshow-carousel
+  class="carousel--root"
   data-section-id="{{ section.id }}"
-  data-top-border="{{ top_border }}"
-  data-background-color="{{ section.settings.background-color }}"
+  data-auto-rotate="{{ auto_rotate }}"
+  data-background-color="{{ bg_color }}"
+  data-border="{{ border }}"
+  data-columns="{{ blocks_per_slide }}"
   data-container-width="6"
-  data-spacing-above="{{ section.settings.spacing-above }}"
-  data-spacing-below="{{ section.settings.spacing-below }}"
+  data-header-overlap-compatible
+  data-last-slide="false"
+  data-mobile-full-width="true"
+  data-mobile-columns="{{ blocks_per_slide_mobile }}"
+  data-mobile-spacing-above="{{ mobile_spacing_above }}"
+  data-mobile-spacing-below="{{ mobile_spacing_below }}"
+  data-spacing-above="{{ spacing_above }}"
+  data-spacing-around-blocks="{{ spacing_around_blocks }}"
+  data-spacing-below="{{ spacing_below }}"
+  data-transition-type="{{ transition_type }}"
+  {% if auto_rotate %}
+    data-rotate-frequency="{{ rotate_frequency }}"
+  {% endif %}
+  style="{{ css_vars }}"
 >
-  {%-
-    render 'carousel',
-    section_id: section.id,
-    view: 'slideshow',
-    arrows_enabled: section.settings.arrows-enabled,
-    aspect_ratio: aspect_ratio,
-    auto_rotate: section.settings.auto-rotate,
-    blocks_per_slide: section.settings.blocks_per_slide,
-    blocks_per_slide_mobile: section.settings.blocks_per_slide_mobile,
-    blocks: section.blocks,
-    display_type: display_type,
-    dot_nav_enabled: true,
-    heading_type: section.settings.heading-type,
-    light_text: section.settings.light-text,
-    mobile_display_type: mobile_display_type,
-    mobile_aspect_ratio: mobile_aspect_ratio,
-    mobile_overlay: section.settings.mobile-overlay,
-    overlay_style: section.settings.overlay-style,
-    rotate_frequency: section.settings.rotate-frequency,
-    spacing_around_blocks: section.settings.spacing-around-blocks,
-    text_style: section.settings.text-style,
-    text_bg_color: section.settings.text-background-color,
-    total_blocks: section.blocks.size,
-    transition_type: section.settings.transition_type
-  -%}
-</div>
+  <div class="carousel--wrapper">
+    {%- if arrows_enabled -%}
+      <button
+        class="carousel--prev"
+        aria-label="{{ 'general.a11y.previous' | t }}"
+        aria-disabled="true"
+        data-mq="medium-large"
+      >
+        {%- render 'nav-arrow', direction: 'left' -%}
+      </button>
+    {%- endif -%}
+
+    <div class="carousel--container">
+      {%- for block in section.blocks limit: total_blocks -%}
+        {%- liquid
+          assign block_id = section.id | append: '--block-' | append: forloop.index
+          assign block_column = forloop.index0 | modulo: blocks_per_slide | plus: 1
+          assign block_column_mobile = forloop.index0 | modulo: blocks_per_slide_mobile | plus: 1
+
+          assign loading = 'lazy'
+          if forloop.index <= blocks_per_slide and section.index < 3
+            assign loading = 'eager'
+          endif
+
+          assign fetchpriority = 'auto'
+          if forloop.index <= blocks_per_slide and section.index == 1
+            assign fetchpriority = 'high'
+          endif
+
+          assign block_active = false
+          if forloop.index <= blocks_per_slide
+            assign block_active = true
+          endif
+
+          assign block_active_mobile = false
+          if forloop.index <= blocks_per_slide_mobile
+            assign block_active_mobile = true
+          endif
+
+          assign slide_modulo = forloop.index0 | divided_by: blocks_per_slide | plus: 1 | modulo: 2
+          assign placeholder_index = 2
+          if slide_modulo == 0
+            assign placeholder_index = 1
+          endif
+
+          capture block_css_vars
+            echo '--block-column:' | append: block_column | append: ';'
+            echo '--block-column-mobile:' | append: block_column_mobile | append: ';'
+          endcapture
+        -%}
+
+        <div
+          class="carousel--block"
+          data-id="{{ block_id }}"
+          {% unless transition_type == 'slide' %}
+            data-active="{{ block_active }}"
+            data-mobile-active="{{ block_active_mobile }}"
+            style="{{ block_css_vars }}"
+          {% endunless %}
+          {{ block.shopify_attributes }}
+        >
+          {%- if block.type == 'image' -%}
+            {%-
+              render 'featured-content',
+              button_style: block.settings.button-style,
+              description: block.settings.description,
+              fetchpriority: fetchpriority,
+              full_width: full_width,
+              heading_type: heading_type,
+              highlight_color: block.settings.highlight-color,
+              highlight_text: block.settings.highlight-text,
+              highlight_type: block.settings.highlight-type,
+              id: block_id,
+              image: block.settings.image,
+              image_aspect_ratio: aspect_ratio,
+              image_display_type: display_type,
+              image_transition_disabled: true,
+              link_text: block.settings.link-text,
+              link_url: block.settings.link-url,
+              loading: loading,
+              mobile_full_width: full_width,
+              mobile_hide_description: block.settings.mobile-hide-description,
+              mobile_image_display_type: mobile_display_type,
+              mobile_image_aspect_ratio: mobile_aspect_ratio,
+              mobile_text_x_alignment: block.settings.mobile-text-horizontal-alignment,
+              mobile_text_y_alignment: block.settings.mobile-text-vertical-alignment,
+              mobile_overlay: true,
+              mobile_image: block.settings.mobile-image,
+              mobile_per_row: blocks_per_slide_mobile,
+              overline: block.settings.overline,
+              overlay_style: overlay_style,
+              placeholder_index: placeholder_index,
+              per_row: blocks_per_slide,
+              sizes: sizes,
+              text_bg_color: text_bg_color,
+              text_style: text_style,
+              text_width: block.settings.text-width,
+              text_position: 'overlay',
+              text_x_alignment: block.settings.text-horizontal-alignment,
+              text_y_alignment: block.settings.text-vertical-alignment,
+              title: block.settings.title,
+              white_text: white_text
+            -%}
+
+          {%- elsif block.type == 'video' -%}
+            {%-
+              render 'video',
+              aspect_ratio: aspect_ratio,
+              autoplay: block.settings.autoplay,
+              button_style: block.settings.button-style,
+              button_text: block.settings.button-text,
+              button_url: block.settings.button-url,
+              description: block.settings.description,
+              display_type: display_type,
+              full_width: full_width,
+              heading: block.settings.heading,
+              heading_type: heading_type,
+              highlight_color: block.settings.highlight-color,
+              highlight_text: block.settings.highlight-text,
+              highlight_type: block.settings.highlight-type,
+              id: block_id,
+              mobile_aspect_ratio: mobile_aspect_ratio,
+              mobile_display_type: mobile_display_type,
+              mobile_full_width: full_width,
+              mobile_hide_description: block.settings.mobile-hide-description,
+              mobile_text_x_alignment: block.settings.mobile-text-horizontal-alignment,
+              mobile_text_y_alignment: block.settings.mobile-text-vertical-alignment,
+              mobile_thumbnail: block.settings.mobile-thumbnail,
+              overline: block.settings.overline,
+              overlay_style: overlay_style,
+              play_button_style: block.settings.play-button-style,
+              text_bg_color: text_bg_color,
+              text_style: text_style,
+              text_x_alignment: block.settings.text-horizontal-alignment,
+              text_y_alignment: block.settings.text-vertical-alignment,
+              text_width: block.settings.text-width,
+              thumbnail: block.settings.image,
+              video_upload: block.settings.video-upload,
+              video_url: block.settings.video-url,
+              white_text: white_text
+            -%}
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+
+      {%- unless transition_type == 'slide' -%}
+        {%- liquid
+          assign desktop_empty_blocks = blocks_per_slide | minus: block_column
+          assign mobile_empty_blocks = blocks_per_slide_mobile | minus: block_column_mobile
+
+          assign total_empty_blocks = desktop_empty_blocks
+          if mobile_empty_blocks > desktop_empty_blocks
+            assign total_empty_blocks = mobile_empty_blocks
+          endif
+        -%}
+
+        {%- if total_empty_blocks > 0 -%}
+          {%- for i in (1..total_empty_blocks) -%}
+            {%- liquid
+              assign block_position = total_blocks | plus: i
+
+              assign block_active = false
+              if block_position <= blocks_per_slide
+                assign block_active = true
+              endif
+
+              assign block_active_mobile = false
+              if block_position <= blocks_per_slide_mobile
+                assign block_active_mobile = true
+              endif
+
+              assign empty_block_column = block_column | plus: i
+              assign empty_block_column_mobile = block_column_mobile | plus: i
+
+              capture block_css_vars
+                echo '--block-column:' | append: empty_block_column | append: ';'
+                echo '--block-column-mobile:' | append: empty_block_column_mobile | append: ';'
+              endcapture
+            -%}
+
+            <div
+              class="carousel--block"
+              data-active="{{ block_active }}"
+              data-mobile-active="{{ block_active_mobile }}"
+              data-background-color="{{ bg_color }}"
+              style="{{ block_css_vars }}"
+              {% if i <= desktop_empty_blocks and i > mobile_empty_blocks %}
+                data-mq="medium-large"
+              {% elsif i <= mobile_empty_blocks and i > desktop_empty_blocks %}
+                data-mq="small"
+              {% endif %}
+            ></div>
+          {%- endfor -%}
+        {%- endif -%}
+      {%- endunless -%}
+    </div>
+
+    {%-
+      render 'carousel-nav-dot',
+      auto_rotate: auto_rotate,
+      max_dots: max_dots,
+      total_slides: total_slides,
+      total_slides_mobile: total_slides_mobile
+    -%}
+
+    {%- if arrows_enabled -%}
+      <button
+        class="carousel--next"
+        aria-label="{{ 'general.a11y.next' | t }}"
+        aria-disabled="true"
+        data-mq="medium-large"
+      >
+        {%- render 'nav-arrow', direction: 'right' -%}
+      </button>
+    {%- endif -%}
+  </div>
+</slideshow-carousel>
 
 {% schema %}
 {
@@ -55,43 +315,84 @@
       "content": "General layout"
     },
     {
-      "id": "top-border",
-      "label": "Top border",
-      "type": "checkbox",
-      "default": false
+      "id": "border",
+      "label": "Border",
+      "type": "select",
+      "options": [
+        {
+          "label": "Top",
+          "value": "top"
+        },
+        {
+          "label": "Bottom",
+          "value": "bottom"
+        },
+        {
+          "label": "Both",
+          "value": "both"
+        },
+        {
+          "label": "None",
+          "value": "none"
+        }
+      ],
+      "default": "none"
     },
     {
       "id": "spacing-above",
       "label": "Spacing above",
-      "type": "checkbox",
-      "default": false
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "none"
     },
     {
       "id": "spacing-below",
       "label": "Spacing below",
-      "type": "checkbox",
-      "default": false
-    },
-    {
-      "id": "spacing-around-blocks",
-      "label": "Spacing around blocks",
-      "type": "checkbox",
-      "default": false
-    },
-    {
-      "id": "arrows-enabled",
-      "label": "Enable arrows",
-      "type": "checkbox",
-      "default": true
-    },
-    {
-      "id": "blocks_per_slide",
-      "label": "Blocks per slide for desktop",
-      "type": "range",
-      "min": 1,
-      "max": 4,
-      "step": 1,
-      "default": 2
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "none"
     },
     {
       "id": "background-color",
@@ -99,7 +400,7 @@
       "type": "select",
       "options": [
         {
-          "label": "Transparent",
+          "label": "None",
           "value": "none"
         },
         {
@@ -117,23 +418,73 @@
         {
           "label": "Accent 2",
           "value": "accent-2"
+        },
+        {
+          "label": "Accent 3",
+          "value": "accent-3"
         }
       ],
       "default": "none"
+    },
+    {
+      "id": "spacing-around-blocks",
+      "label": "Spacing around blocks",
+      "type": "checkbox",
+      "default": false
+    },
+    {
+      "id": "arrows-enabled",
+      "label": "Enable arrows",
+      "type": "checkbox",
+      "default": true
+    },
+    {
+      "id": "blocks-per-slide",
+      "label": "Blocks per slide for desktop",
+      "type": "range",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 1
     },
     {
       "type": "header",
       "content": "Text layout"
     },
     {
-      "id": "light-text",
-      "label": "Use light text color",
+      "id": "white-text",
+      "label": "Use white text color",
       "type": "checkbox",
       "default": true
     },
     {
+      "id": "overlay-style",
+      "label": "Image darkness",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Darken entire image",
+          "value": "darken"
+        },
+        {
+          "label": "Darken top down",
+          "value": "darken-top"
+        },
+        {
+          "label": "Darken bottom up",
+          "value": "darken-bottom"
+        }
+      ],
+      "default": "darken-bottom",
+      "info": "Can enhance text visibility"
+    },
+    {
       "id": "text-style",
-      "label": "Text visibility enhancement",
+      "label": "Text shadows",
       "type": "select",
       "options": [
         {
@@ -145,7 +496,7 @@
           "value": "text-shadow"
         },
         {
-          "label": "Gradient behind text",
+          "label": "Oval shadow",
           "value": "eclipse-shadow"
         }
       ],
@@ -175,6 +526,10 @@
         {
           "label": "Accent 2",
           "value": "accent-2"
+        },
+        {
+          "label": "Accent 3",
+          "value": "accent-3"
         }
       ],
       "default": "transparent"
@@ -197,7 +552,7 @@
     },
     {
       "id": "image-display-type",
-      "label": "Image display type",
+      "label": "Image aspect ratio",
       "type": "select",
       "options": [
         {
@@ -209,7 +564,7 @@
           "value": "aspect-ratio"
         },
         {
-          "label": "X-Small",
+          "label": "Extra small",
           "value": "x-small"
         },
         {
@@ -225,7 +580,7 @@
           "value": "large"
         },
         {
-          "label": "X-Large",
+          "label": "Extra large",
           "value": "x-large"
         },
         {
@@ -237,38 +592,13 @@
     },
     {
       "id": "aspect-ratio",
-      "label": "Image aspect ratio",
+      "label": "Adjustable aspect ratio",
       "type": "range",
       "min": 24,
       "max": 200,
       "step": 2,
       "default": 56,
-      "info": "Only applies if adjustable aspect ratio is selected."
-    },
-    {
-      "id": "overlay-style",
-      "label": "Image overlay",
-      "type": "select",
-      "options": [
-        {
-          "label": "None",
-          "value": "none"
-        },
-        {
-          "label": "Darken entire image",
-          "value": "darken"
-        },
-        {
-          "label": "Dark gradient from top",
-          "value": "darken-top"
-        },
-        {
-          "label": "Dark gradient from bottom",
-          "value": "darken-bottom"
-        }
-      ],
-      "default": "darken-bottom",
-      "info": "Can enhance text visibility"
+      "visible_if": "{{ section.settings.image-display-type == 'aspect-ratio' }}"
     },
     {
       "type": "header",
@@ -278,21 +608,22 @@
       "type": "checkbox",
       "id": "auto-rotate",
       "label": "Auto-rotate slides",
-      "default": false
+      "default": true
     },
     {
-      "label": "Rotate frequency (seconds)",
+      "label": "Rotate frequency",
       "id": "rotate-frequency",
       "type": "range",
-      "min": 3,
+      "min": 2,
       "max": 15,
       "step": 1,
-      "default": 7
+      "unit": "sec",
+      "default": 5
     },
     {
-      "type": "radio",
-      "id": "transition_type",
-      "label": "Transition style",
+      "id": "transition-type",
+      "label": "Transition type",
+      "type": "select",
       "options": [
         {
           "value": "slide",
@@ -310,8 +641,64 @@
       "content": "Mobile"
     },
     {
+      "id": "mobile-spacing-above",
+      "label": "Spacing above",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "id": "mobile-spacing-below",
+      "label": "Spacing below",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "none"
+    },
+    {
       "id": "mobile-image-display-type",
-      "label": "Mobile image display type",
+      "label": "Mobile image aspect ratio",
       "type": "select",
       "options": [
         {
@@ -323,7 +710,7 @@
           "value": "aspect-ratio"
         },
         {
-          "label": "X-Small",
+          "label": "Extra small",
           "value": "x-small"
         },
         {
@@ -339,7 +726,7 @@
           "value": "large"
         },
         {
-          "label": "X-Large",
+          "label": "Extra large",
           "value": "x-large"
         },
         {
@@ -351,28 +738,22 @@
     },
     {
       "id": "mobile-aspect-ratio",
-      "label": "Mobile image aspect ratio",
+      "label": "Mobile adjustable aspect ratio",
       "type": "range",
       "min": 32,
       "max": 200,
       "step": 2,
       "default": 134,
-      "info": "Only applies if adjustable aspect ratio is selected."
+      "visible_if": "{{ section.settings.mobile-image-display-type == 'aspect-ratio' }}"
     },
     {
-      "id": "blocks_per_slide_mobile",
+      "id": "blocks-per-slide-mobile",
       "label": "Blocks per slide for mobile",
-      "type": "radio",
+      "type": "select",
       "options": [
         { "value": "1", "label": "1" },
         { "value": "2", "label": "2" }
       ]
-    },
-    {
-      "id": "mobile-overlay",
-      "label": "Overlay text on small devices",
-      "type": "checkbox",
-      "default": true
     }
   ],
   "blocks": [
@@ -387,32 +768,17 @@
         {
           "id": "text-width",
           "label": "Text width",
-          "type": "select",
-          "options": [
-            {
-              "value": "small",
-              "label": "Small"
-            },
-            {
-              "value": "medium",
-              "label": "Medium"
-            },
-            {
-              "value": "large",
-              "label": "Large"
-            }
-          ],
-          "default": "medium"
+          "type": "range",
+          "min": 300,
+          "max": 800,
+          "step": 25,
+          "unit": "px",
+          "default": 400
         },
         {
           "label": "Horizontal text position",
           "id": "text-horizontal-alignment",
-          "type": "select",
-          "options": [
-            { "label": "Left", "value": "left" },
-            { "label": "Center", "value": "center" },
-            { "label": "Right", "value": "right" }
-          ],
+          "type": "text_alignment",
           "default": "center"
         },
         {
@@ -446,7 +812,115 @@
           "label": "Heading",
           "type": "text",
           "default": "Slide heading",
-          "info": "Emphasize featured or banner headings by wrapping text with square brackets, ie. This is [emphasized]."
+          "info": "Highlight headings by wrapping text with square brackets, ie. This is [highlighted]."
+        },
+        {
+          "id": "highlight-type",
+          "label": "Highlight type",
+          "type": "select",
+          "options": [
+            {
+              "label": "Italic",
+              "value": "italic"
+            },
+            {
+              "label": "Bold",
+              "value": "bold"
+            },
+            {
+              "label": "Bold italic",
+              "value": "bold-italic"
+            },
+            {
+              "label": "Text color",
+              "value": "color"
+            },
+            {
+              "label": "Outlined",
+              "value": "outlined"
+            },
+            {
+              "label": "Highlight",
+              "value": "highlight"
+            },
+            {
+              "label": "Half highlight",
+              "value": "half-highlight"
+            },
+            {
+              "label": "Underline",
+              "value": "underline"
+            },
+            {
+              "label": "Reverse opacity",
+              "value": "reverse-opacity"
+            }
+          ],
+          "default": "italic"
+        },
+        {
+          "id": "highlight-color",
+          "label": "Highlight color",
+          "type": "select",
+          "options": [
+            {
+              "label": "Transparent",
+              "value": "transparent"
+            },
+            {
+              "label": "Light",
+              "value": "light"
+            },
+            {
+              "label": "Dark",
+              "value": "dark"
+            },
+            {
+              "label": "Accent 1",
+              "value": "accent-1"
+            },
+            {
+              "label": "Accent 2",
+              "value": "accent-2"
+            },
+            {
+              "label": "Accent 3",
+              "value": "accent-3"
+            }
+          ],
+          "default": "accent-2"
+        },
+        {
+          "id": "highlight-text",
+          "label": "Highlighted text color",
+          "type": "select",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "Light",
+              "value": "light"
+            },
+            {
+              "label": "Dark",
+              "value": "dark"
+            },
+            {
+              "label": "Accent 1",
+              "value": "accent-1"
+            },
+            {
+              "label": "Accent 2",
+              "value": "accent-2"
+            },
+            {
+              "label": "Accent 3",
+              "value": "accent-3"
+            }
+          ],
+          "default": "none"
         },
         {
           "id": "description",
@@ -462,8 +936,36 @@
           "info": "Entire block will become a link when no link text or description."
         },
         {
+          "id": "button-style",
+          "label": "Button style",
+          "type": "select",
+          "options": [
+            {
+              "label": "Style 1",
+              "value": "button-1"
+            },
+            {
+              "label": "Style 2",
+              "value": "button-2"
+            },
+            {
+              "label": "Style 3",
+              "value": "button-3"
+            },
+            {
+              "label": "Style 4",
+              "value": "button-4"
+            },
+            {
+              "label": "Link",
+              "value": "block-link"
+            }
+          ],
+          "default": "button-2"
+        },
+        {
           "id": "link-text",
-          "label": "Link text",
+          "label": "Optional link",
           "type": "text",
           "default": "View more"
         },
@@ -477,15 +979,20 @@
           "type": "image_picker"
         },
         {
+          "label": "Mobile text horizontal alignment",
+          "id": "mobile-text-horizontal-alignment",
+          "type": "text_alignment",
+          "default": "center"
+        },
+        {
           "label": "Vertical text position",
-          "id": "mobile-text-alignment",
+          "id": "mobile-text-vertical-alignment",
           "type": "select",
           "options": [
             { "label": "Center", "value": "center" },
             { "label": "Bottom", "value": "bottom" }
           ],
-          "default": "center",
-          "info": "Applies when text overlays image."
+          "default": "center"
         },
         {
           "id": "mobile-hide-description",
@@ -506,34 +1013,18 @@
         {
           "id": "text-width",
           "label": "Text width",
-          "type": "select",
-          "options": [
-            {
-              "value": "small",
-              "label": "Small"
-            },
-            {
-              "value": "medium",
-              "label": "Medium"
-            },
-            {
-              "value": "large",
-              "label": "Large"
-            }
-          ],
-          "default": "medium"
+          "type": "range",
+          "min": 300,
+          "max": 800,
+          "step": 25,
+          "unit": "px",
+          "default": 400
         },
         {
           "label": "Horizontal text position",
           "id": "text-horizontal-alignment",
-          "type": "select",
-          "options": [
-            { "label": "Left", "value": "left" },
-            { "label": "Center", "value": "center" },
-            { "label": "Right", "value": "right" }
-          ],
-          "default": "center",
-          "info": "Only applies to the overlay text placement."
+          "type": "text_alignment",
+          "default": "center"
         },
         {
           "label": "Vertical text position",
@@ -566,32 +1057,7 @@
             { "label": "Outline", "value": "outline" }
           ],
           "default": "solid",
-          "info": "Only appears when autoplay is disabled."
-        },
-        {
-          "id": "overlay-style",
-          "label": "Image overlay",
-          "type": "select",
-          "options": [
-            {
-              "label": "None",
-              "value": "none"
-            },
-            {
-              "label": "Darken entire image",
-              "value": "darken"
-            },
-            {
-              "label": "Dark gradient from top",
-              "value": "darken-top"
-            },
-            {
-              "label": "Dark gradient from bottom",
-              "value": "darken-bottom"
-            }
-          ],
-          "default": "darken-bottom",
-          "info": "Can enhance text visibility"
+          "visible_if": "{{ block.settings.autoplay == false }}"
         },
         {
           "type": "header",
@@ -626,13 +1092,149 @@
           "id": "heading",
           "label": "Heading",
           "default": "Video",
-          "info": "Emphasize featured or banner headings by wrapping text with square brackets, ie. This is [emphasized]."
+          "info": "Highlight headings by wrapping text with square brackets, ie. This is [highlighted]."
+        },
+        {
+          "id": "highlight-type",
+          "label": "Highlight type",
+          "type": "select",
+          "options": [
+            {
+              "label": "Italic",
+              "value": "italic"
+            },
+            {
+              "label": "Bold",
+              "value": "bold"
+            },
+            {
+              "label": "Bold italic",
+              "value": "bold-italic"
+            },
+            {
+              "label": "Text color",
+              "value": "color"
+            },
+            {
+              "label": "Outlined",
+              "value": "outlined"
+            },
+            {
+              "label": "Highlight",
+              "value": "highlight"
+            },
+            {
+              "label": "Half highlight",
+              "value": "half-highlight"
+            },
+            {
+              "label": "Underline",
+              "value": "underline"
+            },
+            {
+              "label": "Reverse opacity",
+              "value": "reverse-opacity"
+            }
+          ],
+          "default": "italic"
+        },
+        {
+          "id": "highlight-color",
+          "label": "Highlight color",
+          "type": "select",
+          "options": [
+            {
+              "label": "Transparent",
+              "value": "transparent"
+            },
+            {
+              "label": "Light",
+              "value": "light"
+            },
+            {
+              "label": "Dark",
+              "value": "dark"
+            },
+            {
+              "label": "Accent 1",
+              "value": "accent-1"
+            },
+            {
+              "label": "Accent 2",
+              "value": "accent-2"
+            },
+            {
+              "label": "Accent 3",
+              "value": "accent-3"
+            }
+          ],
+          "default": "accent-2"
+        },
+        {
+          "id": "highlight-text",
+          "label": "Highlighted text color",
+          "type": "select",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "Light",
+              "value": "light"
+            },
+            {
+              "label": "Dark",
+              "value": "dark"
+            },
+            {
+              "label": "Accent 1",
+              "value": "accent-1"
+            },
+            {
+              "label": "Accent 2",
+              "value": "accent-2"
+            },
+            {
+              "label": "Accent 3",
+              "value": "accent-3"
+            }
+          ],
+          "default": "none"
         },
         {
           "type": "richtext",
           "id": "description",
           "label": "Description",
           "default": "<p>Add a description here</p>"
+        },
+        {
+          "id": "button-style",
+          "label": "Button style",
+          "type": "select",
+          "options": [
+            {
+              "label": "Style 1",
+              "value": "button-1"
+            },
+            {
+              "label": "Style 2",
+              "value": "button-2"
+            },
+            {
+              "label": "Style 3",
+              "value": "button-3"
+            },
+            {
+              "label": "Style 4",
+              "value": "button-4"
+            },
+            {
+              "label": "Link",
+              "value": "block-link"
+            }
+          ],
+          "default": "button-2"
         },
         {
           "type": "text",
@@ -655,48 +1257,14 @@
           "label": "Mobile thumbnail (optional)"
         },
         {
-          "id": "mobile-image-display-type",
-          "label": "Mobile image display type",
-          "type": "select",
-          "options": [
-            {
-              "label": "Original aspect ratio",
-              "value": "original"
-            },
-            {
-              "label": "Adjustable aspect ratio",
-              "value": "aspect-ratio"
-            },
-            {
-              "label": "X-Small",
-              "value": "x-small"
-            },
-            {
-              "label": "Small",
-              "value": "small"
-            },
-            {
-              "label": "Medium",
-              "value": "medium"
-            },
-            {
-              "label": "Large",
-              "value": "large"
-            },
-            {
-              "label": "X-Large",
-              "value": "x-large"
-            },
-            {
-              "label": "Fit screen",
-              "value": "fit-screen"
-            }
-          ],
-          "default": "original"
+          "label": "Mobile text horizontal alignment",
+          "id": "mobile-text-horizontal-alignment",
+          "type": "text_alignment",
+          "default": "center"
         },
         {
           "label": "Vertical text position",
-          "id": "mobile-text-alignment",
+          "id": "mobile-text-vertical-alignment",
           "type": "select",
           "options": [
             { "label": "Center", "value": "center" },

@@ -1,79 +1,121 @@
 {%- liquid
-  assign aspect_ratio = 100.0 | divided_by: block.settings.aspect-ratio
+  assign bg_color = block.settings.background-color
+  assign border_type = block.settings.border-type
   assign description = block.settings.description
-  assign display_type = block.settings.image-display-type
   assign heading_type = block.settings.heading-type
+  assign highlight_type = block.settings.highlight-type
+  assign highlight_color = block.settings.highlight-color
+  assign highlight_text = block.settings.highlight-text
   assign image = block.settings.image
-  assign light_text = block.settings.light-text
   assign link_text = block.settings.link-text
   assign link_url = block.settings.link-url
   assign mobile_image = block.settings.mobile-image
-  assign mobile_display_type = block.settings.mobile-image-display-type
-  assign mobile_aspect_ratio = 100.0 | divided_by: block.settings.mobile-aspect-ratio
   assign mobile_hide_description = block.settings.mobile-hide-description
-  assign mobile_text_alignment = block.settings.mobile-text-alignment
+  assign mobile_hide_border = block.settings.mobile-hide-border
+  assign mobile_text_x_alignment = block.settings.mobile-text-horizontal-alignment
+  assign mobile_text_y_alignment = block.settings.mobile-text-vertical-alignment
   assign overline = block.settings.overline
   assign overlay_style = block.settings.overlay-style
   assign parallax_enabled = block.settings.parallax-enabled
-  assign promo_width = block.settings.promo-width
-  assign text_bg_color = block.settings.text-background-color
   assign text_style = block.settings.text-style
+  assign text_bg_color = block.settings.text-background-color
   assign text_x_alignment = block.settings.text-horizontal-alignment
   assign text_y_alignment = block.settings.text-vertical-alignment
   assign text_width = block.settings.text-width
   assign title = block.settings.title
+  assign white_text = block.settings.white-text
 
   assign cover_link = false
   if link_url != blank and description == blank
     assign cover_link = true
   endif
+
+  assign description_type = 'paragraph'
+  if image
+    assign description_type = 'featured-paragraph'
+  endif
+
+  assign onboarding = false
+  if bg_color == 'none' and image == blank
+    assign onboarding = true
+  endif
+
+  assign tag = 'div'
+  if cover_link
+    assign tag = 'a'
+  endif
 -%}
 
-<div
+<{{ tag }}
+  {% if cover_link %}
+    href="{{ link_url }}"
+    {% unless title == blank %}
+      aria-label="{{ title }}"
+    {% else %}
+      aria-label="{{ image.alt }}"
+    {% endunless %}
+  {% endif %}
   class="collection-promo--root"
   data-promo-width="{{ promo_width }}"
-  data-background-color="{{ text_bg_color }}"
+  data-background-color="{{ bg_color }}"
+  data-border-type="{{ border_type }}"
+  data-mobile-hide-border="{{ mobile_hide_border }}"
+  {% unless settings.transitions--other %}
+    data-transition-item="{{ section_id }}"
+  {% endunless %}
   {{ block.shopify_attributes }}
 >
-  {%- if cover_link -%}
-    <a
-      class="collection-promo--cover-link"
-      href="{{ link_url }}"
-      {%- if title != blank -%}
-        aria-label="{{ title }}"
-      {%- else -%}
-        aria-label="{{ image.alt }}"
-      {%- endif -%}
-    >
-  {%- endif -%}
-
   {%- if image -%}
     {%-
       render 'image',
       image: image,
-      aspect_ratio: aspect_ratio,
-      display_type: display_type,
+      display_type: 'fill-available',
+      loading: loading,
+      mobile_image: mobile_image,
+      mobile_display_type: 'fill-available',
+      overlay_style: overlay_style,
+      parallax: parallax_enabled,
+      sizes: sizes
+    -%}
+  {%- elsif onboarding -%}
+    {%- liquid
+      assign placeholder_color = 'default'
+      if white_text
+        assign placeholder_color = 'dark'
+      endif
+    -%}
+
+    {%-
+      render 'placeholder',
+      type: 'collection',
+      color: placeholder_color,
+      display_type: 'fill-available',
       overlay_style: overlay_style,
       parallax: parallax_enabled,
       mobile_image: mobile_image,
-      mobile_aspect_ratio: mobile_aspect_ratio,
-      mobile_display_type: mobile_display_type,
-      sizes: sizes
+      mobile_display_type: 'fill-available',
+      placeholder_index: 1
     -%}
   {%- endif -%}
 
   {%-
-    render "stacked-text",
+    render 'stacked-text',
     bg_color: text_bg_color,
+    button_style: 'block-link',
     cover_link: cover_link,
     description: description,
+    description_type: description_type,
     heading_type: heading_type,
+    highlight_color: highlight_color,
+    highlight_text: highlight_text,
+    highlight_type: highlight_type,
     id: block.id,
-    light_text: light_text,
+    white_text: white_text,
     link_text: link_text,
     link_url: link_url,
     mobile_hide_description: mobile_hide_description,
-    mobile_alignment: mobile_text_alignment,
+    mobile_x_alignment: mobile_text_x_alignment,
+    mobile_y_alignment: mobile_text_y_alignment,
     overline: overline,
     style: text_style,
     title: title,
@@ -81,8 +123,4 @@
     x_alignment: text_x_alignment,
     y_alignment: text_y_alignment
   -%}
-
-  {%- if cover_link -%}
-    </a>
-  {%- endif -%}
-</div>
+</{{ tag }}>

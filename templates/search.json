@@ -9,17 +9,8 @@
  */
 {
   "sections": {
-    "navigation": {
-      "type": "search--navigation",
-      "settings": {}
-    },
-    "main": {
-      "type": "search-results",
-      "settings": {}
-    }
+    "navigation": { "type": "search-navigation", "settings": {} },
+    "main": { "type": "search-results", "settings": {} }
   },
-  "order": [
-    "navigation",
-    "main"
-  ]
+  "order": ["navigation", "main"]
 }

@@ -2,10 +2,10 @@
   assign close_t = 'general.a11y.close' | t
 
   assign bg_color = block.settings.background-color
+  assign button_style = block.settings.button-style
   assign countdown_enabled = block.settings.countdown-enabled
   assign days_range = block.settings.days-range
   assign delay = block.settings.delay
-  assign light_text = block.settings.light-text
   assign description = block.settings.description
   assign heading = block.settings.heading
   assign link_text = block.settings.link-text
@@ -18,6 +18,7 @@
   assign show_at_bottom = block.settings.show-at-bottom
   assign text_alignment = block.settings.text-alignment
   assign translucent = block.settings.translucent
+  assign white_text = block.settings.white-text
 -%}
 
 {%- unless page_enabled and page_url != request.path -%}
@@ -31,7 +32,9 @@
     data-countdown-container
     data-show-again-after="{{ days_range }}"
     data-show-at-bottom="{{ show_at_bottom }}"
-    data-light-text="{{ light_text }}"
+    {% if white_text %}
+      data-text-color="white"
+    {% endif %}
     data-position="{{ position }}"
     data-referrer-enabled="{{ referrer_enabled }}"
     data-referrer-url="{{ referrer_url }}"
@@ -75,24 +78,15 @@
           <a
             class="popup--button--container"
             href="{{ link_url }}"
-            data-item="{{ settings.buttons--style }}"
-            data-text="{{- link_text -}}"
-            data-countdown-button
-            {% unless settings.transitions--buttons %}
-              data-transition-button
-            {% endunless %}
-            {% if block.settings.show-button-when == 'finished' %}
-              style="display:none;"
-            {% endif %}
+            data-item="{{ button_style }}"
+            data-text="{{ link_text }}"
           >
-            <span>{{- link_text -}}</span>
+            <span>{{ link_text }}</span>
           </a>
         </div>
       {%- endunless -%}
     </div>
 
-    <button aria-label="{{ close_t }}" class="popup--block--close">
-      {%- render 'icons', icon: 'cross' -%}
-    </button>
+    <button class="layout--close" aria-label="{{ 'general.a11y.close' | t }}"></button>
   </popup-block>
 {%- endunless -%}

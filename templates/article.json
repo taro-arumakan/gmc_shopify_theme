@@ -9,27 +9,10 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "article",
-      "settings": {}
-    },
-    "navigation": {
-      "type": "article-navigation",
-      "settings": {}
-    },
-    "recents": {
-      "type": "article-recents",
-      "settings": {}
-    },
-    "comments": {
-      "type": "article-comments",
-      "settings": {}
-    }
+    "main": { "type": "article", "settings": {} },
+    "navigation": { "type": "article-navigation", "settings": {} },
+    "recents": { "type": "article-recents", "settings": {} },
+    "comments": { "type": "article-comments", "settings": {} }
   },
-  "order": [
-    "main",
-    "navigation",
-    "recents",
-    "comments"
-  ]
+  "order": ["main", "navigation", "recents", "comments"]
 }

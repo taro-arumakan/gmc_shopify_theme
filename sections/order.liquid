@@ -1,11 +1,17 @@
-{%- render 'section-assets', name: 'customer', type: 'style' -%}
-
 <div
   class="customer--root"
+  data-container-width="2"
   data-section-id="{{ section.id }}"
+  data-background-color="none"
 >
   <div class="customer--wrapper">
-    <h1 data-item="section-heading">
+    <h1
+      data-item="section-heading"
+      {% unless settings.transitions--text %}
+        data-transition-item="viewport"
+        data-transition-type="slide-in"
+      {% endunless %}
+    >
       {{- 'customer.order.page_title' | t: name: order.name -}}
       <span class="note order_date">
         &mdash; {{ order.created_at | time_tag: format: 'date' }}
@@ -90,7 +96,7 @@
 
     <table id="order_details" class="order--table responsive">
       <thead>
-        <tr data-item="accent-text">
+        <tr data-item="nav-text">
           <th>{{ 'customer.order.item' | t }}</th>
           <th>{{ 'customer.order.sku' | t }}</th>
           <th>{{ 'customer.order.price' | t }}</th>
@@ -134,26 +140,30 @@
               {%- endif -%}
             </td>
             <td class="order--item--sku" data-label="{{ 'customer.order.sku' | t }}">
-              <div data-item="accent-text">
+              <div data-item="nav-text">
                 {{- line_item.sku -}}
               </div>
             </td>
             <td
               class="order--item--price"
-              data-item="accent-text"
+              data-item="nav-text"
               data-label="{{ 'customer.order.price' | t }}"
             >
               {%- if line_item.original_line_price > line_item.final_line_price -%}
-                <div data-item="light-accent-text">
+                <div data-item="nav-text" data-text-color="gray">
                   <s class="money">{{ line_item.original_price | money }}</s>
                 </div>
               {%- endif -%}
 
-              <div class="money" data-item="accent-text">
+              <div class="money" data-item="nav-text">
                 {{- line_item.final_price | money -}}
               </div>
 
-              <div class="order--item--unit-price-container" data-item="light-accent-text">
+              <div
+                class="order--item--unit-price-container"
+                data-item="nav-text"
+                data-text-color="gray"
+              >
                 {%- if line_item.unit_price_measurement -%}
                   {{- line_item.unit_price | money -}}/
                   {%- if line_item.unit_price_measurement.reference_value != 1 -%}
@@ -164,7 +174,7 @@
               </div>
 
               {%- if line_item.line_level_discount_allocations.size > 0 -%}
-                <div data-item="light-accent-text">
+                <div data-item="nav-text" data-text-color="gray">
                   {% for discount_allocation in line_item.line_level_discount_allocations %}
                     {{ discount_allocation.discount_application.title }} (-<span class="money">{{ discount_allocation.amount | money }}</span>)
                   {% endfor %}
@@ -173,18 +183,18 @@
             </td>
             <td
               class="order--item--quantity"
-              data-item="accent-text"
+              data-item="nav-text"
               data-label="{{ 'customer.order.quantity' | t }}"
             >
               {{- line_item.quantity -}}
             </td>
             <td
               class="order--item--total"
-              data-item="accent-text"
+              data-item="nav-text"
               data-label="{{ 'customer.order.total' | t }}"
             >
               {%- if line_item.original_line_price > line_item.final_line_price -%}
-                <div data-item="light-accent-text">
+                <div data-item="nav-text" data-text-color="gray">
                   <s class="money">{{ line_item.original_line_price | money }}</s>
                 </div>
               {%- endif -%}
@@ -203,7 +213,7 @@
         <tr class="order--summary">
           <td>{{ 'customer.order.subtotal' | t }}</td>
           <td colspan="3"></td>
-          <td class="order--item--total money" data-item="accent-text">
+          <td class="order--item--total money" data-item="nav-text">
             {{- order.line_items_subtotal_price | money -}}
           </td>
         </tr>
@@ -213,9 +223,11 @@
             <tr>
               <td colspan="4">
                 <div class="order--discount--label">{{ 'customer.order.discount' | t }}:</div>
-                <div data-item="light-accent-text">{{ discount_application.title }}</div>
+                <div data-item="nav-text" data-text-color="gray">
+                  {{ discount_application.title }}
+                </div>
               </td>
-              <td class="order--discount" data-item="light-accent-text">
+              <td class="order--discount" data-item="nav-text" data-text-color="gray">
                 -<span class="money">{{ discount_application.total_allocated_amount | money }}</span>
               </td>
             </tr>
@@ -226,7 +238,7 @@
           <tr>
             <td>{{ shipping_method.title }}:</td>
             <td colspan="3"></td>
-            <td class="order--item--total money" data-item="accent-text">
+            <td class="order--item--total money" data-item="nav-text">
               {{ shipping_method.price | money }}
             </td>
           </tr>
@@ -236,7 +248,7 @@
           <tr>
             <td>{{ tax_line.title }} {{ tax_line.rate | times: 100 }}%:</td>
             <td colspan="3"></td>
-            <td class="order--item--total money" data-item="accent-text">
+            <td class="order--item--total money" data-item="nav-text">
               {{- tax_line.price | money -}}
             </td>
           </tr>
@@ -245,7 +257,7 @@
         <tr>
           <td>{{ 'customer.order.total' | t }}</td>
           <td colspan="3"></td>
-          <td class="order--item--total money" data-item="accent-text">
+          <td class="order--item--total money" data-item="nav-text">
             {{- order.total_price | money }} {{ order.currency -}}
           </td>
         </tr>

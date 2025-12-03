@@ -8,8 +8,6 @@
   assign no_comments_t = 'blog.article.no_comments' | t
   assign button_t = 'blog.comment.button' | t
   assign moderated_notice_t = 'blog.comment.moderated_notice' | t
-
-  render 'section-assets', name: 'comments', type: 'style'
 -%}
 
 {%- paginate article.comments by 8 -%}
@@ -17,13 +15,13 @@
     {%- if article.comments.size > 0 -%}
       <div class="comments--list">
         {%- for comment in article.comments -%}
-          <div id="comment-{{ comment.id }}" class="comment--item">
+          <div id="{{ comment.id }}-comment" class="comment--item">
             <p class="comment--meta">
-              <span data-item="accent-text">{{ comment.author }}</span> &mdash;
-              <span data-item="light-accent-text">
+              <span data-item="nav-text">{{ comment.author }}</span> &mdash;
+              <span data-item="nav-text" data-text-color="gray">
                 {%-
-                  render "utils",
-                  utility: "timesince",
+                  render 'utils',
+                  name: 'timesince',
                   created_at: comment.created_at
                 -%}
               </span>
@@ -48,7 +46,7 @@
         {%-
           render 'pagination',
           paginate: paginate,
-          view: 'blog-comments'
+          hash: 'comments'
         -%}
       </div>
     {%- endif -%}
@@ -56,7 +54,7 @@
     {%- form article, class: 'comments--form' -%}
       {%- liquid
         if form.posted_successfully?
-          echo '<p class="success" data-item="accent-text">'
+          echo '<p class="success" data-item="nav-text">'
             if blog.moderated?
               echo moderated_feedback_t
             else
@@ -69,7 +67,7 @@
       <div class="comments--form-meta">
         <div class="comments--form-name">
           <input
-            data-item="accent-text"
+            data-item="nav-text"
             type="text"
             id="comment_name"
             name="comment[author]"
@@ -85,7 +83,7 @@
 
         <div class="comments--form-email">
           <input
-            data-item="accent-text"
+            data-item="nav-text"
             type="email"
             id="comment_email"
             name="comment[email]"
@@ -102,7 +100,7 @@
 
       <div class="comments--form-input">
         <textarea
-          data-item="accent-text"
+          data-item="nav-text"
           id="comment_body"
           name="comment[body]"
           cols="40"
@@ -116,13 +114,13 @@
       </div>
 
       {%- if blog.moderated? -%}
-        <div class="comments--form-moderated" data-item="accent-text">
+        <div class="comments--form-moderated" data-item="nav-text">
           {{- moderated_notice_t -}}
         </div>
       {%- endif -%}
 
       {%- if form.errors -%}
-        <div class="comments--form-error" data-item="accent-text">
+        <div class="comments--form-error" data-item="nav-text">
           {{- error_t -}}
         </div>
       {%- endif -%}
@@ -131,11 +129,8 @@
         class="comments--form-submit"
         type="submit"
         value="{{ button_t }}"
-        data-item="button"
+        data-item="button-1"
         data-text="{{- button_t -}}"
-        {% unless settings.transitions--buttons %}
-          data-transition-button
-        {% endunless %}
       >
         <span>{{- button_t -}}</span>
       </button>

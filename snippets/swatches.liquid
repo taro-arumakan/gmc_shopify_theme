@@ -1,0 +1,109 @@
+{% comment %} Usage:
+- Place inside loop of 'option' objects
+- If more than one product is included on one page, include a unique 'id'
+{% endcomment %}
+
+{%- liquid
+  capture name
+    assign option_name = option.name | downcase | remove: ' '
+    echo id | append: '-' | append: option_name
+  endcapture
+
+  assign limit_swatches = false
+  if grid_item and option.values.size > 3 and settings.product--limit-swatches
+    assign limit_swatches = true
+  endif
+-%}
+
+{% unless grid_item %}
+  <label
+    class="swatches--header"
+    id="{{ name }}"
+    data-item="nav-text"
+  >
+    <span class="swatches--name">
+      <span>{{ option.name | escape }}</span>
+
+      <span class="swatches--option-current" data-text-color="gray">
+        {%- liquid
+          for value in option.values
+            if value == option.selected_value
+              echo value | escape
+              break
+            endif
+          endfor
+        -%}
+      </span>
+    </span>
+  </label>
+{%- endunless -%}
+
+<div
+  class="swatches--container"
+  role="radiogroup"
+  aria-labelledby="{{ name }}"
+  {% if limit_swatches %}
+    aria-expanded="false"
+  {% endif %}
+>
+  {%- for value in option.values -%}
+    {%- liquid
+      assign swatch_value = nil
+      assign first_variant_id = nil
+
+      if value.swatch.image
+        assign image_url = value.swatch.image | image_url: width: 60
+        assign swatch_value = 'url(' | append: image_url | append: ')'
+      elsif value.swatch.color
+        assign swatch_value = 'rgb(' | append: value.swatch.color.rgb | append: ')'
+      endif
+    -%}
+
+    <label
+      for="{{ name }}-{{ value | downcase | remove: ' ' }}"
+      class="swatch"
+      data-item="swatch"
+      data-shape="{{ shape }}"
+      aria-label="{{ value | escape }}"
+      {% if value.id and grid_item != true %}
+        data-product-url="{{ value.product_url }}"
+        data-option-value-id="{{ value.id }}"
+        data-option-name="{{ option.name | strip | downcase }}"
+      {% endif %}
+      {% unless value.available %}
+        data-unavailable="true"
+      {% endunless %}
+      style="--swatch-background:{{ swatch_value }};"
+    >
+      <input
+        class="swatch--input"
+        type="radio"
+        id="{{ name }}-{{ value | downcase | remove: ' ' }}"
+        name="{{ name }}"
+        value="{{ value | escape }}"
+        {% if value.id %}
+          data-option-value-id="{{ value.id }}"
+          data-option-name="{{ option.name | strip | downcase }}"
+          data-product-url="{{ value.product_url }}"
+        {% endif %}
+        data-item="radio"
+        {% if value == option.selected_value and grid_item == false %}
+          checked
+        {% endif %}
+      />
+    </label>
+  {%- endfor -%}
+
+  {%- if limit_swatches -%}
+    <button
+      class="swatches--expand"
+      type="button"
+      data-item="nav-text"
+      onclick="
+        this.parentElement.setAttribute('aria-expanded', true);
+        this.closest('.carousel--root')?.resetHeight();"
+    >
+      <span>+{{ option.values.size | minus: 3 -}}</span>
+    </button>
+  {%- endif -%}
+</div>

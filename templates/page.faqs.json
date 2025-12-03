@@ -11,13 +11,27 @@
   "sections": {
     "16324399488a55ecb4": {
       "type": "featured-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading-type": "featured-heading",
+            "title": "FAQs",
+            "highlight-type": "none",
+            "highlight-color": "",
+            "highlight-text": ""
+          }
+        }
+      },
+      "block_order": ["heading"],
       "settings": {
-        "spacing-above": true,
-        "spacing-below": true,
+        "spacing-above": "large",
+        "spacing-below": "large",
         "background-color": "none",
-        "light-text": false,
-        "overline": "",
-        "heading": "FAQs"
+        "white-text": false,
+        "container-width": "1",
+        "text-alignment": "center",
+        "mobile-text-alignment": "center"
       }
     },
     "main": {
@@ -25,14 +39,72 @@
       "settings": {
         "show-title": false,
         "background-color": "none",
-        "light-text": false,
-        "spacing-above": false,
-        "spacing-below": true
+        "white-text": false,
+        "container-width": "2",
+        "spacing-above": "none",
+        "spacing-below": "large"
+      }
+    },
+    "16324397781a8be68b": {
+      "type": "collapsible-rows",
+      "blocks": {
+        "16324397781a8be68b-0": {
+          "type": "collapsible-row",
+          "settings": {
+            "heading": "Collapsible row",
+            "description": "<p>Use rows to highlight unique features, <br/>sizing information, <br/>or other sales information.</p>",
+            "page-content": ""
+          }
+        },
+        "16324397781a8be68b-1": {
+          "type": "collapsible-row",
+          "settings": {
+            "heading": "Collapsible row",
+            "description": "<p>Use rows to highlight unique features, <br/>sizing information, <br/>or other sales information.</p>",
+            "page-content": ""
+          }
+        },
+        "16324397781a8be68b-2": {
+          "type": "collapsible-row",
+          "settings": {
+            "heading": "Collapsible row",
+            "description": "<p>Use rows to highlight unique features, <br/>sizing information, <br/>or other sales information.</p>",
+            "page-content": ""
+          }
+        },
+        "a6080b6f-76b2-411e-84ba-9bbd1dbedff2": {
+          "type": "collapsible-row",
+          "settings": {
+            "heading": "Collapsible row",
+            "description": "<p>Use rows to highlight unique features, <br/>sizing information, <br/>or other sales information.</p>",
+            "page-content": ""
+          }
+        },
+        "5212a784-4faa-4ff4-b627-6ca5174a15f9": {
+          "type": "collapsible-row",
+          "settings": {
+            "heading": "Collapsible row",
+            "description": "<p>Use rows to highlight unique features, <br/>sizing information, <br/>or other sales information.</p>",
+            "page-content": ""
+          }
+        }
+      },
+      "block_order": [
+        "16324397781a8be68b-0",
+        "16324397781a8be68b-1",
+        "16324397781a8be68b-2",
+        "a6080b6f-76b2-411e-84ba-9bbd1dbedff2",
+        "5212a784-4faa-4ff4-b627-6ca5174a15f9"
+      ],
+      "settings": {
+        "spacing-above": "none",
+        "spacing-below": "large",
+        "background-color": "none",
+        "white-text": false,
+        "container-width": "2",
+        "heading": ""
       }
     }
   },
-  "order": [
-    "16324399488a55ecb4",
-    "main"
-  ]
+  "order": ["16324399488a55ecb4", "main", "16324397781a8be68b"]
 }

@@ -1,20 +1,44 @@
 {%- liquid
-  assign search_t = 'layout.header.search' | t
-  assign account_t = 'layout.header.account' | t
+  assign account_t = 'layout.header.account_view_link' | t
+  assign toggle_drawer_t = 'layout.header.toggle_drawer' | t
+  assign cart_title_t = 'cart.title' | t
+  assign search_t = 'general.search.search' | t
 
   assign bg_color = section.settings.background-color
-  assign cart_icon = section.settings.cart--icon
-  assign light_text = section.settings.light-text
-  assign logo_image = section.settings.logo
+  assign border = section.settings.bottom-border
+  assign cart_type = settings.cart--type
+  assign highlight_color = section.settings.highlight-color
+  assign highlight_item = section.settings.highlight-item | handleize
+  assign hover_disabled = section.settings.hover-disabled
+  assign layout = section.settings.layout
+  assign logo = section.settings.logo
   assign logo_height = section.settings.logo-height
-  assign logo_center = section.settings.header-logo-center
-  assign menu_center = section.settings.header-menu-center
   assign menu = section.settings.menu
   assign mobile_logo_height = section.settings.mobile-logo-height
+  assign modal_bg = section.settings.modal-background-color
+  assign modal_item = section.settings.modal-item | handleize
+  assign modal_white_text = section.settings.modal-white-text
+  assign overlap_behavior = section.settings.overlap-behavior
+  assign reduce_height = section.settings.reduce-height
+  assign scroll_hide = section.settings.hide-on-scroll
+  assign show_icons = section.settings.icons-enabled
+  assign show_search = section.settings.search-enabled
+  assign sticky_enabled = section.settings.sticky-enabled
+  assign transparent_enabled = section.settings.transparent-enabled
+  assign transparent_white_text = section.settings.transparent-white-text
+  assign transparent_logo = section.settings.transparent-logo
+  assign white_menu_background = section.settings.white-menu-background
+  assign white_text = section.settings.white-text
 
-  assign transparent_menu = false
-  if request.page_type == 'index'
-    assign transparent_menu = section.settings.transparent-menu
+  assign menu_text_color = 'body'
+  if white_text
+    assign menu_text_color = 'white'
+  endif
+
+  assign menu_bg_color = bg_color
+  if white_menu_background
+    assign menu_text_color = 'body'
+    assign menu_bg_color = 'none'
   endif
 
   assign region_enabled = false
@@ -26,156 +50,346 @@
   if section.settings.show-locale-selector and localization.available_languages.size > 1
     assign locale_enabled = true
   endif
+
+  assign toolbar_block = section.blocks | find: 'type', 'toolbar'
 -%}
 
-<header-root
-  class="header--root"
-  data-section-id="{{ section.id }}"
-  data-section-type="header"
-  data-spacing="none"
-  data-background-color="{{ bg_color }}"
-  data-center-logo="{{ logo_center }}"
-  data-center-menu="{{ menu_center }}"
-  data-light-text="{{ light_text }}"
-  data-transparent-menu="{{ transparent_menu }}"
-  style="--header--logo-height:{{ logo_height }}px;"
->
-  <div class="header--y-menu-for-drawer" style="display:none;">
-    {%- render 'y-menu', handle: menu -%}
-  </div>
-
-  {%- if locale_enabled or region_enabled -%}
-    <div class="header--localization-for-drawer" style="display:none;">
-      {%- render
-        'localization',
-        locale_enabled: locale_enabled,
-        region_enabled: region_enabled,
-        loading: 'lazy',
-        id: 'drawer'
-      -%}
-    </div>
-  {%- endif -%}
-
-  <div class="header--top-row">
-    {%- if locale_enabled or region_enabled -%}
-      <div class="header--localization">
-        {%- render
-          'localization',
-          locale_enabled: locale_enabled,
-          region_enabled: region_enabled,
-          id: 'header'
-        -%}
-      </div>
-    {%- endif -%}
-
-    {%- if request.page_type == 'index' -%}
-      <h1 class="header--logo">
-        {%-
-          render 'logo',
-          logo: logo_image,
-          height: logo_height,
-          mobile_height: mobile_logo_height
-        -%}
-      </h1>
-    {%- else -%}
-      <div class="header--logo">
-        {%-
-          render 'logo',
-          logo: logo_image,
-          height: logo_height,
-          mobile_height: mobile_logo_height
-        -%}
-      </div>
-    {%- endif -%}
-
-    {%- if settings.search--show-in-header -%}
-      <div
-        class="header--search"
-        data-drawer-open="top"
-        data-drawer-view="search"
-        role="img"
-        tabindex="0"
-        aria-label="{{ search_t }}"
-      >
-        {%- render 'icons', icon: 'search' -%}
-      </div>
-    {%- endif -%}
-
-    {%- if section.settings.header-account-show and shop.customer_accounts_enabled -%}
-      <a
-        class="header--account-icon"
-        {% if customer %}
-          href="{{ routes.account_url }}"
-        {% else %}
-          href="{{ routes.account_login_url }}"
-        {% endif %}
-        aria-label="{{ account_t }}"
-      >
-        {%- render 'icons', icon: 'account' -%}
-      </a>
-    {%- endif -%}
-  </div>
-
-  <div class="header--bottom-row">
-    {%- liquid
-      if linklists[menu].links.size > 0
-        assign menu_alignment = 'left'
-        if menu_center
-          assign menu_alignment = 'center'
-        endif
-
-        echo '<div class="header--menu">'
-          render 'x-menu', align: menu_alignment, overlap_parent: 1, handle: menu
-        echo '</div>'
-      endif
-
-      echo '<div class="header--cart">'
-        render 'header-cart', cart_icon: cart_icon
-      echo '</div>'
+{%- capture logo -%}
+  <div class="header--primary-logo">
+    {%-
+      render 'logo',
+      logo: logo,
+      height: logo_height,
+      mobile_height: mobile_logo_height
     -%}
   </div>
 
-  <div
-    class="header--mobile"
-    data-background-color="{{ bg_color }}"
-    data-light-text="{{ light_text }}"
-  >
-    <div class="header--mobile--menu">
-      <div
-        tabindex="0"
-        data-drawer-open="left"
-        data-drawer-view="y-menu"
-        aria-haspopup="menu"
-      >
-        {%- render 'icons', icon: 'menu' -%}
-      </div>
-    </div>
-
-    <div class="header--mobile--title">
+  {%- if transparent_logo and transparent_enabled -%}
+    <div class="header--secondary-logo">
       {%-
         render 'logo',
-        logo: logo_image,
+        logo: transparent_logo,
         height: logo_height,
         mobile_height: mobile_logo_height
       -%}
     </div>
+  {%- endif -%}
+{%- endcapture -%}
 
-    <div class="header--mobile--cart" data-item="accent-text">
-      {%- render 'header-cart', cart_icon: cart_icon -%}
+{%- capture account_html -%}
+  {%- if shop.customer_accounts_enabled -%}
+    <a
+      class="header--account"
+      href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}"
+      aria-label="{{ account_t }}"
+    >
+      {%- liquid
+        if show_icons
+          render 'icons', icon: 'account'
+        else
+          echo account_t
+        endif
+      -%}
+    </a>
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- capture search_html -%}
+  {%- if show_search -%}
+    <button
+      class="header--search"
+      data-drawer-open="top"
+      data-drawer-view="search"
+      data-item="nav-text"
+      aria-label="{{ search_t }}"
+      tabindex="0"
+    >
+      {%- liquid
+        if show_icons
+          render 'icons', icon: 'search'
+        else
+          echo search_t
+        endif
+      -%}
+    </button>
+  {%- endif -%}
+{%- endcapture -%}
+
+<header-element
+  class="header--root"
+  data-section-id="{{ section.id }}"
+  data-section-type="header"
+  data-background-color="{{ bg_color }}"
+  data-bottom-border="{{ border }}"
+  data-container-width="6"
+  data-hover-disabled="{{ hover_disabled }}"
+  data-layout="{{ layout }}"
+  data-mobile-spacing-above="none"
+  data-mobile-spacing-below="none"
+  data-overlap-behavior="{{ overlap_behavior }}"
+  data-reduce-height="{{ reduce_height }}"
+  data-scroll-hide="{{ scroll_hide }}"
+  data-spacing-above="none"
+  data-spacing-below="none"
+  data-sticky="false"
+  data-sticky-enabled="{{ sticky_enabled }}"
+  {% if white_text %}
+    data-text-color="white"
+  {% endif %}
+  data-transparent-enabled="{{ transparent_enabled }}"
+  data-transparent-white-text="{{ transparent_white_text }}"
+  aria-expanded="false"
+  aria-hidden="false"
+>
+  {%- unless toolbar_block == blank -%}
+    {%- liquid
+      assign toolbar_border = toolbar_block.settings.bottom-border
+      assign text = toolbar_block.settings.text
+      assign toolbar_text_alignment = toolbar_block.settings.text-alignment
+
+      assign toolbar_region_enabled = false
+      if toolbar_block.settings.show-region-selector and localization.available_countries.size > 1
+        assign toolbar_region_enabled = true
+      endif
+
+      assign toolbar_locale_enabled = false
+      if toolbar_block.settings.show-locale-selector and localization.available_languages.size > 1
+        assign toolbar_locale_enabled = true
+      endif
+    -%}
+
+    <div
+      class="header--toolbar"
+      data-text-alignment="{{ toolbar_text_alignment }}"
+      data-bottom-border="{{ toolbar_border }}"
+    >
+      <div class="header--toolbar-wrapper">
+        {%- unless text == blank -%}
+          <div class="header--toolbar-text" data-item="nav-text">
+            {{- text -}}
+          </div>
+
+          {%- for i in (0..4) -%}
+            <div class="header--toolbar-text" aria-hidden="true" data-mq="small" data-item="nav-text">
+              {{- text -}}
+            </div>
+          {%- endfor -%}
+        {%- endunless -%}
+      </div>
+
+      {%- if toolbar_locale_enabled or toolbar_region_enabled -%}
+        <div class="header--toolbar-localization" data-mq="large">
+          {%-
+            render 'localization',
+            locale_enabled: toolbar_locale_enabled,
+            region_enabled: toolbar_region_enabled,
+            id: 'toolbar'
+          -%}
+        </div>
+      {%- endif -%}
     </div>
+  {%- endunless -%}
+
+  <div class="header--wrapper">
+    {%- if request.page_type == 'index' -%}
+      <h1 class="header--logo">
+        {{- logo -}}
+      </h1>
+    {%- else -%}
+      <div class="header--logo">
+        {{- logo -}}
+      </div>
+    {%- endif -%}
+
+    {%- if layout == 'center-below' or overlap_behavior == 'center-below' -%}
+      <div class="header--search-container">
+        {{ search_html }}
+      </div>
+    {%-  endif -%}
+
+    <nav class="header--primary-nav" aria-hidden="true">
+      <button
+        class="header--drawer-toggle"
+        data-drawer-open="left"
+        data-drawer-view="y-menu"
+        aria-haspopup="menu"
+        aria-label="{{ toggle_drawer_t }}"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      {%- liquid
+        if layout == 'drawer' or overlap_behavior == 'drawer'
+          echo search_html
+        endif
+      -%}
+
+      {%-
+        render 'x-menu',
+        handle: menu,
+        bg_color: menu_bg_color,
+        blocks: section.blocks,
+        highlight_color: highlight_color,
+        highlight_item: highlight_item,
+        modal_item: modal_item,
+        text_color: menu_text_color
+      -%}
+    </nav>
+
+    <nav class="header--secondary-nav" data-item="nav-text">
+      {%- if locale_enabled or region_enabled -%}
+        <div class="header--localization" data-mq="large">
+          {%-
+            render 'localization',
+            locale_enabled: locale_enabled,
+            region_enabled: region_enabled,
+            id: 'header'
+          -%}
+        </div>
+      {%- endif -%}
+
+      {{- search_html -}}
+      {{- account_html -}}
+
+      <a
+        class="header--cart"
+        data-type="{% if show_icons %}icon{% else %}text{% endif %}"
+        aria-label="{{ cart_title_t }}"
+        {%- if cart_type == 'drawer' -%}
+          data-drawer-open="right"
+          data-drawer-view="cart-drawer"
+          aria-haspopup="menu"
+          href="#"
+        {%- else -%}
+          href="{{ routes.cart_url }}"
+        {%- endif -%}
+        data-cart-count="{{ cart.item_count }}"
+      >
+        {%- liquid
+          if show_icons
+            render 'icons', icon: 'bag'
+          else
+            echo cart_title_t
+          endif
+        -%}
+      </a>
+    </nav>
   </div>
-</header-root>
+</header-element>
+
+<style>
+  :root {
+    --header--sticky: {% if sticky_enabled %}1{% else %}0{% endif %};
+  }
+
+  .section--announcement ~ #shopify-section-{{ section.id }} {
+    top: calc(var(--announcement--sticky, 0) * var(--announcement--height, 0px));
+    z-index: 4;
+  }
+</style>
+
+{% comment %} Measure header ASAP to prevent CLS {% endcomment %}
+<script>
+  const header_root = document.querySelector('.header--root');
+  header_root && document.documentElement.style.setProperty(
+    '--header--height', `${header_root.offsetHeight.toFixed(2)}px`
+  );
+</script>
+
+{%- if shop.customer_accounts_enabled -%}
+  <element-relocator data-move-into=".mobile-nav--account" data-mq="none">
+    {{- account_html -}}
+  </element-relocator>
+{%- endif -%}
+
+{%- if show_search -%}
+  <element-relocator data-move-into=".mobile-nav--search"  data-mq="none">
+    {{- search_html -}}
+  </element-relocator>
+{%- endif -%}
+
+<element-relocator data-move-into=".mobile-nav--menu" data-mq="none">
+  {%-
+    render 'y-menu',
+    menu: menu,
+    blocks: section.blocks,
+    highlight_color: highlight_color,
+    highlight_item: highlight_item,
+    modal_item: modal_item
+  -%}
+</element-relocator>
+
+{%- if locale_enabled or region_enabled -%}
+  <element-relocator data-move-into=".mobile-nav--localization" data-mq="none">
+    {%-
+      render 'localization',
+      locale_enabled: locale_enabled,
+      region_enabled: region_enabled,
+      id: 'mobile-nav'
+    -%}
+  </element-relocator>
+{%- endif -%}
+
+{%- unless modal_item == blank -%}
+  {%- liquid
+    assign modal_content = 'sections.header.empty_page_content' | t
+    unless section.settings.modal-content == blank
+      assign modal_content = pages[section.settings.modal-content].content
+    endunless
+  -%}
+
+  <modal-element
+    class="modal--root"
+    data-id="header-modal"
+    data-background-color="dark"
+    data-translucent="true"
+    data-transition-item="viewport"
+    data-transition-type="fade-in"
+    data-transition-trigger="custom"
+    aria-hidden="true"
+  >
+    <div class="modal--view">
+      <div
+        class="header--modal"
+        data-background-color="{{ modal_bg }}"
+        {% if modal_white_text %}
+          data-text-color="white"
+        {% endif %}
+      >
+        {{- modal_content -}}
+      </div>
+    </div>
+  </modal-element>
+{%- endunless -%}
 
 {% schema %}
 {
   "name": "Header",
   "class": "section--header",
+  "tag": "header",
   "settings": [
     {
-      "type": "checkbox",
-      "id": "transparent-menu",
-      "label": "Transparent on home page",
-      "info": "Requires this section to be the last of the header group. Only recommended with a full width image in first template section."
+      "type": "paragraph",
+      "content": "Add/edit/hide each megamenu in this section's block settings."
+    },
+    {
+      "type": "header",
+      "content": "General layout"
+    },
+    {
+      "id": "layout",
+      "label": "Layout",
+      "type": "select",
+      "options": [
+        { "label": "Logo left, navigation left", "value": "left-left" },
+        { "label": "Logo left, navigation center", "value": "left-center" },
+        { "label": "Logo center, navigation left", "value": "center-left" },
+        { "label": "Logo center, navigation below", "value": "center-below" },
+        { "label": "Drawer", "value": "drawer" }
+      ],
+      "default": "left-left"
     },
     {
       "id": "background-color",
@@ -183,7 +397,7 @@
       "type": "select",
       "options": [
         {
-          "label": "Transparent",
+          "label": "None",
           "value": "none"
         },
         {
@@ -201,42 +415,124 @@
         {
           "label": "Accent 2",
           "value": "accent-2"
+        },
+        {
+          "label": "Accent 3",
+          "value": "accent-3"
         }
       ],
       "default": "none"
     },
     {
-      "id": "light-text",
-      "label": "Use light text color",
+      "id": "white-menu-background",
+      "label": "Menu dropdown white background",
+      "type": "checkbox",
+      "default": true
+    },
+    {
+      "id": "bottom-border",
+      "label": "Bottom border",
+      "type": "checkbox",
+      "default": true
+    },
+    {
+      "id": "white-text",
+      "label": "Use white text color",
       "type": "checkbox",
       "default": false
     },
     {
       "type": "checkbox",
-      "id": "header-account-show",
-      "label": "Enable customer account links",
-      "default": true,
-      "info": "[You will also need to enable customer accounts in your store settings](https:\/\/docs.shopify.com\/manual\/your-store\/customers\/customer-accounts)"
-    },
-    {
-      "type": "select",
-      "id": "cart--icon",
-      "label": "Cart icon",
-      "options": [
-        { "label": "Text", "value": "text" },
-        { "label": "Bag", "value": "bag" },
-        { "label": "Cart", "value": "cart" }
-      ],
-      "default": "text"
-    },
-    {
-      "type": "header",
-      "content": "Menu"
+      "id": "hover-disabled",
+      "label": "Disable hover animation",
+      "default": false
     },
     {
       "type": "checkbox",
-      "id": "header-menu-center",
-      "label": "Center align"
+      "id": "sticky-enabled",
+      "label": "Enable sticky bar",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "hide-on-scroll",
+      "label": "Hide on scroll",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "reduce-height",
+      "label": "Reduce height",
+      "default": false
+    },
+    {
+      "id": "overlap-behavior",
+      "label": "Menu overlap behavior",
+      "type": "select",
+      "options": [
+        { "label": "Drawer", "value": "drawer" },
+        { "label": "Move below", "value": "center-below" }
+      ],
+      "default": "drawer",
+      "info": "Occurs when menu doesn't have enough space in some screen resolutions."
+    },
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "label": "Custom logo height",
+      "id": "logo-height",
+      "type": "range",
+      "min": 15,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 35,
+      "info": "This is referring to the natural height and should be half the height of the image you uploaded to ensure it stays sharp on retina screens."
+    },
+    {
+      "label": "Mobile logo height",
+      "id": "mobile-logo-height",
+      "type": "range",
+      "min": 15,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Transparent header",
+      "info": "To show a transparent header, add a compatible section (such as slideshow) as the first section. If the Header section isn't the last section in the Header group, sections following it in the group will be hidden."
+    },
+    {
+      "type": "checkbox",
+      "id": "transparent-enabled",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "id": "transparent-white-text",
+      "label": "Use white text color",
+      "type": "checkbox",
+      "default": false,
+      "visible_if": "{{ section.settings.transparent-enabled == true }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "transparent-logo",
+      "label": "Logo image",
+      "visible_if": "{{ section.settings.transparent-enabled == true }}"
+    },
+    {
+      "type": "header",
+      "content": "Navigation"
     },
     {
       "type": "link_list",
@@ -245,9 +541,72 @@
       "default": "main-menu"
     },
     {
+      "type": "checkbox",
+      "id": "search-enabled",
+      "label": "Show search",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "icons-enabled",
+      "label": "Show icons",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Highlight link"
+    },
+    {
+      "type": "text",
+      "id": "highlight-item",
+      "label": "Menu item",
+      "info": "The name of any top-level link"
+    },
+    {
+      "id": "highlight-color",
+      "label": "Color",
+      "type": "color",
+      "default": "#d02e2e"
+    },
+    {
+      "type": "header",
+      "content": "Modal link"
+    },
+    {
+      "type": "text",
+      "id": "modal-item",
+      "label": "Menu item",
+      "info": "The name of any top-level link"
+    },
+    {
+      "type": "page",
+      "id": "modal-content",
+      "label": "Modal content"
+    },
+    {
+      "id": "modal-background-color",
+      "label": "Modal background color",
+      "type": "select",
+      "options": [
+        { "label": "None", "value": "none" },
+        { "label": "Light", "value": "light" },
+        { "label": "Dark", "value": "dark" },
+        { "label": "Accent 1", "value": "accent-1" },
+        { "label": "Accent 2", "value": "accent-2" },
+        { "label": "Accent 3", "value": "accent-3" }
+      ],
+      "default": "none"
+    },
+    {
+      "id": "modal-white-text",
+      "label": "Use white text color",
+      "type": "checkbox",
+      "default": false
+    },
+    {
       "type": "header",
       "content": "Country/region Selector",
-      "info": "To add a country/region, go to your [payment settings](/admin/settings/payments)."
+      "info": "To add a country/region, go to your [markets settings](/admin/settings/markets)."
     },
     {
       "type": "checkbox",
@@ -265,42 +624,738 @@
       "id": "show-locale-selector",
       "label": "Show language selector",
       "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "toolbar",
+      "name": "Toolbar",
+      "limit": 1,
+      "settings": [
+        {
+          "id": "bottom-border",
+          "label": "Bottom border",
+          "type": "checkbox",
+          "default": true
+        },
+        {
+          "id": "text-alignment",
+          "label": "Text alignment",
+          "type": "text_alignment",
+          "default": "center"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Announcement for sales, promos & more</p>"
+        },
+        {
+          "type": "header",
+          "content": "Country/region Selector",
+          "info": "To add a country/region, go to your [markets settings](/admin/settings/markets)."
+        },
+        {
+          "type": "checkbox",
+          "id": "show-region-selector",
+          "label": "Show country/region selector",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Language Selector",
+          "info": "To add a language, go to your [language settings](/admin/settings/languages)."
+        },
+        {
+          "type": "checkbox",
+          "id": "show-locale-selector",
+          "label": "Show language selector",
+          "default": true
+        }
+      ]
     },
     {
-      "type": "header",
-      "content": "Logo"
+      "type": "image",
+      "name": "Image grid item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "menu-item",
+          "label": "Menu item",
+          "info": "The name of any top-level link"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "id": "image-display-type",
+          "label": "Image aspect ratio",
+          "type": "select",
+          "options": [
+            { "label": "Original aspect ratio", "value": "original" },
+            { "label": "Adjustable aspect ratio", "value": "aspect-ratio" }
+          ],
+          "default": "aspect-ratio"
+        },
+        {
+          "id": "aspect-ratio",
+          "label": "Adjustable aspect ratio",
+          "type": "range",
+          "min": 24,
+          "max": 200,
+          "step": 2,
+          "default": 100,
+          "visible_if": "{{ block.settings.image-display-type == 'aspect-ratio' }}"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "Description"
+        },
+        {
+          "type": "url",
+          "id": "link-url",
+          "label": "Link",
+          "info": "Entire block will become a link."
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile-image",
+          "label": "Mobile image"
+        },
+        {
+          "id": "mobile-image-display-type",
+          "label": "Mobile image aspect ratio",
+          "type": "select",
+          "options": [
+            {
+              "label": "Original aspect ratio",
+              "value": "original"
+            },
+            {
+              "label": "Adjustable aspect ratio",
+              "value": "aspect-ratio"
+            },
+            {
+              "label": "Extra small",
+              "value": "x-small"
+            },
+            {
+              "label": "Small",
+              "value": "small"
+            },
+            {
+              "label": "Medium",
+              "value": "medium"
+            },
+            {
+              "label": "Large",
+              "value": "large"
+            },
+            {
+              "label": "Extra large",
+              "value": "x-large"
+            },
+            {
+              "label": "Fit screen",
+              "value": "fit-screen"
+            }
+          ],
+          "default": "original"
+        },
+        {
+          "id": "mobile-aspect-ratio",
+          "label": "Mobile adjustable aspect ratio",
+          "type": "range",
+          "min": 32,
+          "max": 200,
+          "step": 2,
+          "default": 134,
+          "visible_if": "{{ block.settings.mobile-image-display-type == 'aspect-ratio' }}"
+        }
+      ]
     },
     {
-      "type": "checkbox",
-      "id": "header-logo-center",
-      "label": "Center align"
+      "type": "blog",
+      "name": "Blog",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "menu-item",
+          "label": "Menu item",
+          "info": "The name of any top-level link"
+        },
+        {
+          "id": "blog",
+          "label": "Choose blog",
+          "type": "blog"
+        },
+        {
+          "id": "tag-select",
+          "label": "Filter by tag",
+          "type": "text",
+          "default": "pinned",
+          "info": "Tag articles with 'pinned' or change this to match an existing tag"
+        },
+        {
+          "id": "image-size",
+          "label": "Article image size",
+          "type": "select",
+          "options": [
+            { "label": "Natural", "value": "natural" },
+            { "label": "Square (1:1)", "value": "square" },
+            { "label": "Landscape (4:3)", "value": "landscape" },
+            { "label": "Portrait (2:3)", "value": "portrait" }
+          ],
+          "default": "natural"
+        },
+        {
+          "id": "show-cta",
+          "label": "Show call-to-action",
+          "type": "checkbox",
+          "default": true
+        },
+        {
+          "id": "show-date",
+          "label": "Show date",
+          "type": "checkbox",
+          "default": true
+        },
+        {
+          "id": "show-excerpt",
+          "label": "Show excerpt",
+          "type": "checkbox",
+          "default": true
+        }
+      ]
     },
     {
-      "type": "image_picker",
-      "id": "logo",
-      "label": "Image",
-      "info": "1600 x 200px max"
+      "type": "full-width-promo",
+      "name": "Full width promotion",
+      "settings": [
+        {
+          "type": "text",
+          "id": "menu-item",
+          "label": "Menu item",
+          "info": "The name of any top-level link"
+        },
+        {
+          "type": "header",
+          "content": "Text layout"
+        },
+        {
+          "id": "white-text",
+          "label": "Use white text color",
+          "type": "checkbox",
+          "default": true
+        },
+        {
+          "id": "overlap",
+          "label": "Overlap text",
+          "type": "checkbox",
+          "default": false,
+          "info": "Not applicable for overlaid text"
+        },
+        {
+          "id": "heading-type",
+          "label": "Heading type",
+          "type": "select",
+          "options": [
+            { "label": "Banner", "value": "banner-heading" },
+            { "label": "Featured", "value": "featured-heading" },
+            { "label": "Large", "value": "section-heading" },
+            { "label": "Medium", "value": "block-heading" }
+          ],
+          "default": "featured-heading"
+        },
+        {
+          "id": "text-position",
+          "label": "Text placement with image",
+          "type": "select",
+          "options": [
+            { "label": "Top", "value": "top" },
+            { "label": "Bottom", "value": "bottom" },
+            { "label": "Left", "value": "left" },
+            { "label": "Right", "value": "right" },
+            { "label": "Overlay", "value": "overlay" }
+          ],
+          "default": "overlay"
+        },
+        {
+          "label": "Horizontal text position",
+          "id": "text-horizontal-alignment",
+          "type": "text_alignment",
+          "default": "center",
+          "visible_if": "{{ block.settings.text-position == 'overlay' }}"
+        },
+        {
+          "label": "Vertical text position",
+          "id": "text-vertical-alignment",
+          "type": "select",
+          "options": [
+            { "label": "Bottom", "value": "bottom" },
+            { "label": "Center", "value": "center" },
+            { "label": "Top", "value": "top" }
+          ],
+          "default": "center",
+          "visible_if": "{{ block.settings.text-position == 'overlay' }}"
+        },
+        {
+          "id": "text-width",
+          "label": "Text width",
+          "type": "range",
+          "min": 300,
+          "max": 800,
+          "step": 25,
+          "unit": "px",
+          "default": 400
+        },
+        {
+          "id": "overlay-style",
+          "label": "Image darkness",
+          "type": "select",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "Darken entire image",
+              "value": "darken"
+            },
+            {
+              "label": "Darken top down",
+              "value": "darken-top"
+            },
+            {
+              "label": "Darken bottom up",
+              "value": "darken-bottom"
+            }
+          ],
+          "default": "darken-bottom",
+          "info": "Can enhance text visibility"
+        },
+        {
+          "id": "text-style",
+          "label": "Text shadows",
+          "type": "select",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "Text shadow",
+              "value": "text-shadow"
+            },
+            {
+              "label": "Oval shadow",
+              "value": "eclipse-shadow"
+            }
+          ],
+          "default": "none"
+        },
+        {
+          "id": "text-background-color",
+          "label": "Text background color",
+          "type": "select",
+          "options": [
+            {
+              "label": "Transparent",
+              "value": "transparent"
+            },
+            {
+              "label": "Light",
+              "value": "light"
+            },
+            {
+              "label": "Dark",
+              "value": "dark"
+            },
+            {
+              "label": "Accent 1",
+              "value": "accent-1"
+            },
+            {
+              "label": "Accent 2",
+              "value": "accent-2"
+            },
+            {
+              "label": "Accent 3",
+              "value": "accent-3"
+            }
+          ],
+          "default": "transparent"
+        },
+        {
+          "type": "header",
+          "content": "Image layout"
+        },
+        {
+          "id": "image-display-type",
+          "label": "Image aspect ratio",
+          "type": "select",
+          "options": [
+            {
+              "label": "Original aspect ratio",
+              "value": "original"
+            },
+            {
+              "label": "Adjustable aspect ratio",
+              "value": "aspect-ratio"
+            },
+            {
+              "label": "Extra small",
+              "value": "x-small"
+            },
+            {
+              "label": "Small",
+              "value": "small"
+            },
+            {
+              "label": "Medium",
+              "value": "medium"
+            },
+            {
+              "label": "Large",
+              "value": "large"
+            },
+            {
+              "label": "Extra large",
+              "value": "x-large"
+            },
+            {
+              "label": "Fit screen",
+              "value": "fit-screen"
+            }
+          ],
+          "default": "medium"
+        },
+        {
+          "id": "aspect-ratio",
+          "label": "Adjustable aspect ratio",
+          "type": "range",
+          "min": 24,
+          "max": 200,
+          "step": 2,
+          "default": 56,
+          "visible_if": "{{ block.settings.image-display-type == 'aspect-ratio' }}"
+        },
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "id": "image",
+          "label": "Image",
+          "type": "image_picker"
+        },
+        {
+          "id": "overline",
+          "label": "Overline",
+          "type": "text",
+          "default": "Overline text"
+        },
+        {
+          "id": "title",
+          "label": "Heading",
+          "type": "text",
+          "default": "Image with text",
+          "info": "Highlight headings by wrapping text with square brackets, ie. This is [highlighted]."
+        },
+        {
+          "id": "highlight-type",
+          "label": "Highlight type",
+          "type": "select",
+          "options": [
+            {
+              "label": "Italic",
+              "value": "italic"
+            },
+            {
+              "label": "Bold",
+              "value": "bold"
+            },
+            {
+              "label": "Bold italic",
+              "value": "bold-italic"
+            },
+            {
+              "label": "Text color",
+              "value": "color"
+            },
+            {
+              "label": "Outlined",
+              "value": "outlined"
+            },
+            {
+              "label": "Highlight",
+              "value": "highlight"
+            },
+            {
+              "label": "Half highlight",
+              "value": "half-highlight"
+            },
+            {
+              "label": "Underline",
+              "value": "underline"
+            },
+            {
+              "label": "Reverse opacity",
+              "value": "reverse-opacity"
+            }
+          ],
+          "default": "italic"
+        },
+        {
+          "id": "highlight-color",
+          "label": "Highlight color",
+          "type": "select",
+          "options": [
+            {
+              "label": "Transparent",
+              "value": "transparent"
+            },
+            {
+              "label": "Light",
+              "value": "light"
+            },
+            {
+              "label": "Dark",
+              "value": "dark"
+            },
+            {
+              "label": "Accent 1",
+              "value": "accent-1"
+            },
+            {
+              "label": "Accent 2",
+              "value": "accent-2"
+            },
+            {
+              "label": "Accent 3",
+              "value": "accent-3"
+            }
+          ],
+          "default": "accent-2"
+        },
+        {
+          "id": "highlight-text",
+          "label": "Highlighted text color",
+          "type": "select",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "Light",
+              "value": "light"
+            },
+            {
+              "label": "Dark",
+              "value": "dark"
+            },
+            {
+              "label": "Accent 1",
+              "value": "accent-1"
+            },
+            {
+              "label": "Accent 2",
+              "value": "accent-2"
+            },
+            {
+              "label": "Accent 3",
+              "value": "accent-3"
+            }
+          ],
+          "default": "none"
+        },
+        {
+          "id": "description",
+          "label": "Description",
+          "type": "richtext",
+          "default": "<p>Combine imagery with text to create stand-out campaign sections, eye-catching promotions, information blocks and more.</p>"
+        },
+        {
+          "id": "link-url",
+          "label": "Link",
+          "type": "url",
+          "info": "Entire block will become a link when no link text or description."
+        },
+        {
+          "id": "button-style",
+          "label": "Button style",
+          "type": "select",
+          "options": [
+            {
+              "label": "Style 1",
+              "value": "button-1"
+            },
+            {
+              "label": "Style 2",
+              "value": "button-2"
+            },
+            {
+              "label": "Style 3",
+              "value": "button-3"
+            },
+            {
+              "label": "Style 4",
+              "value": "button-4"
+            },
+            {
+              "label": "Link",
+              "value": "block-link"
+            }
+          ],
+          "default": "button-2"
+        },
+        {
+          "id": "link-text",
+          "label": "Optional link",
+          "type": "text"
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "id": "mobile-image",
+          "label": "Mobile image (optional)",
+          "type": "image_picker"
+        },
+        {
+          "id": "mobile-overlay",
+          "label": "Overlay text on small devices",
+          "type": "checkbox",
+          "default": true
+        },
+        {
+          "id": "mobile-hide-description",
+          "label": "Hide description in mobile",
+          "type": "checkbox",
+          "default": false
+        },
+        {
+          "id": "mobile-button-style",
+          "label": "Mobile button style",
+          "type": "select",
+          "options": [
+            {
+              "label": "Style 1",
+              "value": "button-1"
+            },
+            {
+              "label": "Style 2",
+              "value": "button-2"
+            },
+            {
+              "label": "Style 3",
+              "value": "button-3"
+            },
+            {
+              "label": "Style 4",
+              "value": "button-4"
+            }
+          ],
+          "default": "button-1",
+          "visible_if": "{{ block.settings.button-style != 'block-link' }}"
+        },
+        {
+          "id": "mobile-image-display-type",
+          "label": "Mobile image aspect ratio",
+          "type": "select",
+          "options": [
+            {
+              "label": "Original aspect ratio",
+              "value": "original"
+            },
+            {
+              "label": "Adjustable aspect ratio",
+              "value": "aspect-ratio"
+            },
+            {
+              "label": "Extra small",
+              "value": "x-small"
+            },
+            {
+              "label": "Small",
+              "value": "small"
+            },
+            {
+              "label": "Medium",
+              "value": "medium"
+            },
+            {
+              "label": "Large",
+              "value": "large"
+            },
+            {
+              "label": "Extra large",
+              "value": "x-large"
+            },
+            {
+              "label": "Fit screen",
+              "value": "fit-screen"
+            }
+          ],
+          "default": "original"
+        },
+        {
+          "id": "mobile-aspect-ratio",
+          "label": "Mobile adjustable aspect ratio",
+          "type": "range",
+          "min": 32,
+          "max": 200,
+          "step": 2,
+          "default": 134,
+          "visible_if": "{{ block.settings.mobile-image-display-type == 'aspect-ratio' }}"
+        },
+        {
+          "label": "Horizontal text position",
+          "id": "mobile-text-horizontal-alignment",
+          "type": "text_alignment",
+          "default": "center"
+        },
+        {
+          "label": "Vertical text position",
+          "id": "mobile-text-vertical-alignment",
+          "type": "select",
+          "options": [
+            { "label": "Center", "value": "center" },
+            { "label": "Bottom", "value": "bottom" }
+          ],
+          "default": "center",
+          "visible_if": "{{ block.settings.mobile-overlay == true }}"
+        }
+      ]
     },
     {
-      "label": "Image height",
-      "id": "logo-height",
-      "type": "range",
-      "min": 15,
-      "max": 100,
-      "step": 5,
-      "unit": "px",
-      "default": 50,
-      "info": "This is referring to the natural height and should be half the height of the image you uploaded to ensure it stays sharp on retina screens."
-    },
-    {
-      "label": "Mobile image height",
-      "id": "mobile-logo-height",
-      "type": "range",
-      "min": 15,
-      "max": 100,
-      "step": 5,
-      "unit": "px",
-      "default": 30
+      "type": "product-list",
+      "name": "Product list",
+      "settings": [
+        {
+          "type": "text",
+          "id": "menu-item",
+          "label": "Menu item",
+          "info": "The name of any top-level link"
+        },
+        {
+          "type": "product_list",
+          "id": "product-list",
+          "label": "Products",
+          "limit": 4
+        }
+      ]
     }
   ],
   "enabled_on": {

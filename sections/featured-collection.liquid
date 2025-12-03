@@ -1,193 +1,309 @@
 {%- liquid
-  comment
-    Translations
-  endcomment
-
   assign skip_link_t = 'sections.featured_collection.skip_link' | t
-  assign view_collection_t = 'sections.featured_collection.view_collection' | t
-
-  comment
-    Variables
-  endcomment
 
   assign bg_color = section.settings.background-color
+  assign border = section.settings.border
+  assign button_style = section.settings.button-style
   assign collection = collections[section.settings.collection]
   assign display_type = section.settings.display-type
   assign heading = section.settings.heading
-  assign light_text = section.settings.light-text
-  assign max_products = section.settings.max-products
-  assign product_per_row_desktop = section.settings.products-per-row--desktop
-  assign product_per_row_mobile = section.settings.products-per-row--mobile
+  assign link_text = section.settings.link-text
+  assign max_blocks = section.settings.max-blocks
+  assign mobile_columns = section.settings.products-per-row--mobile | plus: 0
+  assign mobile_heading_alignment = section.settings.mobile-heading-alignment
+  assign mobile_spacing_above = section.settings.mobile-spacing-above
+  assign mobile_spacing_below = section.settings.mobile-spacing-below
+  assign columns = section.settings.products-per-row--desktop | plus: 0
+  assign section_alignment = section.settings.section-alignment
   assign spacing_above = section.settings.spacing-above
   assign spacing_below = section.settings.spacing-below
-  assign top_border = section.settings.top-border
+  assign white_text = section.settings.white-text
 
   assign onboarding = true
   if collection.handle.size > 0 and collection.products_count != 0
     assign onboarding = false
   endif
 
-  if onboarding
-    if section.settings.featured-collection--description--show
-      assign collection_description = 'collections.placeholder.collection_description' | t
-    endif
-    if section.settings.featured-collection--image--show
-      capture collection_image
-        render "placeholder", type: "collection", aspect_ratio: 1.45, placeholder_index: 1
-      endcapture
-    endif
-  else
-    if collection.image.size > 0 and section.settings.featured-collection--image--show
-      capture collection_image
-        assign image_url = collection.image | image_url: width: collection.image.width
-        echo image_url | image_tag: widths: '800, 1000, 1200, 1500, 1800, 2100', sizes: '50vw'
-      endcapture
+  capture sizes
+    render 'utils', name: 'sizes', columns: columns, mobile_columns: mobile_columns
+  endcapture
+
+  assign promo_grid_blocks = 0
+  for block in section.blocks
+    assign block_position = block.settings.position
+    if block_position > max_blocks
+      continue
     endif
 
-    if collection.description.size > 0 and section.settings.featured-collection--description--show
-      assign collection_description = collection.description
+    assign promo_width = block.settings.promo-width | plus: 0
+    assign promo_columns = columns | divided_by: promo_width
+    assign mobile_promo_columns = 1
+    if promo_width == 1 and mobile_columns == 2
+      assign mobile_promo_columns = 2
     endif
-  endif
 
-  render 'section-assets', name: 'featured-collection', type: 'style'
+    capture promo_sizes
+      render 'utils', name: 'sizes', columns: promo_columns, mobile_columns: mobile_promo_columns
+    endcapture
+
+    comment
+      This logic lets a double-wide block render at the end even if there's only space for one block
+    endcomment
+    if block_position == max_blocks
+      assign promo_grid_blocks = promo_grid_blocks | plus: 1
+    else
+      assign promo_grid_blocks = promo_grid_blocks | plus: promo_width
+    endif
+
+    capture promo_html
+      unless promo_html == blank
+        echo promo_html | append: '<span class="divider"></span>'
+      endunless
+      render 'collection-promo', section_id: section.id, block: block, promo_width: promo_width, sizes: promo_sizes
+    endcapture
+  endfor
+
+  assign promo_html_arr = promo_html | split: '<span class="divider"></span>'
+  assign max_blocks = max_blocks | minus: promo_grid_blocks | plus: promo_html_arr.size
+
+  capture grid_items
+    assign product_index = 0
+    assign placeholder_index = 1
+
+    for i in (1..max_blocks)
+      assign grid_index = forloop.index
+      assign promo_index = false
+      assign loading = 'lazy'
+      if forloop.index <= columns and section.index < 3
+        assign loading = 'eager'
+      endif
+
+      for block in section.blocks
+        if block.settings.position == grid_index
+          assign promo_index = forloop.index0
+          break
+        endif
+      endfor
+
+      if promo_index
+        echo promo_html_arr[promo_index]
+      elsif onboarding
+        if placeholder_index > 6
+          assign placeholder_index = placeholder_index | minus: 6
+        endif
+
+        render 'product-card', onboarding: true, placeholder_index: placeholder_index, transition_id: section.id
+        assign placeholder_index = placeholder_index | plus: 1
+      elsif product_index < collection.products.size
+        assign product = collection.products[product_index]
+        assign product_index = product_index | plus: 1
+        render 'product-card', product_item: product, transition_id: section.id, sizes: sizes, loading: loading
+      else
+        break
+      endif
+      echo '<span class="divider"></span>'
+    endfor
+  endcapture
+
+  assign grid_items_arr = grid_items | split: '<span class="divider"></span>'
 -%}
-
-{%- capture sizes -%}
-  '(max-width: 767px) {{ 100 | divided_by: product_per_row_mobile }}vw, {{ 100 | divided_by: product_per_row_desktop }}vw'
-{%- endcapture %}
 
 <div
   class="featured-collection--root"
   data-section-id="{{ section.id }}"
   data-background-color="{{ bg_color }}"
-  data-container="section"
-  data-has-image="{% if collection_image.size > 0 %}true{% else %}false{% endif %}"
-  data-light-text="{{ light_text }}"
+  data-border="{{ border }}"
+  data-container-width="5"
+  data-mobile-spacing-above="{{ mobile_spacing_above }}"
+  data-mobile-spacing-below="{{ mobile_spacing_below }}"
+  {% if white_text %}
+    data-text-color="white"
+  {% endif %}
   data-section-type="index_featured_collection"
   data-spacing-above="{{ spacing_above }}"
   data-spacing-below="{{ spacing_below }}"
-  data-top-border="{{ top_border }}"
 >
-  <div class="featured-collection--header" data-container="block">
-    <div class="featured-collection--header-text">
-      <h2 class="featured-collection--title" data-item="section-heading">
-        <a href="{{ collection.url }}">
-          {{- heading -}}
-        </a>
-      </h2>
-
-      {%- if collection_description.size > 0 -%}
-        <div class="featured-collection--description" data-item="paragraph">
-          {{- collection_description -}}
+  <div class="featured-collection--wrapper" data-container="section">
+    {%- unless heading == blank and display_type == 'grid' -%}
+      <div
+        class="featured-collection--header-nav"
+        data-container="nav"
+        data-text-alignment="{{ section_alignment }}"
+        data-mobile-text-alignment="{{ mobile_heading_alignment }}"
+      >
+        <div class="featured-collection--header" data-container="block">
+          {%- unless heading == blank -%}
+            <h2
+              class="featured-collection--title"
+              data-item="section-heading"
+              {% unless settings.transitions--text %}
+                data-transition-item="viewport"
+                data-transition-type="slide-in"
+              {% endunless %}
+            >
+              <a href="{{ collection.url }}">
+                {{- heading -}}
+              </a>
+            </h2>
+          {%- endunless -%}
         </div>
+
+        {%- liquid
+          if display_type == 'slideshow'
+            assign blocks_per_slide_desktop = columns | plus: 0.0
+            assign blocks_per_slide_mobile = mobile_columns | plus: 0.0
+            assign total_slides = grid_items_arr.size | divided_by: blocks_per_slide_desktop | ceil
+            assign total_slides_mobile = grid_items_arr.size | divided_by: blocks_per_slide_mobile | ceil
+            render 'carousel-nav-arrow', id: section.id, total_slides_mobile: total_slides_mobile, total_slides: total_slides
+          endif
+        -%}
+      </div>
+    {%- endunless -%}
+
+    <div
+      class="featured-collection--products"
+      data-display-type="{{ display_type }}"
+      data-container="panel"
+      {% if display_type == 'grid' %}
+        data-columns="{{ columns }}"
+        data-mobile-columns="{{ mobile_columns }}"
+      {% endif %}
+      {% unless settings.transitions--other %}
+        data-transition-container="{{ section.id }}"
+        data-transition-type="fade-in"
+        data-transition-cascade="horizontal"
+        data-transition-cascade-interval="200"
+      {% endunless %}
+    >
+      {%- if collection.products.size > max_blocks -%}
+        <a data-item="a11y-button" href="#featured_collection_show_more">
+          {{- skip_link_t -}}
+        </a>
+      {%- endif -%}
+
+      {%- if display_type == 'slideshow' -%}
+        {%-
+          render 'carousel',
+          section: section,
+          blocks: grid_items_arr,
+          blocks_per_slide: columns,
+          blocks_per_slide_mobile: mobile_columns,
+          total_blocks: grid_items_arr.size
+        -%}
+
+      {%- else -%}
+        {%- liquid
+          for grid_item in grid_items_arr
+            echo grid_item
+          endfor
+        -%}
       {%- endif -%}
     </div>
 
-    {%- if collection_image.size > 0 -%}
-      <div class="featured-collection--image" data-item="image">
-        {{- collection_image -}}
+    {%- unless link_text == blank -%}
+      <div data-container="block" data-text-alignment="{{ section_alignment }}">
+        <a
+          id="featured_collection_show_more"
+          href="{{ collection.url }}"
+          class="featured-collection--show-more"
+          data-text="{{ link_text }}"
+          data-item="{{ button_style }}"
+        >
+          <span>{{- link_text -}}</span>
+        </a>
       </div>
-    {%- endif -%}
+    {%- endunless -%}
   </div>
-
-  <div
-    class="featured-collection--products"
-    data-display-type="{{ display_type }}"
-    data-container="panel"
-    {% unless settings.transitions--other %}
-      data-transition-container="{{ section.id }}"
-      data-transition-type="fade-in"
-    {% endunless %}
-    {%- if display_type == 'grid' -%}
-      data-columns="{{ product_per_row_desktop }}"
-      data-mobile-columns="{{ product_per_row_mobile }}"
-      data-transition-cascade="horizontal"
-      data-transition-cascade-interval="200"
-    {%- endif -%}
-  >
-    {%- liquid
-      if display_type == 'slideshow'
-        echo '<a data-item="a11y-button" href="#featured-collection-show-more">'
-          echo skip_link_t
-        echo '</a>'
-
-        render 'carousel', view: 'product', section_id: section.id, onboarding: onboarding, bg_color: bg_color, blocks: collection.products, blocks_per_slide: 4, blocks_per_slide_mobile: 2, dot_nav_enabled: true, total_blocks: max_products, spacing_around_blocks: true, transition_type: 'slide'
-
-      else
-        if onboarding
-          for i in (1..max_products)
-            assign placeholder_index = i
-            if i > 6
-              assign placeholder_index = i | minus: 6
-            endif
-
-            render 'product--item', onboarding: true, placeholder_index: placeholder_index, section_id: section.id
-          endfor
-
-        else
-          for product in collection.products limit: max_products
-            render 'product--item', product_item: product, section_id: section.id, sizes: sizes
-          endfor
-        endif
-      endif
-    -%}
-  </div>
-
-  {%- if collection.products.size > max_products -%}
-    <div data-container="block">
-      <a
-        id="featured-collection-show-more"
-        href="{{ collection.url }}"
-        class="featured-collection--show-more"
-        data-text="{{- view_collection_t -}}"
-        data-item="{{- settings.buttons--style -}}"
-        {% unless settings.transitions--buttons %}
-          data-transition-button
-        {% endunless %}
-      >
-        <span>{{- view_collection_t -}}</span>
-      </a>
-    </div>
-  {%- endif -%}
 </div>
 
 {% schema %}
 {
   "name": "Featured collection",
+  "class": "section--featured-collection",
   "settings": [
     {
       "type": "header",
       "content": "Style and layout"
     },
     {
-      "id": "top-border",
-      "label": "Top border",
-      "type": "checkbox",
-      "default": false
+      "id": "border",
+      "label": "Border",
+      "type": "select",
+      "options": [
+        {
+          "label": "Top",
+          "value": "top"
+        },
+        {
+          "label": "Bottom",
+          "value": "bottom"
+        },
+        {
+          "label": "Both",
+          "value": "both"
+        },
+        {
+          "label": "None",
+          "value": "none"
+        }
+      ],
+      "default": "none"
     },
     {
       "id": "spacing-above",
       "label": "Spacing above",
-      "type": "checkbox",
-      "default": true
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "large"
     },
     {
       "id": "spacing-below",
       "label": "Spacing below",
-      "type": "checkbox",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "featured-collection--image--show",
-      "label": "Show collection image",
-      "default": false
-    },
-    {
-      "type": "checkbox",
-      "id": "featured-collection--description--show",
-      "label": "Show collection description",
-      "default": false
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "large"
     },
     {
       "id": "background-color",
@@ -195,7 +311,7 @@
       "type": "select",
       "options": [
         {
-          "label": "Transparent",
+          "label": "None",
           "value": "none"
         },
         {
@@ -213,20 +329,30 @@
         {
           "label": "Accent 2",
           "value": "accent-2"
+        },
+        {
+          "label": "Accent 3",
+          "value": "accent-3"
         }
       ],
       "default": "none"
     },
     {
-      "id": "light-text",
-      "label": "Use light text color",
+      "id": "white-text",
+      "label": "Use white text color",
       "type": "checkbox",
       "default": false
     },
     {
+      "id": "section-alignment",
+      "label": "Heading and call-to-action alignment",
+      "type": "text_alignment",
+      "default": "center"
+    },
+    {
       "id": "display-type",
       "label": "Display type",
-      "type": "radio",
+      "type": "select",
       "options": [
         { "label": "Slideshow", "value": "slideshow" },
         { "label": "Grid", "value": "grid" }
@@ -234,26 +360,14 @@
       "default": "slideshow"
     },
     {
-      "label": "Products per row (desktop)",
+      "label": "Products per row",
       "id": "products-per-row--desktop",
-      "type": "radio",
+      "type": "select",
       "options": [
         { "value": "3", "label": "3" },
         { "value": "4", "label": "4" }
       ],
-      "default": "3",
-      "info": "Applies to grid display only"
-    },
-    {
-      "label": "Product per row (mobile)",
-      "id": "products-per-row--mobile",
-      "type": "radio",
-      "options": [
-        { "value": "1", "label": "1" },
-        { "value": "2", "label": "2" }
-      ],
-      "default": "1",
-      "info": "Applies to grid display only"
+      "default": "3"
     },
     {
       "type": "header",
@@ -265,8 +379,8 @@
       "label": "Collection"
     },
     {
-      "id": "max-products",
-      "label": "Maximum number of products",
+      "id": "max-blocks",
+      "label": "Maximum number of blocks",
       "type": "range",
       "min": 4,
       "max": 12,
@@ -278,6 +392,513 @@
       "id": "heading",
       "type": "text",
       "default": "Collection name"
+    },
+    {
+      "id": "button-style",
+      "label": "Button style",
+      "type": "select",
+      "options": [
+        {
+          "label": "Style 1",
+          "value": "button-1"
+        },
+        {
+          "label": "Style 2",
+          "value": "button-2"
+        },
+        {
+          "label": "Style 3",
+          "value": "button-3"
+        },
+        {
+          "label": "Style 4",
+          "value": "button-4"
+        },
+        {
+          "label": "Link",
+          "value": "block-link"
+        }
+      ],
+      "default": "button-1"
+    },
+    {
+      "label": "Optional link",
+      "id": "link-text",
+      "type": "text",
+      "default": "View collection"
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "id": "mobile-spacing-above",
+      "label": "Spacing above",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "id": "mobile-spacing-below",
+      "label": "Spacing below",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "id": "mobile-heading-alignment",
+      "label": "Heading alignment",
+      "type": "text_alignment",
+      "default": "left",
+      "info": "Align the heading to balance it with the slideshow navigation arrows."
+    },
+    {
+      "label": "Products per row",
+      "id": "products-per-row--mobile",
+      "type": "select",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ],
+      "default": "1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "promotion",
+      "name": "Promotion",
+      "settings": [
+        {
+          "type": "header",
+          "content": "General layout"
+        },
+        {
+          "label": "Position",
+          "id": "position",
+          "type": "range",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "default": 1
+        },
+        {
+          "label": "Width",
+          "id": "promo-width",
+          "type": "select",
+          "options": [
+            { "label": "One block", "value": "1" },
+            { "label": "Two blocks", "value": "2" }
+          ],
+          "default": "1",
+          "info": "Only applies to the grid layout."
+        },
+        {
+          "type": "header",
+          "content": "Text layout"
+        },
+        {
+          "id": "heading-type",
+          "label": "Heading type",
+          "type": "select",
+          "options": [
+            { "label": "Banner", "value": "banner-heading" },
+            { "label": "Featured", "value": "featured-heading" },
+            { "label": "Large", "value": "section-heading" },
+            { "label": "Medium", "value": "block-heading" }
+          ],
+          "default": "section-heading"
+        },
+        {
+          "label": "Horizontal text position",
+          "id": "text-horizontal-alignment",
+          "type": "text_alignment",
+          "default": "center"
+        },
+        {
+          "label": "Vertical text position",
+          "id": "text-vertical-alignment",
+          "type": "select",
+          "options": [
+            { "label": "Bottom", "value": "bottom" },
+            { "label": "Center", "value": "center" },
+            { "label": "Top", "value": "top" }
+          ],
+          "default": "bottom"
+        },
+        {
+          "id": "text-width",
+          "label": "Text width",
+          "type": "range",
+          "min": 300,
+          "max": 800,
+          "step": 25,
+          "unit": "px",
+          "default": 400
+        },
+        {
+          "id": "overlay-style",
+          "label": "Image darkness",
+          "type": "select",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "Darken entire image",
+              "value": "darken"
+            },
+            {
+              "label": "Darken top down",
+              "value": "darken-top"
+            },
+            {
+              "label": "Darken bottom up",
+              "value": "darken-bottom"
+            }
+          ],
+          "default": "darken-bottom",
+          "info": "Can enhance text visibility"
+        },
+        {
+          "id": "text-style",
+          "label": "Text shadows",
+          "type": "select",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "Text shadow",
+              "value": "text-shadow"
+            },
+            {
+              "label": "Oval shadow",
+              "value": "eclipse-shadow"
+            }
+          ],
+          "default": "none"
+        },
+        {
+          "id": "background-color",
+          "label": "Background color",
+          "type": "select",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "Light",
+              "value": "light"
+            },
+            {
+              "label": "Dark",
+              "value": "dark"
+            },
+            {
+              "label": "Accent 1",
+              "value": "accent-1"
+            },
+            {
+              "label": "Accent 2",
+              "value": "accent-2"
+            },
+            {
+              "label": "Accent 3",
+              "value": "accent-3"
+            }
+          ],
+          "default": "none"
+        },
+        {
+          "id": "text-background-color",
+          "label": "Text background color",
+          "type": "select",
+          "options": [
+            {
+              "label": "Transparent",
+              "value": "transparent"
+            },
+            {
+              "label": "Light",
+              "value": "light"
+            },
+            {
+              "label": "Dark",
+              "value": "dark"
+            },
+            {
+              "label": "Accent 1",
+              "value": "accent-1"
+            },
+            {
+              "label": "Accent 2",
+              "value": "accent-2"
+            },
+            {
+              "label": "Accent 3",
+              "value": "accent-3"
+            }
+          ],
+          "default": "transparent"
+        },
+        {
+          "type": "header",
+          "content": "Image layout"
+        },
+        {
+          "id": "border-type",
+          "label": "Border type",
+          "type": "select",
+          "options": [
+            { "label": "None", "value": "none" },
+            { "label": "Thin", "value": "thin" },
+            { "label": "Thick", "value": "thick" }
+          ],
+          "default": "thick"
+        },
+        {
+          "id": "parallax-enabled",
+          "label": "Enable parallax",
+          "type": "checkbox",
+          "default": false,
+          "info": "Creates a subtle depth effect on scroll, making images engaging"
+        },
+        {
+          "id": "white-text",
+          "label": "Use white text color",
+          "type": "checkbox",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "id": "overline",
+          "label": "Overline",
+          "type": "text"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Promotion title",
+          "info": "Highlight headings by wrapping text with square brackets, ie. This is [highlighted]."
+        },
+        {
+          "id": "highlight-type",
+          "label": "Highlight type",
+          "type": "select",
+          "options": [
+            {
+              "label": "Italic",
+              "value": "italic"
+            },
+            {
+              "label": "Bold",
+              "value": "bold"
+            },
+            {
+              "label": "Bold italic",
+              "value": "bold-italic"
+            },
+            {
+              "label": "Text color",
+              "value": "color"
+            },
+            {
+              "label": "Outlined",
+              "value": "outlined"
+            },
+            {
+              "label": "Highlight",
+              "value": "highlight"
+            },
+            {
+              "label": "Half highlight",
+              "value": "half-highlight"
+            },
+            {
+              "label": "Underline",
+              "value": "underline"
+            },
+            {
+              "label": "Reverse opacity",
+              "value": "reverse-opacity"
+            }
+          ],
+          "default": "italic"
+        },
+        {
+          "id": "highlight-color",
+          "label": "Highlight color",
+          "type": "select",
+          "options": [
+            {
+              "label": "Transparent",
+              "value": "transparent"
+            },
+            {
+              "label": "Light",
+              "value": "light"
+            },
+            {
+              "label": "Dark",
+              "value": "dark"
+            },
+            {
+              "label": "Accent 1",
+              "value": "accent-1"
+            },
+            {
+              "label": "Accent 2",
+              "value": "accent-2"
+            },
+            {
+              "label": "Accent 3",
+              "value": "accent-3"
+            }
+          ],
+          "default": "accent-2"
+        },
+        {
+          "id": "highlight-text",
+          "label": "Highlighted text color",
+          "type": "select",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "Light",
+              "value": "light"
+            },
+            {
+              "label": "Dark",
+              "value": "dark"
+            },
+            {
+              "label": "Accent 1",
+              "value": "accent-1"
+            },
+            {
+              "label": "Accent 2",
+              "value": "accent-2"
+            },
+            {
+              "label": "Accent 3",
+              "value": "accent-3"
+            }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description",
+          "default": "<p>Highlight a promotion or a sale</p>"
+        },
+        {
+          "type": "url",
+          "id": "link-url",
+          "label": "Link",
+          "info": "Entire block will become a link when no link text or description."
+        },
+        {
+          "type": "text",
+          "id": "link-text",
+          "label": "Optional link"
+        },
+        {
+          "type": "header",
+          "content": "Mobile"
+        },
+        {
+          "id": "mobile-image",
+          "label": "Mobile image (optional)",
+          "type": "image_picker"
+        },
+        {
+          "label": "Horizontal text position",
+          "id": "mobile-text-horizontal-alignment",
+          "type": "text_alignment",
+          "default": "center"
+        },
+        {
+          "label": "Vertical text position",
+          "id": "mobile-text-vertical-alignment",
+          "type": "select",
+          "options": [
+            { "label": "Center", "value": "center" },
+            { "label": "Bottom", "value": "bottom" }
+          ],
+          "default": "center",
+          "info": "Applies when text overlays image."
+        },
+        {
+          "id": "mobile-hide-description",
+          "label": "Hide description in mobile",
+          "type": "checkbox",
+          "default": false
+        },
+        {
+          "id": "mobile-hide-border",
+          "label": "Hide border in mobile",
+          "type": "checkbox",
+          "default": false
+        }
+      ]
     }
   ],
   "presets": [

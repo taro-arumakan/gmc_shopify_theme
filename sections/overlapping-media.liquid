@@ -1,0 +1,660 @@
+{%- liquid
+  assign animation_enabled = section.settings.animation-enabled
+  assign bg_color = section.settings.background-color
+  assign border = section.settings.border
+  assign button_style = section.settings.button-style
+  assign container_width = section.settings.container-width
+  assign description = section.settings.description
+  assign heading_type = section.settings.heading-type
+  assign highlight_color = section.settings.highlight-color
+  assign highlight_text = section.settings.highlight-text
+  assign highlight_type = section.settings.highlight-type
+  assign image_offset = section.settings.image-offset | divided_by: 2
+  assign link_text = section.settings.link-text
+  assign link_url = section.settings.link-url
+  assign mobile_spacing_above = section.settings.mobile-spacing-above
+  assign mobile_spacing_below = section.settings.mobile-spacing-below
+  assign mobile_text_alignment = section.settings.mobile-text-alignment
+  assign overlay_style = section.settings.overlay-style
+  assign overline = section.settings.overline
+  assign reverse_layout = section.settings.reverse-layout
+  assign spacing_above = section.settings.spacing-above
+  assign spacing_below = section.settings.spacing-below
+  assign text_alignment = section.settings.text-alignment
+  assign text_column_width = section.settings.text-column-width
+  assign title = section.settings.title
+  assign white_text = section.settings.white-text
+
+  assign loading = 'lazy'
+  if section.index < 3
+    assign loading = 'eager'
+  endif
+
+  capture sizes
+    render 'utils', name: 'sizes', container_width: container_width, additional_padding: text_column_width, columns: 2, mobile_columns: 2, mobile_column_spacing: 0
+  endcapture
+-%}
+
+{%- capture blocks -%}
+  {%- for block in section.blocks -%}
+    <div class="overlapping-media--block" {{ block.shopify_attributes }}>
+      {%- liquid
+        if block.type == 'image'
+          assign block_image = block.settings.image
+          assign block_mobile_image = block.settings.mobile-image
+
+          if block_image
+            render 'image', image: block_image, mobile_image: block_mobile_image, display_type: 'original', loading: loading, sizes: sizes
+          else
+            render 'placeholder', type: 'lifestyle', placeholder_index: forloop.index, display_type: 'aspect-ratio', aspect_ratio: 0.8, overlay_style: 'darken-bottom'
+          endif
+        elsif block.type == 'video'
+          assign block_video_upload = block.settings.video-upload
+          assign block_video_url = block.settings.video-url
+
+          assign block_overlay_style = ''
+          if block_video_upload == blank and block_video_url == blank
+            assign block_overlay_style = 'darken-bottom'
+          endif
+
+          render 'video', autoplay: true, id: block.id, video_upload: block_video_upload, video_url: block_video_url, display_type: 'original', mobile_display_type: 'original', overlay_style: block_overlay_style
+        endif
+      -%}
+    </div>
+  {%- endfor -%}
+{%- endcapture -%}
+
+<div
+  class="overlapping-media--root"
+  data-section-id="{{ section.id }}"
+  data-background-color="{{ bg_color }}"
+  data-border="{{ border }}"
+  data-container-width="{{ container_width }}"
+  data-mobile-spacing-above="{{ mobile_spacing_above }}"
+  data-mobile-spacing-below="{{ mobile_spacing_below }}"
+  data-spacing-above="{{ spacing_above }}"
+  data-spacing-below="{{ spacing_below }}"
+  style="--image-offset:{{ image_offset }}px;--text-column-width:{{ text_column_width }}px;"
+>
+  <div
+    class="overlapping-media--wrapper"
+    data-container="split"
+    data-reverse-layout="{{ reverse_layout }}"
+  >
+    {%- unless blocks == blank -%}
+      {%- if animation_enabled -%}
+        <scroll-progress class="overlapping-media--progress-container">
+      {%- endif -%}
+
+      <div class="overlapping-media--blocks">
+        {{- blocks -}}
+      </div>
+
+      {%- if animation_enabled -%}
+        </scroll-progress>
+      {%- endif -%}
+    {%- endunless -%}
+
+    <div
+      class="overlapping-media--text"
+      data-container="block"
+      {% if white_text %}
+        data-text-color="white"
+      {% endif %}
+      data-text-alignment="{{ text_alignment }}"
+      data-mobile-text-alignment="{{ mobile_text_alignment }}"
+      {% unless settings.transitions--text %}
+        data-transition-container="{{ section.id }}"
+        data-transition-type="slide-in"
+        data-transition-cascade="vertical"
+        data-transition-cascade-interval="500"
+      {% endunless %}
+    >
+      {%- unless title == blank -%}
+        <div
+          {% unless settings.transitions--text %}
+            data-transition-item="{{ section.id }}"
+          {% endunless %}
+        >
+          <h2 class="overlapping-media--title" data-item="{{ heading_type }}">
+            {%-
+              render 'utils',
+              name: 'highlighted-text',
+              text: title,
+              highlight_color: highlight_color,
+              highlight_text: highlight_text,
+              highlight_type: highlight_type
+            -%}
+          </h2>
+        </div>
+      {%- endunless -%}
+
+      {%- unless overline == blank -%}
+        <div
+          class="overlapping-media--overline"
+          {% unless settings.transitions--text %}
+            data-transition-item="{{ section.id }}"
+          {% endunless %}
+        >
+          <h3 data-item="overline">
+            {{- overline | escape -}}
+          </h3>
+        </div>
+      {%- endunless -%}
+
+      {%- unless description == blank -%}
+        <div
+          class="overlapping-media--description"
+          {% unless settings.transitions--text %}
+            data-transition-item="{{ section.id }}"
+          {% endunless %}
+        >
+          {{- description -}}
+        </div>
+      {%- endunless -%}
+
+      {%- unless link_text == blank -%}
+        <a
+          class="overlapping-media--button"
+          href="{{ link_url }}"
+          data-item="{{ button_style }}"
+          data-text="{{ link_text }}"
+          {% unless settings.transitions--text %}
+            data-transition-item="{{ section.id }}"
+            data-transition-type="fade-in"
+          {% endunless %}
+        >
+          <span>{{ link_text }}</span>
+        </a>
+      {%- endunless -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Overlapping media",
+  "class": "section--overlapping-media",
+  "settings": [
+    {
+      "type": "header",
+      "content": "General layout"
+    },
+    {
+      "id": "border",
+      "label": "Border",
+      "type": "select",
+      "options": [
+        {
+          "label": "Top",
+          "value": "top"
+        },
+        {
+          "label": "Bottom",
+          "value": "bottom"
+        },
+        {
+          "label": "Both",
+          "value": "both"
+        },
+        {
+          "label": "None",
+          "value": "none"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "id": "spacing-above",
+      "label": "Spacing above",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "large"
+    },
+    {
+      "id": "spacing-below",
+      "label": "Spacing below",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "large"
+    },
+    {
+      "id": "background-color",
+      "label": "Background color",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Light",
+          "value": "light"
+        },
+        {
+          "label": "Dark",
+          "value": "dark"
+        },
+        {
+          "label": "Accent 1",
+          "value": "accent-1"
+        },
+        {
+          "label": "Accent 2",
+          "value": "accent-2"
+        },
+        {
+          "label": "Accent 3",
+          "value": "accent-3"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "id": "container-width",
+      "label": "Maximum width of container",
+      "type": "select",
+      "options": [
+        { "label": "Medium", "value": "3" },
+        { "label": "Large", "value": "4" },
+        { "label": "Extra large", "value": "5" }
+      ],
+      "default": "4"
+    },
+    {
+      "id": "reverse-layout",
+      "label": "Reverse layout",
+      "type": "checkbox",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Text layout"
+    },
+    {
+      "id": "white-text",
+      "label": "Use white text color",
+      "type": "checkbox",
+      "default": false
+    },
+    {
+      "id": "heading-type",
+      "label": "Heading type",
+      "type": "select",
+      "options": [
+        { "label": "Featured", "value": "featured-heading" },
+        { "label": "Large", "value": "section-heading" },
+        { "label": "Medium", "value": "block-heading" }
+      ],
+      "default": "featured-heading"
+    },
+    {
+      "id": "text-alignment",
+      "label": "Text alignment",
+      "type": "text_alignment",
+      "default": "left"
+    },
+    {
+      "id": "text-column-width",
+      "label": "Text column width",
+      "type": "range",
+      "min": 280,
+      "max": 500,
+      "step": 5,
+      "unit": "px",
+      "default": 375
+    },
+    {
+      "type": "header",
+      "content": "Image layout"
+    },
+    {
+      "id": "animation-enabled",
+      "label": "Enable animation",
+      "type": "checkbox",
+      "default": true
+    },
+    {
+      "label": "Offset",
+      "id": "image-offset",
+      "type": "range",
+      "min": 16,
+      "max": 60,
+      "step": 4,
+      "default": 48,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "id": "overline",
+      "label": "Overline",
+      "type": "text"
+    },
+    {
+      "id": "title",
+      "label": "Heading",
+      "type": "text",
+      "default": "Overlapping media",
+      "info": "Highlight headings by wrapping text with square brackets, ie. This is [highlighted]."
+    },
+    {
+      "id": "highlight-type",
+      "label": "Highlight type",
+      "type": "select",
+      "options": [
+        {
+          "label": "Italic",
+          "value": "italic"
+        },
+        {
+          "label": "Bold",
+          "value": "bold"
+        },
+        {
+          "label": "Bold italic",
+          "value": "bold-italic"
+        },
+        {
+          "label": "Text color",
+          "value": "color"
+        },
+        {
+          "label": "Outlined",
+          "value": "outlined"
+        },
+        {
+          "label": "Highlight",
+          "value": "highlight"
+        },
+        {
+          "label": "Half highlight",
+          "value": "half-highlight"
+        },
+        {
+          "label": "Underline",
+          "value": "underline"
+        },
+        {
+          "label": "Reverse opacity",
+          "value": "reverse-opacity"
+        }
+      ],
+      "default": "italic"
+    },
+    {
+      "id": "highlight-color",
+      "label": "Highlight color",
+      "type": "select",
+      "options": [
+        {
+          "label": "Transparent",
+          "value": "transparent"
+        },
+        {
+          "label": "Light",
+          "value": "light"
+        },
+        {
+          "label": "Dark",
+          "value": "dark"
+        },
+        {
+          "label": "Accent 1",
+          "value": "accent-1"
+        },
+        {
+          "label": "Accent 2",
+          "value": "accent-2"
+        },
+        {
+          "label": "Accent 3",
+          "value": "accent-3"
+        }
+      ],
+      "default": "accent-2"
+    },
+    {
+      "id": "highlight-text",
+      "label": "Highlighted text color",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Light",
+          "value": "light"
+        },
+        {
+          "label": "Dark",
+          "value": "dark"
+        },
+        {
+          "label": "Accent 1",
+          "value": "accent-1"
+        },
+        {
+          "label": "Accent 2",
+          "value": "accent-2"
+        },
+        {
+          "label": "Accent 3",
+          "value": "accent-3"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "id": "description",
+      "label": "Description",
+      "type": "richtext",
+      "default": "<p>Use this section to showcase product or brand imagery with overlapping elements.</p>"
+    },
+    {
+      "id": "link-url",
+      "label": "Link",
+      "type": "url"
+    },
+    {
+      "id": "button-style",
+      "label": "Button style",
+      "type": "select",
+      "options": [
+        {
+          "label": "Style 1",
+          "value": "button-1"
+        },
+        {
+          "label": "Style 2",
+          "value": "button-2"
+        },
+        {
+          "label": "Style 3",
+          "value": "button-3"
+        },
+        {
+          "label": "Style 4",
+          "value": "button-4"
+        },
+        {
+          "label": "Link",
+          "value": "block-link"
+        }
+      ],
+      "default": "button-1"
+    },
+    {
+      "id": "link-text",
+      "label": "Optional link",
+      "type": "text",
+      "default": "Optional link"
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "id": "mobile-spacing-above",
+      "label": "Spacing above",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "id": "mobile-spacing-below",
+      "label": "Spacing below",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "label": "Mobile text alignment",
+      "id": "mobile-text-alignment",
+      "type": "text_alignment",
+      "default": "center"
+    }
+  ],
+  "max_blocks": 2,
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "id": "image",
+          "label": "Image",
+          "type": "image_picker"
+        },
+        {
+          "id": "mobile-image",
+          "label": "Mobile image (optional)",
+          "type": "image_picker"
+        }
+      ]
+    },
+    {
+      "type": "video",
+      "name": "Video",
+      "settings": [
+        {
+          "type": "video",
+          "id": "video-upload",
+          "label": "Video upload",
+          "info": "To load videos as quickly as possible, upload a file instead of using external URLs."
+        },
+        {
+          "type": "video_url",
+          "id": "video-url",
+          "label": "Video URL",
+          "accept": ["youtube", "vimeo"]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Overlapping media",
+      "settings": {},
+      "blocks": [
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["aside"]
+  }
+}
+{% endschema %}

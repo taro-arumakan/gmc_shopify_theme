@@ -57,7 +57,9 @@
   <div
     class="article--navigation-root"
     data-section-id="{{ section.id }}"
-    data-spacing-above="false"
+    data-background-color="none"
+    data-spacing-above="none"
+    data-spacing-below="large"
   >
     <div class="article--navigation-wrapper">
       {%- if show_tags -%}
@@ -77,8 +79,8 @@
           {%-
             render 'social-icons',
             type: 'share',
-            align: 'right',
-            mobile_align: 'left',
+            alignment: 'right',
+            mobile_alignment: 'left',
             heading: share_t,
             social_settings: section.settings
           -%}
@@ -91,6 +93,7 @@
 {% schema %}
 {
   "name": "Navigation",
+  "class": "section--article-navigation",
   "settings": [
     {
       "id": "show-tags",

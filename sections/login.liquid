@@ -11,27 +11,33 @@
   assign guest_continue_t = 'customer.login.guest_continue' | t
   assign submit_t = 'customer.login.submit' | t
   assign cancel_t = 'customer.login.cancel' | t
-
-  render 'section-assets', name: 'customer', type: 'style'
 -%}
 
 <div
   class="customer--root"
+  data-container-width="2"
   data-section-id="{{ section.id }}"
+  data-background-color="none"
 >
   <div class="customer--wrapper">
     <div class="customer--login">
       <p class="account--reset" data-item="paragraph">
         {{- reset_instructions_t -}}
       </p>
-      <h1 data-item="section-heading">
+      <h1
+        data-item="section-heading"
+        {% unless settings.transitions--text %}
+          data-transition-item="viewport"
+          data-transition-type="slide-in"
+        {% endunless %}
+      >
         {{- title_t -}}
       </h1>
 
       {%- form 'customer_login' -%}
         {{- form.errors | default_errors -}}
 
-        <label for="customer_email" class="label" data-item="accent-text">
+        <label for="customer_email" class="label" data-item="nav-text">
           {{- email_t -}}
         </label>
         <input
@@ -44,7 +50,7 @@
         />
 
         {%- if form.password_needed -%}
-          <label for="customer_password" class="label" data-item="accent-text">
+          <label for="customer_password" class="label" data-item="nav-text">
             {{- password_t -}}
           </label>
           <input
@@ -66,24 +72,18 @@
         <div class="account--button-container">
           <button
             class="account--sign-in"
-            data-item="button"
+            data-item="button-1"
             data-text="{{- sign_in_t -}}"
             value="{{ sign_in_t }}"
             type="submit"
-            {% unless settings.transitions--buttons %}
-              data-transition-button
-            {% endunless %}
           >
             <span>{{- sign_in_t -}}</span>
           </button>
           <a
             class="account--register"
             href="{{ routes.account_register_url }}"
-            data-item="secondary-button"
+            data-item="button-3"
             data-text="{{ new_account_t }}"
-            {% unless settings.transitions--buttons %}
-              data-transition-button
-            {% endunless %}
           >
             <div>{{ new_account_t }}</div>
           </a>
@@ -92,7 +92,13 @@
     </div>
 
     <div class="account--recover-password" style="display:none;">
-      <h1 data-item="section-heading">
+      <h1
+        data-item="section-heading"
+        {% unless settings.transitions--text %}
+          data-transition-item="viewport"
+          data-transition-type="slide-in"
+        {% endunless %}
+      >
         {{- reset_password_t -}}
       </h1>
       <p class="account--reset-instructions" data-item="paragraph">
@@ -102,7 +108,7 @@
       {%- form 'recover_customer_password' -%}
         {{- form.errors | default_errors -}}
 
-        <label for="email" class="label" data-item="accent-text">
+        <label for="email" class="label" data-item="nav-text">
           {{- email_t -}}
         </label>
         <input
@@ -119,12 +125,9 @@
           <button
             class="account--submit"
             type="submit"
-            data-item="button"
+            data-item="button-1"
             data-text="{{- submit_t -}}"
             value="{{ submit_t }}"
-            {% unless settings.transitions--buttons %}
-              data-transition-button
-            {% endunless %}
           >
             <span>{{- submit_t -}}</span>
           </button>
@@ -146,10 +149,18 @@
 
     {%- if shop.checkout.guest_login -%}
       <div id="guest" class="columns">
-        <h1 data-item="section-heading">{{ guest_title_t }}</h1>
+        <h1
+          data-item="section-heading"
+          {% unless settings.transitions--text %}
+            data-transition-item="viewport"
+            data-transition-type="slide-in"
+          {% endunless %}
+        >
+          {{ guest_title_t }}
+        </h1>
 
         {%- form 'guest_login' -%}
-          <input class="button" type="submit" value="{{ guest_continue_t }}" />
+          <input class="button-1" type="submit" value="{{ guest_continue_t }}" />
         {%- endform -%}
       </div>
     {%- endif -%}

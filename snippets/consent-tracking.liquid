@@ -2,13 +2,15 @@
   assign accept_t = 'general.consent_tracking.accept' | t
   assign decline_t = 'general.consent_tracking.decline' | t
 
+  assign accept_button_style = block.settings.accept-button-style
   assign bg_color = block.settings.background-color
+  assign decline_button_style = block.settings.decline-button-style
   assign description = block.settings.description
   assign heading = block.settings.heading
-  assign light_text = block.settings.light-text
   assign position = block.settings.position
   assign text_alignment = block.settings.text-alignment
   assign translucent = block.settings.translucent
+  assign white_text = block.settings.white-text
 -%}
 
 <consent-tracking
@@ -17,7 +19,9 @@
   data-background-color="{{ bg_color }}"
   data-text-alignment="{{ text_alignment }}"
   data-translucent="{{ translucent }}"
-  data-light-text="{{ light_text }}"
+  {% if white_text %}
+    data-text-color="white"
+  {% endif %}
   data-position="{{ position }}"
   data-transition-item="viewport"
   data-transition-type="scale-in"
@@ -26,37 +30,31 @@
   {{ block.shopify_attributes }}
 >
   <div class="popup--block--container">
-    {%- if heading != blank -%}
+    {%- unless heading == blank -%}
       <div class="popup--block--heading" data-item="block-heading">
         {{ heading }}
       </div>
-    {%- endif -%}
+    {%- endunless -%}
 
-    {%- if description != blank -%}
+    {%- unless description == blank -%}
       <div class="popup--block--description" data-item="rte-content">
         {{- description -}}
       </div>
-    {%- endif -%}
+    {%- endunless -%}
 
     <div class="popup--block--button-container">
       <button
         class="popup--block--accept"
-        data-item="button"
-        data-text="{{- accept_t -}}"
-        {% unless settings.transitions--buttons %}
-          data-transition-button
-        {% endunless %}
+        data-item="{{ accept_button_style }}"
+        data-text="{{ accept_t }}"
       >
         <span>{{- accept_t -}}</span>
       </button>
 
       <button
         class="popup--block--decline"
-        data-item="secondary-button"
+        data-item="{{ decline_button_style }}"
         data-text="{{ decline_t }}"
-        {% unless settings.transitions--buttons %}
-          data-transition-button
-        {% endunless %}
       >
         <span>{{- decline_t -}}</span>
       </button>

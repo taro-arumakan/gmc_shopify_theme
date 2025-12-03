@@ -3,16 +3,14 @@
     class="layout--close"
     aria-label="{{ 'general.a11y.close' | t }}"
     aria-hidden="true"
-  >
-    {%- render 'icons', icon: 'cross' -%}
-  </button>
+  ></button>
 
   <button
     class="layout--previous"
     aria-hidden="true"
     data-modal-button="previous"
   >
-    {%- render 'css-icons', icon: 'prev' -%}
+    {%- render 'nav-arrow', direction: 'left' -%}
   </button>
 
   <button
@@ -20,6 +18,8 @@
     aria-hidden="true"
     data-modal-button="next"
   >
-    {%- render 'css-icons', icon: 'next' -%}
+    {%- render 'nav-arrow', direction: 'right' -%}
   </button>
+
+  <div class="layout--bottom"></div>
 </div>

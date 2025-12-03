@@ -2,11 +2,9 @@
   assign cancel_t = 'general.search.cancel' | t
   assign clear_t = 'general.search.clear' | t
   assign placeholder_t = 'general.search.placeholder' | t
-
-  render 'section-assets', name: 'predictive-search'
 -%}
 
-<predictive-search-root class="search--root" data-loading="false">
+<predictive-search-element class="search--root" data-loading="false">
   <form action="{{ routes.search_url }}" method="get" role="search">
     <div class="search--bar-wrapper">
       <div class="search--bar">
@@ -15,11 +13,11 @@
           {%- render 'icons', icon: 'spinner' -%}
         </div>
 
-        <label for="search-input" data-item="hidden-text">
+        <label for="search_input" data-item="hidden-text">
           {{- placeholder_t -}}
         </label>
         <input
-          id="search-input"
+          id="search_input"
           class="search--textbox"
           type="search"
           name="q"
@@ -27,8 +25,8 @@
           placeholder="{{ placeholder_t }}"
           data-item="paragraph"
           role="combobox"
-          aria-owns="predictive-search-results-list"
-          aria-controls="predictive-search-results-list"
+          aria-owns="predictive_search_results_list"
+          aria-controls="predictive_search_results_list"
           aria-autocomplete="list"
           autocorrect="off"
           autocomplete="off"
@@ -36,19 +34,19 @@
           spellcheck="false"
         >
 
-        <div class="search--clear" tabindex="0" aria-label="{{ clear_t }}" style="display:none;">
+        <div class="search--clear" tabindex="0" aria-label="{{ clear_t }}" aria-hidden="true">
           {%- render 'icons', icon: 'x-mark' -%}
         </div>
       </div>
 
       <div class="search--cancel" data-item="block-link" tabindex="0" data-drawer-close>
-        <div>{{- cancel_t -}}</div>
+        <span>{{- cancel_t -}}</span>
       </div>
     </div>
 
     <div
       class="search--results"
-      id="predictive-search-results-list"
+      id="predictive_search_results_list"
       {% unless settings.transitions--text %}
         data-transition-container="search"
         data-transition-type="fade-in"
@@ -59,4 +57,4 @@
       {%- render 'predictive-search' -%}
     </div>
   </form>
-</predictive-search-root>
+</predictive-search-element>

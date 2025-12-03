@@ -1,87 +1,261 @@
 {%- liquid
-  comment
-    "Variables"
-  endcomment
+  assign contact_name_t = 'sections.contact.name' | t
+  assign contact_email_t = 'sections.contact.email' | t
+  assign contact_message_t = 'sections.contact.message' | t
+  assign contact_button_t = 'sections.contact.button' | t
+  assign open_maps_t = 'sections.map.open' | t
+  assign shopify_disclaimer_t = 'shopify.online_store.spam_detection.disclaimer_html' | t
 
   assign bg_color = section.settings.background-color
+  assign border = section.settings.border
+  assign button_style = section.settings.button-style
   assign container_width = section.settings.container-width
   assign form_id = 'contact_form_' | append: section.id
-  assign facebook_url = settings.social--facebook--url
   assign heading = section.settings.heading
-  assign instagram_url = settings.social--instagram--url
-  assign light_text = section.settings.light-text
-  assign pinterest_url = settings.social--pinterest--url
+  assign heading_alignment = section.settings.heading-alignment
+  assign link_text = section.settings.link-text
+  assign mobile_spacing_above = section.settings.mobile-spacing-above
+  assign mobile_spacing_below = section.settings.mobile-spacing-below
+  assign outer_background = section.settings.outer-background
   assign show_social_sharing = section.settings.show-social-sharing
   assign store_address = section.settings.store-address
   assign store_hours = section.settings.store-hours
   assign spacing_above = section.settings.spacing-above
   assign spacing_below = section.settings.spacing-below
-  assign threads_url = settings.social--threads--url
-  assign tiktok_url = settings.social--tiktok--url
-  assign top_border = section.settings.top-border
-  assign x_url = settings.social--x--url
-  assign vimeo_url = settings.social--vimeo--url
-  assign youtube_url = settings.social--youtube--url
-
-  if facebook_url == blank and instagram_url == blank and threads_url == blank and pinterest_url == blank and tiktok_url == blank and x_url == blank and vimeo_url == blank and youtube_url == blank
-    assign show_social_sharing = false
-  endif
+  assign white_text = section.settings.white-text
 -%}
 
 <div
   class="contact--root"
   data-section-id="{{ section.id }}"
   data-background-color="{{ bg_color }}"
+  data-border="{{ border }}"
   data-container-width="{{ container_width }}"
-  data-light-text="{{ light_text }}"
+  data-mobile-spacing-above="{{ mobile_spacing_above }}"
+  data-mobile-spacing-below="{{ mobile_spacing_below }}"
+  data-outer-background="{{ outer_background }}"
+  {% if white_text %}
+    data-text-color="white"
+  {% endif %}
   data-spacing-above="{{ spacing_above }}"
   data-spacing-below="{{ spacing_below }}"
-  data-top-border="{{ top_border }}"
 >
   <div class="contact--wrapper">
     {%- unless heading == blank -%}
-      <div class="contact--header">
+      <div
+        class="contact--header"
+        data-text-alignment="{{ heading_alignment }}"
+        {% unless settings.transitions--text %}
+          data-transition-item="viewport"
+          data-transition-type="slide-in"
+        {% endunless %}
+      >
         <h2 class="contact--title" data-item="section-heading">
           {{- heading -}}
         </h2>
       </div>
     {%- endunless -%}
 
-    {%-
-      render 'contact-form',
-      store_address: store_address,
-      store_hours: store_hours,
-      form_id: form_id,
-      show_social_sharing: show_social_sharing
-    -%}
+    <div class="contact--container">
+      {%- unless store_address == blank and store_hours == blank -%}
+        <div class="contact--left-column">
+          {%- unless store_address == blank -%}
+            <div class="contact--address">
+              <address class="contact--address-text" data-item="paragraph">
+                {{- store_address | newline_to_br -}}
+              </address>
+
+              <a
+                class="contact--address-link"
+                data-item="block-link"
+                href="https://www.google.ca/maps/place/{{ store_address | url_encode }}"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span>{{- open_maps_t -}}</span>
+              </a>
+            </div>
+          {%- endunless -%}
+
+          {%- unless store_hours == blank -%}
+            <div class="contact--hours" data-item="paragraph">
+              {{- store_hours -}}
+            </div>
+          {%- endunless -%}
+        </div>
+      {%- endunless -%}
+
+      <div class="contact--right-column">
+        {%- form 'contact', id: form_id -%}
+          <div class="contact--form-details">
+            <label for="{{ form_id }}-contact_name" data-item="hidden-text">
+              {{ contact_name_t }}
+            </label>
+            <input
+              id="{{ form_id }}-contact_name"
+              type="text"
+              name="contact[name]"
+              value="{{ contact.fields.name }}"
+              placeholder="{{ contact_name_t }}"
+              {% if form.errors contains 'name' %}
+                data-text-color="alert"
+                aria-invalid="true"
+              {% endif %}
+              autocomplete="name"
+            />
+
+            <label for="{{ form_id }}-contact_email" data-item="hidden-text">
+              {{- contact_email_t -}}
+            </label>
+            <input
+              id="{{ form_id }}-contact_email"
+              type="email"
+              name="contact[email]"
+              value="{{ contact.fields.email }}"
+              placeholder="{{ contact_email_t }}"
+              autocomplete="email"
+              {% if form.errors contains 'email' %}
+                aria-invalid="true"
+                data-text-color="alert"
+              {% endif %}
+              required
+            />
+          </div>
+
+          <label for="{{ form_id }}-contact_textarea" data-item="hidden-text">
+            {{- contact_message_t -}}
+          </label>
+          <textarea
+            {% if form.errors contains 'body' %}
+              data-text-color="alert"
+            {% endif %}
+            id="{{ form_id }}-contact_textarea"
+            rows="5"
+            cols="60"
+            name="contact[body]"
+            placeholder="{{ contact_message_t }}"
+            required
+          >{{ contact.fields.body }}</textarea>
+
+          <div class="contact--form-submit">
+            <button
+              type="submit"
+              value="{{ contact_button_t }}"
+              data-item="{{ button_style }}"
+              data-text="{{ link_text }}"
+            >
+              <span>{{ link_text }}</span>
+            </button>
+          </div>
+
+          {%- if form.posted_successfully? -%}
+            <script>window.location.hash = '#feedback-bar--contact-form';</script>
+          {%- endif -%}
+
+          <div data-item="hidden-text">
+            {% comment %} remove the below line to display reCAPTCHA badge {% endcomment %}
+            {{ shopify_disclaimer_t }}
+          </div>
+        {%- endform -%}
+
+        {%- liquid
+          if show_social_sharing
+            render 'social-icons', type: 'follow', alignment: 'center'
+          endif
+        -%}
+      </div>
+    </div>
   </div>
 </div>
 
 {% schema %}
 {
   "name": "Contact form",
+  "class": "section--contact-form",
   "settings": [
     {
       "type": "header",
       "content": "Style and layout"
     },
     {
-      "id": "top-border",
-      "label": "Top border",
-      "type": "checkbox",
-      "default": false
+      "id": "border",
+      "label": "Border",
+      "type": "select",
+      "options": [
+        {
+          "label": "Top",
+          "value": "top"
+        },
+        {
+          "label": "Bottom",
+          "value": "bottom"
+        },
+        {
+          "label": "Both",
+          "value": "both"
+        },
+        {
+          "label": "None",
+          "value": "none"
+        }
+      ],
+      "default": "none"
     },
     {
       "id": "spacing-above",
       "label": "Spacing above",
-      "type": "checkbox",
-      "default": true
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "large"
     },
     {
       "id": "spacing-below",
       "label": "Spacing below",
-      "type": "checkbox",
-      "default": true
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "large"
     },
     {
       "id": "background-color",
@@ -89,7 +263,7 @@
       "type": "select",
       "options": [
         {
-          "label": "Transparent",
+          "label": "None",
           "value": "none"
         },
         {
@@ -107,47 +281,49 @@
         {
           "label": "Accent 2",
           "value": "accent-2"
+        },
+        {
+          "label": "Accent 3",
+          "value": "accent-3"
         }
       ],
       "default": "none"
     },
     {
-      "id": "light-text",
-      "label": "Use light text color",
+      "id": "outer-background",
+      "label": "Outer background",
+      "type": "checkbox",
+      "default": true
+    },
+    {
+      "id": "white-text",
+      "label": "Use white text color",
       "type": "checkbox",
       "default": false
+    },
+    {
+      "id": "heading-alignment",
+      "label": "Heading alignment",
+      "type": "text_alignment",
+      "default": "center"
     },
     {
       "id": "container-width",
       "label": "Maximum width of container",
       "type": "select",
       "options": [
-        {
-          "label": "Extra small",
-          "value": "1"
-        },
-        {
-          "label": "Small",
-          "value": "2"
-        },
-        {
-          "label": "Medium",
-          "value": "3"
-        },
-        {
-          "label": "Large",
-          "value": "4"
-        },
-        {
-          "label": "Extra large",
-          "value": "5"
-        },
-        {
-          "label": "Full width",
-          "value": "6"
-        }
+        { "label": "Extra small", "value": "1" },
+        { "label": "Small", "value": "2" },
+        { "label": "Medium", "value": "3" },
+        { "label": "Large", "value": "4" }
       ],
       "default": "2"
+    },
+    {
+      "id": "show-social-sharing",
+      "label": "Show social sharing",
+      "type": "checkbox",
+      "default": true
     },
     {
       "type": "header",
@@ -172,10 +348,98 @@
       "default": "<p>Monday - Friday<br>12pm - 8pm<br><br>Saturday - Sunday<br>12pm - 5pm</p>"
     },
     {
-      "id": "show-social-sharing",
-      "label": "Show social sharing",
-      "type": "checkbox",
-      "default": true
+      "id": "button-style",
+      "label": "Button style",
+      "type": "select",
+      "options": [
+        {
+          "label": "Style 1",
+          "value": "button-1"
+        },
+        {
+          "label": "Style 2",
+          "value": "button-2"
+        },
+        {
+          "label": "Style 3",
+          "value": "button-3"
+        },
+        {
+          "label": "Style 4",
+          "value": "button-4"
+        },
+        {
+          "label": "Link",
+          "value": "block-link"
+        }
+      ],
+      "default": "button-1"
+    },
+    {
+      "id": "link-text",
+      "label": "Link text",
+      "type": "text",
+      "default": "Send"
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "id": "mobile-spacing-above",
+      "label": "Spacing above",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "id": "mobile-spacing-below",
+      "label": "Spacing below",
+      "type": "select",
+      "options": [
+        {
+          "label": "None",
+          "value": "none"
+        },
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        },
+        {
+          "label": "Extra large",
+          "value": "x-large"
+        }
+      ],
+      "default": "medium"
     }
   ],
   "presets": [

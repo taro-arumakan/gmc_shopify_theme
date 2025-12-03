@@ -1,6 +1,8 @@
 {%- liquid
   assign continue_reading_t = 'blog.article.continue_reading' | t
 
+  assign heading_alignment = section.settings.heading-alignment
+
   comment
     "gets a recent article that is not the next, previous, or current article"
   endcomment
@@ -20,25 +22,34 @@
   endfor
 
   assign columns = 3
-  unless blog.next_article and blog.previous_article
+  unless blog.next_article and blog.previous_article and other_article != blank
     assign columns = 2
   endunless
 
-  render 'section-assets', name: 'article-item', type: 'style'
+  capture sizes
+    render 'utils', name: 'sizes', container_width: '2', columns: columns, mobile_columns: 1
+  endcapture
 -%}
-
-{%- capture sizes -%}
-  '(max-width: 767px) 100vw, {{ 100 | divided_by: columns }}vw'
-{%- endcapture %}
 
 <div
   class="article--recents-root"
   data-section-id="{{ section.id }}"
   data-aspect-ratio="{{ settings.image--article-size }}"
-  data-spacing-above="false"
+  data-background-color="none"
+  data-container-width="2"
+  data-spacing-above="none"
+  data-spacing-below="large"
 >
   <div class="article--recents-wrapper" data-container="section">
-    <div class="article--recents-header" data-container="block">
+    <div
+      class="article--recents-header"
+      data-container="block"
+      data-text-alignment="{{ heading_alignment }}"
+      {% unless settings.transitions--text %}
+        data-transition-item="viewport"
+        data-transition-type="slide-in"
+      {% endunless %}
+    >
       <h2 class="article--recents-title" data-item='section-heading'>
         {{- continue_reading_t -}}
       </h2>
@@ -52,13 +63,15 @@
     >
       {%- liquid
         if blog.previous_article
-          render "article--item", featured_article: blog.previous_article, show_author: false, show_date: false, show_excerpt: false, type: 'full_article', sizes: sizes
+          render 'article-card', featured_article: blog.previous_article, show_author: false, show_cta: false, show_date: false, show_excerpt: false, type: 'full_article', sizes: sizes
         endif
 
-        render "article--item", featured_article: other_article, show_author: false, show_date: false, show_excerpt: false, type: 'full_article', sizes: sizes
+        unless other_article == blank
+          render 'article-card', featured_article: other_article, show_author: false, show_cta: false, show_date: false, show_excerpt: false, type: 'full_article', sizes: sizes
+        endunless
 
         if blog.next_article
-          render "article--item", featured_article: blog.next_article, show_author: false, show_date: false, show_excerpt: false, type: 'full_article', sizes: sizes
+          render 'article-card', featured_article: blog.next_article, show_author: false, show_cta: false, show_date: false, show_excerpt: false, type: 'full_article', sizes: sizes
         endif
       -%}
     </div>
@@ -68,6 +81,14 @@
 {% schema %}
 {
   "name": "Recent articles",
-  "settings": []
+  "class": "section--recent-articles",
+  "settings": [
+    {
+      "id": "heading-alignment",
+      "label": "Heading alignment",
+      "type": "text_alignment",
+      "default": "center"
+    }
+  ]
 }
 {% endschema %}

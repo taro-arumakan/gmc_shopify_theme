@@ -2,7 +2,7 @@
   Add Facebook and Pinterest Open Graph meta tags to product pages
   for friendly Facebook sharing and Pinterest pinning.
 
-  More info Open Graph meta tags
+  More info on Open Graph meta tags
     - https://developers.facebook.com/docs/opengraph/using-objects/
     - https://developers.pinterest.com/rich_pins/
 
@@ -57,7 +57,7 @@
         },
       {%- endif -%}
       "offers": [
-        {%- for variant in product.variants -%}
+        {%- for variant in product.variants limit: 20 -%}
           {
             "@type" : "Offer",
             {%- if variant.sku != blank -%}
@@ -72,10 +72,10 @@
             {%- if variant.barcode.size == 14 -%}
               "gtin14": {{ variant.barcode }},
             {%- endif -%}
-            "availability" : "http://schema.org/{% if variant.available %}InStock{% else %}OutOfStock{% endif %}",
-            "price" : {{ variant.price | divided_by: 100.00 | json }},
-            "priceCurrency" : {{ cart.currency.iso_code | json }},
-            "url" : {{ request.origin | append: variant.url | json }}
+            "availability": "http://schema.org/{% if variant.available %}InStock{% else %}OutOfStock{% endif %}",
+            "price": {{ variant.price | divided_by: 100.00 | json }},
+            "priceCurrency": {{ cart.currency.iso_code | json }},
+            "url": {{ request.origin | append: variant.url | json }}
           }{% unless forloop.last %},{% endunless %}
         {%- endfor -%}
       ]
@@ -123,7 +123,7 @@
 {%- endif -%}
 
 {%- liquid
-  assign share_description = shop.description | default: shop.name
+  assign share_description = shop.description | default: shop.name | escape
   if request.page_type == 'article'
     assign share_description = article.excerpt_or_content | strip_html
   elsif page_description

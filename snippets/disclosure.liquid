@@ -15,28 +15,21 @@
   endcapture
 -%}
 
-<disclosure-root
+<disclosure-element
   class="disclosure--root"
   data-id="{{ id | downcase }}"
-  {%- if type != blank -%}
+  {% unless type == blank %}
     data-type="{{ type }}"
-  {%- endif -%}
+  {% endunless %}
 >
-  <div
-    class="disclosure--header"
-    {%- unless display_label -%}
-      data-item="hidden-text"
-    {%- endunless -%}
+  <label
+    class="disclosure--label"
+    id="{{ disclosure_name }}-toggle"
+    data-item="{% if display_label %}nav{% else %}hidden{% endif %}-text"
   >
-    <label
-      class="disclosure--label"
-      data-item="accent-text"
-      id="{{ disclosure_name }}-toggle"
-    >
-      {%- comment -%} label_name needed for a11y {%- endcomment -%}
-      {{- label_name | escape -}}
-    </label>
-  </div>
+    {%- comment -%} label_name needed for a11y {%- endcomment -%}
+    <span>{{- label_name | escape -}}</span>
+  </label>
 
   <div class="disclosure--main">
     <button
@@ -58,7 +51,6 @@
           endif
         echo '</div>'
 
-        render 'icons', icon: 'chevron-up'
         render 'icons', icon: 'chevron-down'
       -%}
     </button>
@@ -68,18 +60,28 @@
       data-transition-item="viewport"
       data-transition-type="scale-in"
       data-transition-trigger="custom"
+      aria-hidden="true"
     >
       {%- for name in option_names -%}
+        {%- assign option_value = option_values[forloop.index0] -%}
         <li
           class="disclosure--option"
           tabindex="0"
-          data-item="nav-text--sub"
-          data-value="{{ option_values[forloop.index0] | escape }}"
-          {%- if option_values[forloop.index0] == current_value -%}
+          data-item="sub-nav-text"
+          data-value="{{ option_value | escape }}"
+          {% if option_value.id %}
+            data-option-value-id="{{ option_value.id }}"
+            data-option-name="{{ label_name | strip | downcase }}"
+            data-product-url="{{ option_value.product_url }}"
+            {% unless option_value.available %}
+              data-unavailable="true"
+            {% endunless %}
+          {% endif %}
+          {% if option_value == current_value %}
             aria-current="true"
-          {%- else -%}
+          {% else %}
             aria-current="false"
-          {%- endif -%}
+          {% endif %}
         >
           {{ name }}
         </li>
@@ -88,13 +90,18 @@
     <input
       class="disclosure--input"
       type="hidden"
-      {%- if input_name -%}
+      {% if input_name %}
         name="{{ input_name }}"
-      {%- endif -%}
-      {%- if current_value -%}
+      {% endif %}
+      {% if current_value %}
         value="{{ current_value | escape }}"
-      {%- endif -%}
+      {% endif %}
+      {% if current_value.id %}
+        data-option-value-id="{{ current_value.id }}"
+        data-option-name="{{ label_name | strip | downcase }}"
+        data-product-url="{{ current_value.product_url }}"
+      {% endif %}
       data-item="disclosure"
     />
   </div>
-</disclosure-root>
+</disclosure-element>
