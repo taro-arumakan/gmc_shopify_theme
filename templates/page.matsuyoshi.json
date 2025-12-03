@@ -24,6 +24,9 @@
     },
     "image_with_text_PBV9Cp": {
       "type": "image-with-text",
+      "custom_css": [
+        "@media only screen and (min-width: 768px) {.image--root[data-display-type=\"medium\"] img {width: unset; margin: auto; }}"
+      ],
       "settings": {
         "top-border": false,
         "spacing-above": false,
@@ -59,11 +62,11 @@
     "featured_text_3WqCXi": {
       "type": "featured-text",
       "custom_css": [
-        "@media only screen and (max-width: 767px) {.stacked-text--root {text-align: left;} }"
+        "@media only screen and (max-width: 767px) {.stacked-text--root {text-align: left; }}"
       ],
       "settings": {
         "top-border": false,
-        "spacing-above": true,
+        "spacing-above": false,
         "spacing-below": true,
         "background-color": "none",
         "light-text": false,
