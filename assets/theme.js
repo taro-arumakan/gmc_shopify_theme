@@ -3325,6 +3325,7 @@ class Placeholder extends HTMLElement {
   }
 }
 customElements.define("placeholder-element", Placeholder);
+
 class PredictiveSearch extends HTMLElement {
   constructor() {
     super();
@@ -3334,6 +3335,8 @@ class PredictiveSearch extends HTMLElement {
       (this.clear_button = this.querySelector(".search--clear")),
       (this.input = this.querySelector(".search--textbox")),
       (this.results = this.querySelector(".search--results")),
+      (this.results_placeholder = this.querySelector('.predictive-search--products')),
+      (this.results_grid = this.querySelector('.predictive-search--product-grid')),
       (this.cached_results = { "": this.results.innerHTML }),
       this.addInputListener(),
       this.addFormSubmitListener(),
@@ -3354,15 +3357,24 @@ class PredictiveSearch extends HTMLElement {
     else {
       (this.abort_controller = new AbortController()), this.toggleLoading(!0);
       try {
-        var i = encodeURIComponent(t),
-          s = await fetch(
-            `${Shopify.routes.predictive_search}?q=${i}&section_id=predictive-search`,
-            { signal: this.abort_controller.signal }
-          );
-        if (!s.ok) throw new Error(s.status);
-        var r = (await s.text()).parse().innerHTML;
-        (this.cached_results[e] = r), (this.results.innerHTML = r);
-      } catch {}
+        var r = await fetch(
+            `${Shopify.routes.search}?type=product&view=json&q=${encodeURIComponent(
+            t
+          )}`,
+          { signal: this.abort_controller.signal }
+        );
+        if (!r.ok) throw new Error(r.status);
+        var s = await r.json();
+        var regex = new RegExp('data-transition-item', 'g');
+        this.results_placeholder.innerHTML = '';
+        console.log(s);
+        var self = this;
+        s.forEach(function (item) {
+          fetch(`/products/${item.handle}?sections=product-card`)
+            .then(response => response.json())
+            .then(data => self.results_placeholder.insertAdjacentHTML('beforeend', data['product-card'].replace(regex, 'div')));
+        })
+      } catch { }
     }
   }
   addClearButtonListener() {
@@ -3393,6 +3405,7 @@ class PredictiveSearch extends HTMLElement {
   }
 }
 customElements.define("predictive-search-element", PredictiveSearch);
+
 class PriceRange extends HTMLElement {
   constructor() {
     super();
