@@ -36,7 +36,6 @@
           "type": "options",
           "settings": {
             "variant-style": "dropdowns",
-            "swatches-enabled": true,
             "size-chart-enabled": false,
             "size-chart-option": "size",
             "size-chart-content": ""
@@ -70,15 +69,15 @@
         "buy-buttons"
       ],
       "settings": {
-        "container-width": "4",
         "spacing-above": "medium",
         "spacing-below": "medium",
+        "container-width": "4",
         "media-layout": "thumbnails",
-        "text-column-width": 280,
+        "thumbnail-width": 80,
         "media-gap": 8,
+        "text-column-width": 280,
         "column-spacing": "close",
         "text-alignment": "left",
-        "thumbnail-width": 80,
         "heading-enabled": false,
         "heading-sizes-enabled": false,
         "heading-size": 40,
@@ -94,31 +93,24 @@
       "type": "related-products",
       "disabled": true,
       "settings": {
-        "top-border": false,
         "spacing-above": "medium",
         "spacing-below": "medium",
-        "background-color": "none",
-        "light-text": false,
         "container-width": "4",
+        "background-color": "none",
         "title": "You may also like"
       }
     },
     "featured_collection_zYB9wT": {
       "type": "featured-collection",
       "settings": {
-        "top-border": false,
         "spacing-above": "none",
         "spacing-below": "medium",
-        "featured-collection--image--show": false,
-        "featured-collection--description--show": false,
         "background-color": "none",
-        "light-text": false,
         "display-type": "slideshow",
         "products-per-row--desktop": "3",
-        "products-per-row--mobile": "2",
         "collection": "{{ product.metafields.custom.product_featured_collection.value }}",
-        "max-products": 12,
-        "heading": "{{ section.settings.collection.title }}その他のオプション"
+        "heading": "{{ section.settings.collection.title }}その他のオプション",
+        "products-per-row--mobile": "2"
       }
     }
   },

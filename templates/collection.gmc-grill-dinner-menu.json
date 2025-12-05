@@ -17,15 +17,14 @@
         "heading-alignment": "center",
         "show-description": true,
         "description-alignment": "with-title",
-        "light-text": true,
         "show-image": true,
         "use-image-fallback": true,
         "image-display-type": "medium",
         "aspect-ratio": 56,
         "mobile-image-display-type": "original",
         "mobile-aspect-ratio": 134,
-        "text-style": "none",
         "overlay-style": "darken-bottom",
+        "text-style": "none",
         "parallax-enabled": false
       }
     },
@@ -41,7 +40,6 @@
         "custom-list-collections": "",
         "show-sort-list": true,
         "show-refine-list": true,
-        "swatches-enabled": false,
         "show-search-link": true
       }
     },
@@ -57,35 +55,19 @@
     "featured_text_wgk4TF": {
       "type": "featured-text",
       "settings": {
-        "top-border": false,
         "spacing-above": "medium",
         "spacing-below": "none",
-        "background-color": "none",
-        "light-text": false,
-        "heading-type": "section-heading",
         "container-width": "4",
-        "overline": "",
-        "heading": "PREMIUM BEEF",
-        "description": "",
-        "link-url": "",
-        "link-text": ""
+        "background-color": "none"
       }
     },
     "featured_text_jnbRcg": {
       "type": "featured-text",
       "settings": {
-        "top-border": false,
         "spacing-above": "medium",
         "spacing-below": "none",
-        "background-color": "none",
-        "light-text": false,
-        "heading-type": "section-heading",
         "container-width": "4",
-        "overline": "",
-        "heading": "タスマニア産 グラスフェド放牧牛",
-        "description": "<p>人が住む場所で世界一大気が綺麗なエリアとして知られるタスマニアの大自然の中、広大な大地の放牧で牧草だけを食べて育った、安心＆安全なオーガニックビーフ。柔らかくジューシーな赤身肉からは牧草の香りがするほどです。<br/>香り高く赤身の美味しい《リブアイロール》の炭火ステーキをご堪能下さい。</p>",
-        "link-url": "",
-        "link-text": ""
+        "background-color": "none"
       }
     },
     "service_list_kEep4q": {
@@ -120,32 +102,21 @@
         "item_9AQxBF"
       ],
       "settings": {
-        "top-border": false,
         "spacing-above": "medium",
         "spacing-below": "none",
         "background-color": "none",
-        "light-text": false,
         "container-width": "6",
         "show-description": true,
-        "heading": "",
-        "heading-alignment": "center"
+        "heading": ""
       }
     },
     "featured_text_mRTWdH": {
       "type": "featured-text",
       "settings": {
-        "top-border": false,
         "spacing-above": "medium",
         "spacing-below": "none",
-        "background-color": "none",
-        "light-text": false,
-        "heading-type": "section-heading",
         "container-width": "4",
-        "overline": "",
-        "heading": "クイーンズランド産 ブラックアンガス牛",
-        "description": "<p>1939年創業、ハート一族が４代にわたり経営してきたジョン・ディー社が生産するハイブランド《ジョンディーゴールド》は160日間を穀物肥育したブラックアンガス牛を45日ウエットエイジング後30日間のドライエイジングを施しました。<br/>サーロインとフィレが一度に楽しめTボーンステーキ、斧の形で迫力満点トマホークステーキを特別な日にどうぞ。</p>",
-        "link-url": "",
-        "link-text": ""
+        "background-color": "none"
       }
     },
     "service_list_A7XKeM": {
@@ -173,49 +144,30 @@
         "item_aQ7R7N"
       ],
       "settings": {
-        "top-border": false,
         "spacing-above": "none",
         "spacing-below": "none",
         "background-color": "none",
-        "light-text": false,
         "container-width": "4",
         "show-description": true,
-        "heading": "",
-        "heading-alignment": "center"
+        "heading": ""
       }
     },
     "featured_text_AQ4nXY": {
       "type": "featured-text",
       "settings": {
-        "top-border": false,
         "spacing-above": "medium",
         "spacing-below": "none",
-        "background-color": "none",
-        "light-text": false,
-        "heading-type": "section-heading",
         "container-width": "4",
-        "overline": "",
-        "heading": "PREMIUM PORK",
-        "description": "",
-        "link-url": "",
-        "link-text": ""
+        "background-color": "none"
       }
     },
     "featured_text_UyeAAn": {
       "type": "featured-text",
       "settings": {
-        "top-border": false,
         "spacing-above": "medium",
         "spacing-below": "none",
-        "background-color": "none",
-        "light-text": false,
-        "heading-type": "section-heading",
         "container-width": "4",
-        "overline": "",
-        "heading": "鹿児島県産 南州農場 かごしま黒豚",
-        "description": "<p>日本の最高峰銘柄豚、鹿児島県産の「かごしま黒豚」鹿児島県鹿屋市にある南州農場で生産者の努力と情熱と、たくさんのさつま芋を食べて育ちました。赤身の旨味と脂身の甘味をご賞味ください。</p>",
-        "link-url": "",
-        "link-text": ""
+        "background-color": "none"
       }
     },
     "service_list_87Qjpp": {
@@ -307,49 +259,30 @@
         "item_HcWH3b"
       ],
       "settings": {
-        "top-border": false,
         "spacing-above": "medium",
         "spacing-below": "none",
         "background-color": "none",
-        "light-text": false,
         "container-width": "4",
         "show-description": true,
-        "heading": "GMC薩摩黒豚",
-        "heading-alignment": "center"
+        "heading": "GMC薩摩黒豚"
       }
     },
     "featured_text_XRRwRy": {
       "type": "featured-text",
       "settings": {
-        "top-border": false,
         "spacing-above": "medium",
         "spacing-below": "none",
-        "background-color": "none",
-        "light-text": false,
-        "heading-type": "section-heading",
         "container-width": "4",
-        "overline": "",
-        "heading": "PREMIUM LAMB",
-        "description": "",
-        "link-url": "",
-        "link-text": ""
+        "background-color": "none"
       }
     },
     "featured_text_rz3t6V": {
       "type": "featured-text",
       "settings": {
-        "top-border": false,
         "spacing-above": "medium",
         "spacing-below": "none",
-        "background-color": "none",
-        "light-text": false,
-        "heading-type": "section-heading",
         "container-width": "4",
-        "overline": "",
-        "heading": "アイスランド産グラスフェドラム",
-        "description": "<p>放牧により海風で育つ野草やハーブを食べたい時に食べている自然な環境で育てられた、4-5ヶ月の仔羊（ラム）です。北の地アイスランドで原種のまま育ったラムは日本のラム総肉輸入量の1%と希少です。臭みなく柔らかい、GMCおすすめのラム肉です。</p>",
-        "link-url": "",
-        "link-text": ""
+        "background-color": "none"
       }
     },
     "service_list_nQHYhn": {
@@ -391,15 +324,12 @@
         "item_AejwJc"
       ],
       "settings": {
-        "top-border": false,
         "spacing-above": "medium",
         "spacing-below": "none",
         "background-color": "none",
-        "light-text": false,
         "container-width": "4",
         "show-description": true,
-        "heading": "",
-        "heading-alignment": "center"
+        "heading": ""
       }
     },
     "service_list_8QMe4D": {
@@ -558,49 +488,30 @@
         "item_8wADKg"
       ],
       "settings": {
-        "top-border": false,
         "spacing-above": "medium",
         "spacing-below": "medium",
         "background-color": "none",
-        "light-text": false,
         "container-width": "4",
         "show-description": true,
-        "heading": "",
-        "heading-alignment": "center"
+        "heading": ""
       }
     },
     "featured_text_nFpPnp": {
       "type": "featured-text",
       "settings": {
-        "top-border": false,
         "spacing-above": "medium",
         "spacing-below": "medium",
-        "background-color": "none",
-        "light-text": false,
-        "heading-type": "section-heading",
         "container-width": "4",
-        "overline": "",
-        "heading": "GMC 特選BBQ Course",
-        "description": "<p><br/>GMCシズリングベーコン<br/>シーザーサラダ<br/>新タマネギのポタージュ<br/>薩摩黒豚フランクとマトンのアイヌ香草ソーセージとフライドポテト<br/>アイスランド産　ラムチョップローズマリースモーク<br/>自家製ピクルス盛合せ<br/>薩摩黒豚プルドポークLOW & SLOW 8h<br/>コールスローとパン<br/>タスマニア産 グラスフェド放牧牛リブアイロールステーキ<br/>季節のフルーツ<br/>The rising sun coffee</p><h4>¥5,500 (４名様より)</h4>",
-        "link-url": "",
-        "link-text": ""
+        "background-color": "none"
       }
     },
     "featured_text_GxeXTX": {
       "type": "featured-text",
       "settings": {
-        "top-border": false,
         "spacing-above": "medium",
         "spacing-below": "medium",
-        "background-color": "none",
-        "light-text": false,
-        "heading-type": "section-heading",
         "container-width": "4",
-        "overline": "",
-        "heading": "GMC 黒豚 Dinner Course",
-        "description": "<p><br/>夷隅産ベビーリーフと香取産マッシュルームのサラダ<br/>薩摩黒豚バラ寿司<br/>薩摩黒豚ベーコンフランク盛合せ ポテト添え<br/>薩摩黒豚ステーキ たまり醤油と山葵<br/>薩摩黒豚ハンバーグ<br/>ガーリックライス<br/>The rising sun coffee<br/>バニラアイス</p><h4>¥3,200 (２名様より)</h4>",
-        "link-url": "",
-        "link-text": ""
+        "background-color": "none"
       }
     },
     "service_list_LGG6Ci": {
@@ -791,15 +702,12 @@
         "item_wkrLG8"
       ],
       "settings": {
-        "top-border": false,
         "spacing-above": "medium",
         "spacing-below": "medium",
         "background-color": "none",
-        "light-text": false,
         "container-width": "4",
         "show-description": true,
-        "heading": "DRINK",
-        "heading-alignment": "center"
+        "heading": "DRINK"
       }
     },
     "service_list_TYn96y": {
@@ -884,15 +792,12 @@
         "item_kx8GzX"
       ],
       "settings": {
-        "top-border": false,
         "spacing-above": "medium",
         "spacing-below": "medium",
         "background-color": "none",
-        "light-text": false,
         "container-width": "4",
         "show-description": true,
-        "heading": "Wine List",
-        "heading-alignment": "center"
+        "heading": "Wine List"
       }
     }
   },
