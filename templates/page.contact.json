@@ -11,53 +11,86 @@
   "sections": {
     "1632436597fbc1d0e4": {
       "type": "image-with-text",
+      "disabled": true,
       "settings": {
+        "border": "none",
         "spacing-above": "none",
         "spacing-below": "large",
-        "background-color": "none",
         "container-width": "6",
+        "background-color": "none",
         "white-text": true,
-        "overlap": false,
+        "heading-type": "section-heading",
         "text-position": "overlay",
+        "overlap": false,
+        "text-horizontal-alignment": "center",
+        "text-vertical-alignment": "center",
         "text-width": 500,
-        "text-style": "none",
         "overlay-style": "darken-bottom",
+        "text-style": "none",
+        "text-background-color": "transparent",
+        "image-display-type": "medium",
+        "aspect-ratio": 56,
         "parallax-enabled": false,
         "overline": "Contact us",
         "title": "Get in touch",
+        "highlight-type": "italic",
+        "highlight-color": "accent-2",
+        "highlight-text": "none",
         "description": "",
         "link-url": "",
+        "button-style": "button-1",
         "link-text": "",
+        "mobile-full-width": true,
         "mobile-spacing-above": "none",
         "mobile-spacing-below": "none",
-        "mobile-overlay": true
+        "mobile-white-text": true,
+        "mobile-overlay": true,
+        "mobile-hide-description": false,
+        "mobile-button-style": "button-1",
+        "mobile-image-display-type": "original",
+        "mobile-aspect-ratio": 134,
+        "mobile-text-horizontal-alignment": "center",
+        "mobile-text-vertical-alignment": "center"
       }
     },
     "main": {
       "type": "page",
       "settings": {
         "show-title": false,
+        "spacing-above": "none",
+        "spacing-below": "large",
+        "container-width": "1",
         "background-color": "none",
         "white-text": false,
-        "container-width": "1",
-        "spacing-above": "none",
-        "spacing-below": "large"
+        "mobile-spacing-above": "medium",
+        "mobile-spacing-below": "medium"
       }
     },
     "1632180071f18cee62": {
       "type": "contact",
       "settings": {
-        "spacing-above": "none",
+        "border": "none",
+        "spacing-above": "x-large",
         "spacing-below": "large",
         "background-color": "none",
+        "outer-background": true,
         "white-text": false,
+        "heading-alignment": "center",
         "container-width": "2",
+        "show-social-sharing": true,
         "heading": "",
-        "store-address": "842 Beech Street\nMountain View, CA 94041",
-        "store-hours": "<p>Monday - Friday<br/>12pm - 8pm<br/><br/>Saturday - Sunday<br/>12pm - 5pm</p>",
-        "show-social-sharing": true
+        "store-address": "",
+        "store-hours": "",
+        "button-style": "button-1",
+        "link-text": "Send",
+        "mobile-spacing-above": "medium",
+        "mobile-spacing-below": "medium"
       }
     }
   },
-  "order": ["1632436597fbc1d0e4", "main", "1632180071f18cee62"]
+  "order": [
+    "1632436597fbc1d0e4",
+    "main",
+    "1632180071f18cee62"
+  ]
 }
