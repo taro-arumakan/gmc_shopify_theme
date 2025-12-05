@@ -15,17 +15,46 @@
       "type": "announcement",
       "disabled": true,
       "settings": {
-        "background-color": "dark"
+        "sticky-enabled": false,
+        "border": "none",
+        "background-color": "dark",
+        "white-text": false,
+        "arrows-enabled": true,
+        "rotate-frequency": 7,
+        "show-social-icons": true,
+        "show-region-selector": true,
+        "show-locale-selector": true,
+        "scroll-text": true,
+        "animation-speed": 3
       }
     },
     "header": {
       "type": "header",
       "settings": {
+        "layout": "drawer",
         "background-color": "light",
+        "white-menu-background": true,
+        "bottom-border": false,
+        "white-text": false,
+        "hover-disabled": false,
+        "sticky-enabled": true,
+        "hide-on-scroll": true,
+        "reduce-height": false,
+        "overlap-behavior": "drawer",
         "logo": "shopify://shop_images/GMC_kaku.png",
         "logo-height": 55,
         "mobile-logo-height": 40,
+        "transparent-enabled": false,
+        "transparent-white-text": false,
         "menu": "main-menu",
+        "search-enabled": true,
+        "icons-enabled": true,
+        "highlight-item": "",
+        "highlight-color": "#d02e2e",
+        "modal-item": "",
+        "modal-content": "",
+        "modal-background-color": "none",
+        "modal-white-text": false,
         "show-region-selector": false,
         "show-locale-selector": false
       }
