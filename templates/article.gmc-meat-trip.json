@@ -9,77 +9,6 @@
  */
 {
   "sections": {
-    "collection-header": {
-      "type": "collection-header",
-      "disabled": true,
-      "settings": {
-        "show-title": true,
-        "heading-type": "section-heading",
-        "heading-alignment": "center",
-        "show-description": true,
-        "description-alignment": "with-title",
-        "show-image": true,
-        "use-image-fallback": true,
-        "image-display-type": "medium",
-        "aspect-ratio": 56,
-        "mobile-image-display-type": "original",
-        "mobile-aspect-ratio": 134,
-        "overlay-style": "darken-bottom",
-        "text-style": "none",
-        "parallax-enabled": false
-      }
-    },
-    "navigation": {
-      "type": "collection-navigation",
-      "disabled": true,
-      "settings": {
-        "show-browse-button": true,
-        "show-sort-button": true,
-        "show-refine-button": true,
-        "show-layout-buttons": true,
-        "show-collections-list": true,
-        "custom-list-collections": "",
-        "show-sort-list": true,
-        "show-refine-list": true,
-        "show-search-link": true
-      }
-    },
-    "main": {
-      "type": "main-collection",
-      "blocks": {
-        "grid-promo-1": {
-          "type": "promotion",
-          "disabled": true,
-          "settings": {
-            "promo-width": "2",
-            "heading-type": "featured-heading",
-            "text-horizontal-alignment": "center",
-            "text-vertical-alignment": "center",
-            "text-width": 500,
-            "overlay-style": "darken-bottom",
-            "text-style": "none",
-            "text-background-color": "light",
-            "parallax-enabled": false,
-            "image": "{{ collection.image }}",
-            "overline": "Overline text{{ collection.title }}",
-            "title": "Grid promotion{{ collection.title }}",
-            "description": "<p>Create eye-catching promos within collection grids to increase discoverability and accelerate conversions.</p>",
-            "link-url": "",
-            "link-text": "Optional link",
-            "mobile-hide-description": false
-          }
-        }
-      },
-      "block_order": [
-        "grid-promo-1"
-      ],
-      "disabled": true,
-      "settings": {
-        "products-per-row--desktop": 4,
-        "products-per-row--mobile": "2",
-        "number-of-rows": 6
-      }
-    },
     "image_with_text_b7dzDd": {
       "type": "image-with-text",
       "settings": {
@@ -236,9 +165,6 @@
     }
   },
   "order": [
-    "collection-header",
-    "navigation",
-    "main",
     "image_with_text_b7dzDd",
     "text_columns_mgMkwB"
   ]

@@ -17,6 +17,7 @@
     "typography--nav": "karla_n4",
     "typography--paragraph": "karla_n4",
     "typography--paragraph--size": 13,
+    "favicon": "shopify://shop_images/GMC_maru_chef.png",
     "color--alternative": "#ffffff",
     "typography--accent": "karla_n4",
     "content_for_index": []

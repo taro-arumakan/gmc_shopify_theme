@@ -9,6 +9,47 @@
  */
 {
   "sections": {
+    "featured_video_adjaUU": {
+      "type": "featured-video",
+      "settings": {
+        "border": "none",
+        "spacing-above": "x-large",
+        "spacing-below": "x-large",
+        "container-width": "6",
+        "background-color": "none",
+        "white-text": true,
+        "text-width": 500,
+        "text-horizontal-alignment": "right",
+        "text-vertical-alignment": "bottom",
+        "overlay-style": "none",
+        "text-style": "none",
+        "text-background-color": "transparent",
+        "heading-type": "featured-heading",
+        "autoplay": true,
+        "video-display-type": "original",
+        "aspect-ratio": 56,
+        "play-button-style": "solid",
+        "video-upload": "shopify://files/videos/GMC_ucchi_loop.mp4",
+        "video-url": "",
+        "overline": "",
+        "heading": "",
+        "highlight-type": "italic",
+        "highlight-color": "accent-2",
+        "highlight-text": "none",
+        "description": "",
+        "button-url": "shopify://collections/gift-贈答",
+        "button-style": "block-link",
+        "button-text": "Shopへ",
+        "mobile-spacing-above": "x-large",
+        "mobile-spacing-below": "x-large",
+        "mobile-full-width": true,
+        "mobile-video-display-type": "original",
+        "mobile-aspect-ratio": 134,
+        "mobile-text-horizontal-alignment": "right",
+        "mobile-text-vertical-alignment": "bottom",
+        "mobile-hide-description": false
+      }
+    },
     "164016757166a86406": {
       "type": "image-with-text",
       "custom_css": [
@@ -18,8 +59,8 @@
       ],
       "settings": {
         "border": "none",
-        "spacing-above": "medium",
-        "spacing-below": "medium",
+        "spacing-above": "x-large",
+        "spacing-below": "x-large",
         "container-width": "6",
         "background-color": "none",
         "white-text": false,
@@ -41,19 +82,67 @@
         "highlight-type": "italic",
         "highlight-color": "accent-2",
         "highlight-text": "none",
-        "description": "<p><br/>web shopご来店有難うございます。</p><p>ただ今 GIFT 購入いただきますと、<br/>無料にてオリジナル風呂敷に包んで発送致します。</p><p>どうぞこの機会にcheers☆</p><p>GMC MEAT TRIP 2023は<a href=\"/collections/gmc-meat-trip-2023\" title=\"GMC Meat Trip 2023\">こちら</a></p><p></p>",
+        "description": "<p><br/>web shopご来店有難うございます。</p><p>ただ今 GIFT 購入いただきますと、<br/>無料にてオリジナル風呂敷に包んで発送致します。</p><p>どうぞこの機会にcheers☆</p>",
         "link-url": "shopify://collections/gift-贈答",
         "button-style": "button-1",
         "link-text": "ブラウズ",
         "mobile-full-width": true,
-        "mobile-spacing-above": "medium",
-        "mobile-spacing-below": "medium",
+        "mobile-spacing-above": "x-large",
+        "mobile-spacing-below": "x-large",
         "mobile-white-text": false,
         "mobile-overlay": true,
         "mobile-hide-description": false,
         "mobile-button-style": "button-1",
         "mobile-image-display-type": "aspect-ratio",
         "mobile-aspect-ratio": 200,
+        "mobile-text-horizontal-alignment": "center",
+        "mobile-text-vertical-alignment": "center"
+      }
+    },
+    "image_with_text_GxJUVn": {
+      "type": "image-with-text",
+      "custom_css": [
+        "img {max-width: 65vw; margin: auto;}"
+      ],
+      "name": "Image with text",
+      "settings": {
+        "border": "none",
+        "spacing-above": "x-large",
+        "spacing-below": "x-large",
+        "container-width": "3",
+        "background-color": "none",
+        "white-text": false,
+        "heading-type": "section-heading",
+        "text-position": "bottom",
+        "overlap": false,
+        "text-horizontal-alignment": "center",
+        "text-vertical-alignment": "center",
+        "text-width": 400,
+        "overlay-style": "none",
+        "text-style": "none",
+        "text-background-color": "transparent",
+        "image-display-type": "original",
+        "aspect-ratio": 56,
+        "parallax-enabled": false,
+        "image": "shopify://shop_images/matsuyoshi.png",
+        "overline": "令和七年開店",
+        "title": "浅草とんかつ松よし",
+        "highlight-type": "italic",
+        "highlight-color": "accent-2",
+        "highlight-text": "none",
+        "description": "<p>薩摩黒豚/白豚専門</p><p> </p>",
+        "link-url": "https://share.google/HNPj4BQZfNW4jaQmi",
+        "button-style": "block-link",
+        "link-text": "店舗情報",
+        "mobile-full-width": false,
+        "mobile-spacing-above": "x-large",
+        "mobile-spacing-below": "x-large",
+        "mobile-white-text": false,
+        "mobile-overlay": false,
+        "mobile-hide-description": false,
+        "mobile-button-style": "button-1",
+        "mobile-image-display-type": "original",
+        "mobile-aspect-ratio": 134,
         "mobile-text-horizontal-alignment": "center",
         "mobile-text-vertical-alignment": "center"
       }
@@ -157,8 +246,8 @@
       ],
       "settings": {
         "border": "none",
-        "spacing-above": "medium",
-        "spacing-below": "none",
+        "spacing-above": "x-large",
+        "spacing-below": "x-large",
         "background-color": "none",
         "spacing-around-blocks": true,
         "arrows-enabled": true,
@@ -173,8 +262,8 @@
         "auto-rotate": true,
         "rotate-frequency": 7,
         "transition-type": "fade",
-        "mobile-spacing-above": "medium",
-        "mobile-spacing-below": "none",
+        "mobile-spacing-above": "x-large",
+        "mobile-spacing-below": "x-large",
         "mobile-image-display-type": "original",
         "mobile-aspect-ratio": 134,
         "blocks-per-slide-mobile": "1"
@@ -184,8 +273,8 @@
       "type": "featured-collection",
       "settings": {
         "border": "none",
-        "spacing-above": "medium",
-        "spacing-below": "medium",
+        "spacing-above": "x-large",
+        "spacing-below": "x-large",
         "background-color": "none",
         "white-text": false,
         "section-alignment": "center",
@@ -196,18 +285,18 @@
         "heading": "{{ section.settings.collection.title }}",
         "button-style": "button-1",
         "link-text": "View collection",
-        "mobile-spacing-above": "medium",
-        "mobile-spacing-below": "medium",
+        "mobile-spacing-above": "x-large",
+        "mobile-spacing-below": "x-large",
         "mobile-heading-alignment": "left",
         "products-per-row--mobile": "2"
       }
     },
-    "featured_video_adjaUU": {
+    "featured_video_2": {
       "type": "featured-video",
       "settings": {
         "border": "none",
-        "spacing-above": "medium",
-        "spacing-below": "medium",
+        "spacing-above": "x-large",
+        "spacing-below": "x-large",
         "container-width": "6",
         "background-color": "none",
         "white-text": true,
@@ -233,8 +322,8 @@
         "button-url": "https://www.youtube.com/channel/UCaFEU-umMmWuISQYSy_UR3g/videos",
         "button-style": "button-2",
         "button-text": "チャンネルへGO",
-        "mobile-spacing-above": "medium",
-        "mobile-spacing-below": "medium",
+        "mobile-spacing-above": "x-large",
+        "mobile-spacing-below": "x-large",
         "mobile-full-width": true,
         "mobile-video-display-type": "original",
         "mobile-aspect-ratio": 134,
@@ -334,6 +423,7 @@
         "overlay-block-2",
         "overlay-block-3"
       ],
+      "disabled": true,
       "custom_css": [
         ".featured-grid--item:nth-child(odd):last-child {width: 100%;}",
         "@media only screen and (min-width: 768px) {.featured-grid--item:nth-child(odd):last-child {grid-column: 2 / span 2; }}"
@@ -429,7 +519,7 @@
         "text-column-width": 280,
         "media-gap": 8,
         "text-alignment": "left",
-        "featured_product": "gmc-satsuma-kurobuta-goddess-set",
+        "featured_product": "オリジナル黒トンバーグ-生-150g-10個入り-ウチダソース20g-10個",
         "modal-enabled": false,
         "loop-enabled": false,
         "image-zoom-enabled": true,
@@ -458,6 +548,9 @@
     },
     "16401814158380a11c": {
       "type": "image-with-text",
+      "custom_css": [
+        "img {max-width: 65vw; margin: auto;}"
+      ],
       "settings": {
         "border": "none",
         "spacing-above": "none",
@@ -471,22 +564,22 @@
         "text-horizontal-alignment": "center",
         "text-vertical-alignment": "center",
         "text-width": 500,
-        "overlay-style": "darken-bottom",
+        "overlay-style": "none",
         "text-style": "none",
         "text-background-color": "transparent",
-        "image-display-type": "medium",
+        "image-display-type": "original",
         "aspect-ratio": 56,
         "parallax-enabled": false,
-        "image": "shopify://shop_images/postcard_YY_omote_3_f7c87838-d1cc-40a6-8446-e50d263eb26f.jpg",
-        "overline": "炭火グリルレストラン",
-        "title": "GMC Grill",
+        "image": "shopify://shop_images/matsuyoshi.png",
+        "overline": "薩摩黒豚/白豚専門",
+        "title": "浅草とんかつ松よし",
         "highlight-type": "italic",
         "highlight-color": "accent-2",
         "highlight-text": "none",
-        "description": "<p><strong><br/></strong><a href=\"/collections/gmc-grill-menu\" title=\"GMC Grill Menu\">メニューはこちら</a></p><p>11:30-15:00(14:30.LO)<br/>18:00-22:00(21:00.LO)</p><p>定休日: 水曜日 & 木曜日</p><p></p>",
-        "link-url": "https://gmc.mazina.co.jp/pages/gmc-grill-dinner-menu",
+        "description": "<p></p><p></p>",
+        "link-url": "https://share.google/HNPj4BQZfNW4jaQmi",
         "button-style": "button-1",
-        "link-text": "",
+        "link-text": "店舗情報",
         "mobile-full-width": true,
         "mobile-spacing-above": "medium",
         "mobile-spacing-below": "medium",
@@ -500,8 +593,57 @@
         "mobile-text-vertical-alignment": "center"
       }
     },
+    "featured_text_KcQHfQ": {
+      "type": "featured-text",
+      "blocks": {
+        "overline_jyy44J": {
+          "type": "overline",
+          "settings": {
+            "overline": "炭火グリルレストラン"
+          }
+        },
+        "heading_YRdQxX": {
+          "type": "heading",
+          "settings": {
+            "heading-type": "section-heading",
+            "title": "GMCGrill",
+            "highlight-type": "italic",
+            "highlight-color": "accent-2",
+            "highlight-text": "none"
+          }
+        },
+        "button_WaxJPt": {
+          "type": "button",
+          "settings": {
+            "style": "button-1",
+            "link-url": "https://share.google/27TL4ZpR89So4WRvn",
+            "link-text": "店舗情報"
+          }
+        }
+      },
+      "block_order": [
+        "overline_jyy44J",
+        "heading_YRdQxX",
+        "button_WaxJPt"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "border": "none",
+        "spacing-above": "medium",
+        "spacing-below": "x-large",
+        "container-width": "4",
+        "background-color": "none",
+        "outer-background": true,
+        "white-text": false,
+        "text-alignment": "center",
+        "mobile-spacing-above": "medium",
+        "mobile-spacing-below": "x-large",
+        "mobile-text-alignment": "center"
+      }
+    },
     "map": {
       "type": "map",
+      "disabled": true,
       "settings": {
         "border": "none",
         "spacing-above": "none",
@@ -522,14 +664,17 @@
     }
   },
   "order": [
+    "featured_video_adjaUU",
     "164016757166a86406",
+    "image_with_text_GxJUVn",
     "slideshow",
     "featured-collection-grid",
-    "featured_video_adjaUU",
+    "featured_video_2",
     "grid-with-overlay",
     "1640181507ee260ca6",
     "custom_content_bTzfAg",
     "16401814158380a11c",
+    "featured_text_KcQHfQ",
     "map"
   ]
 }

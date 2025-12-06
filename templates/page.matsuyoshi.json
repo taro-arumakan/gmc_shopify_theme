@@ -45,7 +45,7 @@
         "overlay-style": "darken-top",
         "text-style": "none",
         "text-background-color": "transparent",
-        "image-display-type": "medium",
+        "image-display-type": "original",
         "aspect-ratio": 56,
         "parallax-enabled": false,
         "image": "shopify://shop_images/matsuyoshi.png",

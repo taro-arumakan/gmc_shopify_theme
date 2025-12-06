@@ -9,10 +9,78 @@
  */
 {
   "sections": {
-    "main": { "type": "article", "settings": {} },
-    "navigation": { "type": "article-navigation", "settings": {} },
-    "recents": { "type": "article-recents", "settings": {} },
-    "comments": { "type": "article-comments", "settings": {} }
+    "divider_TRQi9g": {
+      "type": "divider",
+      "name": "Divider",
+      "settings": {
+        "border-enabled": true,
+        "white-border": false,
+        "spacing-above": "large",
+        "spacing-below": "large",
+        "container-width": "5",
+        "background-color": "none",
+        "mobile-full-width": false,
+        "mobile-spacing-above": "medium",
+        "mobile-spacing-below": "medium"
+      }
+    },
+    "divider_YTzbaY": {
+      "type": "divider",
+      "name": "Divider",
+      "settings": {
+        "border-enabled": true,
+        "white-border": false,
+        "spacing-above": "large",
+        "spacing-below": "large",
+        "container-width": "5",
+        "background-color": "none",
+        "mobile-full-width": false,
+        "mobile-spacing-above": "medium",
+        "mobile-spacing-below": "medium"
+      }
+    },
+    "main": {
+      "type": "article",
+      "settings": {
+        "show-featured": true,
+        "heading-position": "below",
+        "show-date": false,
+        "show-author": false
+      }
+    },
+    "navigation": {
+      "type": "article-navigation",
+      "settings": {
+        "show-tags": true,
+        "facebook-enabled": true,
+        "x-enabled": true,
+        "pinterest-enabled": true,
+        "email-enabled": true,
+        "url-enabled": true
+      }
+    },
+    "recents": {
+      "type": "article-recents",
+      "disabled": true,
+      "settings": {
+        "heading-alignment": "left"
+      }
+    },
+    "comments": {
+      "type": "article-comments",
+      "settings": {
+        "show-comments": true,
+        "disqus-enabled": false,
+        "disqus-shortname": ""
+      }
+    }
   },
-  "order": ["main", "navigation", "recents", "comments"]
+  "order": [
+    "divider_TRQi9g",
+    "main",
+    "navigation",
+    "recents",
+    "comments",
+    "divider_YTzbaY"
+  ]
 }

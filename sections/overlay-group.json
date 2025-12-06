@@ -16,12 +16,15 @@
       "blocks": {
         "consent-tracking": {
           "type": "consent-tracking",
+          "disabled": true,
           "settings": {
             "background-color": "dark",
             "translucent": true,
             "white-text": true,
             "position": "left",
             "text-alignment": "center",
+            "accept-button-style": "button-2",
+            "decline-button-style": "button-4",
             "heading": "Cookie consent",
             "description": "<p>We use cookies and similar technologies to provide the best experience on our website. Refer to our Privacy Policy for more information.</p>"
           }
@@ -42,6 +45,7 @@
             "referrer-enabled": false,
             "referrer-url": "",
             "page-enabled": false,
+            "page-url": "",
             "scroll-text": true,
             "animation-speed": 7.5,
             "mobile-scroll-text": true,
@@ -59,6 +63,8 @@
             "text-alignment": "center",
             "heading": "Up to 40% off!",
             "description": "<p>When the timer runs out, so do the discounts!</p>",
+            "link-url": "/",
+            "button-style": "button-2",
             "link-text": "Shop the sale",
             "delay": 10,
             "show-at-bottom": true,
@@ -66,6 +72,7 @@
             "referrer-enabled": false,
             "referrer-url": "",
             "page-enabled": false,
+            "page-url": "",
             "countdown-enabled": true,
             "timer-bg-color": "dark",
             "light-number": true,
@@ -78,16 +85,17 @@
         },
         "5e9e1428-915c-4d68-b662-db6bc17e6b5d": {
           "type": "newsletter",
+          "disabled": true,
           "settings": {
             "background-color": "accent-1",
             "translucent": true,
             "white-text": true,
             "position": "right",
             "text-alignment": "center",
+            "social-enabled": true,
             "heading": "Join the Glow Club",
             "description": "<p>Be the first to know about new drops, skincare tips, and exclusive deals!</p>",
             "social-title": "Follow us",
-            "social-enabled": true,
             "delay": 15,
             "show-at-bottom": true,
             "days-range": 1,

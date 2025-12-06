@@ -13577,3 +13577,7 @@ ul.x-menu--level-3--container {
 .product-form--block--description table {
   max-width: 98vw;
 }
+
+.header--logo {
+  gap: 1.5rem;
+}

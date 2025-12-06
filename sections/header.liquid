@@ -11,10 +11,13 @@
   assign highlight_item = section.settings.highlight-item | handleize
   assign hover_disabled = section.settings.hover-disabled
   assign layout = section.settings.layout
+  assign menu = section.settings.menu
   assign logo = section.settings.logo
   assign logo_height = section.settings.logo-height
-  assign menu = section.settings.menu
   assign mobile_logo_height = section.settings.mobile-logo-height
+  assign logo2 = section.settings.logo2
+  assign logo2_height = section.settings.logo2-height
+  assign mobile_logo2_height = section.settings.mobile-logo2-height
   assign modal_bg = section.settings.modal-background-color
   assign modal_item = section.settings.modal-item | handleize
   assign modal_white_text = section.settings.modal-white-text
@@ -63,6 +66,17 @@
       mobile_height: mobile_logo_height
     -%}
   </div>
+
+  {%- if logo2 != blank -%}
+    <div class="header--primary-logo">
+      {%-
+        render 'logo',
+        logo: logo2,
+        height: logo2_height,
+        mobile_height: mobile_logo2_height
+      -%}
+    </div>
+  {%- endif -%}
 
   {%- if transparent_logo and transparent_enabled -%}
     <div class="header--secondary-logo">
@@ -499,6 +513,32 @@
     {
       "label": "Mobile logo height",
       "id": "mobile-logo-height",
+      "type": "range",
+      "min": 15,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "image_picker",
+      "id": "logo2",
+      "label": "Logo2 image"
+    },
+    {
+      "label": "Custom logo2 height",
+      "id": "logo2-height",
+      "type": "range",
+      "min": 15,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 35,
+      "info": "This is referring to the natural height and should be half the height of the image you uploaded to ensure it stays sharp on retina screens."
+    },
+    {
+      "label": "Mobile logo2 height",
+      "id": "mobile-logo2-height",
       "type": "range",
       "min": 15,
       "max": 100,
