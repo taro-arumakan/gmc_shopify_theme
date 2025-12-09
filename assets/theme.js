@@ -5865,32 +5865,37 @@ class VideoComponent extends HTMLElement {
       { threshold: 0.1 }
     ).observe(this);
   }
+
   loadPlyr() {
-    (this.player = this.video_wrapper.querySelector("video")),
-      void 0 === Shopify.Video ||
-        this.autoplay ||
-        (this.player.on("ready", () => this.showPlayer()),
+    this.player = this.video_wrapper.querySelector("video");
+
+    // REMOVED: "|| this.autoplay" so the player initializes even when autoplay is true
+    void 0 === Shopify.Video ||
+      (this.player.on("ready", () => this.showPlayer()),
         new Shopify.Video(this.player, {
           autoplay: !0,
-          hideControls: !0,
-          muted: !1,
-          loop: { active: !1 },
+          hideControls: false,
+          // CHANGED: Muted must be true for autoplay to work in most browsers
+          muted: this.autoplay,
+          loop: { active: !1 }, // You might want this.autoplay if you want it to loop
+          // CHANGED: Define which controls appear during autoplay
           controls: this.autoplay
-            ? []
+            ? ["mute"] // Show only mute controls for autoplay
             : [
-                "play",
-                "progress",
-                "current-time",
-                "mute",
-                "volume",
-                "captions",
-                "settings",
-                "pip",
-                "airplay",
-                "fullscreen",
-              ],
+              "play",
+              "progress",
+              "current-time",
+              "mute",
+              "volume",
+              "captions",
+              "settings",
+              "pip",
+              "airplay",
+              "fullscreen",
+            ],
         }));
   }
+
   loadVimeo() {
     void 0 !== Vimeo.Player &&
       ((this.player = new Vimeo.Player(`${this.id}-player`, {

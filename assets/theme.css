@@ -12941,11 +12941,7 @@ button.subscribe-form--submit {
   background: linear-gradient(rgba(0, 0, 0, 0), 70%, rgba(0, 0, 0, var(--content--image-opacity)))
 }
 
-.video--root[data-autoplay=true] .video--wrapper {
-  pointer-events: none
-}
-
-.video--root[data-autoplay=false] .video--wrapper :is(.plyr, .plyr video, .plyr__video-wrapper) {
+.video--wrapper :is(.plyr, .plyr video, .plyr__video-wrapper) {
   height: 100%
 }
 
@@ -12970,8 +12966,6 @@ button.subscribe-form--submit {
 
 .video--root[data-autoplay=true] .video--wrapper>* {
   --left-min-pos: 0px;
-  top: -250px;
-  height: calc(100% + 500px);
   left: min(var(--left-min-pos), 50% - var(--video-width)/2);
   width: max(100%, var(--video-width))
 }
@@ -13580,4 +13574,35 @@ ul.x-menu--level-3--container {
 
 .header--logo {
   gap: 1.5rem;
+}
+
+.plyr--video .plyr__controls {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.video--header {
+  pointer-events: none;
+}
+
+.plyr__controls {
+  /* Forces the width to be exactly the size of its contained elements */
+  width: fit-content !important;
+
+  /* Resets padding/margins that might be adding unwanted space */
+  padding: 0;
+  margin: 0;
+
+  /* Ensure children are packed tightly */
+  gap: 0;
+  justify-content: flex-start;
+}
+
+/* You might also need to ensure the individual button margin is minimal */
+.plyr__controls .plyr__control {
+  margin: 0;
+}
+
+.plyr__control svg {
+  filter: invert(1);
 }

@@ -218,13 +218,9 @@
 
     <div
       class="video--wrapper"
-      {% if autoplay %}
-        tabindex="-1"
-      {% else %}
-        data-transition-item="viewport"
-        data-transition-type="fade-in"
-        data-transition-trigger="custom"
-      {% endif %}
+      data-transition-item="viewport"
+      data-transition-type="fade-in"
+      data-transition-trigger="custom"
     >
       {%- if video_upload -%}
         {%- liquid
