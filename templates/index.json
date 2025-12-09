@@ -13,9 +13,9 @@
       "type": "featured-video",
       "settings": {
         "border": "none",
-        "spacing-above": "x-large",
-        "spacing-below": "x-large",
-        "container-width": "6",
+        "spacing-above": "none",
+        "spacing-below": "none",
+        "container-width": "1",
         "background-color": "none",
         "white-text": true,
         "text-width": 500,
@@ -29,7 +29,7 @@
         "video-display-type": "original",
         "aspect-ratio": 56,
         "play-button-style": "solid",
-        "video-upload": "shopify://files/videos/GMC_ucchi_loop.mp4",
+        "video-upload": "shopify://files/videos/GMC-sns-tate.mp4",
         "video-url": "",
         "overline": "",
         "heading": "",
@@ -40,8 +40,8 @@
         "button-url": "shopify://collections/gift-贈答",
         "button-style": "block-link",
         "button-text": "Shopへ",
-        "mobile-spacing-above": "x-large",
-        "mobile-spacing-below": "x-large",
+        "mobile-spacing-above": "none",
+        "mobile-spacing-below": "none",
         "mobile-full-width": true,
         "mobile-video-display-type": "original",
         "mobile-aspect-ratio": 134,
@@ -53,9 +53,8 @@
     "164016757166a86406": {
       "type": "image-with-text",
       "custom_css": [
-        ".stacked-text--root {align-self: stretch;}",
-        ".featured-content--image {position: absolute;}",
-        ".featured-content--root[data-text-position=\"overlay\"] .stacked-text--root {position: relative;}"
+        ".stacked-text--description {position: relative; z-index: 10; pointer-events: auto;}",
+        ".stacked-text--description a {position: relative; z-index: 11; display: inline-block;}"
       ],
       "settings": {
         "border": "none",
@@ -78,14 +77,14 @@
         "parallax-enabled": false,
         "image": "shopify://shop_images/210730_83227_93df8aba-158c-4e09-bbee-27ef2df052b9.jpg",
         "overline": "",
-        "title": "GMC",
+        "title": "Genki Meat Cheers",
         "highlight-type": "italic",
         "highlight-color": "accent-2",
         "highlight-text": "none",
-        "description": "<p><br/>web shopご来店有難うございます。</p><p>ただ今 GIFT 購入いただきますと、<br/>無料にてオリジナル風呂敷に包んで発送致します。</p><p>どうぞこの機会にcheers☆</p>",
+        "description": "<p><br/>web shopご来店有難うございます。</p><p>ただ今 GIFT 購入いただきますと、<br/>無料にてオリジナル風呂敷に包んで発送致します。</p><p>　</p><p>令和七年 薩摩黒豚/白豚専門<br/><strong>浅草とんかつ松よし 開店</strong><br/></p><p><a href=\"https://share.google/HNPj4BQZfNW4jaQmi\" target=\"_blank\" title=\"https://share.google/0at5nZoSjfkzeGwl2\">店舗情報</a></p><p>　<br/><br/></p><p>どうぞこの機会にcheers☆</p>",
         "link-url": "shopify://collections/gift-贈答",
         "button-style": "button-1",
-        "link-text": "ブラウズ",
+        "link-text": "全ての商品",
         "mobile-full-width": true,
         "mobile-spacing-above": "x-large",
         "mobile-spacing-below": "x-large",
@@ -101,6 +100,7 @@
     },
     "image_with_text_GxJUVn": {
       "type": "image-with-text",
+      "disabled": true,
       "custom_css": [
         "img {max-width: 65vw; margin: auto;}"
       ],
@@ -125,12 +125,12 @@
         "aspect-ratio": 56,
         "parallax-enabled": false,
         "image": "shopify://shop_images/matsuyoshi.png",
-        "overline": "令和七年開店",
-        "title": "浅草とんかつ松よし",
+        "overline": "",
+        "title": "",
         "highlight-type": "italic",
         "highlight-color": "accent-2",
         "highlight-text": "none",
-        "description": "<p>薩摩黒豚/白豚専門</p><p> </p>",
+        "description": "<p></p><p> </p>",
         "link-url": "https://share.google/HNPj4BQZfNW4jaQmi",
         "button-style": "block-link",
         "link-text": "店舗情報",
@@ -184,7 +184,7 @@
             "highlight-color": "accent-2",
             "highlight-text": "none",
             "description": "<p>鹿児島県の六白黒豚生産者、南州農場から日本が誇る最高峰銘柄豚。<br/>甘味のある脂身と旨味の濃い赤身が特徴のかごしま黒豚を100%使用。</p>",
-            "link-url": "shopify://products/職人がひとつひとつ焼き上げたgmc薩摩黒豚ハンバーグ-6個入のコピー",
+            "link-url": "shopify://collections/gift-贈答",
             "button-style": "button-2",
             "link-text": "SHOP NOW",
             "mobile-text-horizontal-alignment": "center",
@@ -205,7 +205,7 @@
             "highlight-color": "accent-2",
             "highlight-text": "none",
             "description": "<p>最高なお肉があればBBQはこの世で最も楽しいアクティビティの一つとなる。<br/>笑い声、良き友、好奇心。伝統から少し離れてみる心意気が最高のスパイス。</p>",
-            "link-url": "shopify://products/gmc-特製bbqセット-8人前",
+            "link-url": "shopify://collections/gift-贈答",
             "button-style": "button-2",
             "link-text": "SHOP NOW",
             "mobile-text-horizontal-alignment": "center",
@@ -226,7 +226,7 @@
             "highlight-color": "accent-2",
             "highlight-text": "none",
             "description": "<p>北海道オホーツクで天然の牧草や木の実を食べて育ったエゾシカのみを使用。<br/>契約猟師がハントしているため狩猟日、猟場も明確です。</p>",
-            "link-url": "shopify://products/gourmet-dog-food-combo",
+            "link-url": "shopify://collections/gift-贈答",
             "button-style": "button-2",
             "link-text": "shop now",
             "mobile-text-horizontal-alignment": "center",
@@ -548,9 +548,7 @@
     },
     "16401814158380a11c": {
       "type": "image-with-text",
-      "custom_css": [
-        "img {max-width: 65vw; margin: auto;}"
-      ],
+      "custom_css": [],
       "settings": {
         "border": "none",
         "spacing-above": "none",
@@ -577,7 +575,7 @@
         "highlight-color": "accent-2",
         "highlight-text": "none",
         "description": "<p></p><p></p>",
-        "link-url": "https://share.google/HNPj4BQZfNW4jaQmi",
+        "link-url": "https://share.google/0at5nZoSjfkzeGwl2",
         "button-style": "button-1",
         "link-text": "店舗情報",
         "mobile-full-width": true,
@@ -593,52 +591,49 @@
         "mobile-text-vertical-alignment": "center"
       }
     },
-    "featured_text_KcQHfQ": {
-      "type": "featured-text",
-      "blocks": {
-        "overline_jyy44J": {
-          "type": "overline",
-          "settings": {
-            "overline": "炭火グリルレストラン"
-          }
-        },
-        "heading_YRdQxX": {
-          "type": "heading",
-          "settings": {
-            "heading-type": "section-heading",
-            "title": "GMCGrill",
-            "highlight-type": "italic",
-            "highlight-color": "accent-2",
-            "highlight-text": "none"
-          }
-        },
-        "button_WaxJPt": {
-          "type": "button",
-          "settings": {
-            "style": "button-1",
-            "link-url": "https://share.google/27TL4ZpR89So4WRvn",
-            "link-text": "店舗情報"
-          }
-        }
-      },
-      "block_order": [
-        "overline_jyy44J",
-        "heading_YRdQxX",
-        "button_WaxJPt"
-      ],
-      "name": "Rich text",
+    "image_with_text_ULtt3i": {
+      "type": "image-with-text",
+      "name": "Image with text",
       "settings": {
         "border": "none",
-        "spacing-above": "medium",
+        "spacing-above": "large",
         "spacing-below": "x-large",
-        "container-width": "4",
+        "container-width": "6",
         "background-color": "none",
-        "outer-background": true,
         "white-text": false,
-        "text-alignment": "center",
-        "mobile-spacing-above": "medium",
+        "heading-type": "section-heading",
+        "text-position": "bottom",
+        "overlap": false,
+        "text-horizontal-alignment": "center",
+        "text-vertical-alignment": "center",
+        "text-width": 400,
+        "overlay-style": "none",
+        "text-style": "none",
+        "text-background-color": "transparent",
+        "image-display-type": "original",
+        "aspect-ratio": 56,
+        "parallax-enabled": false,
+        "image": "shopify://shop_images/postcard_YY_omote_3_f7c87838-d1cc-40a6-8446-e50d263eb26f.jpg",
+        "overline": "炭火グリルレストラン",
+        "title": "GMC Grill",
+        "highlight-type": "italic",
+        "highlight-color": "accent-2",
+        "highlight-text": "none",
+        "description": "",
+        "link-url": "https://share.google/27TL4ZpR89So4WRvn",
+        "button-style": "button-1",
+        "link-text": "店舗情報",
+        "mobile-full-width": true,
+        "mobile-spacing-above": "large",
         "mobile-spacing-below": "x-large",
-        "mobile-text-alignment": "center"
+        "mobile-white-text": false,
+        "mobile-overlay": false,
+        "mobile-hide-description": false,
+        "mobile-button-style": "button-1",
+        "mobile-image-display-type": "original",
+        "mobile-aspect-ratio": 134,
+        "mobile-text-horizontal-alignment": "center",
+        "mobile-text-vertical-alignment": "center"
       }
     },
     "map": {
@@ -674,7 +669,7 @@
     "1640181507ee260ca6",
     "custom_content_bTzfAg",
     "16401814158380a11c",
-    "featured_text_KcQHfQ",
+    "image_with_text_ULtt3i",
     "map"
   ]
 }
